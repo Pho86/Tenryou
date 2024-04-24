@@ -8,10 +8,23 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        'bg': '#211F20',
+        'bg-dark': '#1E1B1B',
+        'bg-light': '#241E1E',
+        'primary': '#FF7373',
+        'text': '#FFF7F7',
+        'accent' : '#B8B8B8',
+        'dark-accent': '#8C7F7F',
+      },
+      dropShadow: {
+        'primary': '0px 10px 10px rgba(91, 205, 249, .2)',
+        'dark': '0px 5px 3px rgba(0, 0, 0, .2)',
+      },
+      fontFamily: {
+        // 👇 Add CSS variables
+        rubik: ["var(--font-rubik)"],
+        heebo: ["var(--font-heebo)"],
       },
     },
   },

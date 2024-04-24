@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* * {
+  border: 1px red solid;
+} */
+
+body {
+  font-size: clamp(1rem, .5vw, 1rem); 
+  overflow-x: hidden;
+  
+}
+
+@media (prefers-color-scheme: dark) {
+  :root{
+    color-scheme: dark;
+  }
+}
+
+@media screen and (min-width:2000px) {
+  html,
+  body {
+    font-size: clamp(1.1rem, .6vw, 1.5rem); 
+  }
+}
+
+@layer base {
+  body {
+    @apply text-text;
+    @apply bg-bg
+  }
+  h1 {
+    @apply font-bold;
+    @apply leading-tight;
+  }
+  p{
+    @apply text-pretty;
+    @apply leading-loose;
+  }
+}
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
