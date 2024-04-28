@@ -127,18 +127,8 @@ export default function CharacterPage({ params }: { params: any }) {
                         <div className="grid gap-4">
                             {/* @ts-ignore */}
                             <VoiceList voiceData={data.voices}/>
-                            {/* {data.voices && data.voices.friendLines.map(({line, index})=>(
-                                <div key={index}>
-                                    <h4>{line.title}</h4>
-                                    {line.description}
-                                    
-                                </div>
-                            ))} */}
                         </div>
                     </section>
-
-
-
                     <Footer />
                 </main>
 

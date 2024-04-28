@@ -26,6 +26,14 @@ const nextConfig = {
                 hostname:'genshin-db-api.vercel.app',
                 protocol:'https'
             },
+            {
+                hostname:'api.ambr.top',
+                protocol:'https'
+            },
+            {
+                hostname:'sdk.hoyoverse.com',
+                protocol:'https'
+            },
         ]
     }
 };

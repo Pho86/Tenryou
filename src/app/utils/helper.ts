@@ -107,6 +107,10 @@ export function addFileName(names: any[]) {
         {
             name: "Kirara",
             fileName: "Momoka",
+        },
+        {
+            name:"Xianyun",
+            fileName: "Liuyun"
         }
     ];
     

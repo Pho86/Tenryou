@@ -2,14 +2,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useMotionValue, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 export default function InfoCharacterBanner({
     data, params
 }: {
     data: any,
     params: any,
 }) {
-
+    const [minimizeName, setMinimizedName] = useState<boolean>(false);
     const sectionRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -25,7 +25,7 @@ export default function InfoCharacterBanner({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: .5 }}
                 viewport={{ once: true }}
-                
+
             >
                 <Image src={`/regions/${data.region}.webp`} width={1500} height={1500} className="w-full max-h-[100dvh] object-contain opacity-60 z-[-15]" alt={`${data.region} icon`} priority />
             </motion.div>
@@ -45,23 +45,32 @@ export default function InfoCharacterBanner({
                 viewport={{ once: true }}
             >
                 <div className="flex flex-col gap-2 mt-10 bg-bg p-4 border-primary border-2 rounded-lg">
-                    <div className="flex gap-4 items-center">
-                        <h1 className="font-bold text-4xl md:text-5xl text-pretty rounded-xl ">{data.name}</h1>
-                        <Image src={`/elements/${data.elementText}.webp`} width={150} height={150} className="w-16 h-16" alt={`${data.elementText} icon`} />
+                    <div className="w-full flex justify-between">
+                        <div className="flex gap-4 items-center">
+                            <h1 className="font-bold text-4xl md:text-5xl text-pretty rounded-xl ">{data.name}</h1>
+                            <Image src={`/elements/${data.elementText}.webp`} width={150} height={150} className="w-16 h-16" alt={`${data.elementText} icon`} />
+                        </div>
+                        <div >
+                            <p className="text-xl cursor-pointer rounded-xl p-1" onClick={() => { setMinimizedName(!minimizeName) }}>{minimizeName ? "🔲" : "🗕"}</p>
+                        </div>
                     </div>
-                    <div className="flex gap-4 items-start md:text-center text-pretty flex-col md:flex-row ">
-                        <blockquote className="italic font-semibold text-2xl ">{data.title}</blockquote>
-                        <p className="font-bold md:text-nowrap text-xl text-primary">{Array(data.rarity).fill('★ ').join('')}</p>
-                    </div>
-                    <blockquote className="text-pretty">{data.description}</blockquote>
+                    {minimizeName &&
+                        <>
+                            <div className="flex gap-4 items-start md:text-center text-pretty flex-col md:flex-row ">
+                                <blockquote className="italic font-semibold text-2xl ">{data.title}</blockquote>
+                                <p className="font-bold md:text-nowrap text-xl text-primary">{Array(data.rarity).fill('★ ').join('')}</p>
+                            </div>
+                            <blockquote className="text-pretty">{data.description}</blockquote>
+                        </>
+                    }
                 </div>
-                <section className="flex flex-col bg-bg gap-2 justify-between border-primary border-2 rounded-xl p-4">
+                {minimizeName && <section className="flex flex-col bg-bg gap-2 justify-between border-primary border-2 rounded-xl p-4">
                     <p><span className="font-bold">Affiliation:</span> {data.affiliation}</p>
                     <p className="flex gap-1"><span className="font-bold">Weapon:</span> <Image src={`/weapons/${data.weaponText}.png`} width={30} height={20} alt={`${data.weaponText} image weapon`} />{data.weaponText}</p>
                     <p><span className="font-bold">Region:</span> {data.region}</p>
                     <p><span className="font-bold">Constellation:</span> {data.constellation}</p>
                     <p><span className="font-bold">Birthday:</span> {data.birthday}</p>
-                </section>
+                </section> }
             </motion.div>
         </div>
     </section>

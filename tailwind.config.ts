@@ -9,23 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       keyframes: {
-        hoverAnimation: {
-          '0%': {
-            transform: 'scale(1)',
-            boxShadow: '0 0px 4px 6px rgba(223, 229, 220, 1)',
-          },
-          '50%': {
-            transform: 'scale(1.025)',
-            boxShadow: '0 0px 2px 4px rgba(223, 229, 220, 1)',
-          },
-          '100%': {
-            transform: 'scale(1.05)',
-            boxShadow: '0 0px 2px 4px rgba(223, 229, 220, 1)',
-          },
-        },
-      },
-      animation: {
-        hoverAnimation: 'hoverAnimation 0.3s ease-in-out forwards',
+
       },
       colors: {
         'bg': '#211F20',
@@ -65,6 +49,9 @@ const config: Config = {
       dropShadow: {
         'primary': '0px 10px 10px rgba(91, 205, 249, .2)',
         'dark': '0px 5px 3px rgba(0, 0, 0, .2)',
+      },
+      boxShadow:{
+        'light': '0 0px 2px 4px rgba(223, 229, 220, 1)',
       },
       borderRadius: {
         "4xl": "1.75rem"

@@ -30,7 +30,7 @@ export default function Footer() {
                 </div>
 
                 <p className="mt-8 text-center text-sm text-gray-200 lg:text-right">
-                    Copyright &copy; 2024
+                    This website is not affiliated with miHoYo.
                 </p>
             </div>
         </footer>

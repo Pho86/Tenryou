@@ -15,6 +15,7 @@ export default function CharacterPage() {
       .get<any[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
       .then((res) => {
         let names = res.data.sort();
+        console.log(res.data)
         names.forEach((name) => {
           addFileName([name]);
         })
@@ -30,7 +31,7 @@ export default function CharacterPage() {
       <main className="pt-16 px-8 mb-20 w-full min-h-[100dvh]">
         <section className=" grid-auto-fit-300">
           {fullData.length > 0 && fullData.map((data, index) => (
-            <div key={index} className="bg-[#ffffff] transition-all relative rounded-xl cursor-pointer hover:animate-hoverAnimation">
+            <div key={index} className="bg-[#ffffff] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light">
               <Link href={`/characters/${data.name}`} className={`flex flex-col self-start  `}>
                 <div className="absolute top-1 left-1 text-black">
                   <Image src={`/elements/${data.elementText}.webp`} width={25} height={25} className="" alt={`${data.region} icon`} />
@@ -39,8 +40,11 @@ export default function CharacterPage() {
                   <Image src={`/regions/${data.region}.webp`} width={25} height={25} className="" alt={`${data.region} icon`} />
                 </div> }
                 <Image
-                  src={`/db/characters/UI_AvatarIcon_${data.fileName}.png`}
+                  // src={`https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_${data.fileName}.png`}
                   // src={data.images.mihoyo_icon}
+                  src={`https://api.ambr.top/assets/UI/UI_AvatarIcon_${data.fileName}.png`}
+                  // onError={(event:any)=>{event.target.src = `https://enka.network/ui/UI_AvatarIcon_${data.fileName}.png`}}
+                  // src={`/db/characters/UI_AvatarIcon_${data.fileName}.png`}
                   width={200}
                   height={200}
                   alt="Image w-full"
