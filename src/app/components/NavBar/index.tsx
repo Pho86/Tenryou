@@ -25,7 +25,7 @@ export default function NavBar({
 
     return (
         <>
-            <motion.nav className="w-full fixed flex justify-between z-[2000] font-bold px-5 py-2 md:py-0 bg-bg" variants={{
+            <motion.nav className="w-full fixed flex justify-between z-[2000] font-bold px-5 py-2 md:py-0 bg-bg-darker" variants={{
                 visible: { y: 0 },
                 hidden: { y: "-100%" },
             }}
@@ -43,7 +43,7 @@ export default function NavBar({
                         </div>
                         <div className="hidden md:flex justify-center items-center md:gap-3 sm:gap-2 gap-1">
 
-                            <Link href="/Characters" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                            <Link href="/characters" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Characters</h3>
                             </Link>
                             <Link href="/Builds" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">

@@ -28,8 +28,12 @@ export type Character = {
     release: string;
     skillTalents: any[];
     title: string;
-    vision: string;
+    elementText: string;
     vision_key: string;
-    weapon: string;
+    weaponText: string;
     weapon_type: string;
+    cv: {
+        english:string;
+        japanese:string;
+    }
 }

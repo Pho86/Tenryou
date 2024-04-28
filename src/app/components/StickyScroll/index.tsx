@@ -13,7 +13,7 @@ export default function StickyScroll({ image, data, link, params }: { image: any
         target: targetRef,
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["-5%", "140%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["-5%", "100%"]);
 
     return (
         <div className='relative md:my-[10dvh] min-h-[200dvh] p-4'>
@@ -30,23 +30,6 @@ export default function StickyScroll({ image, data, link, params }: { image: any
                 </motion.div>
                 <div className='flex flex-col gap-3 justify-end w-full '>
                     <div className="flex flex-col gap-4">
-                        <section className="flex flex-col gap-4">
-                            <h2 className="text-7xl font-bold">{data.name}</h2>
-                            <div className='flex flex-col-reverse md:flex-row gap-2 justify-between border-primary border-2 rounded-xl p-4 w-full'>
-                                <div className="flex flex-col gap-3 ">
-                                    <p><span className="font-bold">Title:</span> {data.title}</p>
-                                    <p><span className="font-bold">Affiliation:</span> {data.affiliation}</p>
-                                    <p><span className="font-bold">Rarity:</span> {data.rarity} Stars</p>
-                                    <p><span className="font-bold">Weapon:</span> {data.weapon}</p>
-                                    <p><span className="font-bold">Element:</span> {data.vision}</p>
-                                    <p><span className="font-bold">Constellation:</span> {data.constellation}</p>
-                                    <p><span className="font-bold">Birthday:</span> {data.birthday}</p>
-                                    <p><span className="font-bold">Release:</span> {data.release}</p>
-                                    <p>{data.description}</p>
-                                </div>
-                                {/* <Image src={`${link}/icon-side`} alt={`${params.name} Image Card`} className='w-32 h-44' width={500} height={500} /> */}
-                            </div>
-                        </section>
                         <section className="flex flex-col gap-4">
                             <h2 className="text-3xl font-bold">Active Skills: </h2>
                             <div className="grid grid-cols-1 gap-3">

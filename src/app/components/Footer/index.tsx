@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 export default function Footer() {
     return (
-        <footer className="w-full my-2 ">
+        <footer className="w-full my-2 mt-16">
             <div className="px-8 md:px-16 my-8">
                 <div className="lg:flex lg:items-end lg:justify-between">
                     <div className="flex flex-col text-center lg:text-left">
                         <div className="flex justify-center lg:justify-start">
                             <div className="font-bold text-2xl hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all py-1">
                                 <Link href="/" className="flex gap-2 items-center">
-                                    <Image src="/logo.svg" alt="logo of Tao" width={35} height={35} />
+                                    <Image src="/next.svg" alt="logo of Tao" width={35} height={35} />
                                     <h1 className="whitespace-nowrap">Tao</h1>
                                 </Link>
                             </div>
