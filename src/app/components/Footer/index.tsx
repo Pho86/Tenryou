@@ -20,8 +20,8 @@ export default function Footer() {
                         <Link href="/" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
                             <h2>Home</h2>
                         </Link>
-                        <Link href="/" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
-                            <h2>Builds</h2>
+                        <Link href="/characters" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
+                            <h2>Characters</h2>
                         </Link>
                         <Link href="/" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
                             <h2>Artifacts</h2>

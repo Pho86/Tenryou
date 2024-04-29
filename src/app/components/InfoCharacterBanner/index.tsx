@@ -9,7 +9,7 @@ export default function InfoCharacterBanner({
     data: any,
     params: any,
 }) {
-    const [minimizeName, setMinimizedName] = useState<boolean>(false);
+    const [minimizeName, setMinimizedName] = useState<boolean>(true);
     const sectionRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,

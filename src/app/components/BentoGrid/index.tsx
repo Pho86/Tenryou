@@ -34,9 +34,6 @@ export default function BentoGrid() {
         {
             title: 'Events',
             content: "",
-            // image: "/icons/events_out.webp",
-            // bg: "/db/namecards/UI_NameCardPic_Bp26_P.png",
-            // link: "/events",
             alt: "",
             id: "",
             children: <Events />

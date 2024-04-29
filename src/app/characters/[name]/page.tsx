@@ -16,6 +16,8 @@ import Lenis from "@studio-freight/lenis";
 import ConstellationsTable from "@/app/components/ConstellationTable";
 import AttackTable from "@/app/components/AttackTable";
 import VoiceList from "@/app/components/VoiceList";
+import Gallery from "@/app/components/Gallery";
+import Loader from "@/app/components/Loader";
 
 export default function CharacterPage({ params }: { params: any }) {
 
@@ -23,6 +25,7 @@ export default function CharacterPage({ params }: { params: any }) {
     const [error, setError] = useState('');
     const [lang, setLang] = useState<string>("english")
     const link = `https://genshin-db-api.vercel.app/api/v5/characters?query=${params.name}`
+    const [gallery, setGallery] = useState<number>(0);
     useLayoutEffect(() => {
         axios.get<Character[]>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true&resultLanguage=${lang}`)
             .then((res) => {
@@ -43,14 +46,16 @@ export default function CharacterPage({ params }: { params: any }) {
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${params.name}&matchCategories=true&queryLanguages=english,jap`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&queryLanguages=english,jap`)
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&queryLanguages=english,jap`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&queryLanguages=english,jap`),
                 ])
                     .then((responses) => {
-                        const [constellationsResponse, talentsResponse, nameCardResponse, voiceDataResponse] = responses;
+                        const [constellationsResponse, talentsResponse, nameCardResponse, voiceDataResponse, outfitResponse] = responses;
                         const constellationsData = constellationsResponse.data;
                         const talentsData = talentsResponse.data;
                         const nameCardData = nameCardResponse.data;
                         const voiceData = voiceDataResponse.data;
+                        const outfitData = outfitResponse.data;
 
                         const mergedData = {
                             // @ts-ignore
@@ -59,6 +64,7 @@ export default function CharacterPage({ params }: { params: any }) {
                             talents: talentsData,
                             nameCard: nameCardData,
                             voices: voiceData,
+                            outfits: outfitData,
                             // @ts-ignore
                             ...data.result,
                         };
@@ -102,39 +108,22 @@ export default function CharacterPage({ params }: { params: any }) {
                         </section>
                     </div>
                     <section className="flex gap-3 flex-col p-4 md:p-8">
-                        <h2 className="font-bold text-3xl">Miscellaneous</h2>
-                        <div className="grid lg:grid-cols-2 gap-4">
-                            <div className="relative overflow-hidden flex flex-col p-4">
-                                <h3 className="font-semibold text-xl my-2">Namecard</h3>
-                                <div className="relative flex flex-col rounded-xl items-center justify-center ">
-                                    {/* @ts-ignore */}
-                                    <Image src={`/db/namecards/${data.nameCard.images.filename_background}.png`} width={2000} height={800} alt={`${data.name} name card.`} className="w-full rounded-t-xl" />
-                                    {/* @ts-ignore */}
-                                    <p className="absolute bottom-0 w-full bg-bg bg-opacity-60 p-4 text-lg font-bold">{data.nameCard.name}</p>
-                                </div>
-                                {/* @ts-ignore */}
-                                <p className="font-poppins w-full bg-zinc-100 rounded-b-xl text-black p-4">{data.nameCard.description}</p>
-                            </div>
-                            <div className="flex flex-col gap-2 justify-center p-4">
-                                <h3 className="font-semibold text-xl text-start ">Constellation</h3>
-                                {/* @ts-ignore */}
-                                <Image src={`/db/constellations/${data.constellations.images.filename_constellation}.png`} width={600} height={500} alt={`${data.name} constellation`} className="p-12" />
-                            </div>
-                        </div>
+                        <Gallery data={data} />
                     </section>
                     <section className="flex gap-3 flex-col p-4 md:p-8">
                         <h2 className="font-bold text-3xl">Quotes</h2>
                         <div className="grid gap-4">
                             {/* @ts-ignore */}
-                            <VoiceList voiceData={data.voices}/>
+                            <VoiceList voiceData={data.voices} />
                         </div>
                     </section>
                     <Footer />
                 </main>
 
                 :
-                <>
-                </>}
+                <div className="pt-16">
+                    <Loader />
+                </div>}
         </>
     );
 }

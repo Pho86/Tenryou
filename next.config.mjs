@@ -19,10 +19,6 @@ const nextConfig = {
                 protocol:'https'
             },
             {
-                hostname:'enka.network',
-                protocol:'https'
-            },
-            {
                 hostname:'genshin-db-api.vercel.app',
                 protocol:'https'
             },
@@ -34,6 +30,10 @@ const nextConfig = {
                 hostname:'sdk.hoyoverse.com',
                 protocol:'https'
             },
+            {
+                hostname:'img-os-static.hoyolab.com',
+                protocol:'https'
+            }
         ]
     }
 };

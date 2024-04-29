@@ -25,7 +25,7 @@ export default function NavBar({
 
     return (
         <>
-            <motion.nav className="w-full fixed flex justify-between z-[2000] font-bold px-5 py-2 md:py-0 bg-bg-darker" variants={{
+            <motion.nav className="w-full fixed flex justify-between z-[1000] font-bold px-5 py-2 md:py-0 bg-bg-darker" variants={{
                 visible: { y: 0 },
                 hidden: { y: "-100%" },
             }}
@@ -46,13 +46,10 @@ export default function NavBar({
                             <Link href="/characters" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Characters</h3>
                             </Link>
-                            <Link href="/Builds" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Builds</h3>
-                            </Link>
-                            <Link href="/Artifacts" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                            <Link href="/artifacts" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Artifacts</h3>
                             </Link>
-                            <Link href="/Weapons" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                            <Link href="/weapons" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Weapons</h3>
                             </Link>
 
