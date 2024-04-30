@@ -52,6 +52,9 @@ export default function NavBar({
                             <Link href="/weapons" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Weapons</h3>
                             </Link>
+                            <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                                <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Weapons</h3>
+                            </Link>
 
 
 

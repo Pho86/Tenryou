@@ -33,6 +33,10 @@ const nextConfig = {
             {
                 hostname:'img-os-static.hoyolab.com',
                 protocol:'https'
+            },
+            {
+                hostname:'fastcdn.hoyoverse.com',
+                protocol:'https'
             }
         ]
     }

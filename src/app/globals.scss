@@ -42,17 +42,29 @@ table tr td {
 }
 .grid-auto-fit-200 {
   display: grid;
-  gap: 1.2em;
-  grid-template-columns: repeat(auto-fit, minmax(9em, max-content));
+  gap: 1.5em 1em;
+  grid-template-columns: repeat(auto-fit, minmax(8em, max-content));
+  grid-auto-rows: minmax(min-content, max-content);
   @media (max-width: 768px) {
     gap:.8em;
     grid-template-columns: repeat(auto-fit, minmax(6.5em, max-content));
   }
 }
+.grid-auto-fit-150 {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(4em, max-content));
+}
 .grid-auto-fit-100 {
   display: grid;
   gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(3em, 1fr));
+}
+.grid-auto-fit-10 {
+  display: grid;
+  gap: .5em;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(3em, max-content));
 }
 
 @media (prefers-color-scheme: dark) {

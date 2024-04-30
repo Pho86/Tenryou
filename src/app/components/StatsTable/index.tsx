@@ -107,10 +107,14 @@ function StatsRow({ stats, stats2, ascension, show, index, percentage }: { stats
                             item.color = getColorFromMaterial(i, stats.ascension);
                             return (
                                 <div key={item.id} className="">
-                                    <Link href={`/materials/${item.id}`} className="flex w-[4rem] md:w-[5rem] flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee]" key={item.id}>
-                                        <Image src={`/db/materials/UI_ItemIcon_${item.id}.png`} width={100} height={100} alt={`${item.name} material icon`} className={`bg-gradient-to-br from-gradient-${item.color}-start to-gradient-${item.color}-end rounded-t-lg p-1 md:p-2 w-full h-full`} />
+                                    <div className="flex w-[4rem] md:w-[5rem] flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee]" key={item.id}>
+                                        <Image src={`/db/materials/UI_ItemIcon_${item.id}.png`} width={100} height={100} alt={`${item.name} material icon`} className={`bg-gradient-to-br from-gradient-${item.color}-start to-gradient-${item.color}-end rounded-t-lg p-1 md:p-2 w-full h-full`} title={item.name}/>
                                         <p className="text-zinc-800 font-bold p-1 text-sm ">{item.count}</p>
-                                    </Link>
+                                    </div>
+                                    {/* <Link href={`/materials/${item.id}`} className="flex w-[4rem] md:w-[5rem] flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee]" key={item.id}>
+                                        <Image src={`/db/materials/UI_ItemIcon_${item.id}.png`} width={100} height={100} alt={`${item.name} material icon`} className={`bg-gradient-to-br from-gradient-${item.color}-start to-gradient-${item.color}-end rounded-t-lg p-1 md:p-2 w-full h-full`} title={item.name}/>
+                                        <p className="text-zinc-800 font-bold p-1 text-sm ">{item.count}</p>
+                                    </Link> */}
                                 </div>
                             );
                         })}

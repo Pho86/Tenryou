@@ -17,6 +17,7 @@ const config: Config = {
         'bg-light': '#241E1E',
         'bg-lighter': '#3B3434',
         'bg-darker': '#151212',
+        'bg-darkest': '#080606',
         'primary': '#FF7373',
         'text': '#FFF7F7',
         'accent': '#B8B8B8',

@@ -1,4 +1,7 @@
+"use client"
 import Image from "next/image";
+import parse from "html-react-parser"
+import { parseColorTags } from "@/app/utils/helper";
 
 export default function AttackTable({ attackData, params }: { attackData: any, params: any }) {
     return <>
@@ -15,22 +18,24 @@ export default function AttackTable({ attackData, params }: { attackData: any, p
             <h3 className="font-bold text-3xl text-pretty">Passive Talents</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 <AttackCard attack={attackData.passive1} name={params.name} attackImage={attackData.images.filename_passive1} index={1} />
-                <AttackCard attack={attackData.passive1} name={params.name} attackImage={attackData.images.filename_passive2} index={2} />
-                <AttackCard attack={attackData.passive1} name={params.name} attackImage={attackData.images.filename_passive3} index={3} />
+                <AttackCard attack={attackData.passive2} name={params.name} attackImage={attackData.images.filename_passive2} index={2} />
+                <AttackCard attack={attackData.passive3} name={params.name} attackImage={attackData.images.filename_passive3} index={3} />
             </div>
         </div>
         }
     </>
 }
-
 function AttackCard({ attack, name, attackImage, index }: { attack: any, name: string, attackImage: string, index: number }) {
+    
+    const parsedHTML = parseColorTags(attack.descriptionRaw);
+    attack.parsedText = `${parsedHTML}`
+
     return (<div className="flex flex-col bg-bg-dark p-4 rounded-lg gap-2">
         <div className="flex items-center gap-2">
             <Image src={`/db/talents/${attackImage}.png`} width={55} height={55} alt={`${name} attack skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
             <h3 className="font-bold text-lg text-pretty">{attack.name} </h3>
         </div>
-        <pre className="text-pretty font-poppins">{attack.description}</pre>
-        {attack.flavorText && <blockquote className="text-pretty font-poppins mt-4 italic">{attack.flavorText}</blockquote>}
+        <pre className="text-pretty font-poppins">{parse(attack.parsedText)}</pre>
     </div>
     )
 }

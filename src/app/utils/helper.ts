@@ -130,3 +130,13 @@ export function addFileName(names: any[]) {
         }
     }
 }
+
+export function parseColorTags(text: string) {
+    // Regular expression to match <color> tags with hex color values
+    const regex = /<color=(#[0-9A-Fa-f]{8})>(.*?)<\/color>/g;
+
+    // Replace <color> tags with span elements with inline style for color
+    return text.replace(regex, (match, color, content) => {
+        return `<span style="color: ${color};">${content}</span>`;
+    });
+}

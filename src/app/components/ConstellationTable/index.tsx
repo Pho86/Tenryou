@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useLayoutEffect, useState } from "react";
+import { parseColorTags } from "@/app/utils/helper";
+import parse from "html-react-parser"
 
 export default function ConstellationsTable({ constellationData, params }: { constellationData: any, params: any }) {
     return <>
@@ -20,12 +21,15 @@ export default function ConstellationsTable({ constellationData, params }: { con
 }
 
 function ConstellationCard({ constellation, name, constellationImage, index }: { constellation: any, name: string, constellationImage: string, index: number }) {
+    const parsedHTML = parseColorTags(constellation.descriptionRaw);
+    constellation.parsedText = `${parsedHTML}`
+
     return (<div className="flex flex-col bg-bg-dark p-4 rounded-lg gap-2">
         <div className="flex items-center gap-2">
             <Image src={`/db/constellations/${constellationImage}.png`} width={55} height={55} alt={`${name} constellation skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
             <h3 className="font-bold text-lg">{index}. {constellation.name} </h3>
         </div>
-        <pre className="text-pretty font-poppins">{constellation.description}</pre>
+        <pre className="text-pretty font-poppins">{parse(constellation.parsedText)}</pre>
     </div>
     )
 }
