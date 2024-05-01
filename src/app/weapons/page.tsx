@@ -2,7 +2,7 @@
 import Image from "next/image";
 import NavBar from "../components/NavBar";
 import axios from "axios";
-import { useLayoutEffect, useState, useEffect } from "react"
+import { useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";

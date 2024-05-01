@@ -38,7 +38,7 @@ export default function Birthdays({ month = "december" }: { month: string }) {
             return <div key={index} className="bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light">
                 <Link href={`/characters/${character.name}`} className={`flex flex-col self-start `}>
                     <Image
-                        src={`https://api.ambr.top/assets/UI/UI_AvatarIcon_${character.fileName}.png`}
+                        src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
                         width={150}
                         height={150}
                         alt={`${character.name} icon`}

@@ -26,7 +26,7 @@ function ConstellationCard({ constellation, name, constellationImage, index }: {
 
     return (<div className="flex flex-col bg-bg-dark p-4 rounded-lg gap-2">
         <div className="flex items-center gap-2">
-            <Image src={`/db/constellations/${constellationImage}.png`} width={55} height={55} alt={`${name} constellation skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
+            <Image src={`https://enka.network/ui/${constellationImage}.png`} width={55} height={55} alt={`${name} constellation skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
             <h3 className="font-bold text-lg">{index}. {constellation.name} </h3>
         </div>
         <pre className="text-pretty font-poppins">{parse(constellation.parsedText)}</pre>

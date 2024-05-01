@@ -37,6 +37,10 @@ const nextConfig = {
             {
                 hostname:'fastcdn.hoyoverse.com',
                 protocol:'https'
+            },
+            {
+                hostname:'enka.network',
+                protocol:'https'
             }
         ]
     }

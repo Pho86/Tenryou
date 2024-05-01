@@ -46,14 +46,11 @@ export default function NavBar({
                             <Link href="/characters" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Characters</h3>
                             </Link>
-                            <Link href="/artifacts" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Artifacts</h3>
-                            </Link>
-                            <Link href="/weapons" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Weapons</h3>
+                            <Link href="/users" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                                <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Users</h3>
                             </Link>
                             <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Weapons</h3>
+                                <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Team Builder</h3>
                             </Link>
 
 

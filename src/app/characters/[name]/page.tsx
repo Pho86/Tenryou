@@ -19,7 +19,7 @@ import VoiceList from "@/app/components/VoiceList";
 import Gallery from "@/app/components/Gallery";
 import Loader from "@/app/components/Loader";
 
-export default function CharacterPage({ params }: { params: any }) {
+export default function CharacterPage({ params }: { params: { name: string } }) {
 
     const [data, setData] = useState<Character[]>();
     const [error, setError] = useState('');

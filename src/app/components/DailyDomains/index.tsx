@@ -110,7 +110,7 @@ export default function DailyDomains({ }: {}) {
                                         {activeCharacters.length > 1 && activeCharacters[index].map((character: any, i: number) => {
                                             return <Link key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
                                                 <Image
-                                                    src={`https://api.ambr.top/assets/UI/UI_AvatarIcon_${character.fileName}.png`}
+                                                    src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
                                                     width={200}
                                                     height={200}
                                                     alt={`${character.name}`}

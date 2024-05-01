@@ -36,7 +36,7 @@ export default function InfoCharacterBanner({
                 viewport={{ once: true }}
                 style={{ y: y, }}
             >
-                <Image src={`/db/characters/${data.images.filename_gachaSplash}.png`} alt={`${params.name} Image Card`} width={3000} height={3000} draggable={false} className="pointer-events-none object-cover w-full h-full transition-all hover:scale-[101%] -z-[10]" priority />
+                <Image src={`https://enka.network/ui/UI_Gacha_AvatarImg_${data.fileName}.png`} alt={`${params.name} Image Card`} width={3000} height={3000} draggable={false} className="pointer-events-none object-cover w-full h-full transition-all hover:scale-[101%] -z-[10]" priority />
             </motion.div>
             <motion.div className="md:max-w-2xl flex flex-col gap-3 justify-start pt-32 md:pt-16 z-10 p-4 md:p-8"
                 initial={{ opacity: 0, x: -50 }}

@@ -46,11 +46,11 @@ export default function BentoGrid() {
             children: <Events />
         },
         {
-            title: 'Achievements',
+            title: 'Users',
             content: "",
             image: "/icons/wish.webp",
             bg: "/db/namecards/UI_NameCardPic_Bp2_P.png",
-            link: "/achievements",
+            link: "/users",
             alt: "",
             id: "",
         },
@@ -83,7 +83,7 @@ export default function BentoGrid() {
             id: ""
         },
         {
-            title: 'Team Builder (WIP)',
+            title: 'Team Builder',
             content: "",
             image: "/icons/characters_out.webp",
             bg: "/db/namecards/UI_NameCardPic_Md2_P.png",

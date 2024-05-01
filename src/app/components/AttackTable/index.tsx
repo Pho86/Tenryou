@@ -32,7 +32,7 @@ function AttackCard({ attack, name, attackImage, index }: { attack: any, name: s
 
     return (<div className="flex flex-col bg-bg-dark p-4 rounded-lg gap-2">
         <div className="flex items-center gap-2">
-            <Image src={`/db/talents/${attackImage}.png`} width={55} height={55} alt={`${name} attack skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
+            <Image src={`https://enka.network/ui/${attackImage}.png`} width={55} height={55} alt={`${name} attack skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
             <h3 className="font-bold text-lg text-pretty">{attack.name} </h3>
         </div>
         <pre className="text-pretty font-poppins">{parse(attack.parsedText)}</pre>

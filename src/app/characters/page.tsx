@@ -71,11 +71,7 @@ export default function CharacterPage() {
                   <Image src={`/regions/${data.region}.webp`} width={25} height={25} className="" alt={`${data.region} icon`} />
                 </div>}
                 <Image
-                  // src={`https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_${data.fileName}.png`}
-                  // src={data.images.mihoyo_icon}
-                  src={`https://api.ambr.top/assets/UI/UI_AvatarIcon_${data.fileName}.png`}
-                  // onError={(event:any)=>{event.target.src = `https://enka.network/ui/UI_AvatarIcon_${data.fileName}.png`}}
-                  // src={`/db/characters/UI_AvatarIcon_${data.fileName}.png`}
+                  src={`https://enka.network/ui/UI_AvatarIcon_${data.fileName}.png`}
                   width={200}
                   height={200}
                   alt="Image w-full"
