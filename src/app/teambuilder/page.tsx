@@ -9,7 +9,7 @@ import IconButtonSwitch from "../components/IconButtonSwitch";
 
 export default function TeamBuilderPage() {
 
-    const [fullData, setFullData] = useState<any[]>([]);
+    const [characterData, setCharacterData] = useState<any[]>([]);
     const [activeElement, setActiveElement] = useState<number>(0);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
     const [activeCharacters, setActiveCharacters] = useState<any[]>([{}, {}, {}, {}]);
@@ -23,7 +23,7 @@ export default function TeamBuilderPage() {
                 names.forEach((name) => {
                     addFileName([name]);
                 })
-                setFullData(names);
+                setCharacterData(names);
             })
             .catch((error) => {
                 console.error("Error fetching character names:", error);
@@ -63,7 +63,7 @@ export default function TeamBuilderPage() {
     return (
         <>
             <NavBar />
-            <main className="pt-16 px-4 md:px-8 mb-20 w-full flex flex-col gap-4">
+            <main className="pt-8 md:pt-16 px-4 md:px-8 mb-20 w-full flex flex-col gap-4">
                 <div className="flex flex-col gap-2 ">
                     <div className="flex w-full justify-between items-center">
                         <h1 className="text-3xl text-primary">Team Builder</h1>
@@ -113,7 +113,7 @@ export default function TeamBuilderPage() {
                 </div>
 
                 <section className="flex gap-6 overflow-y-hidden overflow-x-scroll p-4 w-full">
-                    {fullData.length > 0 ? fullData.map((character, index) => {
+                    {characterData.length > 0 ? characterData.map((character, index) => {
 
                         const elementConditions = [true, "Pyro", "Hydro", "Anemo", "Electro", "Dendro", "Cryo", "Geo"];
                         const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
@@ -133,7 +133,6 @@ export default function TeamBuilderPage() {
                     }
                 </section>
             </main>
-            {/* <Footer /> */}
         </>
     );
 }

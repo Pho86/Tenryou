@@ -79,7 +79,7 @@ export default function WeaponsPage() {
     return (
         <>
             <NavBar />
-            <main className="pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4">
+            <main className="md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                     <h1 className="text-3xl text-primary">Weapons List</h1>
                     <section className="flex flex-col gap-8">

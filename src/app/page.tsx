@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <main className="pt-16 px-8 mb-20 w-full ">
+      <main className="pt-8 md:pt-16 px-8 mb-20 w-full ">
         <BentoGrid/>
       </main>
       <Footer />

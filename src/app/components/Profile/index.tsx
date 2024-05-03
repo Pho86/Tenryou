@@ -45,7 +45,6 @@ export default function Profile({ user }: { user: any }) {
     };
     const [loading, setLoading] = useState<boolean>(false);
     const [activeHover, setActiveHover] = useState<string>("");
-    const [artifactNames, setArtifactNames] = useState<string[]>(["", "", "", "", ""])
     const [activeCharacter, setActiveCharacter] = useState<any>(user.characters[0]);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -108,7 +107,7 @@ export default function Profile({ user }: { user: any }) {
                     </form>
                 </div>
             </div>
-            <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full self-center">
+            {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full self-center">
                 {user.characters.map((character: any, index: number) => {
                     return <div className={`flex relative overflow-hidden rounded-xl group cursor-pointer hover:-translate-y-1 transition-all ${activeCharacter.name == character.name && "shadow-light"}`} key={index} onClick={() => {
                         setLoading(true);
@@ -136,20 +135,20 @@ export default function Profile({ user }: { user: any }) {
                                 <div className="flex gap-2">
                                     <div className="">
                                         <Image src={`https://enka.network/ui/${character.skills.normalAttacks.assets.icon}.png`} width={250} height={250} alt={`${character.skills.normalAttacks.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
-                                        <div className="flex">
-                                            <p className="-mt-2 ml-2 pl-2 pr-2">{character.skills.normalAttacks.level}</p>
+                                        <div className="w-full justify-center flex items-center">
+                                            <p className="-mt-2">{character.skills.normalAttacks.level}</p>
                                         </div>
                                     </div>
                                     <div className="">
                                         <Image src={`https://enka.network/ui/${character.skills.elementalSkill.assets.icon}.png`} width={250} height={250} alt={`${character.skills.elementalSkill.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
-                                        <div className="flex">
-                                            <p className="-mt-2 ml-2 pl-2 pr-2">{character.skills.elementalBurst.level}</p>
+                                        <div className="w-full justify-center flex items-center">
+                                            <p className="-mt-2">{character.skills.elementalBurst.level}</p>
                                         </div>
                                     </div>
                                     <div className="">
                                         <Image src={`https://enka.network/ui/${character.skills.elementalBurst.assets.icon}.png`} width={250} height={250} alt={`${character.skills.elementalBurst.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
-                                        <div className="flex">
-                                            <p className="-mt-2 ml-2 pl-2 pr-2">{character.skills.elementalBurst.level}</p>
+                                        <div className="w-full justify-center flex items-center">
+                                            <p className="-mt-2">{character.skills.elementalBurst.level}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +158,8 @@ export default function Profile({ user }: { user: any }) {
 
                     </div>
                 })}
-            </section>
+            </section>}
+
             <div className="from-gradient-Pyro-start to-gradient-Pyro-end  from-gradient-Electro-start to-gradient-Electro-end from-gradient-Cryo-start to-gradient-Cryo-end from-gradient-Hydro-start to-gradient-Hydro-end from-gradient-Dendro-start to-gradient-Dendro-end from-gradient-Anemo-start to-gradient-Anemo-end from-gradient-Geo-start to-gradient-Geo-end"></div>
             {loading
                 ?
@@ -168,8 +168,8 @@ export default function Profile({ user }: { user: any }) {
                 </div>
                 :
                 <div className={`grid md:grid-cols-2 md:auto-cols-[400px] max-w-7xl p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end`}>
-                    <div className="w-full h-full relative drop-shadow-text">
-                        <div className="flex flex-col absolute p-4 w-full h-full">
+                    <div className="w-full h-full relative drop-shadow-text min-h-[400px] col-span-2 md:col-span-1">
+                        <div className="flex flex-col absolute p-5 w-full h-full">
                             <div className="flex gap-2 items-center">
                                 <h2 className="text-3xl font-semibold">
                                     {activeCharacter.name}
@@ -184,101 +184,95 @@ export default function Profile({ user }: { user: any }) {
                             <div className="flex gap-2 font-semibold">
                                 <Image src={`/stats/Friendship.svg`} width={250} height={250} alt={`Friendship Level`} className={`w-6`} />{activeCharacter.friendship.level}
                             </div>
-                            <div className="absolute right-2 bottom-20 flex flex-col justify-between">
-                                <div className="">
-                                    {activeCharacter.assets.constellations.map((constellation: any, index: number) => {
-                                        return <div key={index} className="relative w-12 h-12">
-                                            <Image src={`/stats/Constellation.svg`} width={250} height={250} alt={`${constellation}`} className={`w-full z-10`} />
-                                            <Image src={`https://enka.network/ui/${constellation}.png`} width={250} height={250} alt={`${constellation}`} className={`absolute ${activeCharacter.constellationsList[index] == undefined && "brightness-50"} top-0 left-0 mt-[11px] ml-[10px] w-7 h-7 z-20`} />
-                                            {activeCharacter.constellationsList[index] === undefined &&
-                                                <Image src={`/stats/lock.svg`} width={250} height={250} alt={`${constellation}`} className={`absolute top-0 left-0 mt-[14px] ml-[14px] w-5 h-5 z-20`} />
-                                            }
-                                        </div>
-                                    })}
-                                </div>
-
+                            <div className="absolute right-3 bottom-20 flex flex-col justify-between">
+                                {activeCharacter.assets.constellations.map((constellation: any, index: number) => {
+                                    return <div key={index} className="relative w-12 h-12">
+                                        <Image src={`/stats/Constellation.svg`} width={250} height={250} alt={`${constellation} background`} className={`w-full z-10`} />
+                                        <Image src={`https://enka.network/ui/${constellation}.png`} width={250} height={250} alt={`${constellation}`} className={`absolute ${activeCharacter.constellationsList[index] == undefined && "brightness-50"} top-0 left-0 mt-[11px] ml-[10px] w-7 h-7 z-20`} />
+                                        {activeCharacter.constellationsList[index] === undefined &&
+                                            <Image src={`/stats/lock.svg`} width={250} height={250} alt={`${constellation}`} className={`absolute top-0 left-0 mt-[14px] ml-[14px] w-5 h-5 z-20`} />
+                                        }
+                                    </div>
+                                })}
                             </div>
-                            <div className="absolute flex bottom-0 right-4 gap-3 font-semibold">
+                            <div className="absolute flex bottom-2 right-4 gap-3 font-semibold">
                                 <div className="">
                                     <Image src={`https://enka.network/ui/${activeCharacter.skills.normalAttacks.assets.icon}.png`} width={250} height={250} alt={`${activeCharacter.skills.normalAttacks.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
-                                    <div className="flex">
-                                        <p className="-mt-2 ml-[20px] pr-2">{activeCharacter.skills.normalAttacks.level}</p>
+                                    <div className="w-full justify-center flex items-center">
+                                        <p className="-mt-2">{activeCharacter.skills.normalAttacks.level}</p>
                                     </div>
                                 </div>
                                 <div className="">
                                     <Image src={`https://enka.network/ui/${activeCharacter.skills.elementalSkill.assets.icon}.png`} width={250} height={250} alt={`${activeCharacter.skills.elementalSkill.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
-                                    <div className="flex">
+                                    <div className="w-full justify-center flex items-center">
                                         {activeCharacter.constellationsList[2] != undefined ?
-                                            <p className="-mt-2 ml-[20px] pr-2 text-green-600">{activeCharacter.skills.elementalBurst.level + 3}</p> :
-                                            <p className="-mt-2 ml-[20px] pr-2">{activeCharacter.skills.elementalBurst.level}</p>
+                                            <p className="-mt-2 text-green-600">{activeCharacter.skills.elementalBurst.level + 3}</p> :
+                                            <p className="-mt-2">{activeCharacter.skills.elementalBurst.level}</p>
                                         }
                                     </div>
                                 </div>
                                 <div className="">
                                     <Image src={`https://enka.network/ui/${activeCharacter.skills.elementalBurst.assets.icon}.png`} width={250} height={250} alt={`${activeCharacter.skills.elementalBurst.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
-                                    <div className="flex">
+                                    <div className="w-full justify-center flex items-center">
                                         {activeCharacter.constellationsList[4] != undefined ?
-                                            <p className="-mt-2 ml-[20px] pr-2 text-green-600">{activeCharacter.skills.elementalBurst.level + 3}</p> :
-                                            <p className="-mt-2 ml-[20px] pr-2">{activeCharacter.skills.elementalBurst.level}</p>
+                                            <p className="-mt-2 text-green-600">{activeCharacter.skills.elementalBurst.level + 3}</p> :
+                                            <p className="-mt-2 ">{activeCharacter.skills.elementalBurst.level}</p>
                                         }
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name}`} className="bg-bg bg-opacity-40 rounded-xl object-cover h-full" />
+                        <div className="p-2 w-full h-full">
+                            <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="bg-bg bg-opacity-40 rounded-xl object-cover h-full" />
+                        </div>
                     </div>
-                    <div className="p-4 flex flex-col gap-2 drop-shadow-text">
-                        <div className="flex flex-col">
-                            <div className="flex md:flex-row flex-col w-full gap-2">
-                                <Image src={`https://enka.network/ui/${activeCharacter.equipment.weapon.assets.awakenIcon}.png`} width={250} height={250} className="p-2 w-28 bg-bg bg-opacity-75 rounded-xl" alt={activeCharacter.equipment.weapon.name} />
-                                <div className="flex flex-col gap-1">
-                                    <div className="font-bold text-2xl">{activeCharacter.equipment.weapon.name}</div>
-                                    <div className="flex gap-4">{activeCharacter.equipment.weapon.weaponStats.map((stat: any, index: number) => {
-                                        const percentStat = isPropertyFlat(stat.stat)
-                                        const isAttackBonus = isAttackStat(stat.stat);
-                                        const isDefenseBonus = isDefenseStat(stat.stat);
-                                        const isHpBonus = isHPStat(stat.stat);
-                                        const isDamageBonus = isPropertyDamageBonus(stat.stat);
-                                        return <div className={`flex p-2 rounded-xl gap-2 font-bold text-xl bg-opacity-75
-                                    ${isAttackBonus && activeHover == "ATK" && "bg-bg"}
-                                    ${isDefenseBonus && activeHover == "DEF" && "bg-bg"}
-                                    ${isHpBonus && activeHover == "HP" && "bg-bg"}
-                                    ${isDamageBonus && activeHover == "ELEMENT" && "bg-bg"}
-                                    ${!isAttackBonus && !isDefenseBonus && !isHpBonus && !isDamageBonus && activeHover == stat.stat && "bg-bg"}
-                                    `} key={index} onMouseEnter={() => {
-                                                if (isAttackBonus) setActiveHover("ATK")
-                                                else if (isDefenseBonus) setActiveHover("DEF")
-                                                else if (isHpBonus) setActiveHover("HP")
-                                                else if (isDamageBonus) setActiveHover("ELEMENT")
-                                                else setActiveHover(stat.stat)
-                                            }} onMouseLeave={() => {
-                                                setActiveHover("")
-                                            }}
-                                        >
-                                            <Image src={`/stats/${stat.stat}.svg`} width={24} height={24} alt={stat.stat} className="" />
-                                            {stat.statValue}{!percentStat && "%"}
+                    <div className="p-4 flex flex-col gap-2 md:col-span-1 col-span-2 drop-shadow-text w-full">
+                        <div className="flex flex-col w-full">
+                            <div className="flex lg:flex-row flex-col w-full justify-between gap-2">
+                                <div className="flex lg:flex-row flex-col w-full gap-2">
+                                    <Image src={`https://enka.network/ui/${activeCharacter.equipment.weapon.assets.awakenIcon}.png`} width={250} height={250} className="p-2 w-28 h-full object-cover bg-bg bg-opacity-75 rounded-xl" alt={activeCharacter.equipment.weapon.name} />
+                                    <div className="flex flex-col gap-1">
+                                        <div className="font-bold text-2xl">{activeCharacter.equipment.weapon.name}</div>
+                                        <div className="flex gap-4">{activeCharacter.equipment.weapon.weaponStats.map((stat: any, index: number) => {
+                                            const percentStat = isPropertyFlat(stat.stat)
+                                            const isAttackBonus = isAttackStat(stat.stat);
+                                            const isDefenseBonus = isDefenseStat(stat.stat);
+                                            const isHpBonus = isHPStat(stat.stat);
+                                            const isDamageBonus = isPropertyDamageBonus(stat.stat);
+                                            return <div className={`flex p-2 rounded-xl gap-2 font-bold text-xl bg-opacity-75
+                                        ${isAttackBonus && activeHover == "ATK" && "bg-bg"}
+                                        ${isDefenseBonus && activeHover == "DEF" && "bg-bg"}
+                                        ${isHpBonus && activeHover == "HP" && "bg-bg"}
+                                        ${isDamageBonus && activeHover == "ELEMENT" && "bg-bg"}
+                                        ${!isAttackBonus && !isDefenseBonus && !isHpBonus && !isDamageBonus && activeHover == stat.stat && "bg-bg"}
+                                        `} key={index} onMouseEnter={() => {
+                                                    if (isAttackBonus) setActiveHover("ATK")
+                                                    else if (isDefenseBonus) setActiveHover("DEF")
+                                                    else if (isHpBonus) setActiveHover("HP")
+                                                    else if (isDamageBonus) setActiveHover("ELEMENT")
+                                                    else setActiveHover(stat.stat)
+                                                }} onMouseLeave={() => {
+                                                    setActiveHover("")
+                                                }}
+                                            >
+                                                <Image src={`/stats/${stat.stat}.svg`} width={24} height={24} alt={stat.stat} className="" />
+                                                {stat.statValue}{!percentStat && "%"}
+                                            </div>
+                                        })}
                                         </div>
-                                    })}
-                                    </div>
-                                    <div className="flex gap-2 font-bold">
-                                        <div className="p-2 bg-bg-light bg-opacity-75 rounded-xl">Lv. {activeCharacter.equipment.weapon.level}/{activeCharacter.equipment.weapon.level}</div>
-                                        <div className="p-2 bg-bg-light bg-opacity-75 rounded-xl">R{activeCharacter.equipment.weapon.refinement.level + 1}</div>
+                                        <div className="flex gap-2 font-bold">
+                                            <div className="p-2 bg-bg-light bg-opacity-75 rounded-xl">Lv. {activeCharacter.equipment.weapon.level}/{activeCharacter.equipment.weapon.level}</div>
+                                            <div className="p-2 bg-bg-light bg-opacity-75 rounded-xl">R{activeCharacter.equipment.weapon.refinement.level + 1}</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="">
+                                <div className="flex flex-wrap flex-col ">
                                     {artifactSet.map((set: any, index: number) => {
                                         if (set.count >= 2) return <div key={index} className="font-bold text-green-600">
-                                            <p>{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
+                                            <p className="text-nowrap">{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
                                         </div>
                                     })}
-                                    {/* {Object.entries(artifactSet).map((artifact:any, index:number) => {
-                                        if(artifact[0] >= 2) return <div key={index}>
-                                            <p>{artifact[0]}x {artifact[1].setName}</p>
-                                            
-                                        </div>
-                                    })} */}
-
                                 </div>
                             </div>
 
@@ -389,13 +383,20 @@ export default function Profile({ user }: { user: any }) {
                                 </div>
                                 <div className="flex flex-col text-right">
                                     <span className="text-xl">
-                                        {(activeCharacter.stats.pyroDamageBonus.value * 100).toFixed(1)}%
+                                        {activeCharacter.element == "Electro" && (activeCharacter.stats.electroDamageBonus.value * 100).toFixed(1)}
+                                        {activeCharacter.element == "Pyro" && (activeCharacter.stats.pyroDamageBonus.value * 100).toFixed(1)}
+                                        {activeCharacter.element == "Cryo" && (activeCharacter.stats.cryoDamageBonus.value * 100).toFixed(1)}
+                                        {activeCharacter.element == "Hydro" && (activeCharacter.stats.hydroDamageBonus.value * 100).toFixed(1)}
+                                        {activeCharacter.element == "Anemo" && (activeCharacter.stats.anemoDamageBonus.value * 100).toFixed(1)}
+                                        {activeCharacter.element == "Geo" && (activeCharacter.stats.geoDamageBonus.value * 100).toFixed(1)}
+                                        {activeCharacter.element == "Dendro" && (activeCharacter.stats.dendroDamageBonus.value * 100).toFixed(1)}
+                                        %
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-2 p-2 grid grid-cols-2 lg:grid-cols-5 gap-2 place-items-center">
+                    <div className="w-full col-span-2 p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 place-items-center">
                         {activeCharacter.equipment.artifacts.map((artifact: any, index: number) => {
                             const isAttackBonus = isAttackStat(artifact.mainstat.stat);
                             const isDefenseBonus = isDefenseStat(artifact.mainstat.stat);
@@ -422,12 +423,10 @@ export default function Profile({ user }: { user: any }) {
                                 >
                                     {!isDamageBonus ?
                                         <Image src={`/stats/${artifact.mainstat.stat}.svg`} width={32} height={32} alt={artifact.mainstat.stat} className="" />
-                                        : //{active[`r${refinement}`].description
+                                        :
                                         <Image src={`/elements/${activeCharacter.element}.svg`} width={32} height={32} alt={artifact.mainstat.stat} className="" />
                                     }
-
                                     {artifact.mainstat.statValue}{!propertyType && "%"}
-
                                 </div>
                                 <div className="grid grid-cols-2 gap-4 col-span-2 place-items-start font-bold">
                                     {artifact.substats.map((stat: any, index: number) => {

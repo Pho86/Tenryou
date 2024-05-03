@@ -17,14 +17,14 @@ export default function Footer() {
                         <p className="mt-6 text-pretty">Tao.</p>
                     </div>
                     <ul className="md:mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12">
-                        <Link href="/" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
-                            <h2>Home</h2>
-                        </Link>
-                        <Link href="/characters" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
+                        <Link href="/characters" className="hover:text-primary relative font-normal transition-all">
                             <h2>Characters</h2>
                         </Link>
-                        <Link href="/" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
-                            <h2>Artifacts</h2>
+                        <Link href="/users" className="hover:text-primary relative font-normal transition-all">
+                            <h2>Users</h2>
+                        </Link>
+                        <Link href="/teambuilder" className="hover:text-primary relative font-normal transition-all">
+                            <h2>Team Builder</h2>
                         </Link>
                     </ul>
                 </div>

@@ -12,6 +12,7 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
     useEffect(() => {
         axios.get(`/api/player/${params.uid}`)
             .then(response => {
+                console.log(response.data)
                 response.data.characters.forEach((character: any) => {
                     addFileName([character]);
                 })
@@ -25,7 +26,7 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
     return (
         <>
             <NavBar />
-            <main className="flex flex-col pt-16 px-8">
+            <main className="flex flex-col md:pt-16 px-8">
                 {playerData ? <Profile user={playerData} />
                     :
                     <Loader />

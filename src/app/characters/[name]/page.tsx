@@ -19,12 +19,7 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
     const [characterData, setCharacterData] = useState<Character[]>();
     const [error, setError] = useState('');
     const [lang, setLang] = useState<string>("english");
-    const [assets, setAssets]= useState()    
     useLayoutEffect(() => {
-        axios.get(`/api/assets/${params.name}`).then((res:any)=>{
-            let data = res.data
-            console.log(data)
-        })
         axios.get<Character[]>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true&resultLanguage=${lang}`)
             .then((res) => {
                 let data = res.data;
