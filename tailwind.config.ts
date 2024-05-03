@@ -22,25 +22,53 @@ const config: Config = {
         'text': '#FFF7F7',
         'accent': '#B8B8B8',
         'dark-accent': '#8C7F7F',
-        'gradient-yellow': {
+        'gradient-SSR': {
           'start': 'hsla(33, 39%, 39%, 1)',
           'end': 'hsla(34, 78%, 56%, 1)',
         },
-        'gradient-purple': {
+        'gradient-SR': {
           'start': 'hsla(231, 23%, 49%, 1)',
           'end': 'hsla(268, 37%, 65%, 1)',
         },
-        'gradient-blue': {
+        'gradient-R': {
           'start': 'hsla(217, 26%, 39%, 1)',
           'end': 'hsla(207, 51%, 53%, 1)',
         },
-        'gradient-green': {
+        'gradient-UC': {
           'start': 'hsla(178, 17%, 33%, 1)',
           'end': 'hsla(151, 32%, 50%, 1)',
         },
-        'gradient-gray': {
+        'gradient-C': {
           'start': 'hsla(0, 0%, 39%, 1)',
           'end': 'hsla(0, 0%, 65%, 1)',
+        },
+        'gradient-Pyro': {
+          'start': '#EE481B',
+          'end': '#DA4E27'
+        },
+        'gradient-Hydro': {
+          'start': '#8296E7',
+          'end': '#1945C1'
+        },
+        'gradient-Cryo': {
+          'start': '#30508E',
+          'end': '#86B7F1'
+        },
+        'gradient-Electro': {
+          'start': '#A575BD',
+          'end': '#6E44AB'
+        },
+        'gradient-Geo': {
+          'start': '#6C5548',
+          'end': '#A07A53'
+        },
+        'gradient-Anemo': {
+          'start': '#258B8D',
+          'end': '#37ADA7'
+        },
+        'gradient-Dendro': {
+          'start': '#274541',
+          'end': '#619871'
         },
       },
 
@@ -51,6 +79,7 @@ const config: Config = {
       dropShadow: {
         'primary': '0px 10px 10px rgba(91, 205, 249, .2)',
         'dark': '0px 5px 3px rgba(0, 0, 0, .2)',
+        'text':'0px 2px 2px rgba(0, 0, 0, .4)'
       },
       boxShadow:{
         'light': '0 0px 2px 4px rgba(223, 229, 220, 1)',

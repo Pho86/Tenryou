@@ -108,7 +108,7 @@ export default function WeaponsPage() {
                                     const validRarity = activeRarity === 0 || weaponRarity[activeRarity] === weapon.rarity;
                                     if (validWeapon && validRarity) return <div key={index} className="max-h-48">
                                         <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == weapon.id && "shadow-light scale-105"}`} onClick={() => { setActive(weapon); receiveWeaponData(weapon) }}>
-                                            <Image src={`https://api.ambr.top/assets/UI/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-yellow-start to-gradient-yellow-end" : weapon.rarity === 4 ? "from-gradient-purple-start to-gradient-purple-end" : weapon.rarity === 3 ? "from-gradient-blue-start to-gradient-blue-end" : weapon.rarity === 2 ? "from-gradient-blue-start to-gradient-blue-end" : "from-gradient-gray-start to-gradient-blue-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`}/>
+                                            <Image src={`https://api.ambr.top/assets/UI/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : weapon.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : weapon.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : weapon.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`}/>
                                             <p className="flex flex-col min-h-9 justify-around mx-1 text-center text-xs md:text-md text-bg font-bold">{weapon.name}</p>
                                         </div>
                                     </div>
@@ -126,8 +126,8 @@ export default function WeaponsPage() {
                                     </div> :
                                     active ? <>
                                         <div className="flex flex-col relative bg-[#e9e9e9] rounded-xl ">
-                                            <div className={`max-h-56 rounded-t-xl bg-gradient-to-br ${active.rarity === 5 ? "from-gradient-yellow-start to-gradient-yellow-end" : active.rarity === 4 ? "from-gradient-purple-start to-gradient-purple-end" : active.rarity === 3 ? "from-gradient-blue-start to-gradient-blue-end" : active.rarity === 2 ? "from-gradient-blue-start to-gradient-blue-end" : "from-gradient-gray-start to-gradient-blue-end"} flex justify-between`}>
-                                                {active.stats && <div className="p-4 w-full">
+                                            <div className={`max-h-56 rounded-t-xl bg-gradient-to-br ${active.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : active.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : active.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : active.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} flex justify-between `}>
+                                                {active.stats && <div className="p-4 w-full drop-shadow-text">
                                                     <p className="text-nowrap font-bold" >{active.weaponText}</p>
                                                     <p className="text-nowrap font-bold text-xl" >Base ATK</p>
                                                     <p className="text-2xl">{active.stats[active.level].attack.toFixed()}</p>

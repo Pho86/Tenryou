@@ -4,8 +4,9 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req: NextApiRequest, { params }: { params: { uid: string } }) {
     const uid = params.uid;
-    const { genshin } = new Wrapper();
-
+    const { genshin } = new Wrapper({
+        cache: true
+    });
     try {
         const playerData = await genshin.getPlayer(uid as string);
         return NextResponse.json(playerData, { status: 200 });

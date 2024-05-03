@@ -1,15 +1,10 @@
 "use client"
-import Image from "next/image";
 import NavBar from "../../components/NavBar";
 import axios from "axios";
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
-import SmoothScroll from "@/app/components/SmoothScroll";
-import StickyScroll from "@/app/components/StickyScroll";
+import { useEffect, useLayoutEffect, useState } from "react"
 import Footer from "@/app/components/Footer";
 import { Character } from "@/app/utils/types";
 import { addFileName } from "@/app/utils/helper";
-import { motion } from "framer-motion"
-import Link from "next/link";
 import StatsTable from "@/app/components/StatsTable";
 import InfoCharacterBanner from "@/app/components/InfoCharacterBanner";
 import Lenis from "@studio-freight/lenis";
@@ -21,12 +16,15 @@ import Loader from "@/app/components/Loader";
 
 export default function CharacterPage({ params }: { params: { name: string } }) {
 
-    const [data, setData] = useState<Character[]>();
+    const [characterData, setCharacterData] = useState<Character[]>();
     const [error, setError] = useState('');
-    const [lang, setLang] = useState<string>("english")
-    const link = `https://genshin-db-api.vercel.app/api/v5/characters?query=${params.name}`
-    const [gallery, setGallery] = useState<number>(0);
+    const [lang, setLang] = useState<string>("english");
+    const [assets, setAssets]= useState()    
     useLayoutEffect(() => {
+        axios.get(`/api/assets/${params.name}`).then((res:any)=>{
+            let data = res.data
+            console.log(data)
+        })
         axios.get<Character[]>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true&resultLanguage=${lang}`)
             .then((res) => {
                 let data = res.data;
@@ -70,7 +68,7 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
                         };
 
                         const finalData = mergeWithPreference(data, mergedData);
-                        setData(finalData);
+                        setCharacterData(finalData);
                     })
                     .catch((error) => {
                         console.error("Error fetching data:", error);
@@ -93,28 +91,28 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
         <>
             <NavBar />
 
-            {data ?
+            {characterData ?
                 <main className="flex flex-col gap-4" >
-                    <InfoCharacterBanner data={data} params={params} />
-                    <button onClick={() => { console.log(data) }} className="p-2 fixed bottom-0"> HERLLO!!</button>
+                    <InfoCharacterBanner characterData={characterData} params={params} />
                     <div className="flex gap-2 p-4 md:p-8 z-20">
                         <section className="flex flex-col gap-8 mt-20">
-                            <StatsTable data={data} />
+                            <StatsTable characterData={characterData} />
+                            
                             {/* @ts-ignore */}
-                            <AttackTable attackData={data.talents} params={params} />
+                            <AttackTable attackData={characterData.talents} params={params} />
                             {/* @ts-ignore */}
-                            <ConstellationsTable constellationData={data.constellations} params={params} />
+                            <ConstellationsTable constellationData={characterData.constellations} params={params} />
 
                         </section>
                     </div>
                     <section className="flex gap-3 flex-col p-4 md:p-8">
-                        <Gallery data={data} />
+                        <Gallery characterData={characterData} />
                     </section>
                     <section className="flex gap-3 flex-col p-4 md:p-8">
                         <h2 className="font-bold text-3xl">Quotes</h2>
                         <div className="grid gap-4">
                             {/* @ts-ignore */}
-                            <VoiceList voiceData={data.voices} />
+                            <VoiceList voiceData={characterData.voices} />
                         </div>
                     </section>
                     <Footer />

@@ -104,7 +104,7 @@ export default function DailyDomains({ }: {}) {
                             {activeArtifacts.map((domain, index) => {
                                 return <div key={index} className="flex gap-4">
                                     <div className="flex flex-col items-center col-span-2 transition-all justify-start rounded-xl min-w-8 min-h-8" >
-                                        <Image src={`/db/materials/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-yellow-end to-gradient-yellow-end rounded-xl hover:scale-105 hover:shadow-light`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
+                                        <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-yellow-end to-gradient-yellow-end rounded-xl hover:scale-105 hover:shadow-light`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>
                                     <div className="grid-auto-fit-10">
                                         {activeCharacters.length > 1 && activeCharacters[index].map((character: any, i: number) => {
@@ -115,7 +115,7 @@ export default function DailyDomains({ }: {}) {
                                                     height={200}
                                                     alt={`${character.name}`}
                                                     title={`${character.name}`}
-                                                    className={`w-full hover:scale-105 hover:shadow-light transition-all rounded-xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-purple-start  to-gradient-purple-end" : "from-gradient-yellow-start  to-gradient-yellow-end"}`}
+                                                    className={`w-full hover:scale-105 hover:shadow-light transition-all rounded-xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
                                                 />
                                             </Link>
                                         })}
@@ -126,8 +126,8 @@ export default function DailyDomains({ }: {}) {
                         <div className="flex gap-2 mt-2">
                             {activeWeapons.map((domain, index) => {
                                 return <div key={index} className="flex justify-between gap-4">
-                                    <div className="flex flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-xl bg-gradient-to-br from-gradient-yellow-end to-gradient-yellow-end" >
-                                        <Image src={`/db/materials/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={``} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
+                                    <div className="flex flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-xl bg-gradient-to-br from-gradient-SSR-end to-gradient-SSR-end" >
+                                        <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={``} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>
                                 </div>
                             })}

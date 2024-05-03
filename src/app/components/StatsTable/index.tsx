@@ -1,47 +1,46 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useLayoutEffect, useState } from "react";
 function getColorFromMaterial(i: number, index: number) {
     if (i == 0) {
-        return "gray"
+        return "C"
     }
     else if (i == 1) {
         if (index == 0) {
-            return "green"
+            return "UC"
         }
         else if (index <= 2) {
-            return "blue";
+            return "R";
         } else if (index < 5) {
-            return "purple"
+            return "SR"
         } else {
-            return "yellow"
+            return "SSR"
         }
     }
     else if (i == 2) {
         if (index == 0) {
-            return "gray"
+            return "C"
         } else {
-            return "purple"
+            return "SSR"
         }
     }
     else if (i == 3) {
-        return "gray";
+        return "C";
     } else if (i == 4) {
         if (index < 2) {
-            return "green"
+            return "UC"
         } else if (index < 4) {
-            return "blue"
+            return "R"
         } else {
-            return "purple"
+            return "SR"
         }
     }
 }
 
-export default function StatsTable({ data }: { data: any }) {
+export default function StatsTable({ characterData }: { characterData: any }) {
     const [showAscension, setAscension] = useState<boolean>(false);
     const [percentage, setPercent] = useState<boolean>(true)
     useLayoutEffect(() => {
-        if (data.substatText == "Elemental Mastery") {
+        if (characterData.substatText == "Elemental Mastery") {
             setPercent(false)
         }
     }, [])
@@ -49,9 +48,9 @@ export default function StatsTable({ data }: { data: any }) {
     return <div className="flex flex-col gap-4">
         <h2 className="font-bold text-3xl">Ascension Materials and Stats</h2>
         <button className="text-start hover:bg-bg-dark border-2 p-2 w-max rounded-xl transition-all" onClick={() => { setAscension(!showAscension) }}>{showAscension ? "Hide" : "Show"} Materials</button>
-        <div className=" bg-gradient-to-br from-gradient-gray-start to-gradient-gray-end from-gradient-purple-start to-gradient-purple-end from-gradient-green-start to-gradient-green-end from-gradient-blue-start to-gradient-blue-end"></div>
+        <div className="bg-gradient-to-br from-gradient-R-start to-gradient-R-end from-gradient-SR-start to-gradient-SR-end from-gradient-UC-start to-gradient-UC-end from-gradient-C-start to-gradient-C-end"></div>
 
-        {data.stats && <table className="table-cell border-collapse w-full rounded-lg ">
+        {characterData.stats && <table className="table-cell border-collapse w-full rounded-lg ">
             <thead className="w-full">
                 <tr className="bg-bg-dark">
                     <th className="p-2">Grade</th>
@@ -59,17 +58,17 @@ export default function StatsTable({ data }: { data: any }) {
                     <th className="p-2">HP</th>
                     <th className="p-2">ATK</th>
                     <th className="p-2">DEF</th>
-                    <th className="p-2">{data.substatText}</th>
+                    <th className="p-2">{characterData.substatText}</th>
                 </tr>
             </thead>
             <tbody className="text-center">
-                <StatsRow stats={data.stats[1]} stats2={data.stats[20]} ascension={data.costs.ascend1} show={showAscension} index={1} percentage={percentage} />
-                <StatsRow stats={data.stats["20+"]} stats2={data.stats[40]} ascension={data.costs.ascend2} show={showAscension} index={2} percentage={percentage} />
-                <StatsRow stats={data.stats["40+"]} stats2={data.stats[50]} ascension={data.costs.ascend3} show={showAscension} index={3} percentage={percentage} />
-                <StatsRow stats={data.stats["50+"]} stats2={data.stats[60]} ascension={data.costs.ascend4} show={showAscension} index={4} percentage={percentage} />
-                <StatsRow stats={data.stats["60+"]} stats2={data.stats[70]} ascension={data.costs.ascend5} show={showAscension} index={5} percentage={percentage} />
-                <StatsRow stats={data.stats["70+"]} stats2={data.stats[80]} ascension={data.costs.ascend6} show={showAscension} index={6} percentage={percentage} />
-                <StatsRow stats={data.stats["80+"]} stats2={data.stats[90]} ascension={data.costs.ascend7} show={showAscension} index={7} percentage={percentage} />
+                <StatsRow stats={characterData.stats[1]} stats2={characterData.stats[20]} ascension={characterData.costs.ascend1} show={showAscension} index={1} percentage={percentage} />
+                <StatsRow stats={characterData.stats["20+"]} stats2={characterData.stats[40]} ascension={characterData.costs.ascend2} show={showAscension} index={2} percentage={percentage} />
+                <StatsRow stats={characterData.stats["40+"]} stats2={characterData.stats[50]} ascension={characterData.costs.ascend3} show={showAscension} index={3} percentage={percentage} />
+                <StatsRow stats={characterData.stats["50+"]} stats2={characterData.stats[60]} ascension={characterData.costs.ascend4} show={showAscension} index={4} percentage={percentage} />
+                <StatsRow stats={characterData.stats["60+"]} stats2={characterData.stats[70]} ascension={characterData.costs.ascend5} show={showAscension} index={5} percentage={percentage} />
+                <StatsRow stats={characterData.stats["70+"]} stats2={characterData.stats[80]} ascension={characterData.costs.ascend6} show={showAscension} index={6} percentage={percentage} />
+                <StatsRow stats={characterData.stats["80+"]} stats2={characterData.stats[90]} ascension={characterData.costs.ascend7} show={showAscension} index={7} percentage={percentage} />
             </tbody>
         </table>}
     </div>
@@ -111,10 +110,6 @@ function StatsRow({ stats, stats2, ascension, show, index, percentage }: { stats
                                         <Image src={`/db/materials/UI_ItemIcon_${item.id}.png`} width={100} height={100} alt={`${item.name} material icon`} className={`bg-gradient-to-br from-gradient-${item.color}-start to-gradient-${item.color}-end rounded-t-lg p-1 md:p-2 w-full h-full`} title={item.name}/>
                                         <p className="text-zinc-800 font-bold p-1 text-sm ">{item.count}</p>
                                     </div>
-                                    {/* <Link href={`/materials/${item.id}`} className="flex w-[4rem] md:w-[5rem] flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee]" key={item.id}>
-                                        <Image src={`/db/materials/UI_ItemIcon_${item.id}.png`} width={100} height={100} alt={`${item.name} material icon`} className={`bg-gradient-to-br from-gradient-${item.color}-start to-gradient-${item.color}-end rounded-t-lg p-1 md:p-2 w-full h-full`} title={item.name}/>
-                                        <p className="text-zinc-800 font-bold p-1 text-sm ">{item.count}</p>
-                                    </Link> */}
                                 </div>
                             );
                         })}

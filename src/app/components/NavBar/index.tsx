@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function NavBar({
 
 }: {
-}) {
+    }) {
 
     const { scrollY } = useScroll();
     const [ham, showHam] = useState<boolean>(false);
@@ -25,7 +25,7 @@ export default function NavBar({
 
     return (
         <>
-            <motion.nav className="w-full fixed flex justify-between z-[1000] font-bold px-5 py-2 md:py-0 bg-bg-darker" variants={{
+            <motion.nav className="w-full fixed hidden md:flex justify-between z-[1000] font-bold px-5 py-2 md:py-0 bg-bg-darker" variants={{
                 visible: { y: 0 },
                 hidden: { y: "-100%" },
             }}
@@ -63,29 +63,27 @@ export default function NavBar({
                     </div>
                 </div>
             </motion.nav>
-            <AnimatePresence>
-                {ham && <motion.nav className="p-8 fixed bg-bg w-full flex flex-col text-heebo top-8 text-xl gap-2 z-[1000] border-primary md:hidden"
-                    initial={{ opacity: 0, y: "-110%" }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: "-100%" }} transition={{ ease: "easeInOut" }}>
-                    <li className="flex flex-col gap-5 w-full">
-                        <ul className="border-b py-2 w-full transition-all cursor-pointer hover:text-primary hover:border-primary">
+            <motion.nav className="w-full fixed bottom-0 md:hidden justify-between z-[1000] grid grid-cols-4 place-items-center font-bold px-5 py-4 bg-bg-darker" variants={{
+                visible: { y: 0 },
+                // hidden: { y: "+100%" },
+            }}
+                animate={hidden ? "hidden" : "visible"}
+                transition={{ ease: "easeInOut", duration: .5 }}
+            >
+                        <Link href="/home" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                            <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Home</h3>
+                        </Link>
+                        <Link href="/characters" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                            <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Characters</h3>
+                        </Link>
+                        <Link href="/users" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                            <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Users</h3>
+                        </Link>
+                        <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                            <h3 className="group-hover:before:scale-x-100 group-hover:before:origin-left group-hover:text-primary relative font-normal transition-all">Team Builder</h3>
+                        </Link>
+            </motion.nav >
 
-                            <Link href="/" className="border-b py-2 w-full transition-all cursor-pointer hover:text-primary hover:border-primary">
-                                <h2>Characters</h2>
-                            </Link>
-
-                        </ul>
-                        
-
-
-                        <p className="pt-40 text-accent text-md">© </p>
-                    </li>
-                </motion.nav>}
-            </AnimatePresence>
-            <AnimatePresence>
-                <motion.div className={`w-full fixed z-10 h-full bg-zinc-950 bg-opacity-30 ${ham ? "fixed" : "hidden"}`} onClick={() => { showHam(!ham) }}>
-
-                </motion.div>
-            </AnimatePresence>
         </>
     )
 }

@@ -1,10 +1,8 @@
 "use client"
 import Image from "next/image";
 import NavBar from "../components/NavBar";
-import { capitalizeFirstLetter, lowerCaseEachLetter, addFileName } from "../utils/helper";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react"
-import Link from "next/link";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 
@@ -14,7 +12,7 @@ function Artifact({ type, rarity, image, onMouseEnter, name }: { type: string, r
     width={100}
     height={100}
     alt={`${type} image`}
-    className={`rounded-4xl w-full h-full object-cover bg-gradient-to-br ${rarity == 5 ? "from-gradient-yellow-start to-gradient-yellow-end" : rarity == 4 ? "from-gradient-purple-start  to-gradient-purple-end" : "from-gradient-blue-start to-gradient-blue-end"} hover:scale-110 transition-all hover:shadow-light`}
+    className={`rounded-4xl max-w-32 w-full h-full object-cover bg-gradient-to-br ${rarity == 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : rarity == 4 ? "from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-R-start to-gradient-R-end"} hover:scale-110 transition-all hover:shadow-light`}
     onMouseEnter={onMouseEnter}
     title={name ? name : ""}
   />
@@ -44,18 +42,18 @@ export default function ArtifactsPage() {
                 <div className="relative flex flex-col gap-2">
                   <div className="grid-auto-fit-100">
                     {data.flower &&
-                      <>
-                        <Artifact type="flower" rarity={data.rarityList[1]} image={data.images.flower} onMouseEnter={() => { setActiveArtifact(1) }} name={data.flower.name} />
-                        <Artifact type="plume" rarity={data.rarityList[1]} image={data.images.plume} onMouseEnter={() => { setActiveArtifact(2) }} name={data.plume.name} />
-                        <Artifact type="sands" rarity={data.rarityList[1]} image={data.images.sands} onMouseEnter={() => { setActiveArtifact(3) }} name={data.sands.name} />
-                        <Artifact type="goblet" rarity={data.rarityList[1]} image={data.images.goblet} onMouseEnter={() => { setActiveArtifact(4) }} name={data.goblet.name} />
-                        <Artifact type="circlet" rarity={data.rarityList[1]} image={data.images.circlet} onMouseEnter={() => { setActiveArtifact(5) }} name={data.circlet.name} />
-                      </>
-                      }
+                      <Artifact type="flower" rarity={data.rarityList[1]} image={`https://enka.network/ui/${data.images.filename_flower}.png`} onMouseEnter={() => { setActiveArtifact(1) }} name={data.flower.name} />}
+                    {/* <Artifact type="flower" rarity={data.rarityList[1]} image={data.images.flower} onMouseEnter={() => { setActiveArtifact(1) }} name={data.flower.name} /> */}
+                    {data.plume && <Artifact type="plume" rarity={data.rarityList[1]} image={`https://enka.network/ui/${data.images.filename_plume}.png`} onMouseEnter={() => { setActiveArtifact(2) }} name={data.plume.name} />}
+                    {data.sands && <Artifact type="sands" rarity={data.rarityList[1]} image={`https://enka.network/ui/${data.images.filename_sands}.png`} onMouseEnter={() => { setActiveArtifact(3) }} name={data.sands.name} />}
+                    {data.goblet && <Artifact type="goblet" rarity={data.rarityList[1]} image={`https://enka.network/ui/${data.images.filename_goblet}.png`} onMouseEnter={() => { setActiveArtifact(4) }} name={data.goblet.name} />}
+                    {data.circlet && <Artifact type="circlet" rarity={data.rarityList[1]} image={`https://enka.network/ui/${data.images.filename_circlet}.png`} onMouseEnter={() => { setActiveArtifact(5) }} name={data.circlet.name} />}
+
                   </div>
                   <h3 className="font-bold text-xl">{data.name}</h3>
-                  <p><span className="font-semibold">2 Piece:</span> {data.effect2Pc}</p>
-                  <p><span className="font-semibold">4 Piece:</span> {data.effect4Pc}</p>
+                  {data.effect1Pc && <p><span className="font-semibold">1 Piece:</span> {data.effect1Pc}</p>}
+                  {data.effect2Pc && <p><span className="font-semibold">2 Piece:</span> {data.effect2Pc}</p>}
+                  {data.effect4Pc && <p><span className="font-semibold">4 Piece:</span> {data.effect4Pc}</p>}
                 </div>
                 {activeArtifact == 1 && data.flower && <Description piece={data.flower} />}
                 {activeArtifact == 2 && data.plume && <Description piece={data.plume} />}

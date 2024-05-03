@@ -43,7 +43,7 @@ export default function Birthdays({ month = "december" }: { month: string }) {
                         height={150}
                         alt={`${character.name} icon`}
                         title={`${character.name}`}
-                        className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-purple-start  to-gradient-purple-end" : "from-gradient-yellow-start  to-gradient-yellow-end"}`}
+                        className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
                     />
                     <p className="text-center w-full h-full text-xs text-nowrap p-2 text-black relative font-bold rounded-b-xl after:absolute after:p-2 absolute:top-0 absolute:bg-red ">{character.birthdaymmdd}</p>
                 </Link>

@@ -27,6 +27,7 @@ export type Character = {
     rarity: number;
     release: string;
     skillTalents: any[];
+    talents: any[];
     title: string;
     elementText: string;
     vision_key: string;

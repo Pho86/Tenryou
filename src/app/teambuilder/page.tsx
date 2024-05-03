@@ -64,7 +64,7 @@ export default function TeamBuilderPage() {
         <>
             <NavBar />
             <main className="pt-16 px-4 md:px-8 mb-20 w-full flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 ">
                     <div className="flex w-full justify-between items-center">
                         <h1 className="text-3xl text-primary">Team Builder</h1>
                         <div className="grid grid-cols-4 gap-2">
@@ -165,7 +165,7 @@ function CharacterCard({ character, selectCharacter, removeCharacter, activeProp
                 height={200}
                 alt={`${character.name}`}
                 title={`${character.name}`}
-                className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-purple-start  to-gradient-purple-end" : "from-gradient-yellow-start  to-gradient-yellow-end"}`}
+                className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
             />
             <p className="text-center w-full text-xs p-2 text-black relative font-bold rounded-b-xl ">{character.name}</p>
         </div>

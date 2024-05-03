@@ -4,9 +4,9 @@ import Link from "next/link"
 import { motion, useMotionValue, useScroll, useTransform } from "framer-motion"
 import { useRef, useState } from "react"
 export default function InfoCharacterBanner({
-    data, params
+    characterData, params
 }: {
-    data: any,
+    characterData: any,
     params: any,
 }) {
     const [minimizeName, setMinimizedName] = useState<boolean>(true);
@@ -16,7 +16,7 @@ export default function InfoCharacterBanner({
         offset: ["start end", "end start"],
         layoutEffect: false
     });
-    const y = useTransform(scrollYProgress, [0, 1], ["-0%", "8%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["-5%", "20%"]);
 
     return <section className={`bg-bg-dark w-full overflow-hidden`} >
         <div className="p-0 pt-0 flex flex-col lg:h-[100dvh] relative w-full " ref={sectionRef}>
@@ -27,7 +27,7 @@ export default function InfoCharacterBanner({
                 viewport={{ once: true }}
 
             >
-                <Image src={`/regions/${data.region}.webp`} width={1500} height={1500} className="w-full max-h-[100dvh] object-contain opacity-60 z-[-15]" alt={`${data.region} icon`} priority />
+                <Image src={`/regions/${characterData.region}.webp`} width={1500} height={1500} className="w-full max-h-[100dvh] object-contain opacity-60 z-[-15]" alt={`${characterData.region} icon`} priority />
             </motion.div>
             <motion.div className="md:pl-0 absolute h-[100dvh] w-full "
                 initial={{ opacity: 0, scale: 1.1, y: 100, filter: "grayscale:(1)", x: -10 }}
@@ -36,7 +36,7 @@ export default function InfoCharacterBanner({
                 viewport={{ once: true }}
                 style={{ y: y, }}
             >
-                <Image src={`https://enka.network/ui/UI_Gacha_AvatarImg_${data.fileName}.png`} alt={`${params.name} Image Card`} width={3000} height={3000} draggable={false} className="pointer-events-none object-cover w-full h-full transition-all hover:scale-[101%] -z-[10]" priority />
+                <Image src={`https://enka.network/ui/UI_Gacha_AvatarImg_${characterData.fileName}.png`} alt={`${params.name} Image Card`} width={3000} height={3000} draggable={false} className="pointer-events-none object-cover w-full h-full transition-all hover:scale-[101%] -z-[10]" priority />
             </motion.div>
             <motion.div className="md:max-w-2xl flex flex-col gap-3 justify-start pt-32 md:pt-16 z-10 p-4 md:p-8"
                 initial={{ opacity: 0, x: -50 }}
@@ -47,8 +47,8 @@ export default function InfoCharacterBanner({
                 <div className="flex flex-col gap-2 mt-10 bg-bg p-4 border-primary border-2 rounded-lg">
                     <div className="w-full flex justify-between">
                         <div className="flex gap-4 items-center">
-                            <h1 className="font-bold text-4xl md:text-5xl text-pretty rounded-xl ">{data.name}</h1>
-                            <Image src={`/elements/${data.elementText}.webp`} width={150} height={150} className="w-16 h-16" alt={`${data.elementText} icon`} />
+                            <h1 className="font-bold text-4xl md:text-5xl text-pretty rounded-xl ">{characterData.name}</h1>
+                            <Image src={`/elements/${characterData.elementText}.webp`} width={150} height={150} className="w-16 h-16" alt={`${characterData.elementText} icon`} />
                         </div>
                         <div >
                             <p className="text-xl cursor-pointer rounded-xl p-1" onClick={() => { setMinimizedName(!minimizeName) }}>{minimizeName ? "🔲" : "🗕"}</p>
@@ -57,19 +57,19 @@ export default function InfoCharacterBanner({
                     {minimizeName &&
                         <>
                             <div className="flex gap-4 items-start md:text-center text-pretty flex-col md:flex-row ">
-                                <blockquote className="italic font-semibold text-2xl ">{data.title}</blockquote>
-                                <p className="font-bold md:text-nowrap text-xl text-primary">{Array(data.rarity).fill('★ ').join('')}</p>
+                                <blockquote className="italic font-semibold text-2xl ">{characterData.title}</blockquote>
+                                <p className="font-bold md:text-nowrap text-xl text-primary">{Array(characterData.rarity).fill('★ ').join('')}</p>
                             </div>
-                            <blockquote className="text-pretty">{data.description}</blockquote>
+                            <blockquote className="text-pretty">{characterData.description}</blockquote>
                         </>
                     }
                 </div>
                 {minimizeName && <section className="flex flex-col bg-bg gap-2 justify-between border-primary border-2 rounded-xl p-4">
-                    <p><span className="font-bold">Affiliation:</span> {data.affiliation}</p>
-                    <p className="flex gap-1"><span className="font-bold">Weapon:</span> <Image src={`/weapons/${data.weaponText}.png`} width={30} height={20} alt={`${data.weaponText} image weapon`} />{data.weaponText}</p>
-                    <p><span className="font-bold">Region:</span> {data.region}</p>
-                    <p><span className="font-bold">Constellation:</span> {data.constellation}</p>
-                    <p><span className="font-bold">Birthday:</span> {data.birthday}</p>
+                    <p><span className="font-bold">Affiliation:</span> {characterData.affiliation}</p>
+                    <p className="flex gap-1"><span className="font-bold">Weapon:</span> <Image src={`/weapons/${characterData.weaponText}.png`} width={30} height={20} alt={`${characterData.weaponText} image weapon`} />{characterData.weaponText}</p>
+                    <p><span className="font-bold">Region:</span> {characterData.region}</p>
+                    <p><span className="font-bold">Constellation:</span> {characterData.constellation}</p>
+                    <p><span className="font-bold">Birthday:</span> {characterData.birthday}</p>
                 </section> }
             </motion.div>
         </div>
