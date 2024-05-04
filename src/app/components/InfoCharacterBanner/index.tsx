@@ -16,10 +16,10 @@ export default function InfoCharacterBanner({
         offset: ["start end", "end start"],
         layoutEffect: false
     });
-    const y = useTransform(scrollYProgress, [0, 1], ["-5%", "20%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
 
     return <section className={`bg-bg-dark w-full overflow-hidden`} >
-        <div className="p-0 pt-0 flex flex-col lg:h-[100dvh] relative w-full " ref={sectionRef}>
+        <div className="p-0 pt-0 flex flex-col lg:h-[100dvh] relative" ref={sectionRef}>
             <motion.div className="lg:absolute w-full max-h-[100dvh] object-contain opacity-60 "
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -27,11 +27,11 @@ export default function InfoCharacterBanner({
                 viewport={{ once: true }}
 
             >
-                <Image src={`/regions/${characterData.region}.webp`} width={1500} height={1500} className="w-full max-h-[100dvh] object-contain opacity-60 z-[-15]" alt={`${characterData.region} icon`} priority />
+                <Image src={`/regions/${characterData.region}.webp`} width={1500} height={1500} className="w-full max-h-[110dvh] object-contain opacity-60 z-[-15]" alt={`${characterData.region} icon`} priority />
             </motion.div>
             <motion.div className="md:pl-0 absolute h-[100dvh] w-full "
-                initial={{ opacity: 0, scale: 1.1, y: 100, filter: "grayscale:(1)", x: -10 }}
-                animate={{ opacity: 1, scale: 1, y: [100, -15, 0], x: [-10, -10, -10, -10, 0], filter: "grayscale:(1)" }}
+                initial={{ opacity: 0, scale: 1.1, y: 100, }}
+                animate={{ opacity: 1, scale: 1, y: [100, -15, 0]}}
                 transition={{ delay: 1, duration: 1.2, ease: "easeInOut" }}
                 viewport={{ once: true }}
                 style={{ y: y, }}
@@ -44,14 +44,14 @@ export default function InfoCharacterBanner({
                 transition={{ delay: 1.8, duration: .8 }}
                 viewport={{ once: true }}
             >
-                <div className="flex flex-col gap-2 mt-10 bg-bg p-4 border-primary border-2 rounded-lg">
+                <div className="flex flex-col gap-2 mt-10 bg-bg p-4 border-primary border-2 rounded-lg ">
                     <div className="w-full flex justify-between">
                         <div className="flex gap-4 items-center">
                             <h1 className="font-bold text-4xl md:text-5xl text-pretty rounded-xl ">{characterData.name}</h1>
                             <Image src={`/elements/${characterData.elementText}.webp`} width={150} height={150} className="w-16 h-16" alt={`${characterData.elementText} icon`} />
                         </div>
                         <div >
-                            <p className="text-xl cursor-pointer rounded-xl p-1" onClick={() => { setMinimizedName(!minimizeName) }}>{minimizeName ? "🔲" : "🗕"}</p>
+                            <p className="text-xl cursor-pointer rounded-xl p-1" onClick={() => { setMinimizedName(!minimizeName) }}>{minimizeName ? "🗕" : "🔲"}</p>
                         </div>
                     </div>
                     {minimizeName &&
@@ -60,17 +60,26 @@ export default function InfoCharacterBanner({
                                 <blockquote className="italic font-semibold text-2xl ">{characterData.title}</blockquote>
                                 <p className="font-bold md:text-nowrap text-xl text-primary">{Array(characterData.rarity).fill('★ ').join('')}</p>
                             </div>
-                            <blockquote className="text-pretty">{characterData.description}</blockquote>
+                            <blockquote className="text-pretty italic">{characterData.description}</blockquote>
                         </>
                     }
                 </div>
                 {minimizeName && <section className="flex flex-col bg-bg gap-2 justify-between border-primary border-2 rounded-xl p-4">
-                    <p><span className="font-bold">Affiliation:</span> {characterData.affiliation}</p>
+                    {characterData.affiliation && <p><span className="font-bold">Affiliation:</span> {characterData.affiliation}</p>}
                     <p className="flex gap-1"><span className="font-bold">Weapon:</span> <Image src={`/weapons/${characterData.weaponText}.png`} width={30} height={20} alt={`${characterData.weaponText} image weapon`} />{characterData.weaponText}</p>
-                    <p><span className="font-bold">Region:</span> {characterData.region}</p>
-                    <p><span className="font-bold">Constellation:</span> {characterData.constellation}</p>
-                    <p><span className="font-bold">Birthday:</span> {characterData.birthday}</p>
-                </section> }
+                    {characterData.region && <p><span className="font-bold">Region:</span> {characterData.region}</p>}
+                    {characterData.constellation && <p><span className="font-bold">Constellation:</span> {characterData.constellation}</p>}
+                    {characterData.birthday && <p><span className="font-bold">Birthday:</span> {characterData.birthday}</p>}
+                    <div className="flex gap-2 "><span className="font-bold text-nowrap">Voice Actor:</span>
+                        <div className="flex gap-4 flex-wrap">
+                            {characterData.cv.english && <p><span className="font-semibold">EN:</span> {characterData.cv.english}</p>}
+                            {characterData.cv.japanese && <p><span className="font-semibold">JP:</span> {characterData.cv.japanese}</p>}
+                            {characterData.cv.chinese && <p><span className="font-semibold">CN:</span> {characterData.cv.chinese}</p>}
+                            {characterData.cv.korean && <p><span className="font-semibold">KR:</span> {characterData.cv.korean}</p>}
+                        </div>
+                    </div>
+
+                </section>}
             </motion.div>
         </div>
     </section>

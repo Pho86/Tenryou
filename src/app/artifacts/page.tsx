@@ -2,7 +2,7 @@
 import Image from "next/image";
 import NavBar from "../components/NavBar";
 import axios from "axios";
-import { useLayoutEffect, useState } from "react"
+import { Fragment, useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 
@@ -19,12 +19,14 @@ function Artifact({ type, rarity, image, onMouseEnter, name }: { type: string, r
 }
 export default function ArtifactsPage() {
   const [artifactData, setArtifactData] = useState<any[]>([]);
-  const [activeArtifact, setActiveArtifact] = useState<number>(1);
+  const [activeArtifact, setActiveArtifact] = useState<any>();
   useLayoutEffect(() => {
     axios
       .get<any[]>("https://genshin-db-api.vercel.app/api/v5/artifacts?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
       .then((res) => {
         setArtifactData(res.data);
+        console.log(res.data)
+        setActiveArtifact({ ...res.data[0], hover: "flower" })
       })
       .catch((error) => {
         console.error("Error fetching character names:", error);
@@ -33,37 +35,63 @@ export default function ArtifactsPage() {
   return (
     <>
       <NavBar />
-      <main className="pt-8 md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
+      <main className="pt-8 md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center">
+        <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
           <h1 className="text-3xl text-primary">Artifacts List</h1>
-          <section className="flex flex-col gap-8">
-            {artifactData.length > 0 ? artifactData.map((artifact, index) => {
-              return <div className="grid md:grid-cols-2 gap-8 w-full" key={index}>
-                <div className="relative flex flex-col gap-2">
-                  <div className="grid-auto-fit-100">
-                    {artifact.flower &&
-                      <Artifact type="flower" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_flower}.png`} onMouseEnter={() => { setActiveArtifact(1) }} name={artifact.flower.name} />}
+          <section className="grid md:grid-cols-2 gap-8">
+            <div className="max-h-[100dvh] overflow-y-scroll py-4 grid-auto-fit-100 px-2 order-last md:order-first">
+              {artifactData.length > 0 ? artifactData.map((artifact, index) => (
+                <Fragment key={index}>
+                  {artifact.flower && (
+                    <Artifact type="flower" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_flower}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "flower" }); }} name={artifact.flower.name} />
+                  )}
+                  {artifact.plume && (
+                    <Artifact type="plume" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_plume}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "plume" }); }} name={artifact.plume.name} />
+                  )}
+                  {artifact.sands && (
+                    <Artifact type="sands" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_sands}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "sands" }); }} name={artifact.sands.name} />
+                  )}
+                  {artifact.goblet && (
+                    <Artifact type="goblet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_goblet}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "goblet" }); }} name={artifact.goblet.name} />
+                  )}
+                  {artifact.circlet && (
+                    <Artifact type="circlet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_circlet}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "circlet" }); }} name={artifact.circlet.name} />
+                  )}
+                </Fragment>
+              )) :
+                <Loader />
+              }
+            </div>
+            <div className=" order-3">
+              {activeArtifact &&
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col relative bg-[#e9e9e9] rounded-xl ">
+                    <div className={`max-h-56 rounded-t-xl bg-gradient-to-br ${activeArtifact.rarityList[1] === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : activeArtifact.rarityList[1] === 4 ? "from-gradient-SR-start to-gradient-SR-end" : activeArtifact.rarityList[1] === 3 ? "from-gradient-R-start to-gradient-R-end" : activeArtifact.rarityList[1] === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} flex justify-between `}>
 
-                    {artifact.plume && <Artifact type="plume" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_plume}.png`} onMouseEnter={() => { setActiveArtifact(2) }} name={artifact.plume.name} />}
-                    {artifact.sands && <Artifact type="sands" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_sands}.png`} onMouseEnter={() => { setActiveArtifact(3) }} name={artifact.sands.name} />}
-                    {artifact.goblet && <Artifact type="goblet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_goblet}.png`} onMouseEnter={() => { setActiveArtifact(4) }} name={artifact.goblet.name} />}
-                    {artifact.circlet && <Artifact type="circlet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_circlet}.png`} onMouseEnter={() => { setActiveArtifact(5) }} name={artifact.circlet.name} />}
+                      {activeArtifact.hover == "flower" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_flower}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
+                      {activeArtifact.hover == "plume" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_plume}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
+                      {activeArtifact.hover == "sands" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_sands}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
+                      {activeArtifact.hover == "goblet" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_goblet}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
+                      {activeArtifact.hover == "circlet" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_circlet}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
 
+                    </div>
+                    <div className="text-bg p-4 flex flex-col gap-2">
+                      {activeArtifact.hover == "flower" && <Description piece={activeArtifact.flower} />}
+                      {activeArtifact.hover == "plume" && <Description piece={activeArtifact.plume} />}
+                      {activeArtifact.hover == "sands" && <Description piece={activeArtifact.sands} />}
+                      {activeArtifact.hover == "goblet" && <Description piece={activeArtifact.goblet} />}
+                      {activeArtifact.hover == "circlet" && <Description piece={activeArtifact.circlet} />}
+                      <div className="flex flex-col w-full gap-2 text-pretty">
+                        <h2 className="font-bold text-xl">{activeArtifact.name}</h2>
+                        {activeArtifact.effect1Pc && <p><span className="font-semibold">1 Piece:</span> {activeArtifact.effect1Pc}</p>}
+                        {activeArtifact.effect2Pc && <p><span className="font-semibold">2 Piece:</span> {activeArtifact.effect2Pc}</p>}
+                        {activeArtifact.effect4Pc && <p><span className="font-semibold">4 Piece:</span> {activeArtifact.effect4Pc}</p>}
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-xl">{artifact.name}</h3>
-                  {artifact.effect1Pc && <p><span className="font-semibold">1 Piece:</span> {artifact.effect1Pc}</p>}
-                  {artifact.effect2Pc && <p><span className="font-semibold">2 Piece:</span> {artifact.effect2Pc}</p>}
-                  {artifact.effect4Pc && <p><span className="font-semibold">4 Piece:</span> {artifact.effect4Pc}</p>}
                 </div>
-                {activeArtifact == 1 && artifact.flower && <Description piece={artifact.flower} />}
-                {activeArtifact == 2 && artifact.plume && <Description piece={artifact.plume} />}
-                {activeArtifact == 3 && artifact.sands && <Description piece={artifact.sands} />}
-                {activeArtifact == 4 && artifact.goblet && <Description piece={artifact.goblet} />}
-                {activeArtifact == 5 && artifact.circlet && <Description piece={artifact.circlet} />}
-              </div>
-            }) :
-              <Loader />
-            }
+              }
+            </div>
           </section>
         </div>
       </main>

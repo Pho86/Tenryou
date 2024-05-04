@@ -84,32 +84,34 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
     }, [])
     return (
         <>
-            <NavBar />
+            <NavBar active={1}/>
 
             {characterData ?
                 <main className="flex flex-col gap-4" >
                     <InfoCharacterBanner characterData={characterData} params={params} />
-                    <div className="flex gap-2 p-4 md:p-8 z-20">
-                        <section className="flex flex-col gap-8 mt-20">
-                            <StatsTable characterData={characterData} />
-                            
-                            {/* @ts-ignore */}
-                            <AttackTable attackData={characterData.talents} params={params} />
-                            {/* @ts-ignore */}
-                            <ConstellationsTable constellationData={characterData.constellations} params={params} />
+                    <div className="flex flex-col gap-4 w-full items-center justify-center">
+                        <div className="flex gap-2 p-4 md:p-8 z-20 max-w-screen-2xl">
+                            <section className="flex flex-col gap-8 mt-20">
+                                <StatsTable characterData={characterData} />
 
+                                {/* @ts-ignore */}
+                                <AttackTable attackData={characterData.talents} params={params} />
+                                {/* @ts-ignore */}
+                                <ConstellationsTable constellationData={characterData.constellations} params={params} />
+
+                            </section>
+                        </div>
+                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl">
+                            <Gallery characterData={characterData} />
+                        </section>
+                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl">
+                            <h2 className="font-bold text-3xl">Quotes</h2>
+                            <div className="grid gap-4">
+                                {/* @ts-ignore */}
+                                <VoiceList voiceData={characterData.voices} />
+                            </div>
                         </section>
                     </div>
-                    <section className="flex gap-3 flex-col p-4 md:p-8">
-                        <Gallery characterData={characterData} />
-                    </section>
-                    <section className="flex gap-3 flex-col p-4 md:p-8">
-                        <h2 className="font-bold text-3xl">Quotes</h2>
-                        <div className="grid gap-4">
-                            {/* @ts-ignore */}
-                            <VoiceList voiceData={characterData.voices} />
-                        </div>
-                    </section>
                     <Footer />
                 </main>
 

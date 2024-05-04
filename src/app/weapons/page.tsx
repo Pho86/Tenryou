@@ -79,8 +79,8 @@ export default function WeaponsPage() {
     return (
         <>
             <NavBar />
-            <main className="md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
+            <main className="md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center ">
+                <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
                     <h1 className="text-3xl text-primary">Weapons List</h1>
                     <section className="flex flex-col gap-8">
                         <div className="flex w-full justify-around gap-2 flex-col md:flex-row">
@@ -100,7 +100,7 @@ export default function WeaponsPage() {
                             </div>
                         </div>
                         <div className="grid lg:grid-cols-2 gap-8">
-                            <div className="grid-auto-fit-200 overflow-y-scroll p-4 max-h-[90dvh] ">
+                            <div className="grid-auto-fit-200 overflow-y-scroll p-2 max-h-[90dvh] ">
                                 {fullData.length > 0 ? fullData.map((weapon: any, index: number) => {
                                     const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
                                     const weaponRarity = [true, 1, 2, 3, 4, 5];
@@ -108,7 +108,7 @@ export default function WeaponsPage() {
                                     const validRarity = activeRarity === 0 || weaponRarity[activeRarity] === weapon.rarity;
                                     if (validWeapon && validRarity) return <div key={index} className="max-h-48">
                                         <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == weapon.id && "shadow-light scale-105"}`} onClick={() => { setActive(weapon); receiveWeaponData(weapon) }}>
-                                            <Image src={`https://api.ambr.top/assets/UI/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : weapon.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : weapon.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : weapon.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`}/>
+                                            <Image src={`https://api.ambr.top/assets/UI/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : weapon.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : weapon.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : weapon.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`} />
                                             <p className="flex flex-col min-h-9 justify-around mx-1 text-center text-xs md:text-md text-bg font-bold">{weapon.name}</p>
                                         </div>
                                     </div>
@@ -179,14 +179,8 @@ export default function WeaponsPage() {
                                                     )}
                                                 </div>
                                                 {active.parsedDescription && <p className="italic text-sm">{parse(active.parsedDescription)}</p>}
+                                                {story && <p className="italic rounded-xl pt-4 text-sm leading-normal">{active.story}</p>}
                                             </div>
-                                        </div>
-                                        <div className="text-text p-4 flex flex-col gap-2">
-                                            <div className="flex justify-between w-full">
-                                            <h4 className="font-bold text-lg">Story</h4>
-                                            <p className="text-xl cursor-pointer rounded-xl p-1" onClick={() => { setStory(!story) }}>{story ? "🔲" : "🗕"}</p>
-                                            </div>
-                                            {story && <p className="italic bg-bg-dark p-4 rounded-xl text-sm leading-normal">{active.story}</p>}
                                         </div>
                                     </>
                                         :

@@ -100,7 +100,7 @@ export default function BentoGrid() {
     ]
     return (
         <>
-            <section className="w-full " >
+            <section className="w-full max-w-screen-2xl " >
                 <div className='grid md:grid-cols-2 lg:grid-cols-4 auto-rows-[300px] w-full gap-4'>
                     {data.map((item, i) => (
                         <BentoItem item={item} index={i} key={i} />
@@ -113,7 +113,7 @@ export default function BentoGrid() {
 function BentoItem({ item, index }: { item: any, index: number }) {
     return (
         <>
-            <div className={`overflow-hidden group rounded-xl transition-all bg-bg-dark border-bg-light border-2 flex flex-col ${index === 2 && ' lg:row-span-2 md:row-span-1 sm:row-span-2'} ${index === 1 ? 'lg:col-span-2 md:row-span-2 lg:row-span-1' : ''} ${index == 3 && "row-span-2 md:col-span-2 "}   ${index == 9 && "lg:col-span-2 "}transition-all`}>
+            <div className={`overflow-hidden group rounded-xl transition-all bg-bg-dark border-bg-light border-2 flex flex-col ${index === 2 && ' lg:row-span-2 md:row-span-1 row-span-2'} ${index === 1 ? 'lg:col-span-2 md:row-span-2 lg:row-span-1' : ''} ${index == 3 && "row-span-2 md:col-span-2 "}   ${index == 9 && "lg:col-span-2 "}transition-all`}>
                 {item.link ?
                     <Link
                         className={`transition-all hover:bg-bg-light flex flex-col h-full cursor-pointer`}

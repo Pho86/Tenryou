@@ -50,9 +50,9 @@ export default function StatsTable({ characterData }: { characterData: any }) {
         <button className="text-start hover:bg-bg-dark border-2 p-2 w-max rounded-xl transition-all" onClick={() => { setAscension(!showAscension) }}>{showAscension ? "Hide" : "Show"} Materials</button>
         <div className="bg-gradient-to-br from-gradient-R-start to-gradient-R-end from-gradient-SR-start to-gradient-SR-end from-gradient-UC-start to-gradient-UC-end from-gradient-C-start to-gradient-C-end"></div>
 
-        {characterData.stats && <table className="table-cell border-collapse w-full rounded-lg ">
+        {characterData.stats && <table className="table-cell border-collapse w-full rounded-xl">
             <thead className="w-full">
-                <tr className="bg-bg-dark">
+                <tr className="bg-bg-dark ">
                     <th className="p-2">Grade</th>
                     <th className="p-2">Level</th>
                     <th className="p-2">HP</th>

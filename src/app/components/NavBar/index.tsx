@@ -4,20 +4,18 @@ import { useState } from "react"
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion"
 import Image from "next/image";
 export default function NavBar({
-
+    active = 0
 }: {
-    }) {
+    active?: number
+}) {
 
     const { scrollY } = useScroll();
-    const [ham, showHam] = useState<boolean>(false);
     const [hidden, setHidden] = useState<boolean>(false);
-
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious();
         //@ts-ignore
-        if (latest > previous && latest > 300) {
+        if (latest > previous && latest > 200) {
             setHidden(true);
-            showHam(false);
         } else {
             setHidden(false);
         }
@@ -25,40 +23,32 @@ export default function NavBar({
 
     return (
         <>
-            <motion.nav className="w-full fixed hidden md:flex justify-between z-[1000] font-bold px-2 py-2 md:py-0 bg-bg-darker" variants={{
+            <motion.nav className="w-full fixed hidden md:flex justify-center z-[1000] font-bold px-2 py-2 md:py-0 bg-bg-darker items-center " variants={{
                 visible: { y: 0 },
                 hidden: { y: "-100%" },
             }}
                 animate={hidden ? "hidden" : "visible"}
                 transition={{ ease: "easeInOut", duration: .5 }}
             >
-                <div className="w-full flex items-center justify-center">
-                    <div className="justify-between w-full flex px-8">
+                <div className="w-full flex items-center justify-center max-w-screen-2xl px-2">
+                    <div className="justify-between w-full flex ">
                         <div className="border-primary cursor-pointer grid place-items-center md:pl-0 ">
 
-                            <Link href="/" className="flex items-center justify-center transition-all cursor-pointer">
-                                {/* <Image src="/" width={175} height={45} alt="" className="w-40 md:w-48" /> */}
-                                Project Tao
+                            <Link href="/" className="flex text-xl items-center justify-center transition-all cursor-pointer">
+                                <Image src="/logo.svg" width={45} height={45} alt="" className="" />
+                                Tenryou
                             </Link>
                         </div>
                         <div className="hidden md:flex justify-center items-center md:gap-3 sm:gap-2 gap-1">
-
                             <Link href="/characters" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className="group-hover:text-primary relative font-normal transition-all">Characters</h3>
+                                <h3 className={`${active == 1 && "text-primary "} group-hover:text-primary relative font-normal transition-all`}>Characters</h3>
                             </Link>
                             <Link href="/users" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className="group-hover:text-primary relative font-normal transition-all">Users</h3>
+                                <h3  className={`${active == 2 && "text-primary "} group-hover:text-primary relative font-normal transition-all`}>Users</h3>
                             </Link>
                             <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className="group-hover:text-primary relative font-normal transition-all">Team Builder</h3>
+                                <h3  className={`${active == 3 && "text-primary "} group-hover:text-primary relative font-normal transition-all`}>Team Builder</h3>
                             </Link>
-
-
-
-                        </div>
-                        <div className="flex md:hidden flex-col">
-                            {/* {ham && <IoClose onClick={() => { showHam(!ham) }} className="p-1 text-white text-4xl cursor-pointer transition-all" />} */}
-                            {/* {!ham && <GiHamburgerMenu onClick={() => { showHam(!ham) }} className="p-1 text-white text-4xl cursor-pointer transition-all" />} */}
                         </div>
                     </div>
                 </div>

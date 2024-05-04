@@ -1,15 +1,16 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import Profile from "@/app/components/Profile";
 import axios from "axios";
 import NavBar from "@/app/components/NavBar";
 import Loader from "@/app/components/Loader";
 import { addFileName } from "@/app/utils/helper";
+
 export default function UIDPage({ params }: { params: { uid: string } }) {
     const [playerData, setPlayerData] = useState<any>();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         axios.get(`/api/player/${params.uid}`)
             .then(response => {
                 console.log(response.data)
@@ -17,6 +18,7 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
                     addFileName([character]);
                 })
                 setPlayerData(response.data);
+                document.title = (`${response.data.player.username} - Tenryou 💮`)
             })
             .catch(error => {
                 console.error("Error fetching player data:", error);
@@ -25,12 +27,15 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
 
     return (
         <>
-            <NavBar />
-            <main className="flex flex-col md:pt-16 px-8">
+            <NavBar active={2}/>
+            <main className="flex flex-col md:pt-16 px-8 justify-center items-center">
+                <div className="w-full max-w-screen-2xl">
+
                 {playerData ? <Profile user={playerData} />
                     :
                     <Loader />
                 }
+                </div>
             </main>
         </>
     );

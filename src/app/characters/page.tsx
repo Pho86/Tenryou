@@ -30,9 +30,9 @@ export default function CharacterPage() {
   }, []);
   return (
     <>
-      <NavBar />
-      <main className="pt-8 md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
+      <NavBar active={1}/>
+      <main className="pt-8 md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center">
+        <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
           <h1 className="text-3xl text-primary">Characters List</h1>
           <div className="flex gap-3 justify-around flex-col md:flex-row">
             <div className="flex gap-3 justify-center ">
@@ -53,7 +53,7 @@ export default function CharacterPage() {
             </div>
           </div>
         </div>
-        <section className="grid-auto-fit-300 w-full">
+        <section className="grid-auto-fit-300 max-w-screen-2xl w-full">
 
           {CharacterData.length > 0 ? CharacterData.map((character, index) => {
             const elementConditions = [true, "Pyro", "Hydro", "Anemo", "Electro", "Dendro", "Cryo", "Geo"];

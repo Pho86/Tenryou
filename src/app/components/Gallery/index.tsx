@@ -15,12 +15,14 @@ export default function Gallery({
                     <h3 className={`font-semibold text-xl my-2 py-2 px-4 rounded-xl cursor-pointer ${active == 0 ? "bg-bg-lighter" : "bg-bg-light"}`} onClick={() => { setActive(0) }}>Namecard</h3>
                     {/* <h3 className={`font-semibold text-xl my-2 py-2 px-4 rounded-xl cursor-pointer ${active == 1 ? "bg-bg-lighter" : "bg-bg-light"}`} onClick={() => { setActive(1) }}>Card</h3> */}
                     {/* <h3 className={`font-semibold text-xl my-2 py-2 px-4 rounded-xl cursor-pointer ${active == 2 ? "bg-bg-lighter" : "bg-bg-light"}`} onClick={() => { setActive(2) }}>Constellation</h3> */}
-
                 </div>
                 {active == 0 && <div className="relative overflow-hidden flex flex-col ">
                     <div className="relative flex flex-col rounded-xl items-center justify-center ">
                         {/* @ts-ignore */}
-                        <Image src={`https://enka.network/ui/UI_NameCardPic_${characterData.fileName}_P.png`} width={2000} height={500} alt={`${characterData.name} constellation`} className="" />
+                        {characterData.name == "Yae Miko" ?
+                            <Image src={`https://enka.network/ui/UI_NameCardPic_${characterData.fileName}1_P.png`} width={2000} height={500} alt={`${characterData.name} constellation`} className="" /> :
+                            <Image src={`https://enka.network/ui/UI_NameCardPic_${characterData.fileName}_P.png`} width={2000} height={500} alt={`${characterData.name} constellation`} className="" />
+                        }
                         {/* @ts-ignore */}
                         <p className="absolute bottom-0 w-full bg-bg bg-opacity-60 p-4 text-lg font-bold">{characterData.nameCard.name}</p>
                     </div>

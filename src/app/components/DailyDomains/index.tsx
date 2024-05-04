@@ -59,28 +59,31 @@ export default function DailyDomains({ }: {}) {
         if (!done) {
             const d = new Date();
             day = weekday[d.getDay()];
+            setSelectedDay(day);
             setDone(true);
         }
+        if (day !== "Sunday") {
+            axios
+                .get<any[]>(`https://genshin-db-api.vercel.app/api/v5/domains?query=${day}&matchCategories=true&dumpResults=true&verboseCategories=true`)
+                .then((res) => {
+                    const weapons = res.data.filter(domain => {
+                        if (domain.domainType !== "UI_ABYSSUS_WEAPON_PROMOTE" || domain.unlockRank < 40) {
+                            return false;
+                        }
+                        return true; // Include all other domains
+                    });
+                    setActiveWeapons(weapons)
+                    setActiveArtifacts([])
+                    fetchAndSetData(res.data);
+                })
 
-        axios
-            .get<any[]>(`https://genshin-db-api.vercel.app/api/v5/domains?query=${day}&matchCategories=true&dumpResults=true&verboseCategories=true`)
-            .then((res) => {
-                const weapons = res.data.filter(domain => {
-                    if (domain.domainType !== "UI_ABYSSUS_WEAPON_PROMOTE" || domain.unlockRank < 40) {
-                        return false;
-                    }
-                    return true; // Include all other domains
+                .catch((error) => {
+                    console.error("Error fetching character names:", error);
+                    setLoading(false)
                 });
-                setActiveWeapons(weapons)
-                setActiveArtifacts([])
-                fetchAndSetData(res.data);
-            })
-
-            .catch((error) => {
-                console.error("Error fetching character names:", error);
-                setLoading(false)
-            });
-    }, [selectedDay]);
+            }
+            else setLoading(false)
+        }, [selectedDay]);
     return (<div className="overflow-y-scroll h-full p-2 gap-2 flex flex-col">
         <select value={selectedDay} onChange={(e) => { setSelectedDay(e.target.value); }} className="p-1">
             <option value="Sunday">Sunday</option>
@@ -95,7 +98,7 @@ export default function DailyDomains({ }: {}) {
 
             <>
                 {selectedDay == "Sunday" ?
-                    <div className="p-2 text-xl"> 
+                    <div className="p-2 text-xl">
                         <p>Everything is farmable today.</p>
                     </div>
                     :
@@ -104,7 +107,7 @@ export default function DailyDomains({ }: {}) {
                             {activeArtifacts.map((domain, index) => {
                                 return <div key={index} className="flex gap-4">
                                     <div className="flex flex-col items-center col-span-2 transition-all justify-start rounded-xl min-w-8 min-h-8" >
-                                        <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-yellow-end to-gradient-yellow-end rounded-xl hover:scale-105 hover:shadow-light`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
+                                        <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end rounded-xl hover:scale-105 hover:shadow-light`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>
                                     <div className="grid-auto-fit-10">
                                         {activeCharacters.length > 1 && activeCharacters[index].map((character: any, i: number) => {
@@ -126,7 +129,7 @@ export default function DailyDomains({ }: {}) {
                         <div className="flex gap-2 mt-2">
                             {activeWeapons.map((domain, index) => {
                                 return <div key={index} className="flex justify-between gap-4">
-                                    <div className="flex flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-xl bg-gradient-to-br from-gradient-SSR-end to-gradient-SSR-end" >
+                                    <div className="flex flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-xl bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end" >
                                         <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={``} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>
                                 </div>

@@ -1,8 +1,5 @@
 "use client"
-import Image from "next/image";
 import NavBar from "../components/NavBar";
-import { addFileName } from "../utils/helper";
-import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react"
 import { useRouter } from "next/navigation";
 
@@ -27,7 +24,7 @@ export default function UserPage() {
 
     return (
         <>
-            <NavBar />
+            <NavBar active={2}/>
             <main className="md:pt-16 px-4 md:px-8 mb-20 w-full flex flex-col gap-4 min-h-[90dvh] justify-center">
                 <p className="text-center">Make sure the profile settings in-game have, "Show character details" enabled, otherwise the API will not be able to see profile details.</p>
                 <p className="text-center">Example:</p>
