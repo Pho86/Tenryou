@@ -2,7 +2,7 @@ import { NextApiRequest } from 'next';
 import { Wrapper } from 'enkanetwork.js';
 import { NextResponse } from 'next/server';
 
-export async function GET(req: NextApiRequest, { params }: { params: { uid: string } }) {
+export async function GET(req: any, { params }: { params: { uid: string } }) {
     const uid = params.uid;
     const { genshin } = new Wrapper({
         cache: true

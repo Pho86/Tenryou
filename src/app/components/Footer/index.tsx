@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 export default function Footer() {
     return (
-        <footer className="w-full mt-16">
-            <div className="px-8 md:px-16 mb-32 md:my-16 flex flex-col gap-2">
-                <div className="flex flex-col md:flex-row gap-2 items-end md:items-start justify-between">
+        <footer className="w-full mt-16 px-8 md:px-16 flex items-center justify-center">
+            <div className="mb-32 md:mb-16 flex flex-col max-w-screen-2xl w-full">
+                <div className="flex flex-col md:flex-row gap-2 items-end justify-between">
                     <div className="flex flex-col md:flex-row text-left">
                         <div className="flex justify-center">
                             <div className="font-bold text-2xl transition-all py-1">
@@ -27,8 +27,9 @@ export default function Footer() {
                         </Link>
                     </ul>
                 </div>
-                <div className="w-full flex justify-between">
+                <div className="w-full flex md:flex-row flex-col md:justify-between items-end mt-4">
                     <div className="flex gap-2">
+                        <p>Your Genshin Companion Website</p>
                         {/* <Link href={"https://enka.network"} target="__blank">
                         <Image src={`/icons/enka.png`} width={200} height={150} alt="Enka.network " className="" />
                     </Link> */}
