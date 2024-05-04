@@ -3,7 +3,7 @@ export default function VoiceList({
 }: {
     voiceData: any
 }) {
-    return <div className="flex flex-col gap-4 max-h-[100dvh] overflow-scroll p-4 overflow-x-hidden bg-bg-dark rounded-xl">
+    return <div className="flex flex-col gap-4 max-h-[100dvh] overflow-scroll w-full p-4 overflow-x-hidden bg-bg-dark rounded-xl">
         {voiceData.friendLines.map((line:any, index:number) => {
             return (
                 <div key={index} className="flex gap-2 flex-col pb-2 border-b-2">

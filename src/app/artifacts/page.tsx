@@ -9,10 +9,10 @@ import Loader from "../components/Loader";
 function Artifact({ type, rarity, image, onMouseEnter, name }: { type: string, rarity: number, image: string, onMouseEnter: () => void, name: string }) {
   return <Image
     src={image}
-    width={100}
-    height={100}
+    width={150}
+    height={150}
     alt={`${type} image`}
-    className={`rounded-4xl max-w-32 w-full h-full object-cover bg-gradient-to-br ${rarity == 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : rarity == 4 ? "from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-R-start to-gradient-R-end"} hover:scale-110 transition-all hover:shadow-light`}
+    className={`rounded-xl max-w-32 w-full h-full object-cover bg-gradient-to-br ${rarity == 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : rarity == 4 ? "from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-R-start to-gradient-R-end"} hover:scale-110 transition-all hover:shadow-light`}
     onMouseEnter={onMouseEnter}
     title={name ? name : ""}
   />
@@ -35,7 +35,7 @@ export default function ArtifactsPage() {
   return (
     <>
       <NavBar />
-      <main className="pt-8 md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center">
+      <main className="pt-8 md:pt-16 px-8 md:px-16 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center relative">
         <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
           <h1 className="text-3xl text-primary">Artifacts List</h1>
           <section className="grid md:grid-cols-2 gap-8">

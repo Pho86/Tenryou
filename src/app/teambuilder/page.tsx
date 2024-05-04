@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import NavBar from "../components/NavBar";
-import { addFileName } from "../utils/helper";
+import { addFileName, getRandomNumber } from "../utils/helper";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react"
 import Loader from "../components/Loader";
@@ -34,21 +34,54 @@ export default function TeamBuilderPage() {
             });
     }, []);
 
-    const selectCharacter = (character: any) => {
+    const selectCharacter = (character: any, index?: number) => {
+        let slot = selectedSlot;
+        let element = "";
+        element = character.elementText;
         setActiveCharacters(prevActiveCharacters => {
             const updatedCharacters = [...prevActiveCharacters];
-            const updatedActiveElements = [...activeElements];
-            updatedCharacters[selectedSlot] = { ...character, active: true };
-
-            updatedActiveElements[selectedSlot] = character.elementText;
-
-            setActiveElements(updatedActiveElements);
-
+            if (index != undefined) {
+                updatedCharacters[index] = { ...character, active: true };
+            } else {
+                const updatedActiveElements = [...activeElements];
+                updatedActiveElements[slot] = character.elementText;
+                updatedCharacters[slot] = { ...character, active: true };
+                setActiveElements(updatedActiveElements);
+            }
             return updatedCharacters;
         });
         if (!secondTeam) setSelectedSlot(prevSlot => (prevSlot + 1) % 4);
         else setSelectedSlot(prevSlot => (prevSlot + 1) % 8);
+        return element;
     };
+    const [deletedChars, setDeletedChars] = useState<boolean>(false);
+    const [availableCharacters, setAvailableCharacters] = useState<any[]>([]);
+    const randomizeTeam = () => {
+        let charactersAvailable;
+        if (!deletedChars) {
+            charactersAvailable = [...characterData];
+            for (let x = 0; x < charactersAvailable.length - 1; x++) {
+                if (charactersAvailable[x].name == "Aether" || charactersAvailable[x].name == "Lumine") {
+                    charactersAvailable.splice(x, 1)
+                }
+            }
+            setDeletedChars(true);
+            setAvailableCharacters(charactersAvailable)
+        } else {
+            charactersAvailable = [...availableCharacters]
+        }
+        let i = 0;
+        let count = 4;
+        let elements = [];
+        if (secondTeam) count = 8;
+        for (i = 0; i < count; i++) {
+            let number = Math.floor(getRandomNumber(0, charactersAvailable.length));
+            let selectedCharacter = charactersAvailable[number];
+            elements.push(selectCharacter(selectedCharacter, i));
+            charactersAvailable.splice(number, 1);
+        }
+        setActiveElements(elements);
+    }
 
     const removeCharacter = (character: any) => {
         const updatedCharacters = activeCharacters.map((item, i) => {
@@ -67,7 +100,7 @@ export default function TeamBuilderPage() {
 
     return (
         <>
-            <NavBar active={3}/>
+            <NavBar active={3} />
             <main className="pt-8 md:pt-16 mb-20 w-full flex flex-col gap-4 items-center justify-center">
                 <div className="flex flex-col gap-2 px-4 md:px-8 justify-center items-center max-w-screen-2xl w-full">
                     <div className="flex w-full justify-between items-center">
@@ -86,19 +119,22 @@ export default function TeamBuilderPage() {
                             })}
                         </div>
                     </div>
-                    <label className="flex gap-2 font-bold">
-                        <input type="checkbox" checked={secondTeam} onChange={() => {
-                            if (secondTeam) {
-                                setSecondTeam(!secondTeam)
-                                setActiveCharacters(prevCharacters => [...prevCharacters.slice(0, 4), {}, {}, {}, {}]);
-                                setActiveElements(prevElements => [...prevElements.slice(0, 4), "", "", "", ""]);
-                            } else {
-                                setSecondTeam(!secondTeam)
+                    <div className="flex gap-4 items-center">
+                        <label className="flex gap-2 font-bold">
+                            <input type="checkbox" checked={secondTeam} onChange={() => {
+                                if (secondTeam) {
+                                    setSecondTeam(!secondTeam)
+                                    setActiveCharacters(prevCharacters => [...prevCharacters.slice(0, 4), {}, {}, {}, {}]);
+                                    setActiveElements(prevElements => [...prevElements.slice(0, 4), "", "", "", ""]);
+                                } else {
+                                    setSecondTeam(!secondTeam)
 
-                            }
-                        }} />
-                        Second Team
-                    </label>
+                                }
+                            }} />
+                            Second Team
+                        </label>
+                        <button onClick={() => { randomizeTeam() }} className="border-2 p-1 hover:bg-bg-dark transition-all">Randomize Team</button>
+                    </div>
                     <div className="max-w-7xl flex items-center w-full justify-center">
                         <div className="grid grid-cols-4 gap-4 md:gap-8 pt-8 h-full w-full">
                             {activeCharacters.length > 0 && activeCharacters.map((character: any, index: number) => {
@@ -148,7 +184,7 @@ export default function TeamBuilderPage() {
                             {showBar ? "v" : "^"}
                         </div>
                     </div>
-                    <section className="flex gap-4 overflow-y-hidden overflow-x-scroll p-4 w-full ">
+                    <section className="flex gap-6 overflow-y-hidden overflow-x-scroll p-4 w-full ">
 
                         {characterData.length > 0 ? characterData.map((character, index) => {
 

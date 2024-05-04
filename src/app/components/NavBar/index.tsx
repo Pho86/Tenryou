@@ -14,7 +14,7 @@ export default function NavBar({
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious();
         //@ts-ignore
-        if (latest > previous && latest > 200) {
+        if (latest > previous && latest > 350) {
             setHidden(true);
         } else {
             setHidden(false);
@@ -23,18 +23,18 @@ export default function NavBar({
 
     return (
         <>
-            <motion.nav className="w-full fixed hidden md:flex justify-center z-[1000] font-bold px-2 py-2 md:py-0 bg-bg-darker items-center " variants={{
+            <motion.nav className="w-full fixed hidden px-8 md:px-16 md:flex justify-center z-[1000] font-bold py-2 md:py-0 bg-bg-darker items-center " variants={{
                 visible: { y: 0 },
                 hidden: { y: "-100%" },
             }}
                 animate={hidden ? "hidden" : "visible"}
                 transition={{ ease: "easeInOut", duration: .5 }}
             >
-                <div className="w-full flex items-center justify-center max-w-screen-2xl px-2">
+                <div className="w-full flex items-center justify-center max-w-screen-2xl">
                     <div className="justify-between w-full flex ">
                         <div className="border-primary cursor-pointer grid place-items-center md:pl-0 ">
 
-                            <Link href="/" className="flex text-xl items-center justify-center transition-all cursor-pointer">
+                            <Link href="/" className="flex text-xl items-center justify-center transition-all cursor-pointer hover:text-primary">
                                 <Image src="/logo.svg" width={45} height={45} alt="" className="" />
                                 Tenryou
                             </Link>

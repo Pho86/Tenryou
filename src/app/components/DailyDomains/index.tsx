@@ -52,9 +52,9 @@ export default function DailyDomains({ }: {}) {
         setLoading(false);
     };
     const [done, setDone] = useState<boolean>(false)
+    const weekday: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     useEffect(() => {
         setLoading(true);
-        const weekday: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let day = selectedDay;
         if (!done) {
             const d = new Date();

@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
+
         remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'genshin.jmp.blue',
-            },
             {
                 hostname:'upload-os-bbs.mihoyo.com',
                 protocol:"https"
@@ -13,14 +10,6 @@ const nextConfig = {
             {
                 hostname:'webstatic.hoyoverse.com',
                 protocol:"https"
-            },
-            {
-                hostname:'static.wikia.nocookie.net',
-                protocol:'https'
-            },
-            {
-                hostname:'genshin-db-api.vercel.app',
-                protocol:'https'
             },
             {
                 hostname:'api.ambr.top',

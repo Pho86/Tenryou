@@ -101,10 +101,10 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
 
                             </section>
                         </div>
-                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl">
+                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl w-full">
                             <Gallery characterData={characterData} />
                         </section>
-                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl">
+                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl w-full">
                             <h2 className="font-bold text-3xl">Quotes</h2>
                             <div className="grid gap-4">
                                 {/* @ts-ignore */}

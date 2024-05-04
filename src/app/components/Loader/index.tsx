@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
+"use client"
+
 export default function Loader() {
 
     return <>

@@ -140,3 +140,7 @@ export function parseColorTags(text: string) {
         return `<span style="color: ${color};">${content}</span>`;
     });
 }
+export function getRandomNumber(min: number, max: number): number {
+
+    return Math.random() * (max - min) + min;
+  }

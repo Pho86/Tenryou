@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Signika } from "next/font/google";
 
 import "./globals.scss";
@@ -9,7 +9,7 @@ const signika = Signika({ subsets: ["latin"], weight: [ '300', '400', '500', '60
 
 export const metadata: Metadata = {
   title: "Home - Tenryou 💮",
-  description: "A Genshin Impact companion website, helps view other users along with a database for the game with a teambuilder.",
+  description: "A Genshin Impact companion website, helps players view other players character information along with a database for the game, Genshin Impact with a work in Progress teambuilder.",
   icons: {
     icon: [
       {
@@ -17,7 +17,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  keywords: ["Genshin Impact", "Team Builder", "Weapons", "Fantasy", "Database", "User Search", "Daily Info", "Artifacts", "Characters"],
+  openGraph: {
+    title: 'Tenryou 💮',
+    locale:"en_US",
+    type:"website"
+  },
+  keywords: ["Genshin Impact", "Team Builder", "Weapons", "Fantasy", "Database", "User Search", "Daily Info", "Artifacts", "Characters", "Enka.Network", "DB", "Genshin Information", "Birthdays"],
   robots: {
     index: false,
     follow: true,
@@ -50,4 +55,10 @@ export default function RootLayout({
       </body>
     </html>
   );
+}
+
+
+export const viewport: Viewport = {
+  themeColor: 'black',
+  colorScheme: 'dark',
 }

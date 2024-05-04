@@ -6,96 +6,60 @@ import Events from "../Events";
 import DailyDomains from "../DailyDomains";
 import Birthdays from "../Birthdays";
 export default function BentoGrid() {
-    const [month, setMonth] = useState<string>("Loading...");
-    const months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-    useEffect(() => {
-        const d = new Date();
-        setMonth(months[d.getMonth()]);
-    }, [])
 
     const data = [
         {
-            title: 'Welcome!',
-            content: "",
-            alt: "Welcome, traveler! Here you can find information from the game visualized with various useful information, including information about the game, such as characters, weapons and other things.",
-            bg: "/db/geographies/UI_Codex_Scenery_DQ2qinglaiwan.png",
-            id: "/"
+            title: 'Welcome, Traveler! 💮',
+            alt: "Here you can find information from the game, Genshin Impact, visualized with various useful information, including information about the game, such as characters, weapons and other specific things.",
         },
         {
             title: 'Characters',
-            content: "",
             image: "/icons/characters_out.webp",
-            bg: "/db/namecards/UI_NameCardPic_Bp5_P.png",
+            bg: "/namecards/UI_NameCardPic_Bp5_P.png",
             link: "/characters",
-            alt: "",
-            id: ""
         },
         {
             title: `Dailies Today`,
-            content: "",
-            alt: "",
-            id: "",
             children: <DailyDomains />
         },
         {
             title: 'Events',
-            content: "",
-            alt: "",
-            id: "",
             children: <Events />
         },
         {
             title: 'Users',
-            content: "",
             image: "/icons/wish.webp",
-            bg: "/db/namecards/UI_NameCardPic_Bp2_P.png",
+            bg: "/namecards/UI_NameCardPic_Bp2_P.png",
             link: "/users",
-            alt: "",
-            id: "",
         },
         {
             title: 'Interactive Map',
-            content: "",
             image: "/icons/map.webp",
             link: "https://act.hoyolab.com/ys/app/interactive-map/index.html",
-            bg: "/db/namecards/UI_NameCardPic_Bp4_P.png",
-            alt: "",
-            id: "",
+            bg: "/namecards/UI_NameCardPic_Bp4_P.png",
             target: true
         },
         {
             title: 'Artifacts',
-            content: "",
             image: "/icons/artifacts.webp",
-            bg: "/db/namecards/UI_NameCardPic_Bp23_P.png",
+            bg: "/namecards/UI_NameCardPic_Bp23_P.png",
             link: "/artifacts",
-            alt: "",
-            id: ""
         },
         {
             title: 'Weapons',
-            content: "",
             image: "/icons/weapons.webp",
-            bg: "/db/namecards/UI_NameCardPic_Bp10_P.png",
+            bg: "/namecards/UI_NameCardPic_Bp10_P.png",
             link: "/weapons",
-            alt: "",
-            id: ""
         },
         {
             title: 'Team Builder',
-            content: "",
             image: "/icons/characters_out.webp",
-            bg: "/db/namecards/UI_NameCardPic_Md2_P.png",
+            bg: "/namecards/UI_NameCardPic_Md2_P.png",
             link: "/teambuilder",
-            alt: "",
-            id: ""
         },
         {
-            title: `Birthdays This Month (${month})`,
-            children: <Birthdays month={month} />,
-            alt: "",
-            id: ""
+            title: `Birthdays This Month`,
+            children: <Birthdays />,
         },
     ]
     return (
@@ -123,16 +87,12 @@ function BentoItem({ item, index }: { item: any, index: number }) {
                         <div className={`transition-all w-full z-20 p-3 flex `}>
                             <div className="flex w-full flex-col">
                                 <h2 className='text-xl text-primary font-semibold'>{item.title}</h2>
-                                <p className='font-bold text-2xl'>{item.content}</p>
                             </div>
                         </div>
-                        {item.image ? <div className={`overflow-hidden w-full h-full relative bg-no-repeat `}>
+                        {item.image && <div className={`overflow-hidden w-full h-full relative bg-no-repeat `}>
                             {item.bg && <Image className="object-cover group-hover:scale-105 transition-all brightness-50 group-hover:brightness-90 " fill alt={`${item.title} page`} src={item.bg} />}
-                            <Image src={item.image} width={500} height={500} alt={item.alt} className="absolute top-0 h-full p-4 w-full object-contain group-hover:scale-105 transition-all " />
-                        </div> :
-                            <p className="px-3">
-                                {item.alt}
-                            </p>
+                            <Image src={item.image} width={500} height={500} alt={item.title} className="absolute top-0 h-full p-4 w-full object-contain group-hover:scale-105 transition-all " />
+                        </div>
                         }
                     </Link>
                     :
@@ -140,7 +100,6 @@ function BentoItem({ item, index }: { item: any, index: number }) {
                         <div className={`transition-all w-full z-20 p-3 flex `}>
                             <div className="flex w-full flex-col">
                                 <h2 className='text-xl text-primary font-semibold'>{item.title}</h2>
-                                <p className='font-bold text-2xl'>{item.content}</p>
                             </div>
                         </div>
                         {item.children ?
@@ -148,7 +107,7 @@ function BentoItem({ item, index }: { item: any, index: number }) {
                                 {item.children}
                             </>
                             :
-                            <p className="px-3">
+                            <p className="px-3 text-lg md:text-base">
                                 {item.alt}
                             </p>}
                     </div>
