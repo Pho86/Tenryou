@@ -9,7 +9,7 @@ const signika = Signika({ subsets: ["latin"], weight: [ '300', '400', '500', '60
 
 export const metadata: Metadata = {
   title: "Home - Tenryou 💮",
-  description: "A Genshin Impact companion website, helps players view other players character information along with a database for the game, Genshin Impact with a work in Progress teambuilder.",
+  description: "Your Genshin Impact companion website, helps players view other players character information along with a database for the game, Genshin Impact with a work in Progress teambuilder.",
   icons: {
     icon: [
       {
@@ -35,7 +35,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  }
+  },
+  applicationName:"Tenryou",
+
 };
 
 export default function RootLayout({
@@ -59,6 +61,7 @@ export default function RootLayout({
 
 
 export const viewport: Viewport = {
+  width: "device-width",
   themeColor: 'black',
   colorScheme: 'dark',
 }

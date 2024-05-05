@@ -23,7 +23,7 @@ export default function BentoGrid() {
             children: <DailyDomains />
         },
         {
-            title: 'Events',
+            title: 'Current Events',
             children: <Events />
         },
         {

@@ -25,7 +25,7 @@ export default function UserPage() {
     return (
         <>
             <NavBar active={2} />
-            <main className="md:pt-16 px-4 md:px-8 mb-20 w-full flex flex-col h-[100dvh] justify-center relative">
+            <main className="px-4 md:px-8 mb-20 w-full flex flex-col h-full min-h-[100dvh] justify-center relative">
                 <div className="flex flex-col gap-4">
                     <p className="text-center">Make sure the profile settings in the game have &quot;Show character details&quot; enabled, otherwise the API will not be able to see profile details.</p>
                     <p className="text-center">Example:</p>

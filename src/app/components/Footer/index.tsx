@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 export default function Footer({
     className
 }: {
@@ -40,9 +41,11 @@ export default function Footer({
                     </Link> */}
                     </div>
                     <div className="flex gap-2 -mt-2">
-                        <Link href="https://github.com/pho86/Tenryou" target="__blank" className="flex justify-end items-end">
-                            <Image src="/icons/github.svg" width={25} height={25} alt="Enka.network " className="" />
-                        </Link>
+                        <div className="flex justify-end items-end">
+                            <Link href="https://github.com/pho86/Tenryou" target="__blank" className="hover:text-primary transition-all text-xl p-1">
+                                <FaGithub />
+                            </Link>
+                        </div>
                         <p className="mt-8 text-end text-sm text-gray-200">
                             This website is not affiliated with miHoYo or COGNOSPHERE, and all assets are property of their original owners.
                         </p>

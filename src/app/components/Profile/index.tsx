@@ -1,8 +1,9 @@
 import Image from "next/image"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import { useRouter } from "next/navigation";
 import Footer from "../Footer";
 import Loader from "../Loader";
+import { FaStar } from "react-icons/fa6";
 export default function Profile({ user }: { user: any }) {
 
     const propertyGroups = {
@@ -70,7 +71,7 @@ export default function Profile({ user }: { user: any }) {
 
     return (
         <div className="flex flex-col gap-4">
-            <button onClick={() => { console.log(user.player) }}>CONSOLE</button>
+            <button onClick={() => { console.log(user) }}>CONSOLE</button>
             <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2 lg:items-center md:p-2 p-0">
                 <div className="flex flex-col md:flex-row gap-2">
                     <Image src={`https://enka.network/ui/${user.player.profilePicture.assets.icon}.png`} width={175} height={50} alt={`${user.player.username} player icon`} title={`${user.player.username}`} className="bg-bg-darker p-2 rounded-xl" />
@@ -183,7 +184,7 @@ export default function Profile({ user }: { user: any }) {
                 <div className="overflow-x-scroll 2xl:overflow-x-hidden grid place-items-center" id="wide_player_card">
                     <div className={`grid grid-cols-2 auto-cols-[400px] w-[1280px] max-7xl p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end`}>
                         <div className="w-full h-full relative drop-shadow-text min-h-[400px] col-span-1">
-                            <div className="flex flex-col absolute p-5 w-full h-full drop-shadow-text">
+                            <div className="flex flex-col absolute p-5 w-full h-full">
                                 <div className="flex gap-2 items-center">
                                     <h2 className="text-3xl font-semibold">
                                         {activeCharacter.name}
@@ -241,12 +242,19 @@ export default function Profile({ user }: { user: any }) {
                                 <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="bg-bg bg-opacity-40 rounded-xl object-cover h-full" />
                             </div>
                         </div>
-                        <div className="p-4 flex flex-col gap-2 col-span-1 drop-shadow-text w-full">
+                        <div className="p-2 flex flex-col gap-2 col-span-1 drop-shadow-text w-full">
                             <div className="flex flex-col w-full ">
                                 <div className="flex w-full justify-between gap-2">
                                     <div className="flex  w-full gap-2">
-                                        <Image src={`https://enka.network/ui/${activeCharacter.equipment.weapon.assets.awakenIcon}.png`} width={250} height={250} className="p-2 w-28 h-full object-cover bg-bg bg-opacity-75 rounded-xl" alt={activeCharacter.equipment.weapon.name} />
-                                        <div className="flex flex-col gap-1 drop-shadow-text">
+                                        <div className="relative flex justify-center">
+                                            <Image src={`https://enka.network/ui/${activeCharacter.equipment.weapon.assets.awakenIcon}.png`} width={250} height={250} className=" w-28 h-full object-cover bg-bg bg-opacity-40 rounded-xl" alt={activeCharacter.equipment.weapon.name} />
+                                            <div className="flex absolute bottom-1 text-xl text-yellow-400">
+                                                {[...Array(activeCharacter.equipment.weapon.stars)].map((_, index) => (
+                                                    <FaStar key={index} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col gap-1 ">
                                             <div className="font-bold text-2xl">{activeCharacter.equipment.weapon.name}</div>
                                             <div className="flex gap-4">{activeCharacter.equipment.weapon.weaponStats.map((stat: any, index: number) => {
                                                 const percentStat = isPropertyFlat(stat.stat)
@@ -283,7 +291,7 @@ export default function Profile({ user }: { user: any }) {
                                     </div>
                                     <div className="flex flex-wrap flex-col ">
                                         {artifactSet.map((set: any, index: number) => {
-                                            if (set.count >= 2) return <div key={index} className="font-bold text-xs text-green-600">
+                                            if (set.count >= 2) return <div key={index} className="font-bold text-sm text-green-600">
                                                 <p className="text-nowrap">{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
                                             </div>
                                         })}
@@ -291,7 +299,7 @@ export default function Profile({ user }: { user: any }) {
                                 </div>
 
                             </div>
-                            <div className="flex flex-col gap-2 drop-shadow-text">
+                            <div className="flex flex-col gap-2 ">
                                 <div className={`flex gap-2 items-center rounded-xl font-semibold transition-all bg-opacity-75 justify-between ${activeHover == "HP" && "bg-bg"} py-1 px-2`} onMouseEnter={() => { setActiveHover("HP") }} onMouseLeave={() => { setActiveHover("") }}>
                                     <div className={`flex gap-2`} >
                                         <Image src={`/stats/FIGHT_PROP_HP.svg`} width={16} height={16} alt={"HP stat icon"} className="" />
@@ -447,30 +455,64 @@ export default function Profile({ user }: { user: any }) {
                                 const isHpBonus = isHPStat(artifact.mainstat.stat);
                                 const isDamageBonus = isPropertyDamageBonus(artifact.mainstat.stat);
                                 const propertyType = isPropertyFlat(artifact.mainstat.stat);
-
-                                return <div key={index} className="relative w-full grid grid-cols-2 bg-bg bg-opacity-75 rounded-xl p-2 justify-between items-center">
-                                    <Image src={`https://enka.network/ui/${artifact.icon}.png`} width={100} height={100} alt={`${artifact.name} icon`} className="object-contain " />
-                                    <div className={`flex text-xl gap-2 font-bold p-2 rounded-xl bg-opacity-75
-                            ${isAttackBonus && activeHover == "ATK" && "bg-bg-dark"}
-                            ${isDefenseBonus && activeHover == "DEF" && "bg-bg-dark"}
-                            ${isHpBonus && activeHover == "HP" && "bg-bg-dark"}
-                            ${isDamageBonus && activeHover == "ELEMENT" && "bg-bg-dark"}
-                            ${!isAttackBonus && !isDefenseBonus && !isHpBonus && !isDamageBonus && activeHover == artifact.mainstat.stat && "bg-bg-dark"}
-                            `} onMouseEnter={() => {
+                                artifact.rollquality = Object.values(artifact.substatsRollQuality.reduce((acc: any, item: any) => {
+                                    if (!acc[item.type]) {
+                                        acc[item.type] = { ...item, rollQuality: [item.rollQuality] };
+                                    } else {
+                                        acc[item.type].rollQuality.push(item.rollQuality);
+                                    }
+                                    return acc;
+                                }, {}));
+                                artifact.critValue = 0;
+                                artifact.substats.forEach((substat: any) => {
+                                    if (substat.stat === 'FIGHT_PROP_CRITICAL_HURT') {
+                                        artifact.critValue += substat.statValue;
+                                    }
+                                    else if (substat.stat === 'FIGHT_PROP_CRITICAL') {
+                                        artifact.critValue += substat.statValue * 2;
+                                    }
+                                });
+                                return <div key={index} className="relative w-full grid grid-cols-2 gap-2 bg-bg bg-opacity-75 rounded-xl p-2 justify-between items-center">
+                                    <div className="relative flex justify-center">
+                                        <Image src={`https://enka.network/ui/${artifact.icon}.png`} title={artifact.name} width={100} height={100} alt={`${artifact.name} icon`} className="object-contain " />
+                                        <div className="flex absolute bottom-0 text-yellow-400">
+                                            {[...Array(artifact.stars)].map((_, index) => (
+                                                <FaStar key={index} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col font-bold justify-center">
+                                        <div className="flex justify-end" >
+                                            
+                                            <div>
+                                                <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl">
+                                                    CV:&nbsp;
+                                                    <span className={` ${artifact.critValue < 20 ? "text-red-500" :
+                                                        artifact.critValue < 30 ? "text-orange-500" :
+                                                            artifact.critValue < 40 ? "text-lime-500" :
+                                                                artifact.critValue >= 40 ? "text-green-500" : ""
+                                                        }`} title="Crit Rate + Crit Dmg*2">
+                                                        {artifact.critValue.toFixed(1)}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className={`flex text-xl gap-2 p-2 rounded-xl bg-opacity-75 ${isAttackBonus && activeHover == "ATK" && "bg-bg-dark"} ${isDefenseBonus && activeHover == "DEF" && "bg-bg-dark"} ${isHpBonus && activeHover == "HP" && "bg-bg-dark"} ${isDamageBonus && activeHover == "ELEMENT" && "bg-bg-dark"} ${!isAttackBonus && !isDefenseBonus && !isHpBonus && !isDamageBonus && activeHover == artifact.mainstat.stat && "bg-bg-dark"}`} onMouseEnter={() => {
                                             if (isAttackBonus) setActiveHover("ATK")
                                             else if (isDefenseBonus) setActiveHover("DEF")
                                             else if (isHpBonus) setActiveHover("HP")
                                             else if (isDamageBonus) setActiveHover("ELEMENT")
                                             else setActiveHover(artifact.mainstat.stat)
                                         }}
-                                        onMouseLeave={() => { setActiveHover("") }}
-                                    >
-                                        {!isDamageBonus || artifact.mainstat.stat === "FIGHT_PROP_PHYSICAL_ADD_HURT" ? (
-                                            <Image src={`/stats/${artifact.mainstat.stat}.svg`} width={32} height={32} alt={artifact.mainstat.stat} className="" />
-                                        ) : (
-                                            <Image src={`/elements/${activeCharacter.element}.svg`} width={32} height={32} alt={artifact.mainstat.stat} className="" />
-                                        )}
-                                        {artifact.mainstat.statValue}{!propertyType && "%"}
+                                            onMouseLeave={() => { setActiveHover("") }}
+                                        >
+                                            {!isDamageBonus || artifact.mainstat.stat === "FIGHT_PROP_PHYSICAL_ADD_HURT" ? (
+                                                <Image src={`/stats/${artifact.mainstat.stat}.svg`} width={32} height={32} alt={artifact.mainstat.stat} className="drop-shadow-icon" />
+                                            ) : (
+                                                <Image src={`/elements/${activeCharacter.element}.svg`} width={32} height={32} alt={artifact.mainstat.stat} className=" drop-shadow-icon" />
+                                            )}
+                                            {artifact.mainstat.statValue}{!propertyType && "%"}
+                                        </div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-4 col-span-2 place-items-start font-bold">
                                         {artifact.substats.map((stat: any, index: number) => {
@@ -478,7 +520,7 @@ export default function Profile({ user }: { user: any }) {
                                             const isDefenseBonus = isDefenseStat(stat.stat);
                                             const isHpBonus = isHPStat(stat.stat);
                                             const propertyType = isPropertyFlat(stat.stat);
-                                            return <div className={`flex gap-2 p-2 w-full bg-opacity-75
+                                            return <div className={`flex gap-2 p-2 w-full bg-opacity-75 relative
                                     ${isAttackBonus && activeHover == "ATK" && "bg-bg-darkest"}
                                     ${isDefenseBonus && activeHover == "DEF" && "bg-bg-darkest"}
                                     ${isHpBonus && activeHover == "HP" && "bg-bg-darkest"}
@@ -490,11 +532,22 @@ export default function Profile({ user }: { user: any }) {
                                                     else setActiveHover(stat.stat)
                                                 }} onMouseLeave={() => { setActiveHover("") }}>
                                                 {!propertyType ?
-                                                    <Image src={`/stats/${stat.stat}.svg`} width={16} height={16} alt={stat.stat} className="" />
+                                                    <Image src={`/stats/${stat.stat}.svg`} width={16} height={16} alt={stat.stat} className="drop-shadow-icon" />
                                                     :
-                                                    <Image src={`/stats/${stat.stat}.svg`} width={16} height={16} alt={stat.stat} className="" />
+                                                    <Image src={`/stats/${stat.stat}.svg`} width={16} height={16} alt={stat.stat} className="drop-shadow-icon" />
                                                 }
                                                 +{stat.statValue}{!propertyType && "%"}
+                                                <div className="flex absolute items-center -bottom-2 gap-1 pointer-events-none ">
+                                                    {artifact.rollquality.map((roll: any, rollIndex: number) => {
+                                                        if (roll.type === stat.stat) {
+                                                            return roll.rollQuality.map((quality: number, qualityIndex: number) => (
+                                                                <React.Fragment key={`${rollIndex}-${qualityIndex}`}>
+                                                                    <span className={`${quality === 4 ? "font-bold text-xl" : quality === 3 ? "font-semibold text-lg" : quality === 2 ? "font-medium text-normal" : "text-sm"}`}>—</span>
+                                                                </React.Fragment>
+                                                            ));
+                                                        }
+                                                    })}
+                                                </div>
                                             </div>
                                         })}
                                     </div>
@@ -505,7 +558,6 @@ export default function Profile({ user }: { user: any }) {
                 </div>
             }
 
-            <Footer />
         </div>
     )
 }

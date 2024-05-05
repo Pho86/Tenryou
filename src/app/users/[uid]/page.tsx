@@ -6,14 +6,13 @@ import axios from "axios";
 import NavBar from "@/app/components/NavBar";
 import Loader from "@/app/components/Loader";
 import { addFileName } from "@/app/utils/helper";
-
+import Footer from "@/app/components/Footer";
 export default function UIDPage({ params }: { params: { uid: string } }) {
     const [playerData, setPlayerData] = useState<any>();
 
     useLayoutEffect(() => {
         axios.get(`/api/player/${params.uid}`)
             .then(response => {
-                console.log(response.data)
                 response.data.characters.forEach((character: any) => {
                     addFileName([character]);
                 })
@@ -36,6 +35,7 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
                     <Loader />
                 }
                 </div>
+                <Footer/>
             </main>
         </>
     );

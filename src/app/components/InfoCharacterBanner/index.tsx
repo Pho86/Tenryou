@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, useMotionValue, useScroll, useTransform } from "framer-motion"
 import { useRef, useState,  } from "react"
+
 export default function InfoCharacterBanner({
     characterData, params
 }: {
@@ -24,7 +25,6 @@ export default function InfoCharacterBanner({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: .5 }}
                 viewport={{ once: true }}
-
             >
                 <Image src={`/regions/${characterData.region}.webp`} width={1500} height={1500} className="w-full max-h-[110dvh] object-contain opacity-60 z-[-15]" alt={`${characterData.region} icon`} priority />
             </motion.div>

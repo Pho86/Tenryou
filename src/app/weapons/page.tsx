@@ -8,7 +8,7 @@ import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
 import { parseColorTags } from "@/app/utils/helper";
 import parse from "html-react-parser"
-
+import { FaStar } from "react-icons/fa";
 export default function WeaponsPage() {
     const [fullData, setFullData] = useState<any[]>([]);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
@@ -92,11 +92,11 @@ export default function WeaponsPage() {
                                 <IconButtonSwitch name="Catalyst" onClick={() => { setActiveWeapon(activeWeapon === 5 ? 0 : 5) }} index={5} active={activeWeapon} />
                             </div>
                             <div className="flex gap-3 justify-center">
-                                <IconButtonSwitch text="gray" onClick={() => { setActiveRarity(activeRarity === 1 ? 0 : 1) }} index={1} active={activeRarity} />
-                                <IconButtonSwitch text="green" onClick={() => { setActiveRarity(activeRarity === 2 ? 0 : 2) }} index={2} active={activeRarity} />
-                                <IconButtonSwitch text="blue" onClick={() => { setActiveRarity(activeRarity === 3 ? 0 : 3) }} index={3} active={activeRarity} />
-                                <IconButtonSwitch text="orange" onClick={() => { setActiveRarity(activeRarity === 4 ? 0 : 4) }} index={4} active={activeRarity} />
-                                <IconButtonSwitch text="yellow" onClick={() => { setActiveRarity(activeRarity === 5 ? 0 : 5) }} index={5} active={activeRarity} />
+                                <IconButtonSwitch star onClick={() => { setActiveRarity(activeRarity === 1 ? 0 : 1) }} index={1} active={activeRarity} className="text-gray-600"/>
+                                <IconButtonSwitch star onClick={() => { setActiveRarity(activeRarity === 2 ? 0 : 2) }} index={2} active={activeRarity} className="text-green-600"/>
+                                <IconButtonSwitch star onClick={() => { setActiveRarity(activeRarity === 3 ? 0 : 3) }} index={3} active={activeRarity} className="text-blue-600"/>
+                                <IconButtonSwitch star onClick={() => { setActiveRarity(activeRarity === 4 ? 0 : 4) }} index={4} active={activeRarity} className="text-purple-600"/>
+                                <IconButtonSwitch star onClick={() => { setActiveRarity(activeRarity === 5 ? 0 : 5) }} index={5} active={activeRarity} className="text-yellow-600"/>
                             </div>
                         </div>
                         <div className="grid lg:grid-cols-2 gap-8">

@@ -38,6 +38,7 @@ export default function Events() {
                                                 initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 100 }} transition={{ ease: "easeInOut" }}
                                             >
                                                 <h3 className="text-xl font-bold pb-4">{events[key].nameFull.EN}</h3>
+                                                <p>Starts at: {events[key].startAt}. Ends at: {events[key].endAt}</p>
                                                 <Image src={events[key].banner.EN} width={800} height={800} className="w-full" alt={`${events[key].nameFull.EN} event banner`} />
                                                 {parse(events[key].description.EN)}
                                             </motion.div>

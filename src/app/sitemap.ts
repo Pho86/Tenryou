@@ -5,55 +5,58 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [
         {
-            url: "https://tenryou.live",
+            url: `${process.env.VERCEL_URL}/`,
             lastModified: new Date(),
             priority: 1,
         },
         {
-            url: "https://tenryou.live/characters",
+            url: `${process.env.VERCEL_URL}/characters`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: "https://tenryou.live/weapons",
+            url: `${process.env.VERCEL_URL}/weapons`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: "https://tenryou.live/artifacts",
+            url: `${process.env.VERCEL_URL}/artifacts`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: "https://tenryou.live/users",
+            url: `${process.env.VERCEL_URL}/users`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: "https://tenryou.live/teambuilder",
+            url: `${process.env.VERCEL_URL}/teambuilder`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         ...(await generateCharacterData()).map((character: any) => ({
-            url: `https://tenryou.live/characters/${character.slug}/`,
+            url: `${process.env.VERCEL_URL}/characters/${character.slug}`,
             lastModified: character.updatedAt,
         })),
     ];
 }
+type sitemap = {
+    slug: string,
+    updatedAt: Date
+}
 const generateCharacterData = async () => {
-    let characterNames: any[] = [];
-    let sitemap: any[] = [];
+    let characterNames: string[] = [];
+    let sitemap: sitemap[] = [];
     try {
         const res = await axios.get<any[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&dumpResults=true");
         characterNames = res.data;
         for (let i = 0; i < characterNames.length - 1; i++) {
             sitemap.push({
-                //@ts-ignore
                 slug: characterNames[i],
                 updatedAt: new Date()
             });
