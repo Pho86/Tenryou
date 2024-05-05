@@ -45,6 +45,7 @@ export default function Birthdays({ }: {}) {
     }, [selectedMonth]);
 
     return <div className="flex flex-col gap-2 p-2 overflow-y-scroll">
+        <label>
         <select value={selectedMonth} onChange={(e) => { setSelectedMonth(e.target.value); }} className="p-1">
             <option value="January">January</option>
             <option value="February">February</option>
@@ -60,6 +61,7 @@ export default function Birthdays({ }: {}) {
             <option value="November">November</option>
             <option value="December">December</option>
         </select>
+        </label>
         <div className="p-2 justify-center grid-auto-fit-150 ">
             {loading ?
                 <Loader />

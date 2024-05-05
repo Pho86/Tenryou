@@ -18,7 +18,7 @@ export default function TeamBuilderPage() {
     const [activeElements, setActiveElements] = useState<any[]>(["", "", "", "", "", "", "", ""]);
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
     const [secondTeam, setSecondTeam] = useState<boolean>(false);
-    const [showIcons, setShowIcons] = useState<boolean>(false);
+    const [showIcons, setShowIcons] = useState<boolean>(true);
     useLayoutEffect(() => {
         axios
             .get<any[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")

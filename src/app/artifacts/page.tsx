@@ -25,7 +25,6 @@ export default function ArtifactsPage() {
       .get<any[]>("https://genshin-db-api.vercel.app/api/v5/artifacts?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
       .then((res) => {
         setArtifactData(res.data);
-        console.log(res.data)
         setActiveArtifact({ ...res.data[0], hover: "flower" })
       })
       .catch((error) => {

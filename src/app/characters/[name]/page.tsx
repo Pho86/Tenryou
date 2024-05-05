@@ -38,9 +38,9 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
                 Promise.all([
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${params.name}&matchCategories=true&queryLanguages=english,jap`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&queryLanguages=english,jap`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&queryLanguages=english,jap`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${params.name}&matchCategories=true&queryLanguages=english`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&queryLanguages=english`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&queryLanguages=english`),
                 ])
                     .then((responses) => {
                         const [constellationsResponse, talentsResponse, nameCardResponse, voiceDataResponse, outfitResponse] = responses;

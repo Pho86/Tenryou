@@ -35,19 +35,20 @@ export default function Footer({
                 </div>
                 <div className="w-full flex md:flex-row flex-col md:justify-between items-end mt-4">
                     <div className="flex gap-2">
-                        <p>Your Genshin Companion Site</p>
+                        <p>Your Genshin Impact Companion Site</p>
                         {/* <Link href={"https://enka.network"} target="__blank">
                         <Image src={`/icons/enka.png`} width={200} height={150} alt="Enka.network " className="" />
                     </Link> */}
                     </div>
                     <div className="flex gap-2 -mt-2">
                         <div className="flex justify-end items-end">
-                            <Link href="https://github.com/pho86/Tenryou" target="__blank" className="hover:text-primary transition-all text-xl p-1">
+                            {/* <Link href="https://github.com/pho86/Tenryou" target="__blank" className="hover:text-primary transition-all text-xl p-1">
+                                <p className="hidden">Github Icon</p>
                                 <FaGithub />
-                            </Link>
+                            </Link> */}
                         </div>
                         <p className="mt-8 text-end text-sm text-gray-200">
-                            This website is not affiliated with miHoYo or COGNOSPHERE, and all assets are property of their original owners.
+                            This website is not affiliated with miHoYo, and all assets are property of original owners.
                         </p>
                     </div>
                 </div>

@@ -8,9 +8,8 @@ import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
 import { parseColorTags } from "@/app/utils/helper";
 import parse from "html-react-parser"
-import { FaStar } from "react-icons/fa";
 export default function WeaponsPage() {
-    const [fullData, setFullData] = useState<any[]>([]);
+    const [weaponData, setWeaponData] = useState<any[]>([]);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
     const [activeRarity, setActiveRarity] = useState<number>(0);
     const [active, setActive] = useState<any>();
@@ -18,19 +17,18 @@ export default function WeaponsPage() {
     const [percentage, setPercent] = useState<boolean>(false);
     const [refinement, setRefinement] = useState<number>(5);
     const [loading, setLoading] = useState<boolean>(false);
-    const [story, setStory] = useState<boolean>(true);
     useLayoutEffect(() => {
         axios
             .get<any[]>("https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
             .then((res) => {
-                setFullData(res.data);
-                receiveWeaponData(res.data[0])
+                setWeaponData(res.data);
+                receiveWeaponStats(res.data[0])
             })
             .catch((error) => {
                 console.error("Error fetching character names:", error);
             });
     }, []);
-    const receiveWeaponData = async (data: any) => {
+    const receiveWeaponStats = async (data: any) => {
         try {
             setLoading(true)
             const res = await axios.get<any[]>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=weapons&query=${data.name}`);
@@ -79,7 +77,7 @@ export default function WeaponsPage() {
     return (
         <>
             <NavBar />
-            <main className="md:pt-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center ">
+            <main className="md:pt-16 md:px-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center ">
                 <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
                     <h1 className="text-3xl text-primary">Weapons List</h1>
                     <section className="flex flex-col gap-8">
@@ -101,13 +99,13 @@ export default function WeaponsPage() {
                         </div>
                         <div className="grid lg:grid-cols-2 gap-8">
                             <div className="grid-auto-fit-200 overflow-y-scroll p-2 max-h-[90dvh] ">
-                                {fullData.length > 0 ? fullData.map((weapon: any, index: number) => {
+                                {weaponData.length > 0 ? weaponData.map((weapon: any, index: number) => {
                                     const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
                                     const weaponRarity = [true, 1, 2, 3, 4, 5];
                                     const validWeapon = activeWeapon === 0 || weaponConditions[activeWeapon] === weapon.weaponText;
                                     const validRarity = activeRarity === 0 || weaponRarity[activeRarity] === weapon.rarity;
                                     if (validWeapon && validRarity) return <div key={index} className="max-h-48">
-                                        <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == weapon.id && "shadow-light scale-105"}`} onClick={() => { setActive(weapon); receiveWeaponData(weapon) }}>
+                                        <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == weapon.id && "shadow-light scale-105"}`} onClick={() => { setActive(weapon); receiveWeaponStats(weapon) }}>
                                             <Image src={`https://api.ambr.top/assets/UI/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : weapon.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : weapon.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : weapon.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`} />
                                             <p className="flex flex-col min-h-9 justify-around mx-1 text-center text-xs md:text-md text-bg font-bold">{weapon.name}</p>
                                         </div>
@@ -179,7 +177,6 @@ export default function WeaponsPage() {
                                                     )}
                                                 </div>
                                                 {active.parsedDescription && <p className="italic text-sm">{parse(active.parsedDescription)}</p>}
-                                                {story && <p className="italic rounded-xl pt-4 text-sm leading-normal">{active.story}</p>}
                                             </div>
                                         </div>
                                     </>
@@ -194,7 +191,7 @@ export default function WeaponsPage() {
                 </div>
             </main>
             <Footer />
-            <div className=" bg-gradient-to-br from-gradient-gray-start to-gradient-gray-end from-gradient-purple-start to-gradient-purple-end from-gradient-green-start to-gradient-green-end from-gradient-blue-start to-gradient-blue-end"></div>
+            <div className=" bg-gradient-to-br from-gradient-C-start to-gradient-C-end from-gradient-SSR-start to-gradient-SSR-end from-gradient-SR-start to-gradient-SR-end from-gradient-R-start to-gradient-R-end from-gradient-C-start to-gradient-C-end"></div>
         </>
     );
 }
