@@ -16,15 +16,18 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
 
     useLayoutEffect(() => {
         axios.get(`/api/player/${params.uid}`)
+        // axios.get(`https://tenryou.vercel.app/api/player/${params.uid}`)
             .then(response => {
                 response.data.characters.forEach((character: any) => {
                     addFileName([character]);
                 })
                 setPlayerData(response.data);
+                console.log(response.data)
                 setLoading(false);
-                document.title = `${response.data.player.username} - Tenryou 💮`;
+                document.title = `${response.data.player.nickname} - Tenryou 💮`;
             })
             .catch(error => {
+                console.log(error)
                 setLoading(false);
                 setError(true);
             });
