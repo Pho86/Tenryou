@@ -40,7 +40,7 @@ export default function BentoGrid() {
             target: true
         },
         {
-            title: 'Team Builder',
+            title: 'Team Builder (WIP)',
             image: "/icons/teambuilder.svg",
             bg: "/namecards/UI_NameCardPic_Md2_P.png",
             link: "/teambuilder",
