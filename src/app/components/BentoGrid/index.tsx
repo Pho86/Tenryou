@@ -46,10 +46,6 @@ export default function BentoGrid() {
             link: "/teambuilder",
         },
         {
-            title: `Birthdays This Month`,
-            children: <Birthdays />,
-        },
-        {
             title: `Materials`,
             image: "/icons/materials.svg",
             bg: "/namecards/UI_NameCardPic_Mxsy_P.png",
@@ -62,6 +58,10 @@ export default function BentoGrid() {
             link: "/artifacts",
         },
         {
+            title: `Birthdays This Month`,
+            children: <Birthdays />,
+        },
+        {
             title: 'Weapons',
             image: "/icons/weapons.svg",
             bg: "/namecards/UI_NameCardPic_Bp10_P.png",
@@ -72,6 +72,18 @@ export default function BentoGrid() {
             image: "/icons/namecards.svg",
             bg: "/namecards/UI_NameCardPic_Bp16_P.png",
             link: "/namecards",
+        },
+        {
+            title: `Outfits`,
+            image: "/icons/outfits.svg",
+            bg: "/namecards/UI_NameCardPic_Bp29_P.png",
+            link: "/outfits",
+        },
+        {
+            title: `Elements`,
+            image: "/icons/elements.svg",
+            bg: "/namecards/UI_NameCardPic_EffigyChallenge_P.png",
+            link: "/elements",
         },
     ]
     return (
@@ -89,7 +101,7 @@ export default function BentoGrid() {
 function BentoItem({ item, index }: { item: any, index: number }) {
     return (
         <>
-            <div className={`overflow-hidden group rounded-xl transition-all bg-bg-dark border-bg-light border-2 flex flex-col ${index === 2 && ' lg:row-span-2 md:row-span-1 row-span-2'} ${index === 1 ? 'lg:col-span-2 md:row-span-2 lg:row-span-1' : ''} ${index == 3 && "row-span-2 md:row-span-3 md:col-span-2 "}  ${index == 7 && "lg:col-span-2 "}transition-all`}>
+            <div className={`overflow-hidden group rounded-xl transition-all bg-bg-dark border-bg-light border-2 flex flex-col ${index === 2 && ' lg:row-span-2 md:row-span-1 row-span-2'} ${index === 1 ? 'lg:col-span-2 md:row-span-2 lg:row-span-1' : ''} ${index == 3 && "row-span-2 md:col-span-2 "}  ${index == 9 && "lg:col-span-2 "}transition-all`}>
                 {item.link ?
                     <Link
                         className={`transition-all hover:bg-bg-light flex flex-col h-full cursor-pointer`}

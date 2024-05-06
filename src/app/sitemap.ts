@@ -34,6 +34,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.8,
         },
         {
+            url: `${process.env.VERCEL_URL}/outfits`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
+        {
+            url: `${process.env.VERCEL_URL}/elements`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
+        {
             url: `${process.env.VERCEL_URL}/materials`,
             lastModified: new Date(),
             changeFrequency: "monthly",
