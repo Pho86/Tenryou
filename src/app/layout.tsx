@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Signika } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react"
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.scss";
 import NextTopLoader from 'nextjs-toploader';
 
@@ -48,6 +48,7 @@ export default function RootLayout({
   return (
     <>
       <Analytics />
+      <SpeedInsights/>
       <html lang="en">
         <body className={` ${signika.className} ${signika.variable} ${poppins.variable}  scroll-smooth`}>
           <NextTopLoader
