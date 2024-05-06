@@ -8,9 +8,12 @@ import Loader from "@/app/components/Loader";
 import { addFileName } from "@/app/utils/helper";
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
+
 export default function UIDPage({ params }: { params: { uid: string } }) {
     const [playerData, setPlayerData] = useState<any>();
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
+
     useLayoutEffect(() => {
         axios.get(`/api/player/${params.uid}`)
             .then(response => {
@@ -18,15 +21,28 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
                     addFileName([character]);
                 })
                 setPlayerData(response.data);
-                console.log(response.data)
-                document.title = (`${response.data.player.username} - Tenryou 💮`)
+                setLoading(false);
+                document.title = `${response.data.player.username} - Tenryou 💮`;
             })
             .catch(error => {
-                setError(true)
+                setLoading(false);
+                setError(true);
             });
     }, [params.uid]);
 
-    if (!playerData || !playerData.characters || playerData.characters.length === 0) {
+    if (loading) {
+        return <>
+            <NavBar active={2} />
+            <main className="flex flex-col md:pt-16 px-8 justify-center items-center relative h-screen">
+                <div className="w-full max-w-screen-2xl">
+                    <Loader />
+                </div>
+                <Footer className="absolute bottom-0" />
+            </main>
+        </>;
+    }
+
+    if (error || !playerData || !playerData.characters || playerData.characters.length === 0) {
         return (
             <>
                 <NavBar active={2} />
@@ -43,16 +59,13 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
             </>
         );
     }
+
     return (
         <>
             <NavBar active={2} />
             <main className="flex flex-col md:pt-16 px-8 justify-center items-center">
                 <div className="w-full max-w-screen-2xl">
-
-                    {playerData ? <Profile user={playerData} />
-                        :
-                        <Loader />
-                    }
+                    {playerData ? <Profile user={playerData} /> : <Loader />}
                 </div>
                 <Footer />
             </main>
