@@ -103,7 +103,7 @@ export default function TeamBuilderPage() {
             <NavBar active={3} />
             <main className="pt-8 md:pt-16 px-8 md:px-16 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center">
                 <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
-                    <h1 className="text-3xl text-primary">Team Builder</h1>
+                    <h1 className="text-3xl text-primary">Team Builder (WIP)</h1>
                     <div className="flex gap-3 justify-around flex-col md:flex-row">
                         <div className="flex gap-3 justify-center ">
                             <IconButtonSwitch name="Pyro" onClick={() => { setActiveElement(activeElement === 1 ? 0 : 1) }} type="elements" index={1} active={activeElement} />

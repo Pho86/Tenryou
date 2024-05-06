@@ -13,10 +13,10 @@ export default function ElementsPage() {
                     <h2 className="text-xl font-bold">Elemental Debuffs</h2>
                     <p>Mastering the art of combining various elements is essential for success in Genshin Impact combat.</p>
                     <div className="flex gap-2 flex-col p-2 rounded-xl bg-bg-dark">
-                        <GridItem title="Engulfing Storm" effect="Continuously drains Energy Recharge." element={["electro"]} />
-                        <GridItem title="Slowing Water" effect="Increases skill CD durations." element={["hydro"]} />
-                        <GridItem title="Smoldering Flames" effect="Continuously drains Energy Recharge." element={["pyro"]} />
-                        <GridItem title="Condensed Ice" effect="Increases stamina consumption." element={["cryo"]} />
+                        <GridItem title="Engulfing Storm" effect="Continuously drains Energy Recharge." element={["Electro"]} />
+                        <GridItem title="Slowing Water" effect="Increases skill CD durations." element={["Hydro"]} />
+                        <GridItem title="Smoldering Flames" effect="Continuously drains Energy Recharge." element={["Pyro"]} />
+                        <GridItem title="Condensed Ice" effect="Increases stamina consumption." element={["Cryo"]} />
                     </div>
                 </section>
                 <section className="w-full flex flex-col">
