@@ -3,21 +3,7 @@ import React, { useState, useEffect, } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "../Loader";
 import { FaStar } from "react-icons/fa6";
-import Link from "next/link";
 export default function Profile({ user }: { user: any }) {
-
-    if (user.characters.length == 0) {
-        return <>
-            <main className="flex h-[70dvh] flex-col gap-10 items-center justify-center relative max-w-screen-2xl w-full">
-                <h1 className="text-9xl">404</h1>
-                <p className="text-xl">Oops... Something went wrong, maybe you inputted the wrong UID, or the account was not public, please make sure you entered the correct UID or the profile is public.</p>
-                <Link href="/" className="">
-                    <button className="border-text border-2 hover:bg-bg-dark transition-all px-4 p-2 rounded-xl">Back To Home</button>
-                </Link>
-
-            </main>
-        </>
-    }
     const propertyGroups = {
         flat: ['FIGHT_PROP_HP', 'FIGHT_PROP_ATTACK', 'FIGHT_PROP_DEFENSE', 'FIGHT_PROP_ELEMENT_MASTERY', "FIGHT_PROP_BASE_ATTACK"],
         percent: ['FIGHT_PROP_HP_PERCENT', 'FIGHT_PROP_ATTACK_PERCENT', 'FIGHT_PROP_DEFENSE_PERCENT', 'FIGHT_PROP_CRITICAL', 'FIGHT_PROP_CRITICAL_HURT', 'FIGHT_PROP_CHARGE_EFFICIENCY', 'FIGHT_PROP_HEAL_ADD',],
