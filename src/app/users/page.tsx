@@ -28,7 +28,7 @@ export default function UserPage() {
             <main className="px-4 md:px-8 mb-20 w-full flex flex-col h-full min-h-[100dvh] justify-center relative">
                 <div className="flex flex-col gap-4">
                     <p className="text-center">Make sure the profile settings in the game have &quot;Show character details&quot; enabled, otherwise the API will not be able to see profile details.</p>
-                    <p className="text-center">Example:</p>
+                    {/* <p className="text-center">Example:</p> */}
                     <form className="flex justify-center items-center h-full w-full gap-2" onSubmit={handleSubmit} onChange={handleChange}>
                         <input type="number" name="uid" required onChange={() => { }} value={user.uid} placeholder="Enter UID..." className="p-2 rounded-xl" />
                         <button className="" type="submit">Search</button>

@@ -1,11 +1,23 @@
 import Image from "next/image"
 import React, { useState, useEffect, } from "react";
 import { useRouter } from "next/navigation";
-import Footer from "../Footer";
 import Loader from "../Loader";
 import { FaStar } from "react-icons/fa6";
+import Link from "next/link";
 export default function Profile({ user }: { user: any }) {
 
+    if (user.characters.length == 0) {
+        return <>
+            <main className="flex h-[70dvh] flex-col gap-10 items-center justify-center relative max-w-screen-2xl w-full">
+                <h1 className="text-9xl">404</h1>
+                <p className="text-xl">Oops... Something went wrong, maybe you inputted the wrong UID, or the account was not public, please make sure you entered the correct UID or the profile is public.</p>
+                <Link href="/" className="">
+                    <button className="border-text border-2 hover:bg-bg-dark transition-all px-4 p-2 rounded-xl">Back To Home</button>
+                </Link>
+
+            </main>
+        </>
+    }
     const propertyGroups = {
         flat: ['FIGHT_PROP_HP', 'FIGHT_PROP_ATTACK', 'FIGHT_PROP_DEFENSE', 'FIGHT_PROP_ELEMENT_MASTERY', "FIGHT_PROP_BASE_ATTACK"],
         percent: ['FIGHT_PROP_HP_PERCENT', 'FIGHT_PROP_ATTACK_PERCENT', 'FIGHT_PROP_DEFENSE_PERCENT', 'FIGHT_PROP_CRITICAL', 'FIGHT_PROP_CRITICAL_HURT', 'FIGHT_PROP_CHARGE_EFFICIENCY', 'FIGHT_PROP_HEAL_ADD',],
@@ -69,9 +81,10 @@ export default function Profile({ user }: { user: any }) {
         setArtifactSet(artifactSetArray);
     }, [activeCharacter.equipment.artifacts]);
 
+
     return (
         <div className="flex flex-col gap-4">
-            <button onClick={() => { console.log(user) }}>CONSOLE</button>
+            {/* <button onClick={() => { console.log(user) }}>CONSOLE</button> */}
             <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2 lg:items-center md:p-2 p-0">
                 <div className="flex flex-col md:flex-row gap-2">
                     <Image src={`https://enka.network/ui/${user.player.profilePicture.assets.icon}.png`} width={175} height={50} alt={`${user.player.username} player icon`} title={`${user.player.username}`} className="bg-bg-darker p-2 rounded-xl" />
@@ -483,7 +496,7 @@ export default function Profile({ user }: { user: any }) {
                                     </div>
                                     <div className="flex flex-col font-bold justify-center">
                                         <div className="flex justify-end" >
-                                            
+
                                             <div>
                                                 <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl">
                                                     CV:&nbsp;
