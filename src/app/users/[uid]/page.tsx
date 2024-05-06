@@ -24,7 +24,7 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
                 setPlayerData(response.data);
                 console.log(response.data)
                 setLoading(false);
-                document.title = `${response.data.player.username} - Tenryou 💮`;
+                document.title = `${response.data.player.nickname} - Tenryou 💮`;
             })
             .catch(error => {
                 console.log(error)
@@ -33,35 +33,35 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
             });
     }, [params.uid]);
 
-    // if (loading) {
-    //     return <>
-    //         <NavBar active={2} />
-    //         <main className="flex flex-col md:pt-16 px-8 justify-center items-center relative h-screen">
-    //             <div className="w-full max-w-screen-2xl">
-    //                 <Loader />
-    //             </div>
-    //             <Footer className="absolute bottom-0" />
-    //         </main>
-    //     </>;
-    // }
+    if (loading) {
+        return <>
+            <NavBar active={2} />
+            <main className="flex flex-col md:pt-16 px-8 justify-center items-center relative h-screen">
+                <div className="w-full max-w-screen-2xl">
+                    <Loader />
+                </div>
+                <Footer className="absolute bottom-0" />
+            </main>
+        </>;
+    }
 
-    // if (error || !playerData || !playerData.characters || playerData.characters.length === 0) {
-    //     return (
-    //         <>
-    //             <NavBar active={2} />
-    //             <main className="flex h-screen flex-col gap-10 items-center justify-center relative">
-    //                 <h1 className="text-9xl">404</h1>
-    //                 <p className="text-2xl">Oops... Something went wrong, maybe you inputted the wrong UID, or the account was not public.</p>
-    //                 <Link href="/" className="">
-    //                     <button className="border-text border-2 hover:bg-bg-dark transition-all px-4 p-2 rounded-xl">Back To Home</button>
-    //                 </Link>
-    //                 <div className="absolute bottom-0 w-full">
-    //                     <Footer />
-    //                 </div>
-    //             </main>
-    //         </>
-    //     );
-    // }
+    if (error || !playerData || !playerData.characters || playerData.characters.length === 0) {
+        return (
+            <>
+                <NavBar active={2} />
+                <main className="flex h-screen flex-col gap-10 items-center justify-center relative">
+                    <h1 className="text-9xl">404</h1>
+                    <p className="text-2xl">Oops... Something went wrong, maybe you inputted the wrong UID, or the account was not public.</p>
+                    <Link href="/" className="">
+                        <button className="border-text border-2 hover:bg-bg-dark transition-all px-4 p-2 rounded-xl">Back To Home</button>
+                    </Link>
+                    <div className="absolute bottom-0 w-full">
+                        <Footer />
+                    </div>
+                </main>
+            </>
+        );
+    }
 
     return (
         <>
