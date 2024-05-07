@@ -63,7 +63,7 @@ export default function CharacterPage() {
             const validWeapon = activeWeapon === 0 || weaponConditions[activeWeapon] === character.weaponText;
             if (character.name == "Aether" || character.name == "Lumine") return //temp
             if (validWeapon && validElement) return <div key={index} className="bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light">
-              <Link href={`/characters/${character.name}`} className={`flex flex-col `}>
+              <Link href={`/characters/${character.name}`} className={`flex flex-col `} id={character.name}>
                 {character.elementText && <div className="absolute top-1 left-1 text-black">
                   <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} className="" alt={`${character.elementText} icon`} />
                 </div>}
@@ -76,7 +76,7 @@ export default function CharacterPage() {
                   width={200}
                   height={200}
                   alt={`${character.name} character icon`}
-                  className={`rounded-t-xl rounded-br-4xl max-h-40 object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
+                  className={`rounded-t-xl rounded-br-4xl max-h-44 object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
                 />
                 <p className="text-center w-full h-full text-xs text-nowrap p-2 text-black relative font-bold rounded-b-xl after:absolute after:p-2 absolute:top-0 absolute:bg-red ">{character.name}</p>
               </Link>

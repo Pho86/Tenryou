@@ -107,6 +107,7 @@ function BentoItem({ item, index }: { item: any, index: number }) {
                         className={`transition-all hover:bg-bg-light flex flex-col h-full cursor-pointer`}
                         target={item.target ? "_blank" : ""}
                         href={item.link}
+                        id={item.title}
                     >
                         <div className={`transition-all w-full z-20 p-3 flex `}>
                             <div className="flex w-full flex-col">

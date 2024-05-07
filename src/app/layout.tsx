@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website"
   },
-  keywords: ["Genshin Impact", "Team Builder", "Weapons", "Fantasy", "Database", "User Search", "Daily Info", "Artifacts", "Characters", "Enka.Network", "DB", "Genshin Information", "Birthdays"],
+  keywords: ["Genshin Impact", "Team Builder", "Weapons", "Fantasy", "Database", "User Search", "Daily Info", "Artifacts", "Characters", "Enka.Network", "DB", "Genshin Information", "Birthdays", "Genshin", "Daily Farming", "PC Game", "Mihoyo", "Elements", "Outfits", "Farming", "Materials", "Stats"],
   robots: {
     index: false,
     follow: true,
@@ -48,7 +48,7 @@ export default function RootLayout({
   return (
     <>
       <Analytics />
-      <SpeedInsights/>
+      {/* <SpeedInsights/> */}
       <html lang="en">
         <body className={` ${signika.className} ${signika.variable} ${poppins.variable}  scroll-smooth`}>
           <NextTopLoader
