@@ -5,7 +5,7 @@ import axios from "axios";
 import { useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
-export default function MaterialsPage() {
+export default function NamecardsPage() {
     const [nameCardData, setNameCardData] = useState<any[]>([]);
     const [active, setActive] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);

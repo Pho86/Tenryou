@@ -7,10 +7,8 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
 import Footer from "../components/Footer";
-import { motion } from "framer-motion"
 
 export default function TeamBuilderPage() {
-
     const [characterData, setCharacterData] = useState<any[]>([]);
     const [activeElement, setActiveElement] = useState<number>(0);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
