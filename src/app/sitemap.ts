@@ -5,66 +5,66 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [
         {
-            url: `${process.env.VERCEL_URL}/`,
+            url: `https://tenryou.live/`,
             lastModified: new Date(),
             priority: 1,
         },
         {
-            url: `${process.env.VERCEL_URL}/characters`,
+            url: `https://tenryou.live/characters`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/weapons`,
+            url: `https://tenryou.live/weapons`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/artifacts`,
+            url: `https://tenryou.live/artifacts`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/namecards`,
+            url: `https://tenryou.live/namecards`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/outfits`,
+            url: `https://tenryou.live/outfits`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/elements`,
+            url: `https://tenryou.live/elements`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/materials`,
+            url: `https://tenryou.live/materials`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/users`,
+            url: `https://tenryou.live/users`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: `${process.env.VERCEL_URL}/teambuilder`,
+            url: `https://tenryou.live/teambuilder`,
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         ...(await generateCharacterData()).map((character: any) => ({
-            url: `${process.env.VERCEL_URL}/characters/${character.slug}`,
+            url: `https://tenryou.live/characters/${character.slug}`,
             lastModified: character.updatedAt,
         })),
     ];
