@@ -9,7 +9,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400
 const signika = Signika({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700',], variable: '--font-signika' });
 export const metadata: Metadata = {
   title: "Home - Tenryou 💮",
-  description: "Your Genshin Impact companion website, helps players view other players character information along with a database for the game, Genshin Impact with a work in Progress teambuilder.",
+  description: "Your Genshin Impact companion website, helps players view other players character information along with a comprehensive database and viewer for the game.",
   icons: {
     icon: [
       {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website"
   },
-  keywords: ["Genshin Impact", "Team Builder", "Weapons", "Fantasy", "Database", "User Search", "Daily Info", "Artifacts", "Characters", "Enka.Network", "DB", "Genshin Information", "Birthdays", "Genshin", "Daily Farming", "PC Game", "Mihoyo", "Elements", "Outfits", "Farming", "Materials", "Stats"],
+  keywords: ["Genshin Impact", "Team Builder", "Genshin Weapons", "Genshin Fantasy", "Genshin Database", "User Search", "Daily Info", "Genshin Artifacts", "Genshin Characters", "Powered By Enka.Network", "Genshin DB", "Genshin Information", "Birthdays", "Genshin", "Genshin Daily Farming", "Genshin PC Game", "Mihoyo", "Genshin Elements", "Genshin Outfits and Models", "Farming", "Genshin Materials", "Genshin Stats"],
   robots: {
     index: false,
     follow: true,

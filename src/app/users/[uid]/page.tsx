@@ -16,7 +16,6 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
 
     useLayoutEffect(() => {
         axios.get(`/api/player/${params.uid}`)
-        // axios.get(`https://tenryou.vercel.app/api/player/${params.uid}`)
             .then(response => {
                 response.data.characters.forEach((character: any) => {
                     addFileName([character]);

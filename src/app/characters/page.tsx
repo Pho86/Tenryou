@@ -1,9 +1,9 @@
 "use client"
 import Image from "next/image";
 import NavBar from "../components/NavBar";
-import { capitalizeFirstLetter, lowerCaseEachLetter, addFileName } from "../utils/helper";
+import { addFileName } from "../utils/helper";
 import axios from "axios";
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 import Link from "next/link";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
@@ -53,7 +53,7 @@ export default function CharacterPage() {
             </div>
           </div>
         </div>
-        <section className="grid-auto-fit-300 max-w-screen-2xl w-full max-h-[100dvh] overflow-y-scroll py-2">
+        <section className="grid-auto-fit-300 max-w-screen-2xl w-full max-h-[100dvh] overflow-y-scroll p-2">
 
           {CharacterData.length > 0 ? CharacterData.map((character, index) => {
             const elementConditions = [true, "Pyro", "Hydro", "Anemo", "Electro", "Dendro", "Cryo", "Geo"];

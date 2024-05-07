@@ -6,8 +6,6 @@ import { useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
-import { parseColorTags } from "@/app/utils/helper";
-import parse from "html-react-parser"
 export default function MaterialsPage() {
     const [materialData, setMaterialData] = useState<any[]>([]);
     const [activeRarity, setActiveRarity] = useState<number>(0);
