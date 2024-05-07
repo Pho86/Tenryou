@@ -17,7 +17,6 @@ export default function Gallery({
                     {characterData.outfits && characterData.outfits.map((outfit: any, index: number) => {
                         if (outfit.images.filename_splash || outfit.url.modelviewer.length > 0) return <h3 key={index} className={`font-semibold text-xl my-2 py-2 px-4 rounded-xl cursor-pointer ${active == index + 1 ? "bg-bg-lighter" : "bg-bg-light"}`} onClick={() => { setActive(index + 1) }}>{outfit.name}</h3>
                     })}
-
                 </div>
                 {active == 0 && <div className="relative overflow-hidden flex flex-col ">
                     <div className="relative flex flex-col rounded-xl items-center justify-center ">
@@ -30,7 +29,7 @@ export default function Gallery({
                     <p className="font-poppins w-full bg-zinc-100 rounded-b-xl text-black p-4">{characterData.nameCard.description}</p>
                 </div>}
                 {characterData.outfits && characterData.outfits.map((outfit: any, index: number) => {
-                    if (active == index + 1) return <div className="flex flex-col gap-2 justify-center">
+                    if (active == index + 1) return <div className="flex flex-col gap-2 justify-center" key={index}>
 
                         {outfit.images.filename_splash && <Image src={`https://enka.network/ui/${outfit.images.filename_splash}.png`} width={1500} height={500} alt={`${outfit.name} gacha splash`} className="w-full" />}
                     
