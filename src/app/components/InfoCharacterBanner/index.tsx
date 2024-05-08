@@ -1,7 +1,6 @@
 "use client"
 import Image from "next/image"
-import Link from "next/link"
-import { motion, useMotionValue, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef, useState,  } from "react"
 
 export default function InfoCharacterBanner({
@@ -10,17 +9,18 @@ export default function InfoCharacterBanner({
     characterData: any,
     params: any,
 }) {
-    const [minimizeName, setMinimizedName] = useState<boolean>(true);
+    const [minimizeName, setMinimizedName] = useState<boolean>(false);
     const sectionRef = useRef(null);
+    const motionRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start end", "end start"],
         layoutEffect: false
     });
     const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-    return <section className={`bg-bg-dark w-full overflow-hidden`} >
-        <div className="p-0 pt-0 flex flex-col lg:h-[100dvh] relative" ref={sectionRef}>
-            <motion.div className="lg:absolute w-full max-h-[100dvh] object-contain opacity-60 "
+    return <section className={`bg-bg-dark w-full overflow-hidden`} ref={motionRef}>
+        <div className="p-0 pt-0 flex flex-col h-[100dvh] relative" ref={sectionRef}>
+            <motion.div className="absolute w-full max-h-[100dvh] object-contain opacity-60 "
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: .5 }}
@@ -28,7 +28,7 @@ export default function InfoCharacterBanner({
             >
                 <Image src={`/regions/${characterData.region}.webp`} width={1500} height={1500} className="w-full max-h-[110dvh] object-contain opacity-60 z-[-15]" alt={`${characterData.region} icon`} priority />
             </motion.div>
-            <motion.div className="md:pl-0 absolute h-[100dvh] w-full "
+            <motion.div className="absolute h-[100dvh] w-full "
                 initial={{ opacity: 0, scale: 1.1, y: 100, }}
                 animate={{ opacity: 1, scale: 1, y: [100, -15, 0] }}
                 transition={{ delay: 1, duration: 1.2, ease: "easeInOut" }}
@@ -37,8 +37,8 @@ export default function InfoCharacterBanner({
             >
                 <Image src={`https://enka.network/ui/UI_Gacha_AvatarImg_${characterData.fileName}.png`} alt={`${params.name} Image Card`} width={3000} height={3000} draggable={false} className="pointer-events-none object-cover w-full h-full transition-all hover:scale-[101%] -z-[10]" priority />
             </motion.div>
-            <div className="w-full flex items-center justify-center">
-                <motion.div className="max-w-screen-2xl w-full pt-32 md:pt-16 z-10"
+            <div className="w-full flex items-center justify-center" >
+                <motion.div className="max-w-screen-2xl w-full md:pt-16 z-10"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1.8, duration: .8 }}
@@ -47,7 +47,6 @@ export default function InfoCharacterBanner({
                     dragConstraints={sectionRef}
                 >
                     <div className="md:max-w-2xl flex flex-col gap-3 justify-start">
-
                         <div className="flex flex-col gap-2 mt-10 bg-bg p-4 border-primary border-2 rounded-lg ">
                             <div className="w-full flex justify-between">
                                 <div className="flex gap-4 items-center">

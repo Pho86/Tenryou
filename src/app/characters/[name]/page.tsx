@@ -16,11 +16,11 @@ import Loader from "@/app/components/Loader";
 
 export default function CharacterPage({ params }: { params: { name: string } }) {
 
-    const [characterData, setCharacterData] = useState<Character[]>();
+    const [characterData, setCharacterData] = useState<Character>();
     const [error, setError] = useState('');
     const [lang, setLang] = useState<string>("english");
     useLayoutEffect(() => {
-        axios.get<Character[]>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true&resultLanguage=${lang}`)
+        axios.get<Character>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true&resultLanguage=${lang}`)
             .then((res) => {
                 let data = res.data;
                 // @ts-ignore
@@ -36,11 +36,11 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
                     return firstData;
                 };
                 Promise.all([
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${params.name}&matchCategories=true&queryLanguages=english`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&queryLanguages=english`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&queryLanguages=english&dumpResults=true&verboseCategories=true`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${params.name}&matchCategories=true&resultLanguage=${lang}`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&resultLanguage=${lang}`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&resultLanguage=${lang}&dumpResults=true&verboseCategories=true`),
                 ])
                     .then((responses) => {
                         const [constellationsResponse, talentsResponse, nameCardResponse, voiceDataResponse, outfitResponse] = responses;
@@ -64,6 +64,7 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
 
                         const finalData = mergeWithPreference(data, mergedData);
                         setCharacterData(finalData);
+                        console.log(finalData)
                     })
                     .catch((error) => {
                         console.error("Error fetching data:", error);
@@ -93,12 +94,8 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
                         <div className="flex gap-2 p-4 md:p-8 z-20 max-w-screen-2xl">
                             <section className="flex flex-col gap-8 mt-20">
                                 <StatsTable characterData={characterData} />
-
-                                {/* @ts-ignore */}
                                 <AttackTable attackData={characterData.talents} params={params} />
-                                {/* @ts-ignore */}
                                 <ConstellationsTable constellationData={characterData.constellations} params={params} />
-
                             </section>
                         </div>
                         <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl w-full">
@@ -107,7 +104,6 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
                         <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl w-full">
                             <h2 className="font-bold text-3xl">Quotes</h2>
                             <div className="grid gap-4">
-                                {/* @ts-ignore */}
                                 <VoiceList voiceData={characterData.voices} />
                             </div>
                         </section>

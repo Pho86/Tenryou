@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img src="public/logo.svg" align="right" width="80px"/>
+
+# [Tenryou.live](https://Tenryou.live)
+
+A Genshin Impact companion website. Tenryou.live helps players view information from the game in a visual and accessible way with information pulled from various resources.
+
+# Development
+Data is pulled from via: 
+
+* [GenshinDB](https://github.com/theBowja/genshin-db)
+* [Enka.network](https://enka.network/)
+* [Ambr.top](https://ambr.top/)
+
 
 ## Getting Started
+```
+# clone repository
+git clone https://github.com/Pho86/Tenryou.git
 
-First, run the development server:
+# install dependencies
+npm i, pnpm i
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# run in dev mode and open in http://localhost:3000.
+npm run dev, pnpm dev
+
+# export as production static site
+npm run build, pnpm build
+
+# run playwright tests
+npm run test, npx playwright test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[MIT](https://github.com/pho86/Tenryou/blob/main/LICENSE)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This website and repository is not affiliated with HoYoVerse.
+All content and materials from the game Genshin Impact, are trademarks and copyrights of the original owners and HoYoVerse.

@@ -1,6 +1,9 @@
 import React from "react";
 
 export type Character = {
+    region: string;
+    fileName: string;
+    voices: string[];
     affiliation: string;
     birthday: string,
     constellation: any;
