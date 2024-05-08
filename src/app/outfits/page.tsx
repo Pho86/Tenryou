@@ -30,12 +30,8 @@ export default function OutfitsPage() {
             <NavBar />
             <main className="md:pt-16 md:px-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center ">
                 <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
-                    <h1 className="text-3xl text-primary">Outfit List</h1>
+                    <h1 className="text-3xl text-primary">Skins List</h1>
                     <section className="flex flex-col gap-8">
-                        <div className="flex w-full justify-around gap-2 flex-col md:flex-row">
-                            <button onClick={() => { console.log(outfitData) }}></button>
-
-                        </div>
                         <div className="grid lg:grid-cols-2 gap-8">
                             <div className="grid-auto-fit-200 overflow-y-scroll p-2 max-h-[90dvh] ">
                                 {outfitData.length > 0 ? outfitData.map((outfit: any, index: number) => {

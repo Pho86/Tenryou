@@ -73,8 +73,8 @@ export default function Profile({ user }: { user: any }) {
             {/* <button onClick={() => { console.log(user) }}>CONSOLE</button> */}
             <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2 lg:items-center md:p-2 p-0">
                 <div className="flex flex-col md:flex-row gap-2">
-                    {user.player.profilePicture ?<Image src={user.player.profilePicture.icon} width={175} height={50} alt={`${user.player.nickname} player icon`} title={`${user.player.nickname}`} className="bg-bg-darker p-2 rounded-xl" /> :
-                    <Image src={''} width={175} height={50} alt={`${user.player.nickname} player icon`} title={`${user.player.nickname}`} className="bg-bg-darker p-2 rounded-xl" /> }
+                    {user.player.profilePicture ? <Image src={user.player.profilePicture.icon} width={175} height={50} alt={`${user.player.nickname} player icon`} title={`${user.player.nickname}`} className="bg-bg-darker p-2 rounded-xl" /> :
+                        <Image src={''} width={175} height={50} alt={`${user.player.nickname} player icon`} title={`${user.player.nickname}`} className="bg-bg-darker p-2 rounded-xl h-48" />}
                     <div className="flex flex-col justify-center">
                         <h1 className="text-4xl text-primary font-bold">
                             {user.player.nickname}
@@ -84,15 +84,14 @@ export default function Profile({ user }: { user: any }) {
                             <p className="">WL {user.player.worldLevel}</p>
                         </div>
                         <p className="">{user.player.signature}</p>
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-row gap-2 flex-nowrap">
                             <span className="flex gap-1">
-                                <Image src={"/stats/achievements.png"} width={50} height={50} alt="Achievements Icon" className="md:w-full md:h-full" />
-                                <p className=""><span className="hidden md:block">Achievements:</span> {user.player.achievements}</p>
+                                <Image src={"/stats/achievements.png"} width={35} height={35} alt="Achievements Icon" className="w-8 h-8" />
+                                <p className="whitespace-nowrap"><span className="hidden md:flex">Achievements:</span> {user.player.achievements}</p>
                             </span>
                             <span className="flex gap-1">
-
-                                <Image src={"/stats/abyss.png"} width={50} height={50} alt="Abyss Icon" className="md:w-full md:h-full w-10 h-10" />
-                                <p className=""><span className="hidden md:block">Abyss:</span> {user.player.abyssFloor}-{user.player.abyssLevel}</p>
+                                <Image src={"/stats/abyss.png"} width={35} height={35} alt="Abyss Icon" className="w-8 h-8" />
+                                <p className="whitespace-nowrap"><span className="hidden md:flex">Abyss:</span> {user.player.abyssFloor}-{user.player.abyssLevel}</p>
                             </span>
                         </div>
                     </div>
@@ -118,7 +117,6 @@ export default function Profile({ user }: { user: any }) {
                     </form>
                 </div>
             </div>
-            {/* <button onClick={()=>{console.log(user)}}>hello</button> */}
             {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full self-center">
                 {user.characters.map((character: any, index: number) => {
                     return <div className={`flex relative overflow-hidden rounded-xl group cursor-pointer hover:-translate-y-1 transition-all ${activeCharacter.name == character.name && "shadow-light"}`} key={index} onClick={() => {
@@ -136,12 +134,15 @@ export default function Profile({ user }: { user: any }) {
 
                         <div className="z-50 p-2 flex gap-2 drop-shadow-text">
                             <div className="bg-bg bg-opacity-30 rounded-xl p-2 ">
-                                <Image src={character.icons.avatar} width={100} height={50} alt={`${character.name}`} title={`${character.name}`} className="w-full transition-all " />
+                                <Image src={character.icons.avatar} width={100} height={50} alt={`${character.name}`} title={`${character.name}`} className="w-full transition-all max-h-40" />
                             </div>
                             <div className="flex flex-col gap-1 justify-between ">
                                 <div className="flex gap-2">
                                     <h2 className="text-xl font-bold">{character.name}</h2>
-                                    <span className="flex items-center px-2 font-bold bg-bg rounded-xl">C{character.constellations.filter((constellation: any) => constellation !== undefined).length}</span>
+                                    <span className="flex items-center px-2 font-bold bg-bg rounded-xl">
+                                        C{character.constellations.filter((constellation: any) => constellation.unlocked === true).length}
+                                    </span>
+
                                 </div>
                                 <div className="flex gap-2 font-semibold">
                                     <div className="">Lv. {character.level}/{character.level}</div>
@@ -206,7 +207,7 @@ export default function Profile({ user }: { user: any }) {
                                     {activeCharacter.constellations.map((constellation: any, index: number) => {
                                         return <div key={index} className="relative w-12 h-12">
                                             <Image src={`/stats/Constellation.svg`} width={250} height={250} alt={`${constellation.name} background`} className={`w-full z-10`} />
-                                            <Image src={constellation.icon} width={250} height={250} alt={`${constellation.name}`} className={`absolute ${!constellation.unlocked && "brightness-50"} top-0 left-0 mt-[11px] ml-[10px] w-7 h-7 z-20`} />
+                                            <Image src={constellation.icon} width={250} height={250} alt={`${constellation.name}`} className={`absolute ${!constellation.unlocked && "brightness-[35%]"} top-0 left-0 mt-[11px] ml-[10px] w-7 h-7 z-20`} />
                                             {!constellation.unlocked &&
                                                 <Image src={`/stats/lock.svg`} width={250} height={250} alt={`${constellation.name}`} className={`absolute top-0 left-0 mt-[14px] ml-[14px] w-5 h-5 z-20`} />
                                             }
@@ -521,7 +522,7 @@ export default function Profile({ user }: { user: any }) {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className={`flex text-xl gap-2 p-2 rounded-xl bg-opacity-75 ${isAttackBonus && activeHover == "ATK" && "bg-bg-dark"} ${isDefenseBonus && activeHover == "DEF" && "bg-bg-dark"} ${isHpBonus && activeHover == "HP" && "bg-bg-dark"} ${isDamageBonus && activeHover == "ELEMENT" && "bg-bg-dark"} ${!isAttackBonus && !isDefenseBonus && !isHpBonus && !isDamageBonus && activeHover == artifact.mainStats.stat && "bg-bg-dark"}`} onMouseEnter={() => {
+                                        <div className={`flex text-xl gap-2 p-2 rounded-xl bg-opacity-75 ${isAttackBonus && activeHover == "ATK" && "bg-bg-dark"} ${isDefenseBonus && activeHover == "DEF" && "bg-bg-dark"} ${isHpBonus && activeHover == "HP" && "bg-bg-dark"} ${isDamageBonus && activeHover == "ELEMENT" && "bg-bg-dark"} ${!isAttackBonus && !isDefenseBonus && !isHpBonus && !isDamageBonus && activeHover == artifact.mainStats.mainPropId && "bg-bg-dark"}`} onMouseEnter={() => {
                                             if (isAttackBonus) setActiveHover("ATK")
                                             else if (isDefenseBonus) setActiveHover("DEF")
                                             else if (isHpBonus) setActiveHover("HP")

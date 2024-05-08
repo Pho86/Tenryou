@@ -32,9 +32,9 @@ export default function NavBar({
             >
                 <div className="w-full flex items-center justify-center max-w-screen-2xl">
                     <div className="justify-between w-full flex ">
-                        <div className="border-primary cursor-pointer grid place-items-center md:pl-0 ">
-                            <Link href="/" className="flex text-xl items-center justify-center transition-all cursor-pointer hover:text-primary">
-                                <Image src="/logo.svg" width={45} height={45} alt="" className="" />
+                        <div className="border-primary cursor-pointer grid place-items-center md:pl-0">
+                            <Link href="/" className="flex text-2xl items-center gap-1 justify-center transition-all cursor-pointer hover:text-primary">
+                                <Image src="/icon.svg" width={45} height={45} alt="Tenryou Icon" className="" />
                                 Tenryou
                             </Link>
                         </div>
