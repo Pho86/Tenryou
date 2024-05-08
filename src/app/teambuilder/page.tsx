@@ -15,8 +15,9 @@ export default function TeamBuilderPage() {
     const [activeCharacters, setActiveCharacters] = useState<any[]>([{}, {}, {}, {}, {}, {}, {}, {}]);
     const [activeElements, setActiveElements] = useState<any[]>(["", "", "", "", "", "", "", ""]);
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
-    const [secondTeam, setSecondTeam] = useState<boolean>(false);
+    const [secondTeam, setSecondTeam] = useState<boolean>(true);
     const [showIcons, setShowIcons] = useState<boolean>(true);
+    const [owned, setOwned] = useState<any[]>([]);
     useLayoutEffect(() => {
         axios
             .get<any[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
@@ -140,67 +141,72 @@ export default function TeamBuilderPage() {
                             </div>
                         }
                     </section>
-                    <section className="w-full flex flex-col gap-4 p-4 order-0 lg:order-1">
-                        <div className="flex gap-4 items-center">
-                            <button onClick={() => { randomizeTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Randomize Team</button>
-                            <button onClick={() => { setShowIcons(!showIcons) }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">{showIcons ? "Expand Imgs" : "Collapse Imgs"}</button>
-                            <label className="flex gap-2 font-bold">
-                                <input type="checkbox" checked={secondTeam} onChange={() => {
-                                    if (secondTeam) {
-                                        setSecondTeam(!secondTeam)
-                                        setActiveCharacters(prevCharacters => [...prevCharacters.slice(0, 4), {}, {}, {}, {}]);
-                                        setActiveElements(prevElements => [...prevElements.slice(0, 4), "", "", "", ""]);
-                                    } else {
-                                        setSecondTeam(!secondTeam)
+                    {characterData.length > 0 ?
+                        <section className="w-full flex flex-col gap-4 p-4 order-0 lg:order-1">
+                            <div className="flex gap-4 items-center">
+                                <button onClick={() => { randomizeTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Randomize Team</button>
+                                <button onClick={() => { setShowIcons(!showIcons) }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">{showIcons ? "Expand Imgs" : "Collapse Imgs"}</button>
+                                <label className="flex gap-2 font-bold">
+                                    <input type="checkbox" checked={secondTeam} onChange={() => {
+                                        if (secondTeam) {
+                                            setSecondTeam(!secondTeam)
+                                            setActiveCharacters(prevCharacters => [...prevCharacters.slice(0, 4), {}, {}, {}, {}]);
+                                            setActiveElements(prevElements => [...prevElements.slice(0, 4), "", "", "", ""]);
+                                        } else {
+                                            setSecondTeam(!secondTeam)
 
-                                    }
-                                }} />
-                                Second Team
-                            </label>
-
-                        </div>
-                        <div className="max-w-7xl flex items-center w-full justify-center">
-                            <div className="grid grid-cols-4 gap-4 md:gap-8 h-full w-full">
-                                {activeCharacters.length > 0 && activeCharacters.map((character: any, index: number) => {
-                                    if (!secondTeam) {
-                                        if (index > 3) return
-                                    }
-                                    return <div key={index} className={`transition-all overflow-hidden h-max rounded-xl ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light "} hover:shadow-light`} onClick={() => setSelectedSlot(index)}>
-                                        {character.active ? <div className={` transition-transform `} >
-                                            <> {showIcons ?
-                                                <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
-                                                :
-                                                <Image src={character.images.cover2} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
-                                            }
-                                            </>
-                                        </div>
-                                            :
-                                            <div className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}>
-                                                <Image src={"/elements/None.png"} alt="placeholder empty image" height={256} width={256} className="" />
-                                                <p className="absolute">
-                                                    +
-                                                </p>
-                                            </div>
                                         }
-                                    </div>
-                                })}
+                                    }} />
+                                    Second Team
+                                </label>
 
                             </div>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 max-w-64">
-                            {activeElements.map((element, index) => {
-                                if (element.length > 0) {
-                                    return <div key={index}>
-                                        <Image src={`/elements/${element}.webp`} width={50} height={50} className="" alt={`${element} icon`} title={element} />
-                                    </div>
-                                }
-                                else {
-                                    return <div key={index}>
-                                    </div>
-                                }
-                            })}
-                        </div>
-                    </section>
+                            <div className="max-w-7xl flex items-center w-full justify-center">
+
+                                <div className="grid grid-cols-4 gap-4 md:gap-8 h-full w-full">
+                                    {activeCharacters.length > 0 && activeCharacters.map((character: any, index: number) => {
+                                        if (!secondTeam) {
+                                            if (index > 3) return
+                                        }
+                                        return <div key={index} className={`transition-all overflow-hidden h-max rounded-xl ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light "} hover:shadow-light`} onClick={() => setSelectedSlot(index)}>
+                                            {character.active ? <div className={` transition-transform `} >
+                                                <> {showIcons ?
+                                                    <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
+                                                    :
+                                                    <Image src={character.images.cover2} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
+                                                }
+                                                </>
+                                            </div>
+                                                :
+                                                <div className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}>
+                                                    <Image src={"/elements/None.png"} alt="placeholder empty image" height={256} width={256} className="" />
+                                                    <p className="absolute">
+                                                        +
+                                                    </p>
+                                                </div>
+                                            }
+                                        </div>
+                                    })}
+
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-4 gap-2 max-w-64">
+                                {activeElements.map((element, index) => {
+                                    if (element.length > 0) {
+                                        return <div key={index}>
+                                            <Image src={`/elements/${element}.webp`} width={50} height={50} className="" alt={`${element} icon`} title={element} />
+                                        </div>
+                                    }
+                                    else {
+                                        return <div key={index}>
+                                        </div>
+                                    }
+                                })}
+                            </div>
+                        </section>
+                        :
+                        <Loader />
+                    }
                 </div>
             </main >
             <Footer />

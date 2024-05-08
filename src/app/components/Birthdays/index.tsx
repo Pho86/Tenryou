@@ -45,22 +45,22 @@ export default function Birthdays({ }: {}) {
     }, [selectedMonth]);
 
     return <div className="flex flex-col gap-2 p-2 overflow-y-scroll">
-        <label>
-        <select value={selectedMonth} onChange={(e) => { setSelectedMonth(e.target.value); }} className="p-1">
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="July">July</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-        </select>
+        <label className="w-full">
+            <select title="Months" value={selectedMonth} onChange={(e) => { setSelectedMonth(e.target.value); }} className="p-1 w-full">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="July">July</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
         </label>
         <div className="p-2 justify-center grid-auto-fit-150 ">
             {loading ?

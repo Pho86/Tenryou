@@ -1,4 +1,4 @@
-<img src="public/logo.svg" align="right" width="80px"/>
+<img src="public/icon.svg" align="right" width="80px"/>
 
 # [Tenryou.live](https://Tenryou.live)
 
