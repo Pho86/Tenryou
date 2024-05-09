@@ -28,6 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.8,
         },
         {
+            url: `https://tenryou.live/achievements`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
+        {
             url: `https://tenryou.live/namecards`,
             lastModified: new Date(),
             changeFrequency: "monthly",

@@ -70,11 +70,10 @@ export default function Profile({ user }: { user: any }) {
 
     return (
         <div className="flex flex-col gap-4">
-            {/* <button onClick={() => { console.log(user) }}>CONSOLE</button> */}
             <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2 lg:items-center md:p-2 p-0">
                 <div className="flex flex-col md:flex-row gap-2">
                     {user.player.profilePicture ? <Image src={user.player.profilePicture.icon} width={175} height={50} alt={`${user.player.nickname} player icon`} title={`${user.player.nickname}`} className="bg-bg-darker p-2 rounded-xl" /> :
-                        <Image src={''} width={175} height={50} alt={`${user.player.nickname} player icon`} title={`${user.player.nickname}`} className="bg-bg-darker p-2 rounded-xl h-48" />}
+                        <Image src={'/icon.svg'} width={175} height={50} alt={`${user.player.nickname} player icon`} title={`${user.player.nickname}`} className="bg-bg-darker p-2 rounded-xl h-48" />}
                     <div className="flex flex-col justify-center">
                         <h1 className="text-4xl text-primary font-bold">
                             {user.player.nickname}
@@ -128,8 +127,8 @@ export default function Profile({ user }: { user: any }) {
                     }}>
 
                         {character.name == "Yae Miko" ?
-                            <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}1_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover bottom-0 rounded-xl" /> :
-                            <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover bottom-0 rounded-xl" />
+                            <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}1_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" /> :
+                            <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" />
                         }
 
                         <div className="z-50 p-2 flex gap-2 drop-shadow-text">

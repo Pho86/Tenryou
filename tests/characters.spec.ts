@@ -5,15 +5,38 @@ test.beforeEach(async ({ page }) => {
 });
 test.describe('Characters', () => {
     test('Path to find Amber and find certain information', async ({ page }) => {
-        await page.click('a[id="Characters"]');
-
+        await page.getByRole('navigation').getByRole('link', { name: 'Characters' }).click();
         await expect(page.locator('h1').getByText('Characters List')).toBeVisible();
         await page.waitForTimeout(2000);
         await page.click('a[id="Amber"]');
-
         await page.waitForTimeout(2000);
-        await expect(page).toHaveTitle(/Amber - Tenryou 💮/);
-
-        await expect(page.locator('h1').getByText('Amber')).toBeVisible();
+        await page.getByRole('heading', { name: 'Amber', exact: true }).click();
+        await page.waitForTimeout(2000);
+        await page.getByRole('button', { name: 'Show Materials' }).click();
+        await page.getByRole('heading', { name: '% Outrider' }).click();
+        await page.getByRole('img', { name: '% Outrider gacha splash' }).click();
+        await page.getByRole('heading', { name: '-Star Outrider' }).click();
+        await page.getByRole('link', { name: 'Open in New Tab' }).click();
     });
+
+    test('Path from Birthdays to Zhongli and find gallery', async ({ page }) => {
+        await page.selectOption('select#months', 'December');
+        await page.waitForTimeout(4000);
+        await page.click('a#Zhongli');
+        await page.waitForTimeout(2000);
+        await page.getByText('🔲').click();
+        await page.getByRole('img', { name: 'Zhongli constellation', exact: true }).click();
+        await page.getByRole('heading', { name: 'Hermit of Mortal Life' }).click();
+    });
+    
+    test('Path from daily domains to Diluc on Friday', async ({ page }) => {
+        await page.goto('http://localhost:3000/');
+        await page.locator('#days').selectOption('Sunday');
+        await page.waitForTimeout(2000);
+        await page.locator('#days').selectOption('Friday');
+        await page.waitForTimeout(2000);
+        await page.click('a#Diluc');
+        await page.getByRole('heading', { name: 'Darknight Blaze' }).click();
+        await page.getByRole('heading', { name: 'Red Dead of Night' }).click();
+      });
 });
