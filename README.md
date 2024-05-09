@@ -1,13 +1,13 @@
-<img src="public/icon.svg" align="right" width="80px"/>
+<img src="public/icon.svg" align="right" width="90px"/>
 
-# [Tenryou.live](https://Tenryou.live)
+# [Tenryou](https://Tenryou.live)
 
-A Genshin Impact companion website. Tenryou.live helps players view information from the game in a visual and accessible way with information pulled from various resources.
+A Genshin Impact companion website. Tenryou helps players view information from the game in a visual and cohesive manner with via information pulled from various resources.
 
-# Development
-Data is pulled from via: 
+## Development
+Tenryou is create via Next.js and with information is pulled via:
 
-* [GenshinDB](https://github.com/theBowja/genshin-db)
+* [Genshin-db](https://github.com/theBowja/genshin-db)
 * [Enka.network](https://enka.network/)
 * [Ambr.top](https://ambr.top/)
 
@@ -16,6 +16,9 @@ Data is pulled from via:
 ```
 # clone repository
 git clone https://github.com/Pho86/Tenryou.git
+
+# change directory into the repository
+cd Tenryou
 
 # install dependencies
 npm i, pnpm i
@@ -26,7 +29,7 @@ npm run dev, pnpm dev
 # export as production static site
 npm run build, pnpm build
 
-# run playwright tests
+# run e2e tests
 npm run test, npx playwright test
 ```
 

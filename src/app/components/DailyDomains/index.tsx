@@ -85,7 +85,7 @@ export default function DailyDomains({ }: {}) {
             else setLoading(false)
         }, [selectedDay]);
     return (<div className="overflow-y-scroll h-full p-2 gap-2 flex flex-col">
-        <select value={selectedDay} onChange={(e) => { setSelectedDay(e.target.value); }} className="p-1">
+        <select value={selectedDay} id="days" onChange={(e) => { setSelectedDay(e.target.value); }} className="p-1">
             <option value="Sunday">Sunday</option>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -106,12 +106,12 @@ export default function DailyDomains({ }: {}) {
                         <div className="flex flex-col gap-4">
                             {activeArtifacts.map((domain, index) => {
                                 return <div key={index} className="flex gap-4">
-                                    <div className="flex flex-col items-center col-span-2 transition-all justify-start rounded-xl min-w-8 min-h-8" >
-                                        <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end rounded-xl hover:scale-105 hover:shadow-light`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
+                                    <div className="flex flex-col items-center col-span-2 justify-start rounded-xl min-w-8 min-h-8" >
+                                        <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end rounded-xl hover:scale-105 hover:shadow-light transition-all`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>
                                     <div className="grid-auto-fit-10">
                                         {activeCharacters.length > 1 && activeCharacters[index].map((character: any, i: number) => {
-                                            return <Link key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
+                                            return <Link id={character.name} key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
                                                 <Image
                                                     src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
                                                     width={200}
@@ -128,7 +128,7 @@ export default function DailyDomains({ }: {}) {
                         </div>
                         <div className="flex gap-2 mt-2">
                             {activeWeapons.map((domain, index) => {
-                                return <div key={index} className="flex justify-between gap-4">
+                                return <div key={index} className="flex justify-between gap-4 ">
                                     <div className="flex flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-xl bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end" >
                                         <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={``} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>

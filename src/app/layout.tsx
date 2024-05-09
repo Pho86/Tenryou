@@ -50,7 +50,7 @@ export default function RootLayout({
       <Analytics />
       {/* <SpeedInsights/> */}
       <html lang="en">
-        <body className={` ${signika.className} ${signika.variable} ${poppins.variable}  scroll-smooth`}>
+        <body className={` ${signika.className} ${signika.variable} ${poppins.variable}   scroll-smooth`}>
           <NextTopLoader
             color="#FF7373"
             height={5} zIndex={2000}

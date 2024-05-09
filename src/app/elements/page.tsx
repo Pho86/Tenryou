@@ -10,8 +10,20 @@ export default function ElementsPage() {
             <div className="flex flex-col gap-5 max-w-screen-2xl w-full">
                 <h1 className="text-3xl text-primary">Elements</h1>
                 <section className="flex flex-col gap-1">
+                    <h2 className="text-xl font-bold">The Seven Elements of Teyvat</h2>
+                    <div className="flex flex-wrap gap-2 p-2 rounded-xl justify-around text-center bg-bg-dark">
+                        <GridItem title="Electro" element={["Electro"]}/>
+                        <GridItem title="Hydro" element={["Hydro"]} />
+                        <GridItem title="Electro" element={["Cryo"]} />
+                        <GridItem title="Pyro" element={["Pyro"]}/>
+                        <GridItem title="Dendro" element={["Dendro"]} />
+                        <GridItem title="Geo" element={["Geo"]} />
+                        <GridItem title="Anemo" element={["Anemo"]} />
+                    </div>
+                </section>
+                <section className="flex flex-col gap-1">
                     <h2 className="text-xl font-bold">Elemental Debuffs</h2>
-                    <p>Mastering the art of combining various elements is essential for success in Genshin Impact combat.</p>
+                    <p>Proficiency in integrating different elements is pivotal for strategic success on the battlefield.</p>
                     <div className="flex gap-2 flex-col p-2 rounded-xl bg-bg-dark">
                         <GridItem title="Engulfing Storm" effect="Continuously drains Energy Recharge." element={["Electro"]} />
                         <GridItem title="Slowing Water" effect="Increases skill CD durations." element={["Hydro"]} />
@@ -21,7 +33,7 @@ export default function ElementsPage() {
                 </section>
                 <section className="w-full flex flex-col">
                     <h2 className="text-xl font-bold">Elemental Chart</h2>
-                    <p>Proficiency in integrating different elements is pivotal for strategic success on the battlefield.</p>
+                    <p>Mastering the art of combining the seven Elements of Teyvat are essential for success in Genshin Impact.</p>
                     <table className="table-cell border-collapse w-full rounded-xl text-center ">
                         <thead>
                             <tr >
@@ -37,7 +49,7 @@ export default function ElementsPage() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td align="center"><Image src={`/elements/Electro.webp`} width={35} height={35} alt={`electro icon`} title={`electro`} className=""/></td>
+                                <td align="center"><Image src={`/elements/Electro.webp`} width={35} height={35} alt={`electro icon`} title={`electro`} className="" /></td>
                                 <td><Scroll to="" smooth={true} className="">-</Scroll></td>
                                 <td><Scroll to="Electro-Charged" smooth={true} className="">Electro-Charged</Scroll></td>
                                 <td><Scroll to="Overloaded" smooth={true} className="">Overloaded</Scroll></td>
@@ -148,10 +160,10 @@ function GridItem({
     title: string,
     element?: string[],
     element2?: string[],
-    effect: string,
+    effect?: string,
     unique?: string
 }) {
-    return <div className="grid grid-cols-2 p-2 gap-2" id={title}>
+    return <div className={`grid grid-cols-2 p-2 gap-2`} id={title}>
         <div className="">
             <h3 className="font-bold text-lg">
                 {title}
@@ -160,7 +172,7 @@ function GridItem({
                 {effect}
             </div>
         </div>
-        <div className="flex gap-2 w-full items-center font-bold text-xl">
+        <div className={`flex gap-2 w-full items-center font-bold text-xl`}>
             {element && element.map((el: string, index: number) => (
                 <Image src={`/elements/${el}.webp`} width={35} height={35} alt={`${el} icon`} title={`${el}`} key={`${el}-${index}`} />
             ))}

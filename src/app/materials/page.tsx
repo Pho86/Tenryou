@@ -46,9 +46,8 @@ export default function MaterialsPage() {
                                     const validRarity = activeRarity === 0 || materialRarity[activeRarity] === material.rarity;
                                     if (validRarity) return <div key={index} className="max-h-48">
                                         <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == material.id && "shadow-light scale-105"}`} onClick={() => { setActive(material) }}>
-                                            <Image src={`https://enka.network/ui/UI_ItemIcon_${material.id}.png`} width={250} height={250} alt={`${material.name} weaapon icon`} className={`bg-gradient-to-br ${material.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : material.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : material.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : material.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${material.name}`}
-                                                //@ts-ignore
-                                                onError={(e) => { e.target.closest('.max-h-48').remove(); }} // delete div's with invalid images
+                                            <Image src={`https://enka.network/ui/${material.images.filename_icon}.png`} width={250} height={250} alt={`${material.name} weaapon icon`} className={`bg-gradient-to-br ${material.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : material.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : material.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : material.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${material.name}`}
+                                                onError={(e:React.SyntheticEvent<HTMLImageElement, Event>) => { e.currentTarget.src = '/icon.svg' }}
                                             />
                                             <p className="flex flex-col min-h-9 justify-around mx-1 text-center text-xs text-bg font-bold">{material.name}</p>
                                         </div>
@@ -71,7 +70,9 @@ export default function MaterialsPage() {
                                                 <div className="p-4 w-full justify-between">
                                                     <h1 className="text-pretty font-bold ">{active.typeText}</h1>
                                                 </div>
-                                                <Image src={`https://enka.network/ui/UI_ItemIcon_${active.id}.png`} width={500} height={500} alt={`${active.name} material icon`} className={`object-contain`} />
+                                                <Image src={`https://enka.network/ui/${active.images.filename_icon}.png`} width={500} height={500} alt={`${active.name} material icon`} className={`object-contain`}
+                                                    onError={(e:React.SyntheticEvent<HTMLImageElement, Event>) => { e.currentTarget.src = '/icon.svg' }}
+                                                />
                                             </div>
                                             <div className="text-bg p-4 flex flex-col gap-2">
                                                 <h2 className="font-bold text-xl">{active.name}</h2>
@@ -86,6 +87,7 @@ export default function MaterialsPage() {
                                                         return <span key={index} className="">
                                                             {source}
                                                         </span>
+
                                                     })}
                                                 </div>
                                             </div>

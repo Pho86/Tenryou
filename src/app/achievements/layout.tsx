@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Characters - Tenryou 💮",
+    title: "Achievements - Tenryou 💮",
 };
 
 export default function Layout({
