@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.scss";
 import NextTopLoader from 'nextjs-toploader';
-
+import { Providers } from './providers'
 const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], variable: '--font-poppins' });
 const signika = Signika({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700',], variable: '--font-signika' });
 export const metadata: Metadata = {
@@ -49,14 +49,16 @@ export default function RootLayout({
     <>
       <Analytics />
       {/* <SpeedInsights/> */}
-      <html lang="en">
-        <body className={` ${signika.className} ${signika.variable} ${poppins.variable}   scroll-smooth`}>
-          <NextTopLoader
-            color="#FF7373"
-            height={5} zIndex={2000}
-            showSpinner={false}
-          />
-          {children}
+      <html lang="en" suppressHydrationWarning>
+        <body className={` ${signika.className} ${signika.variable} ${poppins.variable} bg-bg transition-all scroll-smooth`}>
+          {/* <Providers> */}
+            <NextTopLoader
+              color="#FF7373"
+              height={5} zIndex={2000}
+              showSpinner={false}
+            />
+            {children}
+          {/* </Providers> */}
         </body>
       </html>
     </>

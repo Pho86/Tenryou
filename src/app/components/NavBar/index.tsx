@@ -3,6 +3,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion"
 import Image from "next/image";
+import ThemeSwitch from "../ThemeSwitcher";
 export default function NavBar({
     active = 0
 }: {
@@ -34,7 +35,7 @@ export default function NavBar({
                     <div className="justify-between w-full flex ">
                         <div className="border-primary cursor-pointer grid place-items-center md:pl-0">
                             <Link href="/" className="flex text-2xl items-center gap-1 justify-center transition-all cursor-pointer font-philosopher font-bold hover:text-primary">
-                                <Image src="/icon.svg" width={45} height={45} alt="Tenryou Icon" className="" />
+                                <Image src="/icon.svg" width={45} height={45} alt="Tenryou Icon" className="drop-shadow-icon" />
                                 Tenryou
                             </Link>
                         </div>
@@ -48,6 +49,7 @@ export default function NavBar({
                             <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3  className={`${active == 3 && "text-primary "} group-hover:text-primary relative transition-all`}>Team Builder</h3>
                             </Link>
+                            {/* <ThemeSwitch/> */}
                         </div>
                     </div>
                 </div>

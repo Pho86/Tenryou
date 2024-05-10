@@ -12,7 +12,7 @@ const config: Config = {
 
       },
       colors: {
-        'bg': '#211F20',
+        'bg': '#2a2727',
         'bg-dark': '#161515',
         'bg-light': '#241E1E',
         'bg-lighter': '#3B3434',
@@ -79,10 +79,10 @@ const config: Config = {
       dropShadow: {
         'primary': '0px 10px 10px rgba(91, 205, 249, .2)',
         'dark': '0px 5px 3px rgba(0, 0, 0, .2)',
-        'text':'1px 2px .4px rgba(0, 0, 0, .6)',
-        'icon':'1px 1px 1px rgba(0, 0, 0, .8)',
+        'text': '1px 2px .4px rgba(0, 0, 0, .6)',
+        'icon': '1px 1px 1px rgba(0, 0, 0, .8)',
       },
-      boxShadow:{
+      boxShadow: {
         'light': '0 0px 2px 4px rgba(223, 229, 220, 1)',
       },
       borderRadius: {
@@ -91,6 +91,7 @@ const config: Config = {
       fontFamily: {
         // 👇 Add CSS variables
         poppins: ["var(--font-poppins)"],
+        signika: ["var(--font-signika)"],
       },
     },
   },
