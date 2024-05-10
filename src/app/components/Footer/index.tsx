@@ -15,7 +15,7 @@ export default function Footer({
                         <div className="flex justify-center">
                             <div className="font-bold text-2xl transition-all py-1">
                                 <Link href="/" className="flex gap-1 text-2xl items-center hover:text-primary transition-all">
-                                    <Image src="/icon.svg" alt="logo of Tenryou" width={45} height={45} />
+                                    <Image src="/icon.svg" alt="logo of Tenryou" width={45} height={45} className="drop-shadow-icon" />
                                     <h1 className="whitespace-nowrap">Tenryou</h1>
                                 </Link>
                             </div>
