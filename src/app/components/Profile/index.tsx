@@ -47,12 +47,6 @@ export default function Profile({ user }: { user: any }) {
     };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // try {
-        //     router.push(`/users/${user.uid}`)
-        // }
-        // catch (error) {
-        //     console.log(error)
-        // }
     }
     const [loading, setLoading] = useState<boolean>(false);
     const [activeHover, setActiveHover] = useState<string>("");
@@ -517,12 +511,12 @@ export default function Profile({ user }: { user: any }) {
                                         <div className="flex justify-end" >
 
                                             <div>
-                                                <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl">
+                                                <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl cursor-pointer transition-all" onClick={() => { setShowStatsModal(!showStatsModal) }}>
                                                     CV:&nbsp;
-                                                    <span className={` ${artifact.critValue < 20 ? "text-red-500" :
-                                                        artifact.critValue < 30 ? "text-orange-500" :
-                                                            artifact.critValue < 40 ? "text-yellow-500" :
-                                                                artifact.critValue >= 40 ? "text-green-500" : ""
+                                                    <span className={` ${artifact.critValue < 10 ? "text-red-500" :
+                                                        artifact.critValue < 20 ? "text-orange-500" :
+                                                            artifact.critValue < 30 ? "text-yellow-500" :
+                                                                artifact.critValue >= 30 ? "text-green-500" : ""
                                                         }`} title="Crit Rate + Crit Dmg*2">
                                                         {artifact.critValue.toFixed(1)}
                                                     </span>
