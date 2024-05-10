@@ -5,7 +5,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [
         {
-            url: `https://tenryou.live/`,
+            url: `https://tenryou.live`,
             lastModified: new Date(),
             priority: 1,
         },

@@ -32,7 +32,8 @@ const nextConfig = {
                 protocol: 'https'
             }
         ]
-    }
+    },
+    trailingSlash: true,
 };
 
 export default nextConfig;
