@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useLayoutEffect } from "react";
-import Profile from "@/app/components/Profile";
+import Profile from "@/app/components/ProfileOld";
 import axios from "axios";
 import NavBar from "@/app/components/NavBar";
 import Loader from "@/app/components/Loader";
@@ -68,7 +68,7 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
             <NavBar active={2} />
             <main className="flex flex-col md:pt-16 px-8 justify-center items-center">
                 <div className="w-full max-w-screen-2xl">
-                    {/* {playerData ? <Profile user={playerData} /> : <Loader />} */}
+                    {playerData ? <Profile user={playerData} /> : <Loader />}
                 </div>
                 <Footer />
             </main>
