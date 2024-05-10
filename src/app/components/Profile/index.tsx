@@ -101,12 +101,11 @@ export default function Profile({ user }: { user: any }) {
                                 return <div key={index} className="">
                                     <Image src={`https://enka.network/ui/${namecard.assets.icon}.png`} width={250} height={250} className="w-28" alt={`${namecard.name} namecard picture`} title={namecard.name} />
                                 </div>
-                            })
-                            }
+                            })}
                         </div>
                     }
                     <AnimatePresence>
-                        {showStatsModal && <StatsModal exit={()=>{setShowStatsModal(!showStatsModal)}}/>}
+                        {showStatsModal && <StatsModal exit={() => { setShowStatsModal(!showStatsModal) }} />}
                     </AnimatePresence>
                 </div>
                 <div className="flex flex-col">
@@ -193,9 +192,10 @@ export default function Profile({ user }: { user: any }) {
                 </div>
                 :
                 <div className="overflow-x-scroll 2xl:overflow-x-hidden grid place-items-center" id="wide_player_card">
-                    <div className={`grid grid-cols-2 auto-cols-[400px] w-[1280px] max-7xl p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end`}>
-                        <div className="w-full h-full relative drop-shadow-text min-h-[400px] col-span-1">
-                            <div className="flex flex-col absolute p-5 w-full h-full">
+                    <div className={`grid grid-cols-2 auto-cols-[400px] w-[1280px] max-7xl p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end relative`}>
+                        <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="pointer-events-none absolute top-0 mix-blend-screen opacity-40 rounded-xl object-cover h-full  " />
+                        <div className="w-full h-full relative min-h-[400px] col-span-1">
+                            <div className="flex flex-col absolute p-5 w-full h-full drop-shadow-text ">
                                 <div className="flex gap-2 items-center">
                                     <h2 className="text-3xl font-semibold">
                                         {activeCharacter.name}
@@ -248,14 +248,14 @@ export default function Profile({ user }: { user: any }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="p-2 w-full h-full max-h-[600px]">
+                            <div className="p-2 w-full h-full max-h-[650px]">
                                 <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="bg-bg bg-opacity-40 rounded-xl object-cover h-full  " />
                             </div>
                         </div>
-                        <div className="p-2 flex flex-col gap-2 col-span-1 drop-shadow-text w-full">
+                        <div className="p-2 flex flex-col gap-2 col-span-1 w-full drop-shadow-text">
                             <div className="flex flex-col w-full ">
-                                <div className="flex w-full justify-between gap-2">
-                                    <div className="flex  w-full gap-2">
+                                <div className="flex w-full justify-between gap-2 ">
+                                    <div className="flex w-full gap-2 ">
                                         <div className="relative flex justify-center">
                                             <Image src={`https://enka.network/ui/${activeCharacter.equipment.weapon.assets.awakenIcon}.png`} width={250} height={250} className=" w-28 h-full object-cover bg-bg bg-opacity-40 rounded-xl" alt={activeCharacter.equipment.weapon.name} />
                                             <div className="flex absolute bottom-1 text-xl text-yellow-400">
@@ -298,13 +298,6 @@ export default function Profile({ user }: { user: any }) {
                                                 <div className="p-2 bg-bg-light bg-opacity-75 rounded-xl">R{activeCharacter.equipment.weapon.refinement.level + 1}</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-wrap flex-col ">
-                                        {artifactSet.map((set: any, index: number) => {
-                                            if (set.count >= 2) return <div key={index} className="font-bold text-sm text-green-600">
-                                                <p className="text-nowrap">{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
-                                            </div>
-                                        })}
                                     </div>
                                 </div>
 
@@ -472,9 +465,23 @@ export default function Profile({ user }: { user: any }) {
                                         </div>
                                     </div>
                                 }
+                                {artifactSet.length > 0 && <div className={`flex gap-2 items-center rounded-xl font-semibold transition-all bg-opacity-75 justify-between  py-1 px-2`}>
+                                    <div className={`flex gap-2`} >
+                                        <Image src={`/icons/artifact.svg`} width={16} height={16} alt={"artifact stat icon"} className="" />
+                                        <span>Artifact Sets</span>
+                                    </div>
+                                    <div className="flex flex-col ">
+                                        {artifactSet.map((set: any, index: number) => {
+                                            if (set.count >= 2) return <div key={index} className="font-bold text-sm text-green-600">
+                                                <p className="text-nowrap">{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
+                                            </div>
+                                        })}
+                                    </div>
+                                </div>}
+
                             </div>
                         </div>
-                        <div className="w-full col-span-2 p-2 grid grid-cols-5 gap-2 place-items-center">
+                        <div className="w-full col-span-2 p-2 grid grid-cols-5 gap-2 place-items-center ">
                             {activeCharacter.equipment.artifacts.map((artifact: any, index: number) => {
                                 const isAttackBonus = isAttackStat(artifact.mainstat.stat);
                                 const isDefenseBonus = isDefenseStat(artifact.mainstat.stat);
@@ -498,8 +505,8 @@ export default function Profile({ user }: { user: any }) {
                                         artifact.critValue += substat.statValue * 2;
                                     }
                                 });
-                                return <div key={index} className="relative w-full grid grid-cols-2 gap-2 bg-bg bg-opacity-75 rounded-xl p-2 justify-between items-center">
-                                    <div className="relative flex justify-center">
+                                return <div key={index} className="relative w-full grid grid-cols-2 gap-2 bg-bg bg-opacity-75 rounded-xl p-2 justify-between items-center ">
+                                    <div className="relative flex justify-center drop-shadow-text ">
                                         <Image src={`https://enka.network/ui/${artifact.icon}.png`} title={artifact.name} width={100} height={100} alt={`${artifact.name} icon`} className="object-contain " />
                                         <div className="flex absolute bottom-0 text-yellow-400">
                                             {[...Array(artifact.stars)].map((_, index) => (
@@ -507,9 +514,8 @@ export default function Profile({ user }: { user: any }) {
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="flex flex-col font-bold justify-center">
+                                    <div className="flex flex-col font-bold justify-center drop-shadow-text ">
                                         <div className="flex justify-end" >
-
                                             <div>
                                                 <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl cursor-pointer transition-all" onClick={() => { setShowStatsModal(!showStatsModal) }}>
                                                     CV:&nbsp;
@@ -540,7 +546,7 @@ export default function Profile({ user }: { user: any }) {
                                             {artifact.mainstat.statValue}{!propertyType && "%"}
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4 col-span-2 place-items-start font-bold">
+                                    <div className="grid grid-cols-2 gap-4 col-span-2 place-items-start font-bold drop-shadow-text ">
                                         {artifact.substats.map((stat: any, index: number) => {
                                             const isAttackBonus = isAttackStat(stat.stat);
                                             const isDefenseBonus = isDefenseStat(stat.stat);
