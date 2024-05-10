@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import { useState } from "react"
 import { useRouter } from "next/navigation";
 import Footer from "../components/Footer";
-
+import Link from "next/link";
 export default function UserPage() {
     const router = useRouter();
     const [user, setUser] = useState<any>({
@@ -31,7 +31,7 @@ export default function UserPage() {
                     {/* <p className="text-center">Example:</p> */}
                     <form className="flex justify-center items-center h-full w-full gap-2" onSubmit={handleSubmit} onChange={handleChange}>
                         <input type="number" name="uid" required onChange={() => { }} value={user.uid} placeholder="Enter UID..." className="p-2 rounded-xl" />
-                        <button className="" type="submit">Search</button>
+                        <button className={`hover:bg-bg-dark p-2 rounded-xl transition-all border-2`} type="submit">Search</button>
                     </form>
                 </div>
                 <Footer className="bottom-0 absolute" />

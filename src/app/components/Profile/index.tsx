@@ -162,12 +162,12 @@ export default function Profile({ user }: { user: any }) {
                                             <p className="-mt-2">{character.skills[1].level}</p>
                                         </div>
                                     </div>
-                                    <div className="">
+                                    {character.skills[2] && <div className="">
                                         <Image src={character.skills[2].icon} width={250} height={250} alt={`${character.skills[2].name} icon`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                         <div className="w-full justify-center flex items-center">
                                             <p className="-mt-2">{character.skills[2].level}</p>
                                         </div>
-                                    </div>
+                                    </div>}
                                 </div>
 
                             </div>
@@ -204,11 +204,11 @@ export default function Profile({ user }: { user: any }) {
                                 </div>
                                 <div className="absolute right-3 bottom-20 flex flex-col justify-between">
                                     {activeCharacter.constellations.map((constellation: any, index: number) => {
-                                        return <div key={index} className="relative w-12 h-12">
+                                        return <div key={index} className="relative flex items-center w-12 h-12">
                                             <Image src={`/stats/Constellation.svg`} width={250} height={250} alt={`${constellation.name} background`} className={`w-full z-10`} />
                                             <Image src={constellation.icon} width={250} height={250} alt={`${constellation.name}`} className={`absolute ${!constellation.unlocked && "brightness-[35%]"} top-0 left-0 mt-[11px] ml-[10px] w-7 h-7 z-20`} />
                                             {!constellation.unlocked &&
-                                                <Image src={`/stats/lock.svg`} width={250} height={250} alt={`${constellation.name}`} className={`absolute top-0 left-0 mt-[14px] ml-[14px] w-5 h-5 z-20`} />
+                                                <Image src={`/stats/lock.svg`} width={250} height={250} alt={`${constellation.name}`} className={`absolute top-0 left-0 mt-[16px] ml-[16px] w-4 h-4 z-20`} />
                                             }
                                         </div>
                                     })}
@@ -229,7 +229,7 @@ export default function Profile({ user }: { user: any }) {
                                             }
                                         </div>
                                     </div>
-                                    <div className="">
+                                    {activeCharacter.skills[2] && <div className="">
                                         <Image src={activeCharacter.skills[2].icon} width={250} height={250} alt={`${activeCharacter.skills[2].name} icon`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                         <div className="w-full justify-center flex items-center">
                                             {activeCharacter.skills[2].unlocked == true ?
@@ -237,8 +237,7 @@ export default function Profile({ user }: { user: any }) {
                                                 <p className="-mt-2 ">{activeCharacter.skills[2].level}</p>
                                             }
                                         </div>
-                                    </div>
-
+                                    </div>}
                                 </div>
                             </div>
                             <div className="p-2 w-full h-full">
@@ -423,40 +422,56 @@ export default function Profile({ user }: { user: any }) {
                                         </span>
                                     </div>
                                 </div>
-                                <div className={`flex gap-2 items-center rounded-xl font-semibold transition-all bg-opacity-75 justify-between ${activeHover === "ELEMENT" && "bg-bg"} py-1 px-2`} onMouseEnter={() => { setActiveHover("ELEMENT") }} onMouseLeave={() => { setActiveHover("") }}>
-                                    {activeCharacter.stats.physicalAddHurt > 0 ?
-                                        <>
-                                            <div className="flex gap-2">
-                                                <Image src={`/stats/FIGHT_PROP_PHYSICAL_ADD_HURT.svg`} width={16} height={16} alt={"Elemental Dmg Icon"} className="grayscale brightness-200" />
-                                                <span>Physical DMG Bonus</span>
-                                            </div>
-                                            <div className="flex flex-col text-right">
-                                                <span className="text-xl">
-                                                    {(activeCharacter.stats.physicalAddHurt * 100).toFixed(1)}%
-                                                </span>
-                                            </div>
-                                        </>
-                                        :
-                                        <>
-                                            <div className="flex gap-2">
-                                                <Image src={`/elements/${activeCharacter.element}.svg`} width={16} height={16} alt={"Elemental Dmg Icon"} className="grayscale brightness-200" />
-                                                <span>{activeCharacter.element} DMG Bonus</span>
-                                            </div>
-                                            <div className="flex flex-col text-right">
-                                                <span className="text-xl">
-                                                    {activeCharacter.element === "Electro" && (activeCharacter.stats.elecAddHurt * 100).toFixed(1)}
-                                                    {activeCharacter.element === "Pyro" && (activeCharacter.stats.fireAddHurt * 100).toFixed(1)}
-                                                    {activeCharacter.element === "Cryo" && (activeCharacter.stats.iceAddHurt * 100).toFixed(1)}
-                                                    {activeCharacter.element === "Hydro" && (activeCharacter.stats.waterAddHurt * 100).toFixed(1)}
-                                                    {activeCharacter.element === "Anemo" && (activeCharacter.stats.windAddHurt * 100).toFixed(1)}
-                                                    {activeCharacter.element === "Geo" && (activeCharacter.stats.rockAddHurt * 100).toFixed(1)}
-                                                    {activeCharacter.element === "Dendro" && (activeCharacter.stats.grassAddHurt * 100).toFixed(1)}
-                                                    %
-                                                </span>
-                                            </div>
-                                        </>
-                                    }
-                                </div>
+                                {((activeCharacter.stats.physicalAddHurt > 0) ||
+                                    (activeCharacter.stats.elecAddHurt > 0) ||
+                                    (activeCharacter.stats.fireAddHurt > 0) ||
+                                    (activeCharacter.stats.iceAddHurt > 0) ||
+                                    (activeCharacter.stats.waterAddHurt > 0) ||
+                                    (activeCharacter.stats.windAddHurt > 0) ||
+                                    (activeCharacter.stats.rockAddHurt > 0) ||
+                                    (activeCharacter.stats.grassAddHurt > 0)) &&
+                                    <div className={`flex gap-2 items-center rounded-xl font-semibold transition-all bg-opacity-75 justify-between ${activeHover === "ELEMENT" && "bg-bg"} py-1 px-2`} onMouseEnter={() => { setActiveHover("ELEMENT") }} onMouseLeave={() => { setActiveHover("") }}>
+                                        {activeCharacter.stats.physicalAddHurt > 0 &&
+                                            <>
+                                                <div className="flex gap-2">
+                                                    <Image src={`/stats/FIGHT_PROP_PHYSICAL_ADD_HURT.svg`} width={16} height={16} alt={"Elemental Dmg Icon"} className="grayscale brightness-200" />
+                                                    <span>Physical DMG Bonus</span>
+                                                </div>
+                                                <div className="flex flex-col text-right">
+                                                    <span className="text-xl">
+                                                        {(activeCharacter.stats.physicalAddHurt * 100).toFixed(1)}%
+                                                    </span>
+                                                </div>
+                                            </>
+                                        }
+                                        {((activeCharacter.stats.elecAddHurt > 0) ||
+                                            (activeCharacter.stats.fireAddHurt > 0) ||
+                                            (activeCharacter.stats.iceAddHurt > 0) ||
+                                            (activeCharacter.stats.waterAddHurt > 0) ||
+                                            (activeCharacter.stats.windAddHurt > 0) ||
+                                            (activeCharacter.stats.rockAddHurt > 0) ||
+                                            (activeCharacter.stats.grassAddHurt > 0)) &&
+                                            <>
+                                                <div className="flex gap-2">
+                                                    <Image src={`/elements/${activeCharacter.element}.svg`} width={16} height={16} alt={"Elemental Dmg Icon"} className="grayscale brightness-200" />
+                                                    <span>{activeCharacter.element} DMG Bonus</span>
+                                                </div>
+                                                <div className="flex flex-col text-right">
+                                                    <span className="text-xl">
+                                                        {activeCharacter.element === "Electro" && (activeCharacter.stats.elecAddHurt * 100).toFixed(1)}
+                                                        {activeCharacter.element === "Pyro" && (activeCharacter.stats.fireAddHurt * 100).toFixed(1)}
+                                                        {activeCharacter.element === "Cryo" && (activeCharacter.stats.iceAddHurt * 100).toFixed(1)}
+                                                        {activeCharacter.element === "Hydro" && (activeCharacter.stats.waterAddHurt * 100).toFixed(1)}
+                                                        {activeCharacter.element === "Anemo" && (activeCharacter.stats.windAddHurt * 100).toFixed(1)}
+                                                        {activeCharacter.element === "Geo" && (activeCharacter.stats.rockAddHurt * 100).toFixed(1)}
+                                                        {activeCharacter.element === "Dendro" && (activeCharacter.stats.grassAddHurt * 100).toFixed(1)}
+                                                        %
+                                                    </span>
+                                                </div>
+                                            </>
+                                        }
+                                    </div>
+                                }
 
                                 {Number(activeCharacter.stats.healAdd) > 0 &&
                                     <div className={`flex gap-2 items-center rounded-xl font-semibold transition-all bg-opacity-75 justify-between ${activeHover == "FIGHT_PROP_HEAL_ADD" && "bg-bg"} py-1 px-2`} onMouseEnter={() => { setActiveHover("FIGHT_PROP_HEAL_ADD") }} onMouseLeave={() => { setActiveHover("") }}>
@@ -497,7 +512,7 @@ export default function Profile({ user }: { user: any }) {
                                         artifact.critValue += substat.statValue * 2;
                                     }
                                 });
-                                return <div key={index} className="relative w-full grid grid-cols-2 gap-2 bg-bg bg-opacity-75 rounded-xl p-2 justify-between items-center">
+                                return <div key={index} className="relative w-full grid grid-cols-2 gap-2 bg-bg-dark bg-opacity-75 rounded-xl p-2 justify-between items-center">
                                     <div className="relative flex justify-center">
                                         <Image src={artifact.icon} title={artifact.name} width={100} height={100} alt={`${artifact.name} icon`} className="object-contain " />
                                         <div className="flex absolute bottom-0 text-yellow-400">
@@ -509,7 +524,7 @@ export default function Profile({ user }: { user: any }) {
                                     <div className="flex flex-col font-bold justify-center">
                                         <div className="flex justify-end" >
                                             <div>
-                                                <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl">
+                                                <p className="hover:bg-bg-dark bg-opacity-35 p-1 rounded-xl">
                                                     CV:&nbsp;
                                                     <span className={` ${artifact.critValue < 20 ? "text-red-500" :
                                                         artifact.critValue < 30 ? "text-orange-500" :
