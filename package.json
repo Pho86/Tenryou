@@ -15,7 +15,6 @@
     "@vercel/speed-insights": "^1.0.10",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
-    "enkanetwork": "^3.0.0-beta4",
     "enkanetwork.js": "^2.7.8",
     "framer-motion": "^11.1.7",
     "genshin-db": "^5.1.4",
