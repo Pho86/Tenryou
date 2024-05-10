@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useLayoutEffect } from "react";
-import Profile from "@/app/components/Profile";
+import Profile from "@/app/components/ProfileOld";
 import axios from "axios";
 import NavBar from "@/app/components/NavBar";
 import Loader from "@/app/components/Loader";
@@ -16,13 +16,15 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
 
     useLayoutEffect(() => {
         axios.get(`/api/user/${params.uid}`)
+        // axios.get(`https://tenryou.vercel.app/api/player/${params.uid}`)
             .then(response => {
                 response.data.characters.forEach((character: any) => {
                     addFileName([character]);
                 })
                 setPlayerData(response.data);
+                console.log(response.data)
                 setLoading(false);
-                document.title = `${response.data.player.username} - Tenryou 💮`;
+                document.title = `${response.data.player.nickname} - Tenryou 💮`;
             })
             .catch(error => {
                 console.log(error)

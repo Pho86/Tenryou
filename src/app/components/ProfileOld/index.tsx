@@ -3,9 +3,6 @@ import React, { useState, useEffect, } from "react";
 import { useRouter } from "next/navigation";
 import Loader from "../Loader";
 import { FaStar } from "react-icons/fa6";
-import Link from "next/link";
-import StatsModal from "../StatExplainationModal";
-import { AnimatePresence } from "framer-motion";
 export default function Profile({ user }: { user: any }) {
     const propertyGroups = {
         flat: ['FIGHT_PROP_HP', 'FIGHT_PROP_ATTACK', 'FIGHT_PROP_DEFENSE', 'FIGHT_PROP_ELEMENT_MASTERY', "FIGHT_PROP_BASE_ATTACK"],
@@ -39,21 +36,26 @@ export default function Profile({ user }: { user: any }) {
         );
     }
     const [newUser, setNewUser] = useState<any>({
-        uid: user.uid
+        uid: ''
     });
     const router = useRouter();
     const handleChange = (event: any) => {
         setNewUser({ ...newUser, [event.target.name]: event.target.value });
     };
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-    }
     const [loading, setLoading] = useState<boolean>(false);
     const [activeHover, setActiveHover] = useState<string>("");
     const [activeCharacter, setActiveCharacter] = useState<any>(user.characters[0]);
     const [artifactSet, setArtifactSet] = useState<any[]>([])
     const [namecardsHover, setNamecardsHover] = useState<boolean>(false);
-    const [showStatsModal, setShowStatsModal] = useState<boolean>(false);
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        try {
+            router.push(`/users/${user.uid}`)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         const artifactNames = activeCharacter.equipment.artifacts.map((artifact: any) => artifact.setName);
@@ -76,19 +78,19 @@ export default function Profile({ user }: { user: any }) {
                         <h1 className="text-4xl text-primary font-bold">
                             {user.player.username}
                         </h1>
-                        <div className="flex gap-2 font-semibold text-lg">
+                        <div className="flex gap-2">
                             <p className="">AR {user.player.levels.rank}</p>
                             <p className="">WL {user.player.levels.world}</p>
                         </div>
                         <p className="">{user.player.signature}</p>
-                        <div className="flex flex-row gap-2 w-full">
+                        <div className="flex flex-row gap-2 flex-nowrap">
                             <span className="flex gap-1">
                                 <Image src={"/stats/achievements.png"} width={35} height={35} alt="Achievements Icon" className="w-8 h-8" />
-                                <p className="flex gap-1"><span className="hidden md:flex">Achievements:</span> {user.player.achievements}</p>
+                                <p className="whitespace-nowrap"><span className="hidden md:flex">Achievements:</span> {user.player.achievements}</p>
                             </span>
                             <span className="flex gap-1">
                                 <Image src={"/stats/abyss.png"} width={35} height={35} alt="Abyss Icon" className="w-8 h-8" />
-                                <p className=" flex gap-1"><span className="hidden md:block">Abyss:</span> {user.player.abyss.floor}-{user.player.abyss.chamber}</p>
+                                <p className="whitespace-nowrap"><span className="hidden md:flex">Abyss:</span> {user.player.abyss.floor}-{user.player.abyss.chamber}</p>
                             </span>
                         </div>
                     </div>
@@ -105,18 +107,13 @@ export default function Profile({ user }: { user: any }) {
                             }
                         </div>
                     }
-                    <AnimatePresence>
-                        {showStatsModal && <StatsModal exit={()=>{setShowStatsModal(!showStatsModal)}}/>}
-                    </AnimatePresence>
+
                 </div>
                 <div className="flex flex-col">
                     <form className="flex justify-center items-center h-full w-full gap-2" onSubmit={handleSubmit} onChange={handleChange}>
                         <input type="number" name="uid" required onChange={() => { }} value={newUser.uid} placeholder="Enter UID..." className="p-2 rounded-xl" />
-                        <Link href={`/users/${newUser.uid}`}>
-                            <button className={`hover:bg-bg-dark p-2 rounded-xl transition-all border-2`} type="submit">Search</button>
-                        </Link>
+                        <button className="" type="submit">Search</button>
                     </form>
-                    <p className="hover:text-primary transition-all cursor-pointer" onClick={() => { setShowStatsModal(!showStatsModal) }}>Stats Explaination</p>
                 </div>
             </div>
             {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full self-center">
@@ -129,19 +126,14 @@ export default function Profile({ user }: { user: any }) {
                         }, 10)
                     }}>
 
-                        {character.name === "Yae Miko" ?
-                            <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}1_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" />
-                            :
-                            (character.name === "Traveler") ?
-                                <Image src={`/namecards/UI_NameCardPic_Ysxf4_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" />
-
-                                :
-                                <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" />
+                        {character.name == "Yae Miko" ?
+                            <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}1_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" /> :
+                            <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" />
                         }
 
                         <div className="z-50 p-2 flex gap-2 drop-shadow-text">
                             <div className="bg-bg bg-opacity-30 rounded-xl p-2 ">
-                                <Image src={`https://enka.network/ui/${character.assets.icon}.png`} width={100} height={50} alt={`${character.name}`} title={`${character.name} icon`} className="w-full transition-all max-h-32" />
+                                <Image src={`https://enka.network/ui/${character.assets.icon}.png`} width={100} height={50} alt={`${character.name}`} title={`${character.name} icon`} className="w-full transition-all max-h-40" />
                             </div>
                             <div className="flex flex-col gap-1 justify-between ">
                                 <div className="flex gap-2">
@@ -511,12 +503,12 @@ export default function Profile({ user }: { user: any }) {
                                         <div className="flex justify-end" >
 
                                             <div>
-                                                <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl cursor-pointer transition-all" onClick={() => { setShowStatsModal(!showStatsModal) }}>
+                                                <p className="hover:bg-bg bg-opacity-35 p-1 rounded-xl">
                                                     CV:&nbsp;
-                                                    <span className={` ${artifact.critValue < 10 ? "text-red-500" :
-                                                        artifact.critValue < 20 ? "text-orange-500" :
-                                                            artifact.critValue < 30 ? "text-yellow-500" :
-                                                                artifact.critValue >= 30 ? "text-green-500" : ""
+                                                    <span className={` ${artifact.critValue < 20 ? "text-red-500" :
+                                                        artifact.critValue < 30 ? "text-orange-500" :
+                                                            artifact.critValue < 40 ? "text-lime-500" :
+                                                                artifact.critValue >= 40 ? "text-green-500" : ""
                                                         }`} title="Crit Rate + Crit Dmg*2">
                                                         {artifact.critValue.toFixed(1)}
                                                     </span>
