@@ -14,12 +14,6 @@ export default function UserPage() {
     };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        try {
-            router.push(`/users/${user.uid}`)
-        }
-        catch (error) {
-            console.log(error)
-        }
     }
 
     return (
@@ -31,7 +25,9 @@ export default function UserPage() {
                     {/* <p className="text-center">Example:</p> */}
                     <form className="flex justify-center items-center h-full w-full gap-2" onSubmit={handleSubmit} onChange={handleChange}>
                         <input type="number" name="uid" required onChange={() => { }} value={user.uid} placeholder="Enter UID..." className="p-2 rounded-xl" />
-                        <button className={`hover:bg-bg-dark p-2 rounded-xl transition-all border-2`} type="submit">Search</button>
+                        <Link href={`/users/${user.uid}`}>
+                            <button className={`hover:bg-bg-dark p-2 rounded-xl transition-all border-2`} type="submit">Search</button>
+                        </Link>
                     </form>
                 </div>
                 <Footer className="bottom-0 absolute" />
