@@ -79,8 +79,8 @@ const config: Config = {
       dropShadow: {
         'primary': '0px 10px 10px rgba(91, 205, 249, .2)',
         'dark': '0px 5px 3px rgba(0, 0, 0, .2)',
-        'text':'1px 2px 0.2px rgba(0, 0, 0, .4)',
-        'icon':'2px 2px 1px rgba(0, 0, 0, .8)',
+        'text':'1px 2px .4px rgba(0, 0, 0, .6)',
+        'icon':'1px 1px 1px rgba(0, 0, 0, .8)',
       },
       boxShadow:{
         'light': '0 0px 2px 4px rgba(223, 229, 220, 1)',
