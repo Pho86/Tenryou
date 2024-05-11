@@ -6,14 +6,15 @@ import { useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
+import { Material } from "../types/materials";
 export default function MaterialsPage() {
-    const [materialData, setMaterialData] = useState<any[]>([]);
+    const [materialData, setMaterialData] = useState<Material[]>([]);
     const [activeRarity, setActiveRarity] = useState<number>(0);
-    const [active, setActive] = useState<any>();
+    const [active, setActive] = useState<Material>();
     const [loading, setLoading] = useState<boolean>(false);
     useLayoutEffect(() => {
         axios
-            .get<any[]>("https://genshin-db-api.vercel.app/api/v5/materials?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+            .get<Material[]>("https://genshin-db-api.vercel.app/api/v5/materials?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
             .then((res) => {
                 setMaterialData(res.data);
                 setActive(res.data[0]);

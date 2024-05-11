@@ -8,10 +8,10 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
-
+import { Character } from "@/app/types/character";
 export default function CharacterPage() {
 
-  const [CharacterData, setCharacterData] = useState<any[]>([]);
+  const [CharacterData, setCharacterData] = useState<Character[]>([]);
   const [activeElement, setActiveElement] = useState<number>(0)
   const [activeWeapon, setActiveWeapon] = useState<number>(0)
   useLayoutEffect(() => {

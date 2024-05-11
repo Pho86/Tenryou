@@ -6,17 +6,18 @@ import { useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import Link from "next/link";
+import { Outfit } from "../types/outfits";
 export default function OutfitsPage() {
-    const [outfitData, setOutfitData] = useState<any[]>([]);
+    const [outfitData, setOutfitData] = useState<Outfit[]>([]);
     const [active, setActive] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
     const [skins, setSkins] = useState<boolean>(true);
     useLayoutEffect(() => {
         axios
-            .get<any>("https://genshin-db-api.vercel.app/api/outfits?query=names&dumpResult=true&matchNames=false&matchAltNames=false&matchAliases=true&matchCategories=true&verboseCategories=true")
+            .get<Outfit>("https://genshin-db-api.vercel.app/api/outfits?query=names&dumpResult=true&matchNames=false&matchAltNames=false&matchAliases=true&matchCategories=true&verboseCategories=true")
             .then(async (res) => {
                 let filteredSkins: any[] = [];
-                await Promise.all(res.data.result.map(async (outfit: any) => {
+                await Promise.all(res.data.result.map(async (outfit: Outfit) => {
                     if(outfit.images.nameicon) filteredSkins.push(outfit);
                 }));
                 setOutfitData(filteredSkins);

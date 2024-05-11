@@ -8,18 +8,19 @@ import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
 import { parseColorTags } from "@/app/utils/helper";
 import parse from "html-react-parser"
+import { Weapon } from "../types/weapon";
 export default function WeaponsPage() {
-    const [weaponData, setWeaponData] = useState<any[]>([]);
+    const [weaponData, setWeaponData] = useState<Weapon[]>([]);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
     const [activeRarity, setActiveRarity] = useState<number>(0);
-    const [active, setActive] = useState<any>();
+    const [active, setActive] = useState<Weapon>();
     const [level, setLevel] = useState<number>(90);
     const [percentage, setPercent] = useState<boolean>(false);
     const [refinement, setRefinement] = useState<number>(5);
     const [loading, setLoading] = useState<boolean>(false);
     useLayoutEffect(() => {
         axios
-            .get<any[]>("https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+            .get<Weapon[]>("https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
             .then((res) => {
                 setWeaponData(res.data);
                 receiveWeaponStats(res.data[0])

@@ -5,9 +5,10 @@ import axios from "axios";
 import { useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
+import { Achievement } from "genshin-db";
 
 export default function AchievementsPage() {
-    const [achievementData, setAchievementData] = useState<any[]>([]);
+    const [achievementData, setAchievementData] = useState<Achievement[]>([]);
     const [achievementGroups, setAchievementGroups] = useState<any[]>([]);
     const [activeGroup, setActiveGroup] = useState<string>("")
 
@@ -27,7 +28,7 @@ export default function AchievementsPage() {
                 setActiveGroup(optionsArray[0]);
             })
             .catch((error) => {
-                console.error("Error fetching character names:", error);
+                console.error("Error fetching achievements:", error);
             });
     }, []);
     return (

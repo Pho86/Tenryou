@@ -4,17 +4,18 @@ import { useLayoutEffect, useState } from "react";
 import parse from 'html-react-parser';
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "../Loader";
-export default function Events() {
-    const [events, setEvents] = useState<any>();
+import { Events } from "@/app/types/events";
+export default function EventsModal() {
+    const [events, setEvents] = useState<Events>();
     const [show, setShow] = useState<number>(0)
     useLayoutEffect(() => {
         axios
-            .get<any[]>("https://api.ambr.top/assets/data/event.json")
+            .get<any>("https://api.ambr.top/assets/data/event.json")
             .then((res) => {
                 setEvents(res.data)
             })
             .catch((error) => {
-                console.error("Error fetching character names:", error);
+                console.error("Error fetching events:", error);
             });
     }, [])
 

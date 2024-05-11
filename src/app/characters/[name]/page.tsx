@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react"
 import Footer from "@/app/components/Footer";
-import { Character } from "@/app/utils/types";
+import { Character } from "@/app/types/character";
 import { addFileName } from "@/app/utils/helper";
 import StatsTable from "@/app/components/StatsTable";
 import InfoCharacterBanner from "@/app/components/InfoCharacterBanner";
@@ -51,20 +51,18 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
                         const outfitData = outfitResponse.data;
 
                         const mergedData = {
-                            // @ts-ignore
                             stats: data.stats,
                             constellations: constellationsData,
                             talents: talentsData,
                             nameCard: nameCardData,
                             voices: voiceData,
                             outfits: outfitData,
-                            // @ts-ignore
                             ...data.result,
                         };
 
                         const finalData = mergeWithPreference(data, mergedData);
                         setCharacterData(finalData);
-                        console.log(finalData)
+                        // console.log(finalData)
                     })
                     .catch((error) => {
                         console.error("Error fetching data:", error);
@@ -85,7 +83,7 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
     }, [])
     return (
         <>
-            <NavBar active={1}/>
+            <NavBar active={1} />
 
             {characterData ?
                 <main className="flex flex-col gap-4" >

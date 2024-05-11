@@ -5,8 +5,8 @@ import axios from "axios";
 import { Fragment, useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
-
-function Artifact({ type, rarity, image, onMouseEnter, name, onClick }: { type: string, rarity: number, image: string, onMouseEnter?: () => void, name: string, onClick:()=>void }) {
+import { Artifact as ArtifactTypes } from "../types/artifacts";
+function ArtifactItem({ type, rarity, image, onMouseEnter, name, onClick }: { type: string, rarity: number, image: string, onMouseEnter?: () => void, name: string, onClick:()=>void }) {
   return <Image
     src={image}
     width={150}
@@ -19,8 +19,8 @@ function Artifact({ type, rarity, image, onMouseEnter, name, onClick }: { type: 
   />
 }
 export default function ArtifactsPage() {
-  const [artifactData, setArtifactData] = useState<any[]>([]);
-  const [activeArtifact, setActiveArtifact] = useState<any>();
+  const [artifactData, setArtifactData] = useState<ArtifactTypes[]>([]);
+  const [activeArtifact, setActiveArtifact] = useState<ArtifactTypes>();
   useLayoutEffect(() => {
     axios
       .get<any[]>("https://genshin-db-api.vercel.app/api/v5/artifacts?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
@@ -43,19 +43,19 @@ export default function ArtifactsPage() {
               {artifactData.length > 0 ? artifactData.map((artifact, index) => (
                 <Fragment key={index}>
                   {artifact.flower && (
-                    <Artifact type="flower" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_flower}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "flower" }); }} name={artifact.flower.name} />
+                    <ArtifactItem type="flower" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_flower}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "flower" }); }} name={artifact.flower.name} />
                   )}
                   {artifact.plume && (
-                    <Artifact type="plume" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_plume}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "plume" }); }} name={artifact.plume.name} />
+                    <ArtifactItem type="plume" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_plume}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "plume" }); }} name={artifact.plume.name} />
                   )}
                   {artifact.sands && (
-                    <Artifact type="sands" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_sands}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "sands" }); }} name={artifact.sands.name} />
+                    <ArtifactItem type="sands" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_sands}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "sands" }); }} name={artifact.sands.name} />
                   )}
                   {artifact.goblet && (
-                    <Artifact type="goblet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_goblet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "goblet" }); }} name={artifact.goblet.name} />
+                    <ArtifactItem type="goblet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_goblet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "goblet" }); }} name={artifact.goblet.name} />
                   )}
                   {artifact.circlet && (
-                    <Artifact type="circlet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_circlet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "circlet" }); }} name={artifact.circlet.name} />
+                    <ArtifactItem type="circlet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_circlet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "circlet" }); }} name={artifact.circlet.name} />
                   )}
                 </Fragment>
               )) :

@@ -22,13 +22,23 @@ Tenryou is create via Next.js and with information is pulled via:
 
 ## Built With
 
-Tenryou is currently built with mainly:
+[![Next][Next.js]][Next-url]
+[![React][React.js]][React-url]
+[![TailwindCSS][TailwindCSS]][TailwindCSS-url]
+[![Vercel][Vercel]][Vercel-url]
+[![Framer-Motion][Framer-Motion]][Framer-Motion-url]
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
-* [![Vercel][Vercel]][Vercel-url]
-* [![Framer-Motion][Framer-Motion]][Framer-Motion-url]
+
+## Roadmap
+
+- [ ] Add Changelog
+- [ ] Improve Teambuilder and add example teams
+- [ ] More options to edit to the user card
+- [ ] Add a calculator for stats and damage
+- [ ] Multi-language Support
+    - [ ] Japanese
+    - [ ] Chinese
+    - [ ] Korean
 
 
 ## Prerequisites
@@ -57,6 +67,25 @@ npm run build, pnpm build
 # run e2e tests
 npm run test, npx playwright test
 ```
+
+## Contributing
+
+Contribute by reporting a bug/suggesting an enhancement
+
+1. Navigate to the [issues](https://github.com/pho86/Tenryou/issues) page in this repository
+2. Add a new `Issue` and give it a clear and concise title and description. Include any other information, images, etc. that may be needed.
+3. Give it an appropriate label
+4. Thank you for your contribution!
+
+Contribute through development
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b Feature`)
+3. Commit your Changes (`git commit -m 'Add some Feature'`)
+4. Push to the Branch (`git push origin Feature`)
+5. Open a Pull Request with a clear and concise title and description.
+6. Thank you for your contribution!
+
 
 ## License
 

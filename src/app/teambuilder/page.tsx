@@ -7,9 +7,9 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
 import Footer from "../components/Footer";
-
+import { Character } from "@/app/types/character";
 export default function TeamBuilderPage() {
-    const [characterData, setCharacterData] = useState<any[]>([]);
+    const [characterData, setCharacterData] = useState<Character[]>([]);
     const [activeElement, setActiveElement] = useState<number>(0);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
     const [activeCharacters, setActiveCharacters] = useState<any[]>([{}, {}, {}, {}, {}, {}, {}, {}]);
@@ -20,7 +20,7 @@ export default function TeamBuilderPage() {
     const [owned, setOwned] = useState<any[]>([]);
     useLayoutEffect(() => {
         axios
-            .get<any[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
+            .get<Character[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
             .then((res) => {
                 let names = res.data.sort();
                 names.forEach((name) => {
@@ -33,7 +33,7 @@ export default function TeamBuilderPage() {
             });
     }, []);
 
-    const selectCharacter = (character: any, index?: number) => {
+    const selectCharacter = (character: Character, index?: number) => {
         let slot = selectedSlot;
         let element = "";
         element = character.elementText;

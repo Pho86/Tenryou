@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { FaStar, FaDownload } from "react-icons/fa6";
+import { FaStar, FaDownload, FaImage } from "react-icons/fa6";
 import { toPng } from 'html-to-image';
 import React from "react";
-
+import { User, Characters, Artifact, SubStat } from "@/app/types/user";
 const propertyGroups = {
     flat: ['FIGHT_PROP_HP', 'FIGHT_PROP_ATTACK', 'FIGHT_PROP_DEFENSE', 'FIGHT_PROP_ELEMENT_MASTERY', "FIGHT_PROP_BASE_ATTACK"],
     percent: ['FIGHT_PROP_HP_PERCENT', 'FIGHT_PROP_ATTACK_PERCENT', 'FIGHT_PROP_DEFENSE_PERCENT', 'FIGHT_PROP_CRITICAL', 'FIGHT_PROP_CRITICAL_HURT', 'FIGHT_PROP_CHARGE_EFFICIENCY', 'FIGHT_PROP_HEAL_ADD',],
@@ -42,8 +42,8 @@ export function ProfileCardWide({
     artifactSet,
     toggleShowStatsModal,
 }: {
-    user: any,
-    activeCharacter: any,
+    user: User,
+    activeCharacter: Characters,
     artifactSet: any
     toggleShowStatsModal: () => void,
 }) {
@@ -60,7 +60,6 @@ export function ProfileCardWide({
                 console.log(err)
             })
     };
-
     const [activeHover, setActiveHover] = useState<string>("");
     return <>
         <div className="overflow-x-scroll 2xl:overflow-x-hidden grid place-items-center" id="wide_player_card">
@@ -104,8 +103,8 @@ export function ProfileCardWide({
                                 <Image src={`https://enka.network/ui/${activeCharacter.skills.elementalSkill.assets.icon}.png`} width={250} height={250} alt={`${activeCharacter.skills.elementalSkill.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                 <div className="w-full justify-center flex items-center">
                                     {activeCharacter.constellationsList[2] != undefined ?
-                                        <p className="-mt-2 text-green-600">{activeCharacter.skills.elementalBurst.level + 3}</p> :
-                                        <p className="-mt-2">{activeCharacter.skills.elementalBurst.level}</p>
+                                        <p className="-mt-2 text-green-600">{activeCharacter.skills.elementalSkill.level + 3}</p> :
+                                        <p className="-mt-2">{activeCharacter.skills.elementalSkill.level}</p>
                                     }
                                 </div>
                             </div>
@@ -164,6 +163,7 @@ export function ProfileCardWide({
                                             {stat.statValue}{!percentStat && "%"}
                                         </div>
                                     })}
+                                    
                                     </div>
                                     <div className="flex gap-2 font-bold">
                                         <div className="p-2 bg-bg-light bg-opacity-75 rounded-xl">Lv. {activeCharacter.equipment.weapon.level}/{activeCharacter.equipment.weapon.level}</div>
@@ -354,7 +354,7 @@ export function ProfileCardWide({
                     </div>
                 </div>
                 <div className="w-full col-span-2 p-2 grid grid-cols-5 gap-2 place-items-center ">
-                    {activeCharacter.equipment.artifacts.map((artifact: any, index: number) => {
+                    {activeCharacter.equipment.artifacts.map((artifact: Artifact, index: number) => {
                         const isAttackBonus = isAttackStat(artifact.mainstat.stat);
                         const isDefenseBonus = isDefenseStat(artifact.mainstat.stat);
                         const isHpBonus = isHPStat(artifact.mainstat.stat);
@@ -369,7 +369,7 @@ export function ProfileCardWide({
                             return acc;
                         }, {}));
                         artifact.critValue = 0;
-                        artifact.substats.forEach((substat: any) => {
+                        artifact.substats.forEach((substat: SubStat) => {
                             if (substat.stat === 'FIGHT_PROP_CRITICAL_HURT') {
                                 artifact.critValue += substat.statValue;
                             }
@@ -461,7 +461,7 @@ export function ProfileCardWide({
             </div>
         </div>
         <div className="w-full flex flex-row-reverse items-center justify-center">
-            <div className="flex-end flex justify-end w-[1280px] max-7xl">
+            <div className="flex-end flex justify-end w-[1280px] max-w-7xl gap-2">
                 <FaDownload className="hover:text-primary text-xl transition-all cursor-pointer" onClick={() => { prepareURL() }} />
             </div>
         </div>
@@ -474,8 +474,8 @@ export function ProfileCardSmall({
     artifactSet,
     toggleShowStatsModal,
 }: {
-    user: any,
-    activeCharacter: any,
+    user: User,
+    activeCharacter: Characters,
     artifactSet: any
     toggleShowStatsModal: () => void,
 }) {
@@ -496,5 +496,12 @@ export function ProfileCardSmall({
     const [activeHover, setActiveHover] = useState<string>("");
     return <>
 
+        <div className="w-full">
+            <div className={`grid grid-cols-2 auto-cols-[400px] w-[680px] p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end relative`} ref={cardRef}>
+                <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name} background stars image`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full  " />
+                <div className="w-full h-full relative min-h-[400px] col-span-1">
+                </div>
+            </div>
+        </div>
     </>
 }

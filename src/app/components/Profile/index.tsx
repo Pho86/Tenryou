@@ -1,13 +1,12 @@
 import Image from "next/image"
-import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import Loader from "../Loader";
-import { FaStar } from "react-icons/fa6";
 import Link from "next/link";
 import StatsModal from "../StatExplainationModal";
 import { AnimatePresence } from "framer-motion";
 import { ProfileCardSmall, ProfileCardWide } from "../ProfileCard";
-export default function Profile({ user }: { user: any }) {
+import { User, Characters } from "@/app/types/user";
+export default function Profile({ user }: { user: User }) {
     const [newUser, setNewUser] = useState<any>({
         uid: user.uid
     });
@@ -18,7 +17,7 @@ export default function Profile({ user }: { user: any }) {
         e.preventDefault()
     }
     const [loading, setLoading] = useState<boolean>(false);
-    const [activeCharacter, setActiveCharacter] = useState<any>(user.characters[0]);
+    const [activeCharacter, setActiveCharacter] = useState<Characters>(user.characters[0]);
     const [artifactSet, setArtifactSet] = useState<any[]>([])
     const [namecardsHover, setNamecardsHover] = useState<boolean>(false);
     const [showStatsModal, setShowStatsModal] = useState<boolean>(false);
@@ -86,7 +85,7 @@ export default function Profile({ user }: { user: any }) {
                 </div>
             </div>
             {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full self-center">
-                {user.characters.map((character: any, index: number) => {
+                {user.characters.map((character: Characters, index: number) => {
                     return <div className={`flex relative overflow-hidden rounded-xl group cursor-pointer hover:-translate-y-1 transition-all ${activeCharacter.name == character.name && "shadow-light"}`} key={index} onClick={() => {
                         setLoading(true);
                         setActiveCharacter(character);

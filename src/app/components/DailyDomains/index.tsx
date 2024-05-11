@@ -4,15 +4,17 @@ import Image from "next/image";
 import { addFileName } from "@/app/utils/helper";
 import Link from "next/link";
 import Loader from "../Loader";
+import { Character } from "@/app/types/character";
+import { Artifact } from "@/app/types/artifacts";
 export default function DailyDomains({ }: {}) {
     const [activeWeapons, setActiveWeapons] = useState<any[]>([]);
-    const [activeArtifacts, setActiveArtifacts] = useState<any[]>([]);
-    const [activeCharacters, setActiveCharacters] = useState<any[]>([]);
+    const [activeArtifacts, setActiveArtifacts] = useState<Artifact[]>([]);
+    const [activeCharacters, setActiveCharacters] = useState<Character[]>([]);
     const [selectedDay, setSelectedDay] = useState<string>("Monday");
     const [loading, setLoading] = useState<boolean>(true);
     const fetchData = async (domain: any) => {
         try {
-            setActiveArtifacts(prevState => { // needed for dev mode
+            setActiveArtifacts(prevState => { //  dev mode rerendering
                 const domainExists = prevState.some(item => item.id === domain.id);
                 if (!domainExists) {
                     return [...prevState, domain];
@@ -41,10 +43,8 @@ export default function DailyDomains({ }: {}) {
     };
     const fetchAndSetData = async (data: any) => {
         const talentsPromises = data
-            // @ts-expect-error
-            .filter(domain => domain.domainType === "UI_ABYSSUS_AVATAR_PROUD" && domain.unlockRank > 40)
-            // @ts-expect-error
-            .map(domain => fetchData(domain));
+            .filter((domain:any) => domain.domainType === "UI_ABYSSUS_AVATAR_PROUD" && domain.unlockRank > 40)
+            .map((domain:any) => fetchData(domain));
 
         const talentsData = await Promise.all(talentsPromises);
         setActiveCharacters(talentsData.filter(Boolean));

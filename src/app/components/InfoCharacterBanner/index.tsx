@@ -1,13 +1,15 @@
 "use client"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef, useState,  } from "react"
+import { useRef, useState, } from "react"
 
 export default function InfoCharacterBanner({
     characterData, params
 }: {
     characterData: any,
-    params: any,
+    params: {
+        name: string
+    },
 }) {
     const [minimizeName, setMinimizedName] = useState<boolean>(false);
     const sectionRef = useRef(null);
