@@ -1,7 +1,6 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useLayoutEffect, useEffect } from "react";
 import Events from "../Events";
 import DailyDomains from "../DailyDomains";
 import Birthdays from "../Birthdays";
@@ -104,6 +103,7 @@ export default function BentoGrid() {
         </>
     )
 }
+
 function BentoItem({ item, index }: { item: any, index: number }) {
     return (
         <>

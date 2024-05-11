@@ -8,9 +8,10 @@ import Loader from "@/app/components/Loader";
 import { addFileName } from "@/app/utils/helper";
 import Footer from "@/app/components/Footer";
 import Link from "next/link";
+import { User } from "@/app/types/user"
 
 export default function UIDPage({ params }: { params: { uid: string } }) {
-    const [playerData, setPlayerData] = useState<any>();
+    const [playerData, setPlayerData] = useState<User>();
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
 

@@ -4,8 +4,9 @@ import { addFileName } from "@/app/utils/helper";
 import Image from "next/image";
 import Link from "next/link";
 import Loader from "../Loader";
+import { Character } from "@/app/types/character";
 export default function Birthdays({ }: {}) {
-    const [characters, setCharacters] = useState<any[]>([]);
+    const [characters, setCharacters] = useState<Character[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedMonth, setSelectedMonth] = useState<string>("");
     const [done, setDone] = useState<boolean>(false);

@@ -1,3 +1,4 @@
+import { Character } from "@/app/types/character";
 import Image from "next/image";
 import { useLayoutEffect, useState } from "react";
 function getColorFromMaterial(i: number, index: number) {
@@ -36,7 +37,7 @@ function getColorFromMaterial(i: number, index: number) {
     }
 }
 
-export default function StatsTable({ characterData }: { characterData: any }) {
+export default function StatsTable({ characterData }: { characterData: Character }) {
     const [showAscension, setAscension] = useState<boolean>(false);
     const [percentage, setPercent] = useState<boolean>(true)
     useLayoutEffect(() => {
