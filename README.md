@@ -18,19 +18,28 @@ Tenryou is create via Next.js and with information is pulled via:
 
 ## Built With
 
-Tenryou is currently built with mainly:
+[![Next][Next.js]][Next-url] 
+[![React][React.js]][React-url] 
+[![TailwindCSS][TailwindCSS]][TailwindCSS-url]
+[![Vercel][Vercel]][Vercel-url]
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
-* [![Vercel][Vercel]][Vercel-url]
-
-
+ 
 ## Prerequisites
 
 * [Git](https://git-scm.com/downloads) Installed.
 * [Node.js](https://nodejs.org/en/) Installed.
 * Some knowledge of bash (a shell) commands (ex.: cd, ls).
+
+## Roadmap
+
+- [ ] Add Changelog
+- [ ] Improve Team Builder and add example teams
+- [ ] Calculators
+- [ ] TCG Support
+- [ ] Multi-language Support
+    - [ ] Japanese
+    - [ ] Korean
+    - [ ] Chinese
 
 ## Getting Started
 ``` bash
@@ -69,7 +78,7 @@ All content and materials from the game Genshin Impact, are trademarks and copyr
 [stars-url]: https://github.com/pho86/Tenryou/stargazers
 [issues-shield]: https://img.shields.io/github/issues/pho86/Tenryou.svg?style=for-the-badge
 [issues-url]: https://github.com/pho86/Tenryou/issues
-[license-shield]: https://img.shields.io/github/license/pho86/Tenryou.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/pho86/Tenryou/blob/master/LICENSE.txt
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
