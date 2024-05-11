@@ -1,3 +1,7 @@
+<div align= "center">
+ <img width="230" alt="logo@2x" src="public/icon.svg">
+</div>
+
 <img src="public/icon.svg" align="right" width="90px"/>
 
 # [Tenryou](https://Tenryou.live)
@@ -18,28 +22,20 @@ Tenryou is create via Next.js and with information is pulled via:
 
 ## Built With
 
-[![Next][Next.js]][Next-url] 
-[![React][React.js]][React-url] 
-[![TailwindCSS][TailwindCSS]][TailwindCSS-url]
-[![Vercel][Vercel]][Vercel-url]
+Tenryou is currently built with mainly:
 
- 
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
+* [![Vercel][Vercel]][Vercel-url]
+* [![Framer-Motion][Framer-Motion]][Framer-Motion-url]
+
+
 ## Prerequisites
 
 * [Git](https://git-scm.com/downloads) Installed.
 * [Node.js](https://nodejs.org/en/) Installed.
 * Some knowledge of bash (a shell) commands (ex.: cd, ls).
-
-## Roadmap
-
-- [ ] Add Changelog
-- [ ] Improve Team Builder and add example teams
-- [ ] Calculators
-- [ ] TCG Support
-- [ ] Multi-language Support
-    - [ ] Japanese
-    - [ ] Korean
-    - [ ] Chinese
 
 ## Getting Started
 ``` bash
@@ -78,7 +74,7 @@ All content and materials from the game Genshin Impact, are trademarks and copyr
 [stars-url]: https://github.com/pho86/Tenryou/stargazers
 [issues-shield]: https://img.shields.io/github/issues/pho86/Tenryou.svg?style=for-the-badge
 [issues-url]: https://github.com/pho86/Tenryou/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/pho86/Tenryou.svg?style=for-the-badge
 [license-url]: https://github.com/pho86/Tenryou/blob/master/LICENSE.txt
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
@@ -89,3 +85,5 @@ All content and materials from the game Genshin Impact, are trademarks and copyr
 [TailwindCSS-url]: https://tailwindcss.com/
 [Vercel]: https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white
 [Vercel-url]: https://vercel.com/
+[Framer-Motion]: https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=white
+[Framer-Motion-url]: https://www.framer.com/motion/
