@@ -127,19 +127,26 @@ export default function Profile({ user }: { user: any }) {
                                     <div className="">
                                         <Image src={`https://enka.network/ui/${character.skills.normalAttacks.assets.icon}.png`} width={250} height={250} alt={`${character.skills.normalAttacks.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                         <div className="w-full justify-center flex items-center">
+
                                             <p className="-mt-2">{character.skills.normalAttacks.level}</p>
                                         </div>
                                     </div>
                                     <div className="">
                                         <Image src={`https://enka.network/ui/${character.skills.elementalSkill.assets.icon}.png`} width={250} height={250} alt={`${character.skills.elementalSkill.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                         <div className="w-full justify-center flex items-center">
-                                            <p className="-mt-2">{character.skills.elementalBurst.level}</p>
+                                            {character.constellationsList[2] != undefined ?
+                                                <p className="-mt-2 text-green-600">{character.skills.elementalSkill.level + 3}</p> :
+                                                <p className="-mt-2 ">{character.skills.elementalSkill.level}</p>
+                                            }
                                         </div>
                                     </div>
                                     <div className="">
                                         <Image src={`https://enka.network/ui/${character.skills.elementalBurst.assets.icon}.png`} width={250} height={250} alt={`${character.skills.elementalBurst.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                         <div className="w-full justify-center flex items-center">
-                                            <p className="-mt-2">{character.skills.elementalBurst.level}</p>
+                                        {character.constellationsList[4] != undefined ?
+                                                <p className="-mt-2 text-green-600">{character.skills.elementalBurst.level + 3}</p> :
+                                                <p className="-mt-2 ">{character.skills.elementalBurst.level}</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -160,8 +167,8 @@ export default function Profile({ user }: { user: any }) {
                 </div>
                 :
                 <>
-                <ProfileCardWide user={user} activeCharacter={activeCharacter} artifactSet={artifactSet} toggleShowStatsModal={() => { setShowStatsModal(!showStatsModal) }} />
-                {/* <ProfileCardSmall user={user} activeCharacter={activeCharacter} artifactSet={artifactSet} toggleShowStatsModal={() => { setShowStatsModal(!showStatsModal) }}/> */}
+                    <ProfileCardWide user={user} activeCharacter={activeCharacter} artifactSet={artifactSet} toggleShowStatsModal={() => { setShowStatsModal(!showStatsModal) }} />
+                    {/* <ProfileCardSmall user={user} activeCharacter={activeCharacter} artifactSet={artifactSet} toggleShowStatsModal={() => { setShowStatsModal(!showStatsModal) }}/> */}
                 </>
             }
         </div>

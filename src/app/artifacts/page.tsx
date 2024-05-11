@@ -6,7 +6,7 @@ import { Fragment, useLayoutEffect, useState } from "react"
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 
-function Artifact({ type, rarity, image, onMouseEnter, name }: { type: string, rarity: number, image: string, onMouseEnter: () => void, name: string }) {
+function Artifact({ type, rarity, image, onMouseEnter, name, onClick }: { type: string, rarity: number, image: string, onMouseEnter?: () => void, name: string, onClick:()=>void }) {
   return <Image
     src={image}
     width={150}
@@ -14,6 +14,7 @@ function Artifact({ type, rarity, image, onMouseEnter, name }: { type: string, r
     alt={`${type} image`}
     className={`rounded-xl max-w-32 w-full h-full object-cover bg-gradient-to-br ${rarity == 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : rarity == 4 ? "from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-R-start to-gradient-R-end"} hover:scale-110 transition-all hover:shadow-light`}
     onMouseEnter={onMouseEnter}
+    onClick={onClick}
     title={name ? name : ""}
   />
 }
@@ -42,19 +43,19 @@ export default function ArtifactsPage() {
               {artifactData.length > 0 ? artifactData.map((artifact, index) => (
                 <Fragment key={index}>
                   {artifact.flower && (
-                    <Artifact type="flower" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_flower}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "flower" }); }} name={artifact.flower.name} />
+                    <Artifact type="flower" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_flower}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "flower" }); }} name={artifact.flower.name} />
                   )}
                   {artifact.plume && (
-                    <Artifact type="plume" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_plume}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "plume" }); }} name={artifact.plume.name} />
+                    <Artifact type="plume" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_plume}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "plume" }); }} name={artifact.plume.name} />
                   )}
                   {artifact.sands && (
-                    <Artifact type="sands" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_sands}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "sands" }); }} name={artifact.sands.name} />
+                    <Artifact type="sands" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_sands}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "sands" }); }} name={artifact.sands.name} />
                   )}
                   {artifact.goblet && (
-                    <Artifact type="goblet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_goblet}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "goblet" }); }} name={artifact.goblet.name} />
+                    <Artifact type="goblet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_goblet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "goblet" }); }} name={artifact.goblet.name} />
                   )}
                   {artifact.circlet && (
-                    <Artifact type="circlet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_circlet}.png`} onMouseEnter={() => { setActiveArtifact({ ...artifact, hover: "circlet" }); }} name={artifact.circlet.name} />
+                    <Artifact type="circlet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_circlet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "circlet" }); }} name={artifact.circlet.name} />
                   )}
                 </Fragment>
               )) :

@@ -59,8 +59,8 @@ export default function OutfitsPage() {
                                     </div> :
                                     active ? <>
                                         <div className="flex flex-col relative bg-[#e9e9e9] rounded-xl ">
-                                            <div className={` max-h-72 rounded-t-xl bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end flex justify-between w-full`}>
-                                                <Image src={`https://enka.network/ui/${active.images.namesplash}.png`} width={500} height={500} alt={`${active.name} material icon`} className={`object-cover w-full`} />
+                                            <div className={` max-h-72 rounded-t-xl bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end flex justify-between w-full relative`}>
+                                                <Image src={`https://enka.network/ui/${active.images.namesplash}.png`} width={500} height={500} alt={`${active.name} material icon`} className={`object-contain bottom-0 w-full`} />
                                             </div>
                                             <div className="text-bg p-4 flex flex-col gap-2">
                                                 <h2 className="font-bold text-xl">{active.name}</h2>
@@ -79,7 +79,7 @@ export default function OutfitsPage() {
                                                 </div>
                                             </div>
                                         </div>
-                                        {active.url.modelviewer.length > 0 && <div className="w-full max-h-[50dvh] h-full">
+                                        {active.url.modelviewer.length > 0 && <div className="w-full max-h-[60dvh] h-full">
                                             <iframe src={active.url.modelviewer} className="w-full h-full">
                                             </iframe>
                                             <Link href={active.url.modelviewer} target="__blank" className="hover:text-primary transition-all">Open in New Tab</Link>
@@ -87,7 +87,7 @@ export default function OutfitsPage() {
                                     </>
                                         :
                                         <div>
-                                            <Loader />
+                                            {/* <Loader /> */}
                                         </div>
                                 }
                             </div>
