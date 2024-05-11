@@ -4,6 +4,11 @@
 
 A Genshin Impact companion website. Tenryou helps players view information from the game in a visual and cohesive manner with via information pulled from various resources.
 
+<!-- [![Contributors][contributors-shield]][contributors-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url] -->
+
 ## Development
 Tenryou is create via Next.js and with information is pulled via:
 
@@ -11,9 +16,24 @@ Tenryou is create via Next.js and with information is pulled via:
 * [Enka.network](https://enka.network/)
 * [Ambr.top](https://ambr.top/)
 
+## Built With
+
+Tenryou is currently built with mainly:
+
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
+* [![Vercel][Vercel]][Vercel-url]
+
+
+## Prerequisites
+
+* [Git](https://git-scm.com/downloads) Installed.
+* [Node.js](https://nodejs.org/en/) Installed.
+* Some knowledge of bash (a shell) commands (ex.: cd, ls).
 
 ## Getting Started
-```
+``` bash
 # clone repository
 git clone https://github.com/Pho86/Tenryou.git
 
@@ -35,7 +55,28 @@ npm run test, npx playwright test
 
 ## License
 
-[MIT](https://github.com/pho86/Tenryou/blob/main/LICENSE)
+Distributed under the [MIT](https://github.com/pho86/Tenryou/blob/main/LICENSE) License. 
 
 This website and repository is not affiliated with HoYoVerse.
 All content and materials from the game Genshin Impact, are trademarks and copyrights of the original owners and HoYoVerse.
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/pho86/Tenryou.svg?style=for-the-badge
+[contributors-url]: https://github.com/pho86/Tenryou/graphs/contributors
+[stars-shield]: https://img.shields.io/github/stars/pho86/Tenryou.svg?style=for-the-badge
+[stars-url]: https://github.com/pho86/Tenryou/stargazers
+[issues-shield]: https://img.shields.io/github/issues/pho86/Tenryou.svg?style=for-the-badge
+[issues-url]: https://github.com/pho86/Tenryou/issues
+[license-shield]: https://img.shields.io/github/license/pho86/Tenryou.svg?style=for-the-badge
+[license-url]: https://github.com/pho86/Tenryou/blob/master/LICENSE.txt
+
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[TailwindCSS]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
+[TailwindCSS-url]: https://tailwindcss.com/
+[Vercel]: https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white
+[Vercel-url]: https://vercel.com/
