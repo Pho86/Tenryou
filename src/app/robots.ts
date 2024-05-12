@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: `https://tenryou.live/sitemap.xml`,
+        sitemap: `https://www.tenryou.live/sitemap.xml`,
     }
 }
