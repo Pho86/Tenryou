@@ -4,7 +4,7 @@ import Loader from "../Loader";
 import Link from "next/link";
 import StatsModal from "../StatExplainationModal";
 import { AnimatePresence } from "framer-motion";
-import { ProfileCardSmall, ProfileCardWide } from "../ProfileCard";
+import { ProfileCardGrid, ProfileCardWide } from "../ProfileCard";
 import { User, Characters } from "@/app/types/user";
 export default function Profile({ user }: { user: User }) {
     const [newUser, setNewUser] = useState<any>({
@@ -21,7 +21,6 @@ export default function Profile({ user }: { user: User }) {
     const [artifactSet, setArtifactSet] = useState<any[]>([])
     const [namecardsHover, setNamecardsHover] = useState<boolean>(false);
     const [showStatsModal, setShowStatsModal] = useState<boolean>(false);
-
     useEffect(() => {
         const artifactNames = activeCharacter.equipment.artifacts.map((artifact: any) => artifact.setName);
         const artifactSetCounts = artifactNames.reduce((accumlator: any, currentVal: number) => {
@@ -31,7 +30,6 @@ export default function Profile({ user }: { user: User }) {
         const artifactSetArray = Object.entries(artifactSetCounts).map(([setName, count]) => ({ name: setName, count }));
         setArtifactSet(artifactSetArray);
     }, [activeCharacter.equipment.artifacts]);
-
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2 lg:items-center md:p-2 p-0">
@@ -87,10 +85,10 @@ export default function Profile({ user }: { user: User }) {
             {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full self-center">
                 {user.characters.map((character: Characters, index: number) => {
                     return <div className={`flex relative overflow-hidden rounded-xl group cursor-pointer hover:-translate-y-1 transition-all ${activeCharacter.name == character.name && "shadow-light"}`} key={index} onClick={() => {
-                        setLoading(true);
+                        // setLoading(true);
                         setActiveCharacter(character);
                         setTimeout(() => {
-                            setLoading(false);
+                            // setLoading(false);
                         }, 10)
                     }}>
 
@@ -142,7 +140,7 @@ export default function Profile({ user }: { user: User }) {
                                     <div className="">
                                         <Image src={`https://enka.network/ui/${character.skills.elementalBurst.assets.icon}.png`} width={250} height={250} alt={`${character.skills.elementalBurst.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                         <div className="w-full justify-center flex items-center">
-                                        {character.constellationsList[4] != undefined ?
+                                            {character.constellationsList[4] != undefined ?
                                                 <p className="-mt-2 text-green-600">{character.skills.elementalBurst.level + 3}</p> :
                                                 <p className="-mt-2 ">{character.skills.elementalBurst.level}</p>
                                             }
@@ -157,7 +155,6 @@ export default function Profile({ user }: { user: User }) {
                 })}
             </section>}
 
-
             <div className="from-gradient-Pyro-start to-gradient-Pyro-end  from-gradient-Electro-start to-gradient-Electro-end from-gradient-Cryo-start to-gradient-Cryo-end from-gradient-Hydro-start to-gradient-Hydro-end from-gradient-Dendro-start to-gradient-Dendro-end from-gradient-Anemo-start to-gradient-Anemo-end from-gradient-Geo-start to-gradient-Geo-end"></div>
             {loading
                 ?
@@ -167,9 +164,17 @@ export default function Profile({ user }: { user: User }) {
                 :
                 <>
                     <ProfileCardWide user={user} activeCharacter={activeCharacter} artifactSet={artifactSet} toggleShowStatsModal={() => { setShowStatsModal(!showStatsModal) }} />
-                    {/* <ProfileCardSmall user={user} activeCharacter={activeCharacter} artifactSet={artifactSet} toggleShowStatsModal={() => { setShowStatsModal(!showStatsModal) }}/> */}
                 </>
             }
+            {loading ?
+                <div className="h-[50dvh]">
+                    <Loader />
+                </div>
+                :
+                <ProfileCardGrid user={user} />
+            }
+
         </div>
     )
 }
+

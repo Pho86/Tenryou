@@ -53,8 +53,22 @@ export default function TeamBuilderPage() {
         else setSelectedSlot(prevSlot => (prevSlot + 1) % 8);
         return element;
     };
+    const [availableCharacters, setAvailableCharacters] = useState<Character[]>([]);
     const [deletedChars, setDeletedChars] = useState<boolean>(false);
-    const [availableCharacters, setAvailableCharacters] = useState<any[]>([]);
+    const removeCharacter = (character: Character) => {
+        const updatedCharacters = activeCharacters.map((item, i) => {
+            if (item.name === character.name) {
+                setActiveElements(prevActiveElements => {
+                    const updatedActiveElements = [...prevActiveElements];
+                    updatedActiveElements[i] = "";
+                    return updatedActiveElements;
+                });
+                return {};
+            }
+            return item;
+        });
+        setActiveCharacters(updatedCharacters);
+    };
     const randomizeTeam = () => {
         let charactersAvailable;
         if (!deletedChars) {
@@ -82,20 +96,6 @@ export default function TeamBuilderPage() {
         setActiveElements(elements);
     }
 
-    const removeCharacter = (character: any) => {
-        const updatedCharacters = activeCharacters.map((item, i) => {
-            if (item.name === character.name) {
-                setActiveElements(prevActiveElements => {
-                    const updatedActiveElements = [...prevActiveElements];
-                    updatedActiveElements[i] = "";
-                    return updatedActiveElements;
-                });
-                return {};
-            }
-            return item;
-        });
-        setActiveCharacters(updatedCharacters);
-    };
 
     return (
         <>
