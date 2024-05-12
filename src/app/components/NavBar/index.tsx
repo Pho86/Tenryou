@@ -36,7 +36,9 @@ export default function NavBar({
                         <div className="border-primary cursor-pointer grid place-items-center md:pl-0">
                             <Link href="/" className="flex text-2xl items-center gap-1 justify-center transition-all cursor-pointer font-philosopher font-bold hover:text-primary">
                                 <Image src="/icon.svg" width={45} height={45} alt="Tenryou Icon" className="drop-shadow-icon" />
-                                Tenryou
+                                <h2>
+                                    Tenryou
+                                </h2>
                             </Link>
                         </div>
                         <div className="flex justify-center items-center md:gap-3 sm:gap-2 gap-1 font-semibold">
@@ -44,10 +46,10 @@ export default function NavBar({
                                 <h3 className={`${active == 1 && "text-primary "} group-hover:text-primary relative transition-all`}>Characters</h3>
                             </Link>
                             <Link href="/users" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3  className={`${active == 2 && "text-primary "} group-hover:text-primary relative transition-all`}>Users</h3>
+                                <h3 className={`${active == 2 && "text-primary "} group-hover:text-primary relative transition-all`}>Users</h3>
                             </Link>
                             <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3  className={`${active == 3 && "text-primary "} group-hover:text-primary relative transition-all`}>Team Builder</h3>
+                                <h3 className={`${active == 3 && "text-primary "} group-hover:text-primary relative transition-all`}>Team Builder</h3>
                             </Link>
                             {/* <ThemeSwitch/> */}
                         </div>
