@@ -23,20 +23,6 @@ export const metadata: Metadata = {
     type: "website"
   },
   keywords: ["Genshin Impact", "Team Builder", "Genshin Weapons", "Genshin Fantasy", "Genshin Database", "User Search", "Daily Info", "Genshin Artifacts", "Genshin Characters", "Powered By Enka.Network", "Genshin DB", "Genshin Information", "Birthdays", "Genshin", "Genshin Daily Farming", "Genshin PC Game", "Mihoyo", "Genshin Elements", "Genshin Outfits and Models", "Farming", "Genshin Materials", "Genshin Stats"],
-  robots: {
-    index: true,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      index: true,
-      follow: false,
-      noimageindex: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-    
-  },
   applicationName: "Tenryou",
 
 };
