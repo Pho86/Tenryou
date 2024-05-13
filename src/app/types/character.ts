@@ -1,4 +1,6 @@
 export type Character = {
+    nameCard: any;
+    outfits: any;
     id: number;
     name: string;
     fullname?: string;
@@ -17,6 +19,7 @@ export type Character = {
     birthdaymmdd: string;
     birthday: string;
 
+    element?:string;
     elementType: 'ELEMENT_ANEMO' | 'ELEMENT_CRYO' | 'ELEMENT_DENDRO' | 'ELEMENT_ELECTRO' | 'ELEMENT_GEO' | 'ELEMENT_HYDRO' | 'ELEMENT_NONE' | 'ELEMENT_PYRO';
     elementText: string;
 
@@ -26,7 +29,7 @@ export type Character = {
 
     substatType: 'FIGHT_PROP_ATTACK_PERCENT' | 'FIGHT_PROP_CHARGE_EFFICIENCY' | 'FIGHT_PROP_CRITICAL' | 'FIGHT_PROP_CRITICAL_HURT' | 'FIGHT_PROP_DEFENSE_PERCENT' | 'FIGHT_PROP_ELEC_ADD_HURT' | 'FIGHT_PROP_ELEMENT_MASTERY' | 'FIGHT_PROP_FIRE_ADD_HURT' | 'FIGHT_PROP_GRASS_ADD_HURT' | 'FIGHT_PROP_HEAL_ADD' | 'FIGHT_PROP_HP_PERCENT' | 'FIGHT_PROP_ICE_ADD_HURT' | 'FIGHT_PROP_PHYSICAL_ADD_HURT' | 'FIGHT_PROP_ROCK_ADD_HURT' | 'FIGHT_PROP_WATER_ADD_HURT' | 'FIGHT_PROP_WIND_ADD_HURT';
     substatText: string;
-    map:any;
+    map: any;
     constellation: string;
     cv: {
         english: string;
@@ -57,14 +60,15 @@ export type Character = {
         cover2?: string;
         "hoyolab-avatar"?: string;
     };
-    fileName:string;
+    fileName: string;
     talents: any;
     constellations: any;
     voices: any;
-    result:any;
+    result: any;
     url: {
         fandom: string;
     };
     stats: any;
+    active: boolean;
     version: string;
 }

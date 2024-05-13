@@ -265,7 +265,7 @@ export function ProfileCardSmall({
                         </div>
                     </div>
                     <div className="flex flex-col gap-1 drop-shadow-text justify-end ">
-                        <div className="font-bold text-lg">{character.equipment.weapon.name}</div>
+                        <div className="font-bold text-lg whitespace-nowrap">{character.equipment.weapon.name}</div>
                         <div className="flex gap-4">{character.equipment.weapon.weaponStats.map((stat: any, index: number) => {
                             const percentStat = isPropertyFlat(stat.stat)
                             const isAttackBonus = isAttackStat(stat.stat);

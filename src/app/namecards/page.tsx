@@ -24,7 +24,7 @@ export default function NamecardsPage() {
 
     return (
         <>
-            <NavBar />
+            <NavBar active={4}/>
             <main className="md:pt-16 md:px-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center ">
                 <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
                     <h1 className="text-3xl text-primary">Namecards List</h1>
@@ -34,7 +34,7 @@ export default function NamecardsPage() {
                         </div>
                         <div className="grid lg:grid-cols-2 gap-8">
                             <div className="grid-auto-fit-200 md:grid-auto-fit-300 overflow-y-scroll p-2 max-h-[90dvh] ">
-                                {nameCardData.length > 0 ? nameCardData.map((namecard: any, index: number) => {
+                                {nameCardData.length > 0 ? nameCardData.map((namecard: Namecard, index: number) => {
                                     return <div key={index} className="">
                                         <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == namecard.id && "shadow-light scale-105"}`} onClick={() => { setActive(namecard) }}>
                                             <Image src={`https://enka.network/ui/${namecard.images.filename_background}.png`} width={250} height={250} alt={`${namecard.name} namecard icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end rounded-t-lg w-full h-full rounded-br-4xl object-cover`} title={`${namecard.name}`}

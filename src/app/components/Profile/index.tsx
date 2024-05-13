@@ -31,8 +31,8 @@ export default function Profile({ user }: { user: User }) {
         setArtifactSet(artifactSetArray);
     }, [activeCharacter.equipment.artifacts]);
     return (
-        <div className="flex flex-col gap-4">
-            <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2 lg:items-center md:p-2 p-0">
+        <div className="flex flex-col gap-4 pt-8 pt-0">
+            <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2 lg:items-center">
                 <div className="flex flex-col md:flex-row gap-2">
                     {user.player.profilePicture ? <Image src={`https://enka.network/ui/${user.player.profilePicture.assets.icon}.png`} width={175} height={50} alt={`${user.player.username} player icon`} title={`${user.player.username}`} className="bg-bg-darker p-2 rounded-xl" /> :
                         <Image src={'/icon.svg'} width={175} height={50} alt={`${user.player.username} player icon`} title={`${user.player.username}`} className="bg-bg-darker p-2 rounded-xl h-48" />}
@@ -82,14 +82,10 @@ export default function Profile({ user }: { user: User }) {
                     <p className="hover:text-primary transition-all cursor-pointer" onClick={() => { setShowStatsModal(!showStatsModal) }}>Stats Explaination</p>
                 </div>
             </div>
-            {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full self-center">
+            {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-2xl w-full self-center">
                 {user.characters.map((character: Characters, index: number) => {
                     return <div className={`flex relative overflow-hidden rounded-xl group cursor-pointer hover:-translate-y-1 transition-all ${activeCharacter.name == character.name && "shadow-light"}`} key={index} onClick={() => {
-                        // setLoading(true);
                         setActiveCharacter(character);
-                        setTimeout(() => {
-                            // setLoading(false);
-                        }, 10)
                     }}>
 
                         {character.name === "Yae Miko" ?
@@ -97,7 +93,6 @@ export default function Profile({ user }: { user: User }) {
                             :
                             (character.name === "Traveler") ?
                                 <Image src={`/namecards/UI_NameCardPic_Ysxf4_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" />
-
                                 :
                                 <Image src={`https://enka.network/ui/UI_NameCardPic_${character.fileName}_P.png`} width={2000} height={500} alt={`${character.name} constellation`} className="absolute object-cover w-full h-full bottom-0 rounded-xl" />
                         }

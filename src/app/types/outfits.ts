@@ -8,6 +8,7 @@ export type Outfit = {
     source?: string[];
 
     images: {
+        namecard: any;
         nameicon: string;
         filename_card: string;
         filename_icon?: string;
@@ -16,7 +17,7 @@ export type Outfit = {
         filename_sideIcon?: string;
     };
     url: {
-        modelviewer?: string;
+        modelviewer: string;
     };
     version: string;
     result:any;

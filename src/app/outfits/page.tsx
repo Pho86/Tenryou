@@ -18,7 +18,7 @@ export default function OutfitsPage() {
             .then(async (res) => {
                 let filteredSkins: any[] = [];
                 await Promise.all(res.data.result.map(async (outfit: Outfit) => {
-                    if(outfit.images.nameicon) filteredSkins.push(outfit);
+                    if (outfit.images.nameicon) filteredSkins.push(outfit);
                 }));
                 setOutfitData(filteredSkins);
                 setActive(filteredSkins[0]);
@@ -28,20 +28,17 @@ export default function OutfitsPage() {
 
     return (
         <>
-            <NavBar />
+            <NavBar active={4} />
             <main className="md:pt-16 md:px-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center ">
                 <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
                     <h1 className="text-3xl text-primary">Skins List</h1>
                     <section className="flex flex-col gap-8">
                         <div className="grid lg:grid-cols-2 gap-8">
                             <div className="grid-auto-fit-200 overflow-y-scroll p-2 max-h-[90dvh] ">
-                                {outfitData.length > 0 ? outfitData.map((outfit: any, index: number) => {
+                                {outfitData.length > 0 ? outfitData.map((outfit: Outfit, index: number) => {
                                     if (outfit.images.nameicon && skins) return <div key={index} className="max-h-48">
                                         <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == outfit.id && "shadow-light scale-105"}`} onClick={() => { setActive(outfit) }}>
-
-                                            <Image src={`https://enka.network/ui/${outfit.images.namecard}.png`} width={250} height={250} alt={`${outfit.name} weaapon icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end" rounded-t-lg w-full h-full rounded-br-4xl object-cover`} title={`${outfit.name}`}
-                                                //@ts-ignore
-                                                onError={(e) => { e.target.closest('.max-h-48').remove(); }} // delete div's with invalid images
+                                            <Image src={`https://enka.network/ui/${outfit.images.namecard}.png`} width={250} height={250} alt={`${outfit.name} skins icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end" rounded-t-lg w-full h-full rounded-br-4xl object-cover`} title={`${outfit.name}`}
                                             />
                                             <p className="flex flex-col min-h-9 justify-around mx-1 text-center text-xs text-bg font-bold">{outfit.name}</p>
                                         </div>

@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import { useState, useLayoutEffect } from "react"
 import { addFileName } from "@/app/utils/helper";
