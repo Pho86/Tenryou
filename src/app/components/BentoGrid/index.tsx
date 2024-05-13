@@ -47,7 +47,7 @@ function BentoItem({ item, index, type }: { item: any, index: number, type?:stri
                     <div className={`flex flex-col h-full`}>
                         <div className={`transition-all w-full z-20 p-3 flex `}>
                             <div className="flex w-full flex-col">
-                                <h2 className='text-xl text-primary font-semibold'>{item.title}</h2>
+                                {item.children ? <h2 className='text-xl text-primary font-semibold'>{item.title}</h2> : <h1 className='text-xl text-primary font-semibold'>{item.title}</h1>}
                             </div>
                         </div>
                         {item.children ?

@@ -69,7 +69,7 @@ export default function MaterialsPage() {
                                         <div className="flex flex-col relative bg-[#e9e9e9] rounded-xl ">
                                             <div className={`max-h-56 rounded-t-xl bg-gradient-to-br ${active.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : active.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : active.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : active.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} flex justify-between w-full`}>
                                                 <div className="p-4 w-full justify-between">
-                                                    <h1 className="text-pretty font-bold ">{active.typeText}</h1>
+                                                    <h2 className="text-pretty font-bold ">{active.typeText}</h2>
                                                 </div>
                                                 <Image src={`https://enka.network/ui/${active.images.filename_icon}.png`} width={500} height={500} alt={`${active.name} material icon`} className={`object-contain`}
                                                     onError={(e:React.SyntheticEvent<HTMLImageElement, Event>) => { e.currentTarget.src = '/icon.svg' }}
