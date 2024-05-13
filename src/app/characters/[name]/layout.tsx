@@ -11,7 +11,8 @@ export async function generateMetadata(
     const name = params.name
 
     return {
-        title: `${name} - Tenryou 💮`
+        title: `${name} - Tenryou 💮`,
+        description:`${name} from Genshin Impact information and statistics`
     }
 }
 
