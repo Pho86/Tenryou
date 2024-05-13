@@ -26,7 +26,7 @@ export default function MaterialsPage() {
 
     return (
         <>
-            <NavBar />
+            <NavBar active={4}/>
             <main className="md:pt-16 md:px-16 px-8 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center ">
                 <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
                     <h1 className="text-3xl text-primary">Materials List</h1>
@@ -42,7 +42,7 @@ export default function MaterialsPage() {
                         </div>
                         <div className="grid lg:grid-cols-2 gap-8">
                             <div className="grid-auto-fit-200 overflow-y-scroll p-2 max-h-[90dvh] ">
-                                {materialData.length > 0 ? materialData.map((material: any, index: number) => {
+                                {materialData.length > 0 ? materialData.map((material: Material, index: number) => {
                                     const materialRarity = [true, 1, 2, 3, 4, 5];
                                     const validRarity = activeRarity === 0 || materialRarity[activeRarity] === material.rarity;
                                     if (validRarity) return <div key={index} className="max-h-48">

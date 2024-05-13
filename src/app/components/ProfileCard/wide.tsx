@@ -34,11 +34,22 @@ export function ProfileCardWide({
     const [UID, setUID] = useState<boolean>(true);
     const [critValue, setCritValue] = useState<boolean>(true);
     const [subStatRolls, setSubStatRolls] = useState<boolean>(true);
+    const [starsBackground, setStarsBackground] = useState<boolean>(true);
     return <>
         <div className="overflow-x-scroll 2xl:overflow-x-hidden grid place-items-center" id="wide_player_card">
 
             <div className={`grid grid-cols-2 auto-cols-[400px] w-[1280px] p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end relative`} ref={cardRef}>
-                <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name} background stars image`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full  " />
+                {starsBackground ?
+                    <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name} background stars image`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full  " /> 
+                    :
+                    activeCharacter.name === "Yae Miko" ?
+                        <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}1_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-100 rounded-xl object-cover h-full " />
+                        :
+                        (activeCharacter.name === "Traveler") ?
+                            <Image src={`/namecards/UI_NameCardPic_Ysxf4_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full " />
+                            :
+                            <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full w-full" />
+                }
                 <div className="w-full h-full relative min-h-[400px] col-span-1">
                     <div className="flex flex-col absolute p-5 w-full h-full drop-shadow-text ">
                         <div className="flex-col flex h-full justify-between">
@@ -445,7 +456,7 @@ export function ProfileCardWide({
         </div>
         <div className="w-full flex flex-row-reverse items-center justify-center">
             <div className="flex-end flex justify-end w-[1280px] max-w-7xl gap-4">
-                <FaDownload className="hover:text-primary text-xl transition-all cursor-pointer" onClick={() => { prepareURL() }} />
+                <FaDownload className="hover:text-primary text-xl transition-all cursor-pointer" title="Download Card" onClick={() => { prepareURL() }} />
             </div>
         </div>
         <div className="w-full flex flex-row-reverse items-center justify-center">
@@ -467,6 +478,10 @@ export function ProfileCardWide({
                     <label className="flex gap-2">
                         <input type="checkbox" checked={subStatRolls} onChange={() => { setSubStatRolls(!subStatRolls) }} />
                         <span>Substat Rolls</span>
+                    </label>
+                    <label className="flex gap-2">
+                        <input type="checkbox" checked={!starsBackground} onChange={() => { setStarsBackground(!starsBackground) }} />
+                        <span>Namecard BG</span>
                     </label>
                 </div>
             </div>

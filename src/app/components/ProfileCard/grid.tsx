@@ -103,7 +103,7 @@ export function ProfileCardGrid({
         </div>
         <div className="w-full flex flex-row-reverse items-center justify-center">
             <div className="flex-end flex justify-end w-[1536px] gap-4">
-                <FaDownload className="hover:text-primary text-xl transition-all cursor-pointer" onClick={() => { prepareURL() }} />
+                <FaDownload className="hover:text-primary text-xl transition-all cursor-pointer" title="Download Card" onClick={() => { prepareURL() }} />
             </div>
         </div>
         <div className="w-full flex flex-row-reverse items-center justify-center">
@@ -140,7 +140,7 @@ function CharacterCard({ character, selectCharacter, removeCharacter, activeProp
     }} className={`min-w-[4rem] md:min-w-[5rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active && "shadow-light"} hover:scale-105 hover:shadow-light`}>
         <div className={`flex flex-col self-start `}>
             <Image
-                src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
+                src={`https://enka.network/ui/${character.assets.icon}.png`}
                 width={200}
                 height={200}
                 alt={`${character.name}`}

@@ -9,7 +9,7 @@ export default function Footer({
 }) {
     return (
         <footer className={`w-full mt-16 px-8 md:px-16 flex items-center justify-center ${className}`}>
-            <div className="mb-32 md:mb-16 flex flex-col max-w-screen-2xl w-full">
+            <div className="mb-32 md:mb-8 flex flex-col max-w-screen-2xl w-full">
                 <div className="flex flex-col md:flex-row gap-2 items-end justify-between">
                     <div className="flex flex-col md:flex-row text-left">
                         <div className="flex justify-center">
@@ -30,6 +30,9 @@ export default function Footer({
                         </Link>
                         <Link href="/teambuilder" className="hover:text-primary transition-all">
                             <h2>Team Builder</h2>
+                        </Link>
+                        <Link href="/database" className="hover:text-primary transition-all">
+                            <h2>Database</h2>
                         </Link>
                     </ul>
                 </div>

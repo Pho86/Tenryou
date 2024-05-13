@@ -124,7 +124,7 @@ export default function TeamBuilderPage() {
                 </div>
                 <div className="grid lg:grid-cols-2 w-full max-w-screen-2xl ">
                     <section className="grid-auto-fit-200 w-full p-4 max-h-[100dvh] overflow-y-scroll py-2 order-1">
-                        {characterData.length > 0 ? characterData.map((character: any, index: number) => {
+                        {characterData.length > 0 ? characterData.map((character: Character, index: number) => {
                             const elementConditions = [true, "Pyro", "Hydro", "Anemo", "Electro", "Dendro", "Cryo", "Geo"];
                             const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
                             const validElement = activeElement === 0 || elementConditions[activeElement] === character.elementText;
@@ -214,7 +214,7 @@ export default function TeamBuilderPage() {
     );
 }
 
-function CharacterCard({ character, selectCharacter, removeCharacter, activeProp }: { character: any, index: number, selectCharacter: (char: any) => void, removeCharacter: (char: any) => void, activeProp: () => boolean; }) {
+function CharacterCard({ character, selectCharacter, removeCharacter, activeProp }: { character: Character, index: number, selectCharacter: (char: any) => void, removeCharacter: (char: any) => void, activeProp: () => boolean; }) {
     const [active, setActive] = useState<boolean>(activeProp);
     useEffect(() => {
         setActive(activeProp());

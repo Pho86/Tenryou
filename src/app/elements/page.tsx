@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 import { Link as Scroll } from "react-scroll"
 export default function ElementsPage() {
     return <>
-        <NavBar />
+        <NavBar active={4}/>
         <main className="pt-8 md:pt-16 px-8 md:px-16 mb-20 w-full min-h-[100dvh] flex flex-col gap-4 items-center">
             <div className="flex flex-col gap-5 max-w-screen-2xl w-full">
                 <h1 className="text-3xl text-primary">Elements</h1>

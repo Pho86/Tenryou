@@ -51,28 +51,35 @@ export default function NavBar({
                             <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
                                 <h3 className={`${active == 3 && "text-primary "} group-hover:text-primary relative transition-all`}>Team Builder</h3>
                             </Link>
+                            <Link href="/database" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
+                                <h3 className={`${active == 4 && "text-primary "} group-hover:text-primary relative transition-all`}>Database</h3>
+                            </Link>
                             {/* <ThemeSwitch/> */}
                         </div>
                     </div>
                 </div>
             </motion.nav>
-            <motion.nav className="w-full fixed bottom-0 md:hidden justify-between z-[1000] grid grid-cols-4 place-items-center font-bold px-2 py-2 bg-bg-darker"
+            <motion.nav className="w-full fixed bottom-0 md:hidden justify-between z-[1000] grid grid-cols-5 place-items-center text-xs  sm:text-sm font-bold px-1 py-1 bg-bg-darker"
             >
-                <Link href="/" className="py-2 md:py-4 px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1">
-                    <Image src={'/icons/home.svg'} width={30} height={30} alt="Home Icon" />
+                <Link href="/" className={`${active == 0 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
+                    <Image src={'/icons/home.svg'} width={30} height={30} alt="Home Icon" className=" h-10 w-10" />
                     <h3 className=" group-hover:text-primary relative font-normal transition-all">Home</h3>
                 </Link>
-                <Link href="/characters" className="py-2 md:py-4 px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1">
-                    <Image src={'/icons/characters.svg'} width={30} height={30} alt="Characters Icon" />
-                    <h3 className="group-hover:text-primary relative font-normal transition-all">Characters</h3>
+                <Link href="/characters" className={`${active == 1 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
+                    <Image src={'/icons/characters.svg'} width={30} height={30} alt="Characters Icon" className=" h-10 w-10" />
+                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Characters</h3>
                 </Link>
-                <Link href="/users" className="py-2 md:py-4 px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1">
-                    <Image src={'/icons/users.svg'} width={30} height={30} alt="Users Icon" />
-                    <h3 className="group-hover:text-primary relative font-normal transition-all">Users</h3>
+                <Link href="/users" className={`${active == 2 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
+                    <Image src={'/icons/users.svg'} width={30} height={30} alt="Users Icon" className=" h-10 w-10" />
+                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Users</h3>
                 </Link>
-                <Link href="/teambuilder" className="py-2 md:py-4 px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1">
-                    <Image src={'/icons/team.svg'} width={30} height={30} alt="Team Icon" />
-                    <h3 className="group-hover:text-primary relative font-normal transition-all">TeamBuilder</h3>
+                <Link href="/teambuilder" className={`${active == 3 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
+                    <Image src={'/icons/team.svg'} width={30} height={30} alt="Team Builder Icon" className=" h-10 w-10" />
+                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Team</h3>
+                </Link>
+                <Link href="/database" className={`${active == 4 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
+                    <Image src={'/icons/items.webp'} width={30} height={30} alt="Backpack Icon" className=" h-10 w-10" />
+                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Database</h3>
                 </Link>
             </motion.nav >
 

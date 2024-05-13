@@ -1,11 +1,13 @@
 import Image from "next/image"
 import { useState } from "react"
 import Link from "next/link";
+import { Character } from "@/app/types/character";
+import { Outfit } from "@/app/types/outfits";
 
 export default function Gallery({
     characterData
 }: {
-    characterData: any
+    characterData: Character
 }) {
     const [active, setActive] = useState<number>(0);
     return (
@@ -14,7 +16,7 @@ export default function Gallery({
             <div className="flex flex-col gap-4 bg-bg-dark p-4 rounded-xl">
                 <div className="flex gap-2">
                     <h3 className={`font-semibold text-xl my-2 py-2 px-4 rounded-xl cursor-pointer ${active == 0 ? "bg-bg-lighter" : "bg-bg-light"}`} onClick={() => { setActive(0) }}>Namecard</h3>
-                    {characterData.outfits && characterData.outfits.map((outfit: any, index: number) => {
+                    {characterData.outfits && characterData.outfits.map((outfit: Outfit, index: number) => {
                         if (outfit.images.filename_splash || outfit.url.modelviewer.length > 0) return <h3 id={outfit.name} key={index} className={`font-semibold text-xl my-2 py-2 px-4 rounded-xl cursor-pointer ${active == index + 1 ? "bg-bg-lighter" : "bg-bg-light"}`} onClick={() => { setActive(index + 1) }}>{outfit.name}</h3>
                     })}
                 </div>
