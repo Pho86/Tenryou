@@ -1,4 +1,3 @@
-import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import BentoGrid from "../components/BentoGrid";
 
@@ -58,14 +57,8 @@ export default function Database() {
 
     return (
         <>
-            <NavBar active={4} />
-            <main className="pt-8 md:pt-16 px-8 md:px-16 w-full flex flex-col justify-center items-center gap-2">
-                <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
-                    <h1 className="text-3xl text-primary">Database List</h1>
-                </div>
-                <BentoGrid data={data} />
-            </main>
-            <Footer />
+            <h1 className="text-3xl text-primary">Database List</h1>
+            <BentoGrid data={data} />
         </>
     );
 }

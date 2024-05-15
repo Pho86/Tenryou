@@ -66,7 +66,7 @@ export function ProfileCardGrid({
                     </div>
             }
         </div>
-        <div className="overflow-x-scroll 2xl:overflow-x-hidden grid place-items-center mt-2">
+        <div className="overflow-x-scroll grid place-items-center mt-2">
             <div className="grid grid-cols-4 gap-2 w-[1536px] rounded-xl self-center bg-gradient-to-br p-2 relative bg-bg-dark" ref={cardRef}>
                 <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`background stars image`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-60 rounded-xl object-cover h-full  " />
                 {activeCharacters.length > 0 && activeCharacters.map((character: any, index: number) => {

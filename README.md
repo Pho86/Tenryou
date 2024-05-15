@@ -6,15 +6,35 @@
 
 # [Tenryou](https://Tenryou.live)
 
-A Genshin Impact companion website. Tenryou helps players view information from the game in a visual and cohesive manner with via information pulled from various resources.
+Tenryou is a companion website meant for the action-rpg game [Genshin Impact](https://genshin.mihoyo.com/). Tenryou is intended to help players view information from the game in a visual and cohesive manner with via information pulled from various resources to provide up-to-date information.
 
 <!-- [![Contributors][contributors-shield]][contributors-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url] -->
 
+## Current Features
+* User Card Profile/Team Builder
+* Characters
+* Artifacts
+* Weapons
+* Materials
+* Achievements
+* And more...
+
+## Current Roadmap
+- [ ] Add more options to edit user images
+- [ ] Improve Teambuilder and add example teams
+- [ ] TCG Support
+- [ ] Add calculator for stats, and ascension
+- [ ] Multi-language Support
+    - [ ] Japanese
+    - [ ] Chinese
+    - [ ] Korean
+- [ ] HSR/ZZZ support
+
 ## Development
-Tenryou is create via Next.js and with information is pulled via:
+Tenryou is create via Next.js and information is pulled using axios by these sources:
 
 * [Genshin-db](https://github.com/theBowja/genshin-db)
 * [Enka.network](https://enka.network/)
@@ -27,19 +47,6 @@ Tenryou is create via Next.js and with information is pulled via:
 [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
 [![Vercel][Vercel]][Vercel-url]
 [![Framer-Motion][Framer-Motion]][Framer-Motion-url]
-
-
-## Roadmap
-
-- [ ] Add Changelog
-- [ ] Improve Teambuilder and add example teams
-- [ ] More options to edit to the user card
-- [ ] Add a calculator for stats and damage
-- [ ] Multi-language Support
-    - [ ] Japanese
-    - [ ] Chinese
-    - [ ] Korean
-
 
 ## Prerequisites
 
@@ -93,7 +100,6 @@ Distributed under the [MIT](https://github.com/pho86/Tenryou/blob/main/LICENSE) 
 
 This website and repository is not affiliated with HoYoVerse.
 All content and materials from the game Genshin Impact, are trademarks and copyrights of the original owners and HoYoVerse.
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

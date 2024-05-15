@@ -16,12 +16,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.8,
         },
         {
-            url: `https://www.tenryou.live/database`,
-            lastModified: new Date(),
-            changeFrequency: "monthly",
-            priority: 0.8,
-        },
-        {
             url: `https://www.tenryou.live/weapons`,
             lastModified: new Date(),
             changeFrequency: "monthly",

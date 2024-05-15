@@ -20,7 +20,7 @@ const config: Config = {
         'bg-darkest': '#080606',
         'primary': '#FF7373',
         'text': '#FFF7F7',
-        'accent': '#B8B8B8',
+        'accent': '#FFA2A2',
         'dark-accent': '#8C7F7F',
         'gradient-SSR': {
           'start': 'hsla(33, 39%, 39%, 1)',

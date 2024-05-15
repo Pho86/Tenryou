@@ -1,17 +1,43 @@
-"use client"
-import Link from "next/link"
-import { useState } from "react"
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion"
-import Image from "next/image";
-import ThemeSwitch from "../ThemeSwitcher";
-export default function NavBar({
-    active = 0
-}: {
-    active?: number
-}) {
+"use client";
 
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+const navItems = [
+    {
+        path: "/",
+        name: "Home",
+        icon: "/icons/home.svg"
+    },
+    {
+        path: "/characters",
+        name: "Characters",
+        icon:"/icons/characters.svg"
+    },
+    {
+        path: "/users",
+        name: "Users",
+        icon:"/icons/users.svg"
+    },
+    {
+        path: "/teambuilder",
+        name: "Team Builder",
+        altname:"Team",
+        icon:"/icons/team.svg"
+    },
+    {
+        path: "/database",
+        name: "Database",
+        icon:"/icons/items.webp"
+    },
+];
+
+export default function NavBar() {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState<boolean>(false);
+    const [database, setDatabase] = useState<boolean>(false);
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious();
         //@ts-ignore
@@ -22,67 +48,78 @@ export default function NavBar({
         }
     })
 
+    let pathname = usePathname() || "/";
+
+    if (pathname.includes("/achievements") || pathname.includes("/weapons") || pathname.includes("/oufits") || pathname.includes("/materials") || pathname.includes("/elements") || pathname.includes("/artifacts") || pathname.includes("/namecards")) pathname = "/database";
+    if (pathname.includes("/characters")) pathname = "/characters";
+    if (pathname.includes("/users")) pathname = "/users";
+
+    const [hoveredPath, setHoveredPath] = useState(pathname);
     return (
         <>
-            <motion.nav className="w-full fixed hidden px-8 md:px-16 md:flex justify-center z-[1000] font-bold py-2 md:py-0 bg-bg-darker items-center " variants={{
-                visible: { y: 0 },
-                hidden: { y: "-100%" },
-            }}
+            <motion.nav className="w-full hidden px-8 md:px-16 md:flex justify-center z-[1000]  bg-bg-darker items-center py-2 rounded-lg fixed "
+                variants={{
+                    visible: { y: 0 },
+                    hidden: { y: "-100%" },
+                }}
                 animate={hidden ? "hidden" : "visible"}
                 transition={{ ease: "easeInOut", duration: .5 }}
             >
-                <div className="w-full flex items-center justify-center max-w-screen-2xl">
-                    <div className="justify-between w-full flex ">
-                        <div className="border-primary cursor-pointer grid place-items-center md:pl-0">
-                            <Link href="/" className="flex text-2xl items-center gap-1 justify-center transition-all cursor-pointer font-philosopher font-bold hover:text-primary">
-                                <Image src="/icon.svg" width={45} height={45} alt="Tenryou Icon" className="drop-shadow-icon" />
-                                <h2>
-                                    Tenryou
-                                </h2>
-                            </Link>
-                        </div>
-                        <div className="flex justify-center items-center md:gap-3 sm:gap-2 gap-1 font-semibold">
-                            <Link href="/characters" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className={`${active == 1 && "text-primary "} group-hover:text-primary relative transition-all`}>Characters</h3>
-                            </Link>
-                            <Link href="/users" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className={`${active == 2 && "text-primary "} group-hover:text-primary relative transition-all`}>Users</h3>
-                            </Link>
-                            <Link href="/teambuilder" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className={`${active == 3 && "text-primary "} group-hover:text-primary relative transition-all`}>Team Builder</h3>
-                            </Link>
-                            <Link href="/database" className="py-2 md:py-4 px-4 lg:px-6 transition-all cursor-pointer group">
-                                <h3 className={`${active == 4 && "text-primary "} group-hover:text-primary relative transition-all`}>Database</h3>
-                            </Link>
-                            {/* <ThemeSwitch/> */}
-                        </div>
+                <div className="flex gap-2 relative justify-between w-full z-[100] h-full items-center max-w-screen-2xl">
+                    <div className="">
+                        <Link href="/" className="flex text-2xl items-center gap-1 justify-center transition-all cursor-pointer font-bold hover:text-primary">
+                            <Image src="/icon.svg" width={45} height={45} alt="Tenryou Icon" className="drop-shadow-icon" />
+                            <h2>Tenryou</h2>
+                        </Link>
+                    </div>
+                    <div className="h-full flex justify-between text-nowrap gap-2">
+                        {navItems.map((item, index) => {
+                            const isActive = item.path === pathname;
+                            return (
+                                <Link
+                                    key={item.path}
+                                    className={`px-4 py-2 rounded-xl w-full font-semibold h-full relative duration-300 ease-in ${isActive ? "text-primary" : "text-text"} hover:text-accent`}
+                                    data-active={isActive}
+                                    href={item.path}
+                                    onMouseOver={() => setHoveredPath(item.path)}
+                                >
+                                    <span>{item.name}</span>
+                                    {item.path === hoveredPath && (
+                                        <motion.div
+                                            className="absolute bottom-0 left-0 h-full bg-bg-lighter rounded-xl -z-10 w-full"
+                                            layoutId="navbar"
+                                            aria-hidden="true"
+                                            transition={{
+                                                duration: 0.3,
+                                                ease: "easeInOut"
+                                            }}
+                                        />
+                                    )}
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
             </motion.nav>
-            <motion.nav className="w-full fixed bottom-0 md:hidden justify-between z-[1000] grid grid-cols-5 place-items-center text-xs  sm:text-sm font-bold px-1 py-1 bg-bg-darker"
+            <motion.nav className="w-full fixed bottom-0 md:hidden justify-between z-[1000] grid grid-cols-5 place-items-center text-nowrap text-xs  sm:text-sm font-bold px-1 py-1 bg-bg-darker"
             >
-                <Link href="/" className={`${active == 0 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
-                    <Image src={'/icons/home.svg'} width={30} height={30} alt="Home Icon" className=" h-10 w-10" />
-                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Home</h3>
-                </Link>
-                <Link href="/characters" className={`${active == 1 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
-                    <Image src={'/icons/characters.svg'} width={30} height={30} alt="Characters Icon" className=" h-10 w-10" />
-                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Characters</h3>
-                </Link>
-                <Link href="/users" className={`${active == 2 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
-                    <Image src={'/icons/users.svg'} width={30} height={30} alt="Users Icon" className=" h-10 w-10" />
-                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Users</h3>
-                </Link>
-                <Link href="/teambuilder" className={`${active == 3 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
-                    <Image src={'/icons/team.svg'} width={30} height={30} alt="Team Builder Icon" className=" h-10 w-10" />
-                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Team</h3>
-                </Link>
-                <Link href="/database" className={`${active == 4 && "text-primary "} py-2 md:py-4 w-full px-4 transition-all cursor-pointer flex flex-col group items-center justify-center gap-1`}>
-                    <Image src={'/icons/items.webp'} width={30} height={30} alt="Backpack Icon" className=" h-10 w-10" />
-                    <h3 className=" group-hover:text-primary relative font-normal transition-all">Database</h3>
-                </Link>
+                {navItems.map((item, index) => {
+                    const isActive = item.path === pathname;
+                    return (
+                        <Link
+                            key={item.path}
+                            className={`px-4 py-2 rounded-xl w-full font-semibold text-center flex flex-col items-center justify-center h-full relative transition-all ease-in ${isActive ? "text-primary" : "text-text"} hover:text-accent`}
+                            data-active={isActive}
+                            href={item.path}
+                            onMouseOver={() => setHoveredPath(item.path)}
+                        >
+                            <Image src={item.icon} width={30} height={30} alt="Home Icon" className=" h-10 w-10" />
+                            <h3 className=" group-hover:text-primary relative font-normal transition-all">{item.altname ? item.altname : item.name}</h3>                            
+                        </Link>
+                    );
+                })}
+                
             </motion.nav >
-
         </>
-    )
+    );
 }

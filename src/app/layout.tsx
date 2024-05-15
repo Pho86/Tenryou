@@ -5,11 +5,13 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.scss";
 import NextTopLoader from 'nextjs-toploader';
 import { Providers } from './providers'
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], variable: '--font-poppins' });
 const signika = Signika({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700',], variable: '--font-signika' });
 export const metadata: Metadata = {
   title: "Home - Tenryou 💮",
-  description: "Your Genshin Impact companion website, helps players view other players character information along with a comprehensive database and viewer for the game.",
+  description: "Your Genshin Impact companion website, helps players visualize other's characters along with a comprehensive database and viewer for the game.",
   icons: {
     icon: [
       {
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website"
   },
-  keywords: ["Genshin Impact", "Team Builder", "Genshin Weapons", "Genshin Fantasy", "Genshin Database", "User Search", "Daily Info", "Genshin Artifacts", "Genshin Characters", "Powered By Enka.Network", "Genshin DB", "Genshin Information", "Birthdays", "Genshin", "Genshin Daily Farming", "Genshin PC Game", "Mihoyo", "Genshin Elements", "Genshin Outfits and Models", "Farming", "Genshin Materials", "Genshin Stats"],
+  keywords: ["Genshin Impact", "Team Builder", "Genshin Weapons", "Genshin Fantasy", "Genshin Database", "User Search", "Daily Info", "Genshin Artifacts", "Genshin Characters", "Powered By Enka.Network", "Genshin DB", "Genshin Information", "Birthdays", "Genshin", "Genshin Daily Farming", "Genshin PC Game", "Mihoyo", "Genshin Elements", "Genshin Outfits and Models", "Farming", "Genshin Materials", "Genshin Stats", "Genshin Profile Cards", "Genshin Team Cards"],
   applicationName: "Tenryou",
 
 };
@@ -37,14 +39,20 @@ export default function RootLayout({
       <Analytics />
       {/* <SpeedInsights/> */}
       <html lang="en" suppressHydrationWarning>
-        <body className={` ${signika.className} ${signika.variable} ${poppins.variable} bg-bg transition-all scroll-smooth`}>
+        <body className={` ${signika.className} ${signika.variable} ${poppins.variable} bg-bg transition-all scroll-smooth `}>
           {/* <Providers> */}
-            <NextTopLoader
-              color="#FF7373"
-              height={5} zIndex={2000}
-              showSpinner={false}
-            />
-            {children}
+          <NextTopLoader
+            color="#FF7373"
+            height={5} zIndex={2000}
+            showSpinner={false}
+          />
+          <NavBar />
+          <main className="pt-4 sm:pt-8 md:pt-16 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-center items-center gap-2">
+            <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
+              {children}
+            </div>
+          </main>
+          <Footer />
           {/* </Providers> */}
         </body>
       </html>
