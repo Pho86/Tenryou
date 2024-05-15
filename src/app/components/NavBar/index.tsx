@@ -14,7 +14,7 @@ const navItems = [
     {
         path: "/characters",
         name: "Characters",
-        icon:"/icons/characters.svg"
+        icon:"/icons/character_icon.svg"
     },
     {
         path: "/users",
