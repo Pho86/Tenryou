@@ -22,7 +22,7 @@ test.describe('Characters', () => {
     test('Path from Birthdays to Zhongli and find gallery', async ({ page }) => {
         await page.selectOption('select#months', 'December');
         await page.waitForTimeout(4000);
-        await page.click('a#Zhongli');
+        await page.click('a#Zhongli_month');
         await page.waitForTimeout(2000);
         await page.getByText('🔲').click();
         await page.getByRole('img', { name: 'Zhongli constellation', exact: true }).click();
@@ -35,7 +35,7 @@ test.describe('Characters', () => {
         await page.waitForTimeout(2000);
         await page.locator('#days').selectOption('Friday');
         await page.waitForTimeout(2000);
-        await page.click('a#Diluc');
+        await page.click('a#Diluc_daily');
         await page.getByRole('heading', { name: 'Darknight Blaze' }).click();
         await page.getByRole('heading', { name: 'Red Dead of Night' }).click();
       });

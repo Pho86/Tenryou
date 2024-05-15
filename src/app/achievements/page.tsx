@@ -58,7 +58,7 @@ export default function AchievementsPage() {
                         achievementGroups.map((group: any, index: number) => (
                             <div onClick={() => { setActiveGroup(group); setSearch("") }} className={`flex gap-2 rounded-xl p-2 transition-all bg-bg-dark items-center hover:scale-105 hover:shadow-light ${groupsActivated && activeGroup == group && "scale-105 shadow-light"}`} key={index}>
                                 {/* <Image src={`https://api.ambr.top/assets/UI/achievement/UI_AchievementIcon_A0${index+1}.png`} width={55} height={55} alt={`${group} icon`}/> */}
-                                {group}
+                                {group}&nbsp;
                             </div>
                         ))
                         :
@@ -86,8 +86,8 @@ export default function AchievementsPage() {
                         }
                         if (valid) return (
                             <div key={index} className="flex flex-col gap-2 bg-bg-dark p-2 rounded-xl">
-                                <div className="flex gap-2 text-base md:text-xl font-bold">
-                                    <span className="bg-bg-light p-1 rounded-xl font-normal">{achievement.version}</span>{achievement.name}
+                                <div className="flex items-center gap-1 text-base md:text-xl font-bold">
+                                    <span className="bg-bg-light p-1 rounded-xl font-normal">{achievement.version}</span>&nbsp;{achievement.name}&nbsp;
                                 </div>
                                 <div className="flex flex-col">
                                     {[...Array(achievement.stages)].map((_, idx: number) => {
@@ -96,7 +96,7 @@ export default function AchievementsPage() {
                                         const replacedDescription = description.replace('{param0}', progress);
                                         return (
                                             <div key={idx} className="flex justify-between gap-2 p-2 rounded-xl">
-                                                <div className="text-sm">{replacedDescription}</div>
+                                                <div className="text-sm">{replacedDescription}&nbsp;</div>
                                                 <div className="flex font-bold">{achievement[`stage${idx + 1}`].reward.count}<Image src={`/icons/primogem.webp`} title="Primogem" width={25} height={25} alt="Primogem" /></div>
                                             </div>
                                         );

@@ -22,7 +22,7 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
             .then((res) => {
                 let data = res.data;
                 // @ts-ignore
-                addFileName([data.result]);
+                let names = addFileName([data.result]);
                 const mergeWithPreference = (firstData: any, secondData: any) => {
                     for (const key in secondData) {
                         if (firstData.hasOwnProperty(key) && typeof firstData[key] === 'object' && secondData[key] !== null) {
@@ -33,10 +33,11 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
                     }
                     return firstData;
                 };
+                let CharacterName = names[0].fileName;
                 Promise.all([
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${params.name}&matchCategories=true&resultLanguage=${lang}`),
+                    axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${CharacterName}&matchCategories=true&resultLanguage=${lang}`),
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&resultLanguage=${lang}`),
                     axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&resultLanguage=${lang}&dumpResults=true&verboseCategories=true`),
                 ])

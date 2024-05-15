@@ -47,8 +47,9 @@ export default function Birthdays({ }: {}) {
     }, [selectedMonth]);
 
     return <div className="flex flex-col gap-2 p-2 overflow-y-scroll">
-        <label className="w-full">
-            <select title="Months" id="months" value={selectedMonth} onChange={(e) => { setSelectedMonth(e.target.value); }} className="p-1 w-full">
+        <label className="w-full" htmlFor="months">
+            <span className="hidden">Months</span>
+            <select title="Months" aria-label="Months" id="months" value={selectedMonth} onChange={(e) => { setSelectedMonth(e.target.value); }} className="p-1 w-full">
                 <option value="January">January</option>
                 <option value="February">February</option>
                 <option value="March">March</option>
@@ -71,7 +72,7 @@ export default function Birthdays({ }: {}) {
                 <>
                     {characters.map((character, index) => {
                         return <div key={index} className="bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light">
-                            <Link id={character.name} href={`/characters/${character.name}`} className={`flex flex-col self-start `}>
+                            <Link id={`${character.name}_month`} href={`/characters/${character.name}`} className={`flex flex-col self-start `}>
                                 <Image
                                     src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
                                     width={150}

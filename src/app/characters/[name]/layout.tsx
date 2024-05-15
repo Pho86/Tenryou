@@ -12,7 +12,7 @@ export async function generateMetadata(
 
     return {
         title: `${name} - Tenryou 💮`,
-        description:`${name} from Genshin Impact information and statistics`
+        description:`${name} from Genshin Impact information and statistics viewer`
     }
 }
 

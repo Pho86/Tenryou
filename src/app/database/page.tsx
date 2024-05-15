@@ -1,22 +1,21 @@
-import Footer from "../components/Footer";
 import BentoGrid from "../components/BentoGrid";
 
 const data = [
     {
         title: `Materials`,
-        image: "/icons/materials.svg",
+        image: "/icons/materials.webp",
         bg: "/namecards/UI_NameCardPic_Mxsy_P.png",
         link: "/materials",
     },
     {
         title: 'Artifacts',
-        image: "/icons/artifacts.svg",
+        image: "/icons/artifacts.webp",
         bg: "/namecards/UI_NameCardPic_Bp23_P.png",
         link: "/artifacts",
     },
     {
         title: 'Weapons',
-        image: "/icons/weapons.svg",
+        image: "/icons/weapons.webp",
         bg: "/namecards/UI_NameCardPic_Bp10_P.png",
         link: "/weapons",
     },
@@ -34,19 +33,19 @@ const data = [
     },
     {
         title: `Elements`,
-        image: "/icons/elements.svg",
+        image: "/icons/elements.webp",
         bg: "/namecards/UI_NameCardPic_EffigyChallenge_P.png",
         link: "/elements",
     },
     {
         title: `Achievements`,
-        image: "/icons/achievements.svg",
+        image: "/icons/achievements.webp",
         bg: "/namecards/UI_NameCardPic_Google_P.png",
         link: "/achievements",
     },
     {
         title: 'Interactive Map',
-        image: "/icons/map.svg",
+        image: "/icons/map.webp",
         link: "https://act.hoyolab.com/ys/app/interactive-map/index.html",
         bg: "/namecards/UI_NameCardPic_Bp4_P.png",
         target: true

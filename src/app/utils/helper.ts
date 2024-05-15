@@ -129,6 +129,7 @@ export function addFileName(names: any[]) {
             names[i].fileName = names[i].name;
         }
     }
+    return names
 }
 
 export function parseColorTags(text: string) {

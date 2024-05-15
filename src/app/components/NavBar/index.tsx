@@ -69,7 +69,7 @@ export default function NavBar() {
                     <div className="">
                         <Link href="/" className="flex text-2xl items-center gap-1 justify-center transition-all cursor-pointer font-bold hover:text-primary">
                             <Image src="/icon.svg" width={45} height={45} alt="Tenryou Icon" className="drop-shadow-icon" />
-                            <h2>Tenryou</h2>
+                            <span>Tenryou</span>
                         </Link>
                     </div>
                     <div className="h-full flex justify-between text-nowrap gap-2">

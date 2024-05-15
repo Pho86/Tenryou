@@ -44,8 +44,8 @@ export default function DailyDomains({ }: {}) {
     };
     const fetchAndSetData = async (data: any) => {
         const talentsPromises = data
-            .filter((domain:any) => domain.domainType === "UI_ABYSSUS_AVATAR_PROUD" && domain.unlockRank > 40)
-            .map((domain:any) => fetchData(domain));
+            .filter((domain: any) => domain.domainType === "UI_ABYSSUS_AVATAR_PROUD" && domain.unlockRank > 40)
+            .map((domain: any) => fetchData(domain));
 
         const talentsData = await Promise.all(talentsPromises);
         setActiveCharacters(talentsData.filter(Boolean));
@@ -82,19 +82,22 @@ export default function DailyDomains({ }: {}) {
                     console.error("Error fetching character names:", error);
                     setLoading(false)
                 });
-            }
-            else setLoading(false)
-        }, [selectedDay]);
+        }
+        else setLoading(false)
+    }, [selectedDay]);
     return (<div className="overflow-y-scroll h-full p-2 gap-2 flex flex-col">
-        <select value={selectedDay} id="days" onChange={(e) => { setSelectedDay(e.target.value); }} className="p-1">
-            <option value="Sunday">Sunday</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-        </select>
+        <label className="w-full" htmlFor="days">
+            <span className="hidden">Days of the Week</span>
+            <select value={selectedDay} aria-label="Days" id="days" onChange={(e) => { setSelectedDay(e.target.value); }} className="p-1 w-full">
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+            </select>
+        </label>
         {!loading ?
 
             <>
@@ -112,7 +115,7 @@ export default function DailyDomains({ }: {}) {
                                     </div>
                                     <div className="grid-auto-fit-10">
                                         {activeCharacters.length > 1 && activeCharacters[index].map((character: any, i: number) => {
-                                            return <Link id={character.name} key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
+                                            return <Link id={`${character.name}_daily`} key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
                                                 <Image
                                                     src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
                                                     width={200}
