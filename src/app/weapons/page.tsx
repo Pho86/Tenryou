@@ -104,7 +104,7 @@ export default function WeaponsPage() {
                                 const validRarity = activeRarity === 0 || weaponRarity[activeRarity] === weapon.rarity;
                                 if (validWeapon && validRarity) return <div key={index} className="max-h-48">
                                     <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == weapon.id && "shadow-light scale-105"}`} onClick={() => { setActive(weapon); receiveWeaponStats(weapon) }}>
-                                        <Image src={`https://api.ambr.top/assets/UI/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : weapon.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : weapon.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : weapon.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`} />
+                                        <Image src={`https://enka.network/ui/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : weapon.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : weapon.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : weapon.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`} />
                                         <p className="flex flex-col min-h-9 justify-around mx-1 text-center text-xs md:text-md text-bg font-bold">{weapon.name}</p>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@ export default function WeaponsPage() {
                                                     </>
                                                 }
                                             </div>}
-                                            <Image src={`https://api.ambr.top/assets/UI/${active.images.filename_icon}.png`} width={500} height={500} alt={`${active.name} weapon icon`} className={`object-contain`} />
+                                            <Image src={`https://enka.network/ui/${active.images.filename_icon}.png`} width={500} height={500} alt={`${active.name} weapon icon`} className={`object-contain`} />
                                         </div>
                                         <div className="text-bg p-4 flex flex-col gap-2">
                                             <div className="flex w-full gap-2 text-pretty">

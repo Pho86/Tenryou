@@ -11,7 +11,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400
 const signika = Signika({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700',], variable: '--font-signika' });
 export const metadata: Metadata = {
   title: "Home - Tenryou 💮",
-  description: "Your Genshin Impact companion website, helps players visualize other's characters along with a comprehensive database and viewer for the game.",
+  description: "Your Genshin Impact companion website, helps players visualize other's characters along with a comprehensive database and viewer for the game, Genshin Impact.",
   icons: {
     icon: [
       {
@@ -22,7 +22,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Tenryou 💮',
     locale: "en_US",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "https://www.tenryou.live/icon.svg",
+        width: 800,
+        height: 800,
+      }
+    ]
   },
   keywords: ["Genshin Impact", "Team Builder", "Genshin Weapons", "Genshin Fantasy", "Genshin Database", "User Search", "Daily Info", "Genshin Artifacts", "Genshin Characters", "Powered By Enka.Network", "Genshin DB", "Genshin Information", "Birthdays", "Genshin", "Genshin Daily Farming", "Genshin PC Game", "Mihoyo", "Genshin Elements", "Genshin Outfits and Models", "Farming", "Genshin Materials", "Genshin Stats", "Genshin Profile Cards", "Genshin Team Cards"],
   applicationName: "Tenryou",

@@ -14,7 +14,7 @@ export default function UserPage() {
 
     return (
         <>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 min-h-[90dvh] justify-center items-center">
                 <p className="text-center">Make sure the profile settings in the game have &quot;Show character details&quot; enabled, otherwise the API will not be able to see profile details.</p>
                 <p className="text-center">Example: 610055533</p>
                 <form className="flex justify-center items-center h-full w-full gap-2" onSubmit={handleSubmit} >

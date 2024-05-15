@@ -10,6 +10,7 @@ export default function Gallery({
     characterData: Character
 }) {
     const [active, setActive] = useState<number>(0);
+    // console.log(characterData)
     return (
         <>
             <h2 className="font-bold text-3xl">Gallery</h2>
@@ -22,7 +23,7 @@ export default function Gallery({
                 </div>
                 {active == 0 && <div className="relative overflow-hidden flex flex-col ">
                     <div className="relative flex flex-col rounded-xl items-center justify-center ">
-                        <Image src={`https://enka.network/ui/${characterData.nameCard.images.filename_background}.png`} width={2000} height={1000} alt={`${characterData.name} constellation`} className="" />
+                        <Image src={`https://enka.network/ui/${characterData.nameCard.images.filename_background}.png`} width={2000} height={1000} alt={`${characterData.name} namecard image`} className="" />
                     </div>
                     <p className="font-poppins w-full bg-zinc-100 rounded-b-xl text-black p-4">{characterData.nameCard.description}</p>
                 </div>}
