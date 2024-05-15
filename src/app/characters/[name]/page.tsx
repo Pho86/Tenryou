@@ -1,8 +1,6 @@
 "use client"
-import NavBar from "../../components/NavBar";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react"
-import Footer from "@/app/components/Footer";
 import { Character } from "@/app/types/character";
 import { addFileName } from "@/app/utils/helper";
 import StatsTable from "@/app/components/StatsTable";
@@ -73,46 +71,39 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
             });
     }, []);
 
-    useEffect(() => {
-        const lenis = new Lenis()
-        const raf = (time: any) => {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
-
-    }, [])
     return (
         <>
-            <NavBar active={1} />
 
             {characterData ?
-                <main className="flex flex-col gap-4" >
+                <main className="flex flex-col items-center" >
                     <InfoCharacterBanner characterData={characterData} params={params} />
-                    <div className="flex flex-col gap-4 w-full items-center justify-center">
-                        <div className="flex gap-2 p-4 md:p-8 z-20 max-w-screen-2xl">
-                            <section className="flex flex-col gap-8 mt-20">
-                                <StatsTable characterData={characterData} />
-                                <AttackTable attackData={characterData.talents} params={params} />
-                                <ConstellationsTable constellationData={characterData.constellations} params={params} />
+                    <div className="">
+                        <div className="flex flex-col gap-4 w-full items-center justify-center">
+                            <div className="flex gap-3 flex-col w-full ">
+                                <section className="flex flex-col gap-8 mt-20">
+                                    <StatsTable characterData={characterData} />
+                                    <AttackTable attackData={characterData.talents} params={params} />
+                                    <ConstellationsTable constellationData={characterData.constellations} params={params} />
+                                </section>
+                            </div>
+                            <section className="flex gap-3 flex-col w-full">
+                                <Gallery characterData={characterData} />
+                            </section>
+                            <section className="flex gap-3 flex-col w-full">
+                                <h2 className="font-bold text-3xl">Quotes</h2>
+                                <div className="grid gap-4">
+                                    <VoiceList voiceData={characterData.voices} />
+                                </div>
                             </section>
                         </div>
-                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl w-full">
-                            <Gallery characterData={characterData} />
-                        </section>
-                        <section className="flex gap-3 flex-col p-4 md:p-8 max-w-screen-2xl w-full">
-                            <h2 className="font-bold text-3xl">Quotes</h2>
-                            <div className="grid gap-4">
-                                <VoiceList voiceData={characterData.voices} />
-                            </div>
-                        </section>
                     </div>
-                    <Footer />
                 </main>
 
                 :
                 <div className="pt-16">
                     <Loader />
                 </div>}
+                {error && <p className="text-center">An error has occured.</p>}
         </>
     );
 }

@@ -20,8 +20,8 @@ export default function InfoCharacterBanner({
         layoutEffect: false
     });
     const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-    return <section className={`bg-bg-dark w-full overflow-hidden`} ref={motionRef}>
-        <div className="p-0 pt-0 flex flex-col h-[100dvh] relative" ref={sectionRef}>
+    return <section className={`bg-bg-dark w-screen -mt-16 overflow-hidden`} ref={motionRef}>
+        <div className="p-0 pt-0 flex flex-col h-[105dvh] relative" ref={sectionRef}>
             <motion.div className="absolute w-full max-h-[100dvh] object-contain opacity-60 "
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -30,7 +30,7 @@ export default function InfoCharacterBanner({
             >
                 <Image src={`/regions/${characterData.region}.webp`} width={1500} height={1500} className="w-full max-h-[110dvh] object-contain opacity-60 z-[-15]" alt={`${characterData.region} icon`} priority />
             </motion.div>
-            <motion.div className="absolute h-[100dvh] w-full "
+            <motion.div className="absolute h-[110dvh] w-full "
                 initial={{ opacity: 0, scale: 1.1, y: 100, }}
                 animate={{ opacity: 1, scale: 1, y: [100, -15, 0] }}
                 transition={{ delay: 1, duration: 1.2, ease: "easeInOut" }}

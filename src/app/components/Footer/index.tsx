@@ -36,23 +36,21 @@ export default function Footer({
                         </Link>
                     </ul>
                 </div>
-                <div className="w-full flex md:flex-row flex-col md:justify-between items-end mt-4">
-                    <div className="flex gap-2">
-                        <p>Your Genshin Impact Companion Site | V1.0</p>
+                <div className="w-full flex gap-2 md:flex-row flex-col md:justify-between mt-4">
+                    <div className="flex justify-end md:items-center">
+                        <p>Your Genshin Impact Companion Site | V1.0 | </p>
+                        <Link href="https://github.com/pho86/Tenryou" target="__blank" className="text-xl hover:text-primary transition-all p-1">
+                            <FaGithub title="Github" />
+                        </Link>
                         {/* <Link href={"https://enka.network"} target="__blank">
                         <Image src={`/icons/enka.png`} width={200} height={150} alt="Enka.network " className="" />
                     </Link> */}
                     </div>
-                    <div className="flex gap-2 -mt-2">
-                        <div className="flex justify-end items-end">
-                            {/* <Link href="https://github.com/pho86/Tenryou" target="__blank" className="hover:text-primary transition-all text-xl p-1">
-                                <p className="hidden">Github Icon</p>
-                                <FaGithub />
-                            </Link> */}
-                        </div>
-                        <p className="mt-8 text-end text-sm text-gray-200">
+                    <div className="flex flex-col gap-2 justify-start">
+                        <p className="text-right items-start text-sm text-gray-200">
                             This website is not affiliated with miHoYo, and all assets are property of original owners.
                         </p>
+
                     </div>
                 </div>
             </div>
