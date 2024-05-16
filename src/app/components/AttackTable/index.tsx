@@ -8,8 +8,8 @@ export default function AttackTable({ attackData, params }: { attackData: any, p
     return <>
         {attackData && <div className="flex flex-col gap-2">
             <h3 className="font-bold text-3xl text-pretty">Combat Talents</h3>
-            <div className="grid gap-5">
-                {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"> */}
+            {/* <div className="grid gap-5"> */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 <AttackCard attack={attackData.combat1} name={params.name} attackImage={attackData.images.filename_combat1} index={1} stats />
                 <AttackCard attack={attackData.combat2} name={params.name} attackImage={attackData.images.filename_combat2} index={2} stats />
                 <AttackCard attack={attackData.combat3} name={params.name} attackImage={attackData.images.filename_combat3} index={3} stats />
@@ -42,7 +42,7 @@ function AttackCard({ attack, name, attackImage, index, stats = false }: { attac
             const paramValues = paramKeys.map((paramKey: string) => attack.attributes.parameters[paramKey]);
             return { name, paramValues };
         });
-        
+
     }
     const levels = 15;
     return (
@@ -51,7 +51,7 @@ function AttackCard({ attack, name, attackImage, index, stats = false }: { attac
                 <Image src={`https://enka.network/ui/${attackImage}.png`} width={55} height={55} alt={`${name} attack skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
                 <h3 className="font-bold text-lg text-pretty">{attack.name} </h3>
             </div>
-            <pre className="text-pretty font-signika">{parse(attack.parsedText)}</pre>
+            <pre className="text-wrap text-pretty font-signika">{parse(attack.parsedText)}</pre>
             {/* {stats &&
                 <div className="relative overflow-x-auto">
                     <table className="w-full text-sm text-left rtl:text-right">

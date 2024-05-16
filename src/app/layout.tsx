@@ -54,7 +54,7 @@ export default function RootLayout({
             showSpinner={false}
           />
           <NavBar />
-          <main className="pt-4 sm:pt-8 md:pt-16 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-center items-center gap-2">
+          <main className="pt-4 sm:pt-8 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-center items-center gap-2">
             <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
               {children}
             </div>

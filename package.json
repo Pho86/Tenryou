@@ -10,13 +10,17 @@
     "test": "npx playwright test"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@next/mdx": "^14.2.3",
     "@studio-freight/lenis": "^1.0.42",
+    "@types/mdx": "^2.0.13",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "enkanetwork.js": "^2.7.8",
-    "framer-motion": "^11.1.9",
+    "framer-motion": "^11.2.0",
     "genshin-db": "^5.1.4",
     "gsap": "^3.12.5",
     "html-react-parser": "^5.1.10",
@@ -33,7 +37,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.44.0",
-    "@types/node": "^20",
+    "@types/node": "^20.12.12",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-scroll": "^1.8.10",

@@ -10,8 +10,8 @@ import { Character } from "@/app/types/character";
 export default function CharacterPage() {
 
   const [CharacterData, setCharacterData] = useState<Character[]>([]);
-  const [activeElement, setActiveElement] = useState<number>(0)
-  const [activeWeapon, setActiveWeapon] = useState<number>(0)
+  const [activeElement, setActiveElement] = useState<number>(0);
+  const [activeWeapon, setActiveWeapon] = useState<number>(0);
   useLayoutEffect(() => {
     axios
       .get<Character[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
@@ -21,6 +21,7 @@ export default function CharacterPage() {
           addFileName([name]);
         })
         setCharacterData(names);
+        
       })
       .catch((error) => {
         console.error("Error fetching character names:", error);
