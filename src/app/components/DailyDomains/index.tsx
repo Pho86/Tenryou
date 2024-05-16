@@ -1,6 +1,6 @@
 "use client"
 import axios from "axios";
-import { useState, useLayoutEffect, useEffect } from "react"
+import { useState, useLayoutEffect } from "react"
 import Image from "next/image";
 import { addFileName } from "@/app/utils/helper";
 import Link from "next/link";
@@ -54,7 +54,7 @@ export default function DailyDomains({ }: {}) {
     };
     const [done, setDone] = useState<boolean>(false)
     const weekday: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    useEffect(() => {
+    useLayoutEffect(() => {
         setLoading(true);
         let day = selectedDay;
         if (!done) {
@@ -63,27 +63,38 @@ export default function DailyDomains({ }: {}) {
             setSelectedDay(day);
             setDone(true);
         }
-        if (day !== "Sunday") {
-            axios
-                .get<any[]>(`https://genshin-db-api.vercel.app/api/v5/domains?query=${day}&matchCategories=true&dumpResults=true&verboseCategories=true`)
-                .then((res) => {
-                    const weapons = res.data.filter(domain => {
-                        if (domain.domainType !== "UI_ABYSSUS_WEAPON_PROMOTE" || domain.unlockRank < 40) {
-                            return false;
-                        }
-                        return true; // Include all other domains
+        const storedData = sessionStorage.getItem(`domainData_${selectedDay}`);
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setActiveWeapons(parsedData.weapons);
+            setActiveArtifacts([]);
+            fetchAndSetData(parsedData.allData);
+            setLoading(false);
+        } else {
+            if (day !== "Sunday") {
+                axios
+                    .get<any[]>(`https://genshin-db-api.vercel.app/api/v5/domains?query=${day}&matchCategories=true&dumpResults=true&verboseCategories=true`)
+                    .then((res) => {
+                        const weapons = res.data.filter(domain => {
+                            if (domain.domainType !== "UI_ABYSSUS_WEAPON_PROMOTE" || domain.unlockRank < 40) {
+                                return false;
+                            }
+                            return true; // Include all other domains
+                        });
+                        setActiveWeapons(weapons);
+                        setActiveArtifacts([]);
+                        fetchAndSetData(res.data);
+                        sessionStorage.setItem(`domainData_${selectedDay}`, JSON.stringify({ weapons, allData: res.data }));
+                        setLoading(false);
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching domain data:", error);
+                        setLoading(false);
                     });
-                    setActiveWeapons(weapons)
-                    setActiveArtifacts([])
-                    fetchAndSetData(res.data);
-                })
-
-                .catch((error) => {
-                    console.error("Error fetching character names:", error);
-                    setLoading(false)
-                });
+            } else {
+                setLoading(false);
+            }
         }
-        else setLoading(false)
     }, [selectedDay]);
     return (<div className="overflow-y-scroll h-full p-2 gap-2 flex flex-col">
         <label className="w-full" htmlFor="days">

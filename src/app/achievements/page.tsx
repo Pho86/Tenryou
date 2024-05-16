@@ -7,38 +7,55 @@ import { Achievement } from "genshin-db";
 
 export default function AchievementsPage() {
     const [achievementData, setAchievementData] = useState<Achievement[]>([]);
-    const [achievementGroups, setAchievementGroups] = useState<any[]>([]);
-    const [activeGroup, setActiveGroup] = useState<string>("")
-    const [search, setSearch] = useState<string>("")
+    const [achievementGroups, setAchievementGroups] = useState<string[]>([]);
+    const [activeGroup, setActiveGroup] = useState<string>("");
+    const [search, setSearch] = useState<string>("");
+    const [filteredAchievements, setFilteredAchievements] = useState<Achievement[]>([]);
+    const [groupsActivated, setGroupsActivated] = useState<boolean>(true);
 
     useLayoutEffect(() => {
-        axios
-            .get<any>("https://genshin-db-api.vercel.app/api/achievements?query=names&dumpResult=true&matchAliases=true&matchCategories=true&verboseCategories=true")
-            .then((res) => {
-                let achievementGroups = res.data.result;
-                setAchievementData(achievementGroups);
-                const optionsSet = new Set<string>();
-                achievementGroups.forEach((item: any) => {
-                    optionsSet.add(item.achievementgroup);
-                });
-                const optionsArray = Array.from(optionsSet);
-                setAchievementGroups(optionsArray);
-
-                setActiveGroup(optionsArray[0]);
-            })
-            .catch((error) => {
-                console.error("Error fetching achievements:", error);
+        const storedData = sessionStorage.getItem('achievementData');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setAchievementData(parsedData);
+            const optionsSet = new Set<string>();
+            parsedData.forEach((item: any) => {
+                optionsSet.add(item.achievementgroup);
             });
+            const optionsArray = Array.from(optionsSet);
+            setAchievementGroups(optionsArray);
+            setActiveGroup(optionsArray[0]);
+        } else {
+            axios
+                .get<any>("https://genshin-db-api.vercel.app/api/achievements?query=names&dumpResult=true&matchAliases=true&matchCategories=true&verboseCategories=true")
+                .then((res) => {
+                    let achievementGroups = res.data.result;
+                    setAchievementData(achievementGroups);
+                    sessionStorage.setItem('achievementData', JSON.stringify(achievementGroups));
+                    const optionsSet = new Set<string>();
+                    achievementGroups.forEach((item: any) => {
+                        optionsSet.add(item.achievementgroup);
+                    });
+                    const optionsArray = Array.from(optionsSet);
+                    setAchievementGroups(optionsArray);
+                    setActiveGroup(optionsArray[0]);
+                })
+                .catch((error) => {
+                    console.error("Error fetching achievements:", error);
+                });
+        }
     }, []);
-    const [filteredAchievements, setFilteredAchievements] = useState<Achievement[]>([]);
-    const [groupsActivated, setGroupsActivated] = useState<boolean>(true)
+
     useEffect(() => {
-        if (search.length == 0) setGroupsActivated(true)
-        else setGroupsActivated(false);
+        if (search.length === 0) {
+            setGroupsActivated(true);
+        } else {
+            setGroupsActivated(false);
+        }
         const updatedAchievements = achievementData.map((achievement: any) => {
             const isFiltered =
-                (achievement.name.toLowerCase().includes(search.toLowerCase()) ||
-                    achievement.stage1.description.toLowerCase().includes(search.toLowerCase()));
+                achievement.name.toLowerCase().includes(search.toLowerCase()) ||
+                achievement.stage1.description.toLowerCase().includes(search.toLowerCase());
             return { ...achievement, filtered: isFiltered };
         });
         setFilteredAchievements(updatedAchievements);

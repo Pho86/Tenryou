@@ -18,17 +18,26 @@ function ArtifactItem({ type, rarity, image, onMouseEnter, name, onClick }: { ty
 }
 export default function ArtifactsPage() {
   const [artifactData, setArtifactData] = useState<ArtifactTypes[]>([]);
-  const [activeArtifact, setActiveArtifact] = useState<ArtifactTypes>();
+  const [activeArtifact, setActiveArtifact] = useState<ArtifactTypes | null>(null);
   useLayoutEffect(() => {
-    axios
-      .get<ArtifactTypes[]>("https://genshin-db-api.vercel.app/api/v5/artifacts?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
-      .then((res) => {
-        setArtifactData(res.data);
-        setActiveArtifact({ ...res.data[0], hover: "flower" })
-      })
-      .catch((error) => {
-        console.error("Error fetching character names:", error);
-      });
+    const storedData = sessionStorage.getItem('artifactData');
+
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setArtifactData(parsedData);
+      setActiveArtifact({ ...parsedData[0], hover: 'flower' });
+    } else {
+      axios
+        .get<ArtifactTypes[]>("https://genshin-db-api.vercel.app/api/v5/artifacts?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+        .then((res) => {
+          setArtifactData(res.data);
+          setActiveArtifact({ ...res.data[0], hover: 'flower' });
+          sessionStorage.setItem('artifactData', JSON.stringify(res.data));
+        })
+        .catch((error) => {
+          console.error("Error fetching artifact data:", error);
+        });
+    }
   }, []);
   return (
     <>

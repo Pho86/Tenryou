@@ -22,28 +22,38 @@ export default function Birthdays({ }: {}) {
             setDone(true);
         }
 
-        axios.get<any[]>(`https://genshin-db-api.vercel.app/api/v5/characters?query=${month}&matchCategories=true&dumpResults=true&verboseCategories=true`)
-            .then((res) => {
-                let charactersData = res.data;
-                charactersData.forEach((character: any) => {
-                    addFileName([character]);
-                });
-                charactersData.sort((a, b) => {
-                    const getDate = (dateString: string) => {
-                        const [month, day] = dateString.split('/');
-                        return new Date(2024, parseInt(month) - 1, parseInt(day));
-                    };
-                    const dateA = getDate(a.birthdaymmdd);
-                    const dateB = getDate(b.birthdaymmdd);
+        const storedData = sessionStorage.getItem(`characterData_${selectedMonth}`);
 
-                    return dateA.getTime() - dateB.getTime();
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setCharacters(parsedData);
+            setLoading(false);
+        } else {
+            axios.get<any[]>(`https://genshin-db-api.vercel.app/api/v5/characters?query=${month}&matchCategories=true&dumpResults=true&verboseCategories=true`)
+                .then((res) => {
+                    let charactersData = res.data;
+                    charactersData.forEach((character: any) => {
+                        addFileName([character]);
+                    });
+                    charactersData.sort((a, b) => {
+                        const getDate = (dateString: string) => {
+                            const [month, day] = dateString.split('/');
+                            return new Date(2024, parseInt(month) - 1, parseInt(day));
+                        };
+                        const dateA = getDate(a.birthdaymmdd);
+                        const dateB = getDate(b.birthdaymmdd);
+
+                        return dateA.getTime() - dateB.getTime();
+                    });
+                    setCharacters(charactersData);
+                    sessionStorage.setItem(`characterData_${selectedMonth}`, JSON.stringify(charactersData));
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.error("Error fetching character data:", error);
+                    setLoading(false);
                 });
-                setCharacters(charactersData);
-                setLoading(false)
-            })
-            .catch((error) => {
-                console.error("Error fetching character names:", error);
-            });
+        }
     }, [selectedMonth]);
 
     return <div className="flex flex-col gap-2 p-2 overflow-y-scroll">

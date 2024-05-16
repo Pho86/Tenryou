@@ -9,15 +9,23 @@ export default function NamecardsPage() {
     const [active, setActive] = useState<Namecard>();
     const [loading, setLoading] = useState<boolean>(false);
     useLayoutEffect(() => {
-        axios
-            .get<Namecard[]>("https://genshin-db-api.vercel.app/api/v5/namecards?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
-            .then((res) => {
-                setNameCardData(res.data);
-                setActive(res.data[0]);
-            })
-            .catch((error) => {
-                console.error("Error fetching character names:", error);
-            });
+        const storedData = sessionStorage.getItem('nameCardData');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setNameCardData(parsedData);
+            setActive(parsedData[0]);
+        } else {
+            axios
+                .get<Namecard[]>("https://genshin-db-api.vercel.app/api/v5/namecards?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+                .then((res) => {
+                    setNameCardData(res.data);
+                    setActive(res.data[0]);
+                    sessionStorage.setItem('nameCardData', JSON.stringify(res.data));
+                })
+                .catch((error) => {
+                    console.error("Error fetching namecard data:", error);
+                });
+        }
     }, []);
 
     return (

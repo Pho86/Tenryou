@@ -13,19 +13,24 @@ export default function CharacterPage() {
   const [activeElement, setActiveElement] = useState<number>(0);
   const [activeWeapon, setActiveWeapon] = useState<number>(0);
   useLayoutEffect(() => {
-    axios
-      .get<Character[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
-      .then((res) => {
-        let names = res.data.sort();
-        names.forEach((name) => {
-          addFileName([name]);
+    const storedData = sessionStorage.getItem('characterData');
+    if (storedData) {
+      setCharacterData(JSON.parse(storedData));
+    } else {
+      axios
+        .get<Character[]>('https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true')
+        .then((res) => {
+          const names = res.data.sort();
+          names.forEach((name) => {
+            addFileName([name]);
+          });
+          setCharacterData(names);
+          sessionStorage.setItem('characterData', JSON.stringify(names));
         })
-        setCharacterData(names);
-        
-      })
-      .catch((error) => {
-        console.error("Error fetching character names:", error);
-      });
+        .catch((error) => {
+          console.error('Error fetching character names:', error);
+        });
+    }
   }, []);
   return (
     <>

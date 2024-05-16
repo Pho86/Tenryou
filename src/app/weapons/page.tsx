@@ -18,15 +18,23 @@ export default function WeaponsPage() {
     const [refinement, setRefinement] = useState<number>(5);
     const [loading, setLoading] = useState<boolean>(false);
     useLayoutEffect(() => {
-        axios
-            .get<Weapon[]>("https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
-            .then((res) => {
-                setWeaponData(res.data);
-                receiveWeaponStats(res.data[0])
-            })
-            .catch((error) => {
-                console.error("Error fetching character names:", error);
-            });
+        const storedData = sessionStorage.getItem('weaponData');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setWeaponData(parsedData);
+            receiveWeaponStats(parsedData[0]);
+        } else {
+            axios
+                .get<Weapon[]>("https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+                .then((res) => {
+                    setWeaponData(res.data);
+                    receiveWeaponStats(res.data[0]);
+                    sessionStorage.setItem('weaponData', JSON.stringify(res.data));
+                })
+                .catch((error) => {
+                    console.error("Error fetching weapon data:", error);
+                });
+        }
     }, []);
     const receiveWeaponStats = async (data: any) => {
         try {
