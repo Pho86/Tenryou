@@ -43,8 +43,8 @@ const config: Config = {
           'end': 'hsla(0, 0%, 65%, 1)',
         },
         'gradient-Pyro': {
-          'start': '#EE481B',
-          'end': '#DA4E27'
+          'start': '#E94F25',
+          'end': '#FF9D82'
         },
         'gradient-Hydro': {
           'start': '#8296E7',

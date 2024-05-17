@@ -1,20 +1,40 @@
+"use client"
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
-export default function CreditsPage() {
+import ChangelogComponent from "../components/Changelog";
+import Modal from "../components/Modal";
+import { useState } from "react";
 
+export default function CreditsPage() {
+    const debug = () => {
+        localStorage.clear();
+        sessionStorage.clear();
+    }
+    const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
     return (
         <>
             <h1 className="text-3xl text-primary">Credits</h1>
-            <p>Data: <Link href="https://github.com/theBowja/genshin-db" className="hover:text-primary underline underline-offset-4 font-semibold transition-all">Genshin-db</Link></p>
-            <p>Images and Users API: <Link href="https://enka.network/" className="hover:text-primary underline underline-offset-4 font-semibold transition-all">Enka.Network</Link></p>
-            <p>Events JSON: <Link href="https://ambr.top/en" className="hover:text-primary underline underline-offset-4 font-semibold transition-all">Ambr.Top</Link></p>
+            <p>Data: <Link href="https://github.com/theBowja/genshin-db" target="__blank" className="hover:text-primary underline underline-offset-4 font-semibold transition-all">Genshin-db</Link></p>
+            <p>Images and Users API: <Link href="https://enka.network/" target="__blank" className="hover:text-primary underline underline-offset-4 font-semibold transition-all">Enka.Network</Link></p>
+            <p>Events JSON: <Link href="https://ambr.top/en" target="__blank" className="hover:text-primary underline underline-offset-4 font-semibold transition-all">Ambr.Top</Link></p>
             <div className="flex items-center">
-                <p>Want to Contribute? Or see an Issue? </p>
+                <p>Want to Contribute? Or see an Issue?</p>
                 <Link href="https://github.com/pho86/Tenryou" target="__blank" className="text-xl hover:text-primary transition-all p-1">
                     <FaGithub title="https://github.com/pho86/Tenryou" />
                 </Link>
             </div>
-            <h2 className="text-2xl text-primary font-semibold">Changelog</h2>
+            <ChangelogComponent />
+            <h2>Debug</h2>
+            <button className="p-1 rounded-xl border-2 w-min text-nowrap transition-all hover:bg-bg-dark" onClick={() => {setShowConfirmation(true) }}>Clear Storage</button>
+            <Modal visible={showConfirmation} exit={() => setShowConfirmation(false)}>
+                <div className="flex flex-col gap-2 items-center">
+                    Are you sure you want to reset your data?
+                    <div className="flex gap-2 items-center">
+                        <button className="p-1 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { debug(); setShowConfirmation(false) }}>Yes</button>
+                        <button className="p-1 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { setShowConfirmation(false) }}>No</button>
+                    </div>
+                </div>
+            </Modal>
         </>
     );
 }

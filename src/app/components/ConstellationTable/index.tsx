@@ -29,7 +29,7 @@ function ConstellationCard({ constellation, name, constellationImage, index }: {
             <Image src={`https://enka.network/ui/${constellationImage}.png`} width={55} height={55} alt={`${name} constellation skill #${index}`} className="rounded-full bg-bg-light p-1 border-bg border" />
             <h3 className="font-bold text-lg">{index}. {constellation.name} </h3>
         </div>
-        <pre className="text-pretty font-poppins">{parse(constellation.parsedText)}</pre>
+        <pre className="text-wrap font-signika">{parse(constellation.parsedText)}</pre>
     </div>
     )
 }

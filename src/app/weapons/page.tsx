@@ -18,15 +18,23 @@ export default function WeaponsPage() {
     const [refinement, setRefinement] = useState<number>(5);
     const [loading, setLoading] = useState<boolean>(false);
     useLayoutEffect(() => {
-        axios
-            .get<Weapon[]>("https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
-            .then((res) => {
-                setWeaponData(res.data);
-                receiveWeaponStats(res.data[0])
-            })
-            .catch((error) => {
-                console.error("Error fetching character names:", error);
-            });
+        const storedData = sessionStorage.getItem('weaponData');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setWeaponData(parsedData);
+            receiveWeaponStats(parsedData[0]);
+        } else {
+            axios
+                .get<Weapon[]>("https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+                .then((res) => {
+                    setWeaponData(res.data);
+                    receiveWeaponStats(res.data[0]);
+                    sessionStorage.setItem('weaponData', JSON.stringify(res.data));
+                })
+                .catch((error) => {
+                    console.error("Error fetching weapon data:", error);
+                });
+        }
     }, []);
     const receiveWeaponStats = async (data: any) => {
         try {
@@ -102,8 +110,8 @@ export default function WeaponsPage() {
                                 const weaponRarity = [true, 1, 2, 3, 4, 5];
                                 const validWeapon = activeWeapon === 0 || weaponConditions[activeWeapon] === weapon.weaponText;
                                 const validRarity = activeRarity === 0 || weaponRarity[activeRarity] === weapon.rarity;
-                                if (validWeapon && validRarity) return <div key={index} className="max-h-48">
-                                    <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == weapon.id && "shadow-light scale-105"}`} onClick={() => { setActive(weapon); receiveWeaponStats(weapon) }}>
+                                if (validWeapon && validRarity) return <div key={index} className="">
+                                    <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-[103%] hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == weapon.id && "shadow-light scale-[103%]"}`} onClick={() => { setActive(weapon); receiveWeaponStats(weapon) }}>
                                         <Image src={`https://enka.network/ui/${weapon.images.filename_icon}.png`} width={250} height={250} alt={`${weapon.name} weaapon icon`} className={`bg-gradient-to-br ${weapon.rarity === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : weapon.rarity === 4 ? "from-gradient-SR-start to-gradient-SR-end" : weapon.rarity === 3 ? "from-gradient-R-start to-gradient-R-end" : weapon.rarity === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} rounded-t-lg w-full h-full rounded-br-4xl object-cover bg-gradient-to-br`} title={`${weapon.name}`} />
                                         <p className="flex flex-col min-h-9 justify-around mx-1 text-center text-xs md:text-md text-bg font-bold">{weapon.name}</p>
                                     </div>

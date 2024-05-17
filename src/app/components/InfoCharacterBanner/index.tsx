@@ -39,8 +39,8 @@ export default function InfoCharacterBanner({
             >
                 <Image src={`https://enka.network/ui/UI_Gacha_AvatarImg_${characterData.fileName}.png`} alt={`${params.name} Image Card`} width={3000} height={3000} draggable={false} className="pointer-events-none object-cover w-full h-full transition-all hover:scale-[101%] -z-[10]" priority />
             </motion.div>
-            <div className="w-full flex items-center justify-center" >
-                <motion.div className="max-w-screen-2xl w-full md:pt-16 z-10"
+            <div className="w-full flex items-center justify-center pl-8" >
+                <motion.div className="max-w-screen-2xl w-full md:pt-16 z-10 "
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1.8, duration: .8 }}
@@ -52,7 +52,7 @@ export default function InfoCharacterBanner({
                         <div className="flex flex-col gap-2 mt-10 bg-bg p-4 border-primary border-2 rounded-lg ">
                             <div className="w-full flex justify-between">
                                 <div className="flex gap-4 items-center">
-                                    <h1 className="font-bold text-4xl md:text-5xl text-pretty rounded-xl ">{characterData.name}</h1>
+                                    <h1 className="font-bold text-4xl md:text-5xl text-primary text-pretty rounded-xl ">{characterData.name}</h1>
                                     <Image src={`/elements/${characterData.elementText}.webp`} width={150} height={150} className="w-16 h-16" alt={`${characterData.elementText} icon`} />
                                 </div>
                                 <div >

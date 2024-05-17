@@ -50,7 +50,7 @@ export default function NavBar() {
 
     let pathname = usePathname() || "/";
 
-    if (pathname.includes("/achievements") || pathname.includes("/weapons") || pathname.includes("/oufits") || pathname.includes("/materials") || pathname.includes("/elements") || pathname.includes("/artifacts") || pathname.includes("/namecards")) pathname = "/database";
+    if (pathname.includes("/achievements") || pathname.includes("/weapons") || pathname.includes("/materials") || pathname.includes("/elements") || pathname.includes("/artifacts") || pathname.includes("/namecards") || pathname.includes("/outfits")) pathname = "/database";
     if (pathname.includes("/characters")) pathname = "/characters";
     if (pathname.includes("/users")) pathname = "/users";
 

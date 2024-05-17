@@ -10,26 +10,68 @@ export default function TeamBuilderPage() {
     const [characterData, setCharacterData] = useState<Character[]>([]);
     const [activeElement, setActiveElement] = useState<number>(0);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
-    const [activeCharacters, setActiveCharacters] = useState<any[]>([{}, {}, {}, {}, {}, {}, {}, {}]);
-    const [activeElements, setActiveElements] = useState<any[]>(["", "", "", "", "", "", "", ""]);
+    const [activeElements, setActiveElements] = useState<string[]>(() => {
+        if (typeof window !== "undefined") {
+            const storedActiveElements = localStorage.getItem('activeElements');
+            return storedActiveElements ? JSON.parse(storedActiveElements) : ["", "", "", "", "", "", "", ""];
+        } else {
+            return ["", "", "", "", "", "", "", ""];
+        }
+    });
+
+    const [activeCharacters, setActiveCharacters] = useState<any[]>(() => {
+        if (typeof window !== "undefined") {
+            const storedActiveCharacters = localStorage.getItem('activeCharacters');
+            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}];
+        } else {
+            return [{}, {}, {}, {}, {}, {}, {}, {}];
+        }
+    });
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
     const [secondTeam, setSecondTeam] = useState<boolean>(true);
     const [showIcons, setShowIcons] = useState<boolean>(true);
     const [owned, setOwned] = useState<any[]>([]);
     useLayoutEffect(() => {
-        axios
-            .get<Character[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
-            .then((res) => {
-                let names = res.data.sort();
-                names.forEach((name) => {
-                    addFileName([name]);
+        const storedData = sessionStorage.getItem('characterData');
+        if (storedData) {
+            setCharacterData(JSON.parse(storedData));
+        } else {
+            axios
+                .get<Character[]>('https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true')
+                .then((res) => {
+                    const names = res.data.sort();
+                    names.forEach((name) => {
+                        addFileName([name]);
+                    });
+                    setCharacterData(names);
+                    sessionStorage.setItem('characterData', JSON.stringify(names));
                 })
-                setCharacterData(names);
-            })
-            .catch((error) => {
-                console.error("Error fetching character names:", error);
-            });
+                .catch((error) => {
+                    console.error('Error fetching character names:', error);
+                });
+        }
     }, []);
+
+    useEffect(() => {
+        const storedActiveElements = localStorage.getItem('activeElements');
+        if (storedActiveElements) {
+            setActiveElements(JSON.parse(storedActiveElements));
+        }
+    }, []);
+
+    useEffect(() => {
+        const storedActiveCharacters = localStorage.getItem('activeCharacters');
+        if (storedActiveCharacters) {
+            setActiveCharacters(JSON.parse(storedActiveCharacters));
+        }
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('activeElements', JSON.stringify(activeElements));
+    }, [activeElements]);
+
+    useEffect(() => {
+        localStorage.setItem('activeCharacters', JSON.stringify(activeCharacters));
+    }, [activeCharacters]);
 
     const selectCharacter = (character: Character, index?: number) => {
         let slot = selectedSlot;
@@ -164,8 +206,8 @@ export default function TeamBuilderPage() {
                                     if (!secondTeam) {
                                         if (index > 3) return
                                     }
-                                    return <div key={index} className={`transition-all overflow-hidden h-max rounded-xl ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light "} hover:shadow-light`} onClick={() => setSelectedSlot(index)}>
-                                        {character.active ? <div className={` transition-transform `} >
+                                    return <div key={index} className={`transition-all overflow-hidden h-max rounded-xl ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light  "} hover:shadow-light`} onClick={() => setSelectedSlot(index)}>
+                                        {character.active ? <div className={` transition-transform hover:scale-100 `} >
                                             <> {showIcons ?
                                                 <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
                                                 :
@@ -221,7 +263,7 @@ function CharacterCard({ character, selectCharacter, removeCharacter, activeProp
             selectCharacter(character); setActive(!active);
 
         }
-    }} className={`min-w-[6rem] md:min-w-[8rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active && "scale-105 shadow-light"} hover:scale-105 hover:shadow-light`}>
+    }} className={`min-w-[6rem] md:min-w-[8rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active ? "scale-[103%] shadow-light" : ""} ${active ? "hover:scale-100" : "hover:scale-[103%] hover:shadow-light"}`}>
         <div className={`flex flex-col self-start `}>
             <div className="absolute top-1 left-1 text-black">
                 <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} className="" alt={`${character.element} icon`} />

@@ -18,17 +18,26 @@ function ArtifactItem({ type, rarity, image, onMouseEnter, name, onClick }: { ty
 }
 export default function ArtifactsPage() {
   const [artifactData, setArtifactData] = useState<ArtifactTypes[]>([]);
-  const [activeArtifact, setActiveArtifact] = useState<ArtifactTypes>();
+  const [activeArtifact, setActiveArtifact] = useState<ArtifactTypes | null>(null);
   useLayoutEffect(() => {
-    axios
-      .get<ArtifactTypes[]>("https://genshin-db-api.vercel.app/api/v5/artifacts?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
-      .then((res) => {
-        setArtifactData(res.data);
-        setActiveArtifact({ ...res.data[0], hover: "flower" })
-      })
-      .catch((error) => {
-        console.error("Error fetching character names:", error);
-      });
+    const storedData = sessionStorage.getItem('artifactData');
+
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setArtifactData(parsedData);
+      setActiveArtifact({ ...parsedData[0], hover: 'flower' });
+    } else {
+      axios
+        .get<ArtifactTypes[]>("https://genshin-db-api.vercel.app/api/v5/artifacts?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+        .then((res) => {
+          setArtifactData(res.data);
+          setActiveArtifact({ ...res.data[0], hover: 'flower' });
+          sessionStorage.setItem('artifactData', JSON.stringify(res.data));
+        })
+        .catch((error) => {
+          console.error("Error fetching artifact data:", error);
+        });
+    }
   }, []);
   return (
     <>
@@ -76,7 +85,7 @@ export default function ArtifactsPage() {
                   {activeArtifact.hover == "sands" && <Description piece={activeArtifact.sands} />}
                   {activeArtifact.hover == "goblet" && <Description piece={activeArtifact.goblet} />}
                   {activeArtifact.hover == "circlet" && <Description piece={activeArtifact.circlet} />}
-                  <div className="flex flex-col w-full gap-2 text-pretty">
+                  <div className="flex flex-col w-full text-pretty">
                     <h2 className="font-bold text-xl">{activeArtifact.name}</h2>
                     {activeArtifact.effect1Pc && <p><span className="font-semibold">1 Piece:</span> {activeArtifact.effect1Pc}</p>}
                     {activeArtifact.effect2Pc && <p><span className="font-semibold">2 Piece:</span> {activeArtifact.effect2Pc}</p>}
@@ -94,7 +103,7 @@ export default function ArtifactsPage() {
 
 function Description({ piece }: { piece: any }) {
   return <div className="flex gap-2 flex-col">
-    <p className="font-bold text-xl">{piece.name}</p>
+    <p className="font-bold text-2xl">{piece.name}</p>
     <blockquote className="">{piece.description}</blockquote>
     <blockquote className="italic text-sm">{piece.story}</blockquote>
   </div>

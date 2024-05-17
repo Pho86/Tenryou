@@ -11,15 +11,27 @@ export default function MaterialsPage() {
     const [active, setActive] = useState<Material>();
     const [loading, setLoading] = useState<boolean>(false);
     useLayoutEffect(() => {
-        axios
-            .get<Material[]>("https://genshin-db-api.vercel.app/api/v5/materials?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
-            .then((res) => {
-                setMaterialData(res.data);
-                setActive(res.data[0]);
-            })
-            .catch((error) => {
-                console.error("Error fetching character names:", error);
-            });
+        const storedData = sessionStorage.getItem('materialData');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            setMaterialData(parsedData);
+            setActive(parsedData[0]);
+        } else {
+            setLoading(true);
+            axios
+                .get<Material[]>("https://genshin-db-api.vercel.app/api/v5/materials?query=names&matchCategories=true&dumpResults=true&verboseCategories=true")
+                .then((res) => {
+                    setMaterialData(res.data);
+                    setActive(res.data[0]);
+                    sessionStorage.setItem('materialData', JSON.stringify(res.data));
+                })
+                .catch((error) => {
+                    console.error("Error fetching material data:", error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
     }, []);
 
     return (

@@ -18,59 +18,65 @@ export default function CharacterPage({ params }: { params: { name: string } }) 
     const [error, setError] = useState('');
     const [lang, setLang] = useState<string>("english");
     useLayoutEffect(() => {
-        axios.get<Character>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true&resultLanguage=${lang}`)
+        const storedData = sessionStorage.getItem(`characterData_${params.name}_${lang}`);
+    
+        if (storedData) {
+          setCharacterData(JSON.parse(storedData));
+        } else {
+          axios
+            .get<Character>(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true&resultLanguage=${lang}`)
             .then((res) => {
-                let data = res.data;
-                // @ts-ignore
-                let names = addFileName([data.result]);
-                const mergeWithPreference = (firstData: any, secondData: any) => {
-                    for (const key in secondData) {
-                        if (firstData.hasOwnProperty(key) && typeof firstData[key] === 'object' && secondData[key] !== null) {
-                            firstData[key] = mergeWithPreference(firstData[key], secondData[key]);
-                        } else {
-                            firstData[key] = secondData[key];
-                        }
-                    }
-                    return firstData;
-                };
-                let CharacterName = names[0].fileName;
-                Promise.all([
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${CharacterName}&matchCategories=true&resultLanguage=${lang}`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&resultLanguage=${lang}`),
-                    axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&resultLanguage=${lang}&dumpResults=true&verboseCategories=true`),
-                ])
-                    .then((responses) => {
-                        const [constellationsResponse, talentsResponse, nameCardResponse, voiceDataResponse, outfitResponse] = responses;
-                        const constellationsData = constellationsResponse.data;
-                        const talentsData = talentsResponse.data;
-                        const nameCardData = nameCardResponse.data;
-                        const voiceData = voiceDataResponse.data;
-                        const outfitData = outfitResponse.data;
-
-                        const mergedData = {
-                            stats: data.stats,
-                            constellations: constellationsData,
-                            talents: talentsData,
-                            nameCard: nameCardData,
-                            voices: voiceData,
-                            outfits: outfitData,
-                            ...data.result,
-                        };
-
-                        const finalData = mergeWithPreference(data, mergedData);
-                        setCharacterData(finalData);
-                        // console.log(finalData)
-                    })
-                    .catch((error) => {
-                        console.error("Error fetching data:", error);
-                    });
+              const data = res.data;
+              const names = addFileName([data.result]);
+              const mergeWithPreference = (firstData: any, secondData: any) => {
+                for (const key in secondData) {
+                  if (firstData.hasOwnProperty(key) && typeof firstData[key] === 'object' && secondData[key] !== null) {
+                    firstData[key] = mergeWithPreference(firstData[key], secondData[key]);
+                  } else {
+                    firstData[key] = secondData[key];
+                  }
+                }
+                return firstData;
+              };
+              const characterName = names[0].fileName;
+              Promise.all([
+                axios.get(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
+                axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true&resultLanguage=${lang}`),
+                axios.get(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${characterName}&matchCategories=true&resultLanguage=${lang}`),
+                axios.get(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true&resultLanguage=${lang}`),
+                axios.get(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&resultLanguage=${lang}&dumpResults=true&verboseCategories=true`),
+              ])
+                .then((responses) => {
+                  const [constellationsResponse, talentsResponse, nameCardResponse, voiceDataResponse, outfitResponse] = responses;
+                  const constellationsData = constellationsResponse.data;
+                  const talentsData = talentsResponse.data;
+                  const nameCardData = nameCardResponse.data;
+                  const voiceData = voiceDataResponse.data;
+                  const outfitData = outfitResponse.data;
+    
+                  const mergedData = {
+                    stats: data.stats,
+                    constellations: constellationsData,
+                    talents: talentsData,
+                    nameCard: nameCardData,
+                    voices: voiceData,
+                    outfits: outfitData,
+                    ...data.result,
+                  };
+    
+                  const finalData = mergeWithPreference(data, mergedData);
+                  setCharacterData(finalData);
+                  sessionStorage.setItem(`characterData_${params.name}_${lang}`, JSON.stringify(finalData));
+                })
+                .catch((error) => {
+                  console.error("Error fetching data:", error);
+                });
             })
-            .catch(err => {
-                setError(err.message);
+            .catch((err) => {
+              setError(err.message);
             });
-    }, []);
+        }
+      }, [params.name, lang]);
 
     return (
         <>

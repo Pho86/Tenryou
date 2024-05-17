@@ -8,7 +8,7 @@ export async function generateMetadata(
     { params }: Props,
 
 ): Promise<Metadata> {
-    const name = params.name
+    const name = decodeURIComponent(params.name);
 
     return {
         title: `${name} - Tenryou 💮`,

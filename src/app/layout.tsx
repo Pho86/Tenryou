@@ -33,7 +33,9 @@ export const metadata: Metadata = {
   },
   keywords: ["Genshin Impact", "Team Builder", "Genshin Weapons", "Genshin Fantasy", "Genshin Database", "User Search", "Daily Info", "Genshin Artifacts", "Genshin Characters", "Powered By Enka.Network", "Genshin DB", "Genshin Information", "Birthdays", "Genshin", "Genshin Daily Farming", "Genshin PC Game", "Mihoyo", "Genshin Elements", "Genshin Outfits and Models", "Farming", "Genshin Materials", "Genshin Stats", "Genshin Profile Cards", "Genshin Team Cards"],
   applicationName: "Tenryou",
-
+  twitter:{
+    card:'summary'
+  },
 };
 
 export default function RootLayout({
@@ -52,9 +54,10 @@ export default function RootLayout({
             color="#FF7373"
             height={5} zIndex={2000}
             showSpinner={false}
+            easing="easeInOut"
           />
           <NavBar />
-          <main className="pt-4 sm:pt-8 md:pt-16 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-center items-center gap-2">
+          <main className="pt-4 sm:pt-8 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-center items-center gap-2">
             <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
               {children}
             </div>

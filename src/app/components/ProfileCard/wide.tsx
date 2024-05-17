@@ -40,16 +40,17 @@ export function ProfileCardWide({
 
             <div className={`grid grid-cols-2 auto-cols-[400px] w-[1280px] p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end relative`} ref={cardRef}>
                 {starsBackground ?
-                    <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name} background stars image`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full  " /> 
+                    <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name} background stars image`} blurDataURL="data:..." placeholder="blur"  className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full  " /> 
                     :
                     activeCharacter.name === "Yae Miko" ?
-                        <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}1_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-100 rounded-xl object-cover h-full " />
+                        <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}1_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-100 rounded-xl object-cover h-full " />
                         :
                         (activeCharacter.name === "Traveler") ?
                             <Image src={`/namecards/UI_NameCardPic_Ysxf4_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full " />
                             :
-                            <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full w-full" />
+                            <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full w-full" />
                 }
+                <Image src={'/icon.svg'} alt="Tenryou Logo" width={50} height={50} className="absolute right-2 top-2 drop-shadow-icon"/>
                 <div className="w-full h-full relative min-h-[400px] col-span-1">
                     <div className="flex flex-col absolute p-5 w-full h-full drop-shadow-text ">
                         <div className="flex-col flex h-full justify-between">
@@ -114,7 +115,7 @@ export function ProfileCardWide({
                         </div>
                     </div>
                     <div className="p-2 w-full h-full max-h-[650px] flex items-center justify-center">
-                        <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="bg-bg bg-opacity-45 rounded-xl object-cover h-full w-full" />
+                        <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} blurDataURL="data:..." placeholder="blur"  width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="bg-bg bg-opacity-45 rounded-xl object-cover h-full w-full" />
                     </div>
                 </div>
                 <div className="p-2 flex flex-col gap-2 col-span-1 w-full drop-shadow-text">

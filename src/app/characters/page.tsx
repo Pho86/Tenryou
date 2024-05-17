@@ -10,21 +10,27 @@ import { Character } from "@/app/types/character";
 export default function CharacterPage() {
 
   const [CharacterData, setCharacterData] = useState<Character[]>([]);
-  const [activeElement, setActiveElement] = useState<number>(0)
-  const [activeWeapon, setActiveWeapon] = useState<number>(0)
+  const [activeElement, setActiveElement] = useState<number>(0);
+  const [activeWeapon, setActiveWeapon] = useState<number>(0);
   useLayoutEffect(() => {
-    axios
-      .get<Character[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true")
-      .then((res) => {
-        let names = res.data.sort();
-        names.forEach((name) => {
-          addFileName([name]);
+    const storedData = sessionStorage.getItem('characterData');
+    if (storedData) {
+      setCharacterData(JSON.parse(storedData));
+    } else {
+      axios
+        .get<Character[]>('https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true')
+        .then((res) => {
+          const names = res.data.sort();
+          names.forEach((name) => {
+            addFileName([name]);
+          });
+          setCharacterData(names);
+          sessionStorage.setItem('characterData', JSON.stringify(names));
         })
-        setCharacterData(names);
-      })
-      .catch((error) => {
-        console.error("Error fetching character names:", error);
-      });
+        .catch((error) => {
+          console.error('Error fetching character names:', error);
+        });
+    }
   }, []);
   return (
     <>
@@ -64,14 +70,7 @@ export default function CharacterPage() {
               {character.region && <div className="absolute top-1 right-1 text-black">
                 <Image src={`/regions/${character.region}.webp`} width={25} height={25} className="" alt={`${character.region} icon`} />
               </div>}
-
-              <Image
-                src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
-                width={200}
-                height={200}
-                alt={`${character.name} character icon`}
-                className={`rounded-t-xl rounded-br-4xl max-h-44 object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
-              />
+              <Image blurDataURL="data:..." placeholder="blur" alt={`${character.name} character icon`} src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={600} height={300}  className={`rounded-t-xl rounded-br-4xl max-h-44 object-cover bg-gradient-to-br bg-bg ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}/>
               <p className="text-center w-full h-full text-xs text-nowrap p-2 text-black relative font-bold rounded-b-xl after:absolute after:p-2 absolute:top-0 absolute:bg-red ">{character.name}</p>
             </Link>
           </div>
