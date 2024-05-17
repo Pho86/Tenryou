@@ -7,8 +7,9 @@ import Link from "next/link";
 import Loader from "../Loader";
 import { Character } from "@/app/types/character";
 import { Artifact } from "@/app/types/artifacts";
+import { Weapon } from "@/app/types/weapon";
 export default function DailyDomains({ }: {}) {
-    const [activeWeapons, setActiveWeapons] = useState<any[]>([]);
+    const [activeWeapons, setActiveWeapons] = useState<Weapon[]>([]);
     const [activeArtifacts, setActiveArtifacts] = useState<Artifact[]>([]);
     const [activeCharacters, setActiveCharacters] = useState<Character[]>([]);
     const [selectedDay, setSelectedDay] = useState<string>("Monday");
@@ -24,16 +25,16 @@ export default function DailyDomains({ }: {}) {
             });
 
             const res = await axios.get(`https://genshin-db-api.vercel.app/api/v5/talents?query=${domain.rewardPreview[domain.rewardPreview.length - 1].name}&matchCategories=true&dumpResults=true&verboseCategories=true`);
-            const filteredData = res.data.filter((item: any) => item.name && !item.name.startsWith('Traveler'));
+            const filteredData = res.data.filter((item: Weapon) => item.name && !item.name.startsWith('Traveler'));
 
-            const innerRequests = filteredData.map(async (character: any) => {
+            const innerRequests = filteredData.map(async (character: Character) => {
                 const response = await axios.get(`https://genshin-db-api.vercel.app/api/v5/characters?query=${character.name}&matchCategories=true&dumpResults=true&verboseCategories=true`);
                 return response.data;
             });
 
             const charactersData = await Promise.all(innerRequests);
 
-            charactersData.forEach((character: any) => {
+            charactersData.forEach((character: Character) => {
                 addFileName([character]);
             });
             return charactersData;
@@ -125,7 +126,7 @@ export default function DailyDomains({ }: {}) {
                                         <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end rounded-xl hover:scale-105 hover:shadow-light transition-all`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>
                                     <div className="grid-auto-fit-10">
-                                        {activeCharacters.length > 1 && activeCharacters[index].map((character: any, i: number) => {
+                                        {activeCharacters.length > 1 && activeCharacters[index].map((character: Character, i: number) => {
                                             return <Link id={`${character.name}_daily`} key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
                                                 <Image
                                                     src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}

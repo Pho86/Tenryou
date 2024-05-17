@@ -69,7 +69,7 @@ export default function Profile({ user }: { user: User }) {
                         </div>
                     }
                     <AnimatePresence>
-                        {showStatsModal && <StatsModal exit={() => { setShowStatsModal(!showStatsModal) }} />}
+                       <StatsModal exit={() => { setShowStatsModal(!showStatsModal) }} visible={showStatsModal}/>
                     </AnimatePresence>
                 </div>
                 <div className="flex flex-col">

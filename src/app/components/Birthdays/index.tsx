@@ -29,7 +29,8 @@ export default function Birthdays({ }: {}) {
             setCharacters(parsedData);
             setLoading(false);
         } else {
-            axios.get<any[]>(`https://genshin-db-api.vercel.app/api/v5/characters?query=${month}&matchCategories=true&dumpResults=true&verboseCategories=true`)
+            if(selectedMonth.length == 0) return
+            axios.get<Character[]>(`https://genshin-db-api.vercel.app/api/v5/characters?query=${month}&matchCategories=true&dumpResults=true&verboseCategories=true`)
                 .then((res) => {
                     let charactersData = res.data;
                     charactersData.forEach((character: any) => {

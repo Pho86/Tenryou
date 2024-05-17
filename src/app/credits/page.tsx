@@ -2,8 +2,15 @@
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import ChangelogComponent from "../components/Changelog";
+import Modal from "../components/Modal";
+import { useState } from "react";
 
 export default function CreditsPage() {
+    const debug = () => {
+        localStorage.clear();
+        sessionStorage.clear();
+    }
+    const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
     return (
         <>
             <h1 className="text-3xl text-primary">Credits</h1>
@@ -17,6 +24,17 @@ export default function CreditsPage() {
                 </Link>
             </div>
             <ChangelogComponent />
+            <h2>Debug</h2>
+            <button className="p-1 rounded-xl border-2 w-min text-nowrap transition-all hover:bg-bg-dark" onClick={() => {setShowConfirmation(true) }}>Clear Storage</button>
+            <Modal visible={showConfirmation} exit={() => setShowConfirmation(false)}>
+                <div className="flex flex-col gap-2 items-center">
+                    Are you sure you want to reset your data?
+                    <div className="flex gap-2 items-center">
+                        <button className="p-1 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { debug(); setShowConfirmation(false) }}>Yes</button>
+                        <button className="p-1 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { setShowConfirmation(false) }}>No</button>
+                    </div>
+                </div>
+            </Modal>
         </>
     );
 }
