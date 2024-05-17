@@ -263,7 +263,7 @@ function CharacterCard({ character, selectCharacter, removeCharacter, activeProp
             selectCharacter(character); setActive(!active);
 
         }
-    }} className={`min-w-[6rem] md:min-w-[8rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active && "scale-105 shadow-light hover:scale-100"} hover:scale-105 hover:shadow-light`}>
+    }} className={`min-w-[6rem] md:min-w-[8rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active ? "scale-[103%] shadow-light" : ""} ${active ? "hover:scale-100" : "hover:scale-[103%] hover:shadow-light"}`}>
         <div className={`flex flex-col self-start `}>
             <div className="absolute top-1 left-1 text-black">
                 <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} className="" alt={`${character.element} icon`} />
