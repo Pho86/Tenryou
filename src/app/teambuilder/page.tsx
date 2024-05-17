@@ -11,13 +11,21 @@ export default function TeamBuilderPage() {
     const [activeElement, setActiveElement] = useState<number>(0);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
     const [activeElements, setActiveElements] = useState<string[]>(() => {
-        const storedActiveElements = localStorage.getItem('activeElements');
-        return storedActiveElements ? JSON.parse(storedActiveElements) : ["", "", "", "", "", "", "", ""];
+        if (typeof window !== "undefined") {
+            const storedActiveElements = localStorage.getItem('activeElements');
+            return storedActiveElements ? JSON.parse(storedActiveElements) : ["", "", "", "", "", "", "", ""];
+        } else {
+            return ["", "", "", "", "", "", "", ""];
+        }
     });
 
     const [activeCharacters, setActiveCharacters] = useState<any[]>(() => {
-        const storedActiveCharacters = localStorage.getItem('activeCharacters');
-        return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}];
+        if (typeof window !== "undefined") {
+            const storedActiveCharacters = localStorage.getItem('activeCharacters');
+            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}];
+        } else {
+            return [{}, {}, {}, {}, {}, {}, {}, {}];
+        }
     });
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
     const [secondTeam, setSecondTeam] = useState<boolean>(true);
