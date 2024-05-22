@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
+// import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from 'ai';
+import { streamText } from 'ai';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 const prompt = `I want you to create a team with these characters, generally 4 characters from Genshin Impact. Each character is separated in a string listed by "CHARACTER_NAME, (WEAPON_TYPE), (ELEMENT_TYPE) | ". Every character that will is added to the list, is a character that is fully released and is not from any beta, no speculations are here. I generally want you have a standard team comp, consisting of a Main DPS, 2 supports/or sub DPS, and a healer. Create a guide of each character of the most used artifacts and weapons from the community and list out the recommended substats for these. At the end, state the most common rotations of how you should play the team and provide some tips of how to play the team. If there is multiple characters whose main roles is a healer, example if kokomi and barbara is on the same team, decide which character deals more damage, in this example, because Barbara has no skills that deal any damage, so she would therefore be the healer, meanwhile kokomi is able to deal damage, so she would become a sub DPS. However, if there is only 1 healer on the team, their role can be defined as just the healer, so if the team consisted of a main dps, sub dps, support, and this character was a healer, they are classified as the healer. and is characterized as the 4th slot. However, if there is no character that can be a healer present in the current team that is perfectly fine, create a team with 3 supports instead. If there is a team of less then 4 characters, that team is valid, but then the team comp would be different from your standard team, just ensure one character is the main DPS. The Format I want is in Markdown and disclaimers are provided, make sure you do not include the disclaimers when returning:
 
 # Team Name, EX: Bloom and Burn, or if there is an existing team name such as Morgana (Venti, Mona, Ganyu, Diona) use that name instead. Just write the team name on this line only.
@@ -40,11 +41,11 @@ Example:
 
 `;
 
+const google = createGoogleGenerativeAI({
+    apiKey: process.env.GOOGLE_API_KEY as string || ''
+});
 export async function POST(req: Request, res: NextResponse) {
 
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
-
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
     const body = await req.json();
     let team1 = ""
     let team2 = ""
@@ -61,9 +62,12 @@ export async function POST(req: Request, res: NextResponse) {
         teams = team1;
     }
     try {
-        const result = await model.generateContentStream([teams, prompt]);
-        console.log((await result.response).text())
-        return NextResponse.json((await result.response).text(), { status: 200 });
+        const result = await streamText({
+            model: google('models/gemini-1.5-flash-latest'),
+            system: prompt,
+            prompt: teams
+        });
+        return result.toTextStreamResponse();
     } catch (error) {
         return NextResponse.json({
             text: "Unable to process the prompt. Please try again."

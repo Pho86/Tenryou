@@ -6,7 +6,7 @@
 
 # [Tenryou](https://Tenryou.live)
 
-Tenryou is a companion website meant for the action-rpg game [Genshin Impact](https://genshin.mihoyo.com/). Tenryou is intended to help players view information from the game in a visual and cohesive manner with via information pulled from various resources to provide up-to-date information.
+Tenryou is a companion website create for the action-rpg game [Genshin Impact](https://genshin.mihoyo.com/). Tenryou is intended to help players view information from the game in a visual and cohesive manner with via information pulled from various resources to provide up-to-date information with a teambuilder prototype to help you create your team.
 
 <!-- [![Contributors][contributors-shield]][contributors-url]
 [![Stargazers][stars-shield]][stars-url]
