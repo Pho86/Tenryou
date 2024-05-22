@@ -44,6 +44,7 @@ Example:
 const google = createGoogleGenerativeAI({
     apiKey: process.env.GOOGLE_API_KEY as string || ''
 });
+export const maxDuration = 60;
 export async function POST(req: Request, res: NextResponse) {
 
     const body = await req.json();
