@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "api/teambuild/google": {
+        "maxDuration": 60
+      }
+    }
+  }
