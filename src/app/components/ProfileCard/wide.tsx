@@ -43,12 +43,12 @@ export function ProfileCardWide({
                     <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name} background stars image`} blurDataURL="data:..." placeholder="blur"  className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full  " /> 
                     :
                     activeCharacter.name === "Yae Miko" ?
-                        <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}1_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-100 rounded-xl object-cover h-full " />
+                        <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}1_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full " />
                         :
                         (activeCharacter.name === "Traveler") ?
-                            <Image src={`/namecards/UI_NameCardPic_Ysxf4_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full " />
+                            <Image src={`/namecards/UI_NameCardPic_Ysxf4_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full w-full" />
                             :
-                            <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} constellation`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full w-full" />
+                            <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full w-full" />
                 }
                 <Image src={'/icon.svg'} alt="Tenryou Logo" width={50} height={50} className="absolute right-2 top-2 drop-shadow-icon"/>
                 <div className="w-full h-full relative min-h-[400px] col-span-1">
@@ -463,26 +463,26 @@ export function ProfileCardWide({
         <div className="w-full flex flex-row-reverse items-center justify-center">
             <div className="flex-end flex flex-col justify-start w-[1280px] max-w-7xl gap-2">
                 <h2 className="font-bold text-2xl">Card Options</h2>
-                <div className="flex gap-2">
-                    <label className="flex gap-2">
+                <div className="flex gap-4">
+                    <label className="flex gap-2 items-center">
+                        <span>Username:</span>
                         <input type="checkbox" checked={username} onChange={() => { setUsername(!username) }} />
-                        <span>Username</span>
                     </label>
-                    <label className="flex gap-2">
+                    <label className="flex gap-2 items-center">
+                        <span>UID:</span>
                         <input type="checkbox" checked={UID} onChange={() => { setUID(!UID) }} />
-                        <span>UID</span>
                     </label>
-                    <label className="flex gap-2">
+                    <label className="flex gap-2 items-center">
+                        <span>Crit Value:</span>
                         <input type="checkbox" checked={critValue} onChange={() => { setCritValue(!critValue) }} />
-                        <span>Crit Value</span>
                     </label>
-                    <label className="flex gap-2">
+                    <label className="flex gap-2 items-center">
+                        <span>Substat Rolls:</span>
                         <input type="checkbox" checked={subStatRolls} onChange={() => { setSubStatRolls(!subStatRolls) }} />
-                        <span>Substat Rolls</span>
                     </label>
-                    <label className="flex gap-2">
+                    <label className="flex gap-2 items-center">
+                        <span>Namecard BG:</span>
                         <input type="checkbox" checked={!starsBackground} onChange={() => { setStarsBackground(!starsBackground) }} />
-                        <span>Namecard BG</span>
                     </label>
                 </div>
             </div>

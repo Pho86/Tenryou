@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,30 +14,29 @@ const navItems = [
     {
         path: "/characters",
         name: "Characters",
-        icon:"/icons/character_icon.svg"
+        icon: "/icons/character_icon.svg"
     },
     {
         path: "/users",
         name: "Users",
-        icon:"/icons/users.svg"
+        icon: "/icons/users.svg"
     },
     {
         path: "/teambuilder",
         name: "Team Builder",
-        altname:"Team",
-        icon:"/icons/team.svg"
+        altname: "Team",
+        icon: "/icons/team.svg"
     },
     {
         path: "/database",
         name: "Database",
-        icon:"/icons/items.webp"
+        icon: "/icons/items.webp"
     },
 ];
 
 export default function NavBar() {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState<boolean>(false);
-    const [database, setDatabase] = useState<boolean>(false);
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious();
         //@ts-ignore
@@ -55,6 +54,9 @@ export default function NavBar() {
     if (pathname.includes("/users")) pathname = "/users";
 
     const [hoveredPath, setHoveredPath] = useState(pathname);
+    useEffect(() => {
+        setHoveredPath(pathname)
+    }, [pathname])
     return (
         <>
             <motion.nav className="w-full hidden px-8 md:px-16 md:flex justify-center z-[1000]  bg-bg-darker items-center py-2 rounded-lg fixed "
@@ -114,11 +116,11 @@ export default function NavBar() {
                             onMouseOver={() => setHoveredPath(item.path)}
                         >
                             <Image src={item.icon} width={30} height={30} alt="Home Icon" className=" h-10 w-10" />
-                            <h3 className=" group-hover:text-primary relative font-normal transition-all">{item.altname ? item.altname : item.name}</h3>                            
+                            <h3 className=" group-hover:text-primary relative font-normal transition-all">{item.altname ? item.altname : item.name}</h3>
                         </Link>
                     );
                 })}
-                
+
             </motion.nav >
         </>
     );

@@ -6,6 +6,7 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
 import { Character } from "@/app/types/character";
+import Markdown from "../components/MarkdownComponent";
 export default function TeamBuilderPage() {
     const [characterData, setCharacterData] = useState<Character[]>([]);
     const [activeElement, setActiveElement] = useState<number>(0);
@@ -18,7 +19,6 @@ export default function TeamBuilderPage() {
             return ["", "", "", "", "", "", "", ""];
         }
     });
-
     const [activeCharacters, setActiveCharacters] = useState<any[]>(() => {
         if (typeof window !== "undefined") {
             const storedActiveCharacters = localStorage.getItem('activeCharacters');
@@ -28,9 +28,12 @@ export default function TeamBuilderPage() {
         }
     });
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
-    const [secondTeam, setSecondTeam] = useState<boolean>(true);
+    const [secondTeam, setSecondTeam] = useState<boolean>(false);
     const [showIcons, setShowIcons] = useState<boolean>(true);
     const [owned, setOwned] = useState<any[]>([]);
+    const [recommendations, setRecommendations] = useState<string>("");
+    const [AILoad, setAILoading] = useState<boolean>(false);
+
     useLayoutEffect(() => {
         const storedData = sessionStorage.getItem('characterData');
         if (storedData) {
@@ -135,6 +138,27 @@ export default function TeamBuilderPage() {
         }
         setActiveElements(elements);
     }
+    const clearTeam = () => {
+        setActiveCharacters([{}, {}, {}, {}, {}, {}, {}, {}]);
+        setActiveElements(["", "", "", "", "", "", "", ""]);
+        setSelectedSlot(0);
+        setRecommendations("")
+    }
+
+    const sendDataToAI = async () => {
+        setAILoading(true);
+        const response = await axios.post("/api/teambuild/google", {
+            activeCharacters,
+        });
+        const recommendedData = response.data;
+        setRecommendations(recommendedData);
+        try {
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setAILoading(false);
+        }
+    }
 
 
     return (
@@ -161,7 +185,7 @@ export default function TeamBuilderPage() {
                 </div>
             </div>
             <div className="grid lg:grid-cols-2 w-full max-w-screen-2xl ">
-                <section className="grid-auto-fit-200 w-full p-4 max-h-[100dvh] overflow-y-scroll py-2 order-1">
+                <section className="grid-auto-fit-100 w-full p-4 max-h-[100dvh] overflow-y-scroll py-2 order-1">
                     {characterData.length > 0 ? characterData.map((character: Character, index: number) => {
                         const elementConditions = [true, "Pyro", "Hydro", "Anemo", "Electro", "Dendro", "Cryo", "Geo"];
                         const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
@@ -183,7 +207,8 @@ export default function TeamBuilderPage() {
                     <section className="w-full flex flex-col gap-4 p-4 order-0 lg:order-1">
                         <div className="flex gap-4 items-center">
                             <button onClick={() => { randomizeTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Randomize Team</button>
-                            <button onClick={() => { setShowIcons(!showIcons) }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">{showIcons ? "Expand Imgs" : "Collapse Imgs"}</button>
+                            <button onClick={() => { clearTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Clear Team</button>
+                            {/* <button onClick={() => { setShowIcons(!showIcons) }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">{showIcons ? "Expand Imgs" : "Collapse Imgs"}</button> */}
                             <label className="flex gap-2 font-bold">
                                 <input type="checkbox" checked={secondTeam} onChange={() => {
                                     if (secondTeam) {
@@ -207,7 +232,7 @@ export default function TeamBuilderPage() {
                                         if (index > 3) return
                                     }
                                     return <div key={index} className={`transition-all overflow-hidden h-max rounded-xl ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light  "} hover:shadow-light`} onClick={() => setSelectedSlot(index)}>
-                                        {character.active ? <div className={` transition-transform hover:scale-100 `} >
+                                        {character.active ? <div className={` transition-transform hover:scale-100 relative`} >
                                             <> {showIcons ?
                                                 <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
                                                 :
@@ -228,7 +253,7 @@ export default function TeamBuilderPage() {
 
                             </div>
                         </div>
-                        <div className="grid grid-cols-4 gap-2 max-w-64">
+                        {/* <div className="grid grid-cols-4 gap-2 max-w-64">
                             {activeElements.map((element, index) => {
                                 if (element.length > 0) {
                                     return <div key={index}>
@@ -240,7 +265,22 @@ export default function TeamBuilderPage() {
                                     </div>
                                 }
                             })}
-                        </div>
+                        </div> */}
+                        {!secondTeam ?
+                            <>
+                                <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI() }} disabled={AILoad}>{AILoad ? "Loading..." : "Recommendations"}</button>
+                                <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl">
+                                    {AILoad ? <Loader /> :
+                                        <>
+                                            <Markdown content={recommendations} />
+                                        </>
+                                    }
+                                </div>
+                            </> :
+                            <p>
+                                Recommendations does not support 2 teams as of right now. Sorry.
+                            </p>
+                        }
                     </section>
                     :
                     <Loader />
@@ -263,7 +303,7 @@ function CharacterCard({ character, selectCharacter, removeCharacter, activeProp
             selectCharacter(character); setActive(!active);
 
         }
-    }} className={`min-w-[6rem] md:min-w-[8rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active ? "scale-[103%] shadow-light" : ""} ${active ? "hover:scale-100" : "hover:scale-[103%] hover:shadow-light"}`}>
+    }} className={`min-w-[4rem] md:min-w-[6rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active ? "scale-[103%] shadow-light" : ""} ${active ? "hover:scale-100" : "hover:scale-[103%] hover:shadow-light"}`}>
         <div className={`flex flex-col self-start `}>
             <div className="absolute top-1 left-1 text-black">
                 <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} className="" alt={`${character.element} icon`} />
@@ -277,9 +317,9 @@ function CharacterCard({ character, selectCharacter, removeCharacter, activeProp
                 height={200}
                 alt={`${character.name}`}
                 title={`${character.name}`}
-                className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
+                className={`rounded-t-xl rounded-br-4xl max-h-40 object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
             />
-            <p className="text-center w-full text-xs p-2 text-black relative font-bold rounded-b-xl ">{character.name}</p>
+            <p className="text-center w-full text-[.65rem] text-nowrap p-1 text-black relative font-bold rounded-b-xl ">{character.name}</p>
         </div>
     </div>
 }
