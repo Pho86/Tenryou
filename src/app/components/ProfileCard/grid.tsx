@@ -13,13 +13,14 @@ export function ProfileCardGrid({
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
     const [activeCharacters, setActiveCharacters] = useState<any[]>([{}, {}, {}, {}]);
     const [username, setUsername] = useState<boolean>(true);
+    const [teamName, setTeamName] = useState<string>("");
     const [UID, setUID] = useState<boolean>(true);
     const cardRef = useRef<any>(null);
     const prepareURL = async () => {
         toPng(cardRef.current, { cacheBust: true, })
             .then((dataUrl) => {
                 const link = document.createElement('a');
-                link.download = `${user.player.username}_team.png`;
+                link.download = `${user.player.username}_${teamName.length >= 1 ? teamName : "team"}.png`;
                 link.href = dataUrl;
                 link.click();
             })
@@ -86,9 +87,10 @@ export function ProfileCardGrid({
                         }
                     </div>
                 })}
-                <div className="grid grid-cols-2 w-full col-span-4">
-                    <div className="">
-                        <Image src={'/icon.svg'} width={55} height={55} alt="Tenryou Logo" className="pointer-events-none" />
+                <div className="grid grid-cols-2 w-full col-span-4 drop-shadow-text">
+                    <div className="flex gap-1 text-5xl font-bold items-center">
+                        <Image src={'/icon.svg'} width={55} height={55} alt="Tenryou Logo" className="z-10 pointer-events-none" />
+                        {teamName.length >= 1 ? <span className="z-20 absolute">{teamName}</span> : <div></div>}
                     </div>
                     <div className="flex flex-col px-2 w-full text-end">
                         {username && <span className="font-bold text-xl">
@@ -109,15 +111,18 @@ export function ProfileCardGrid({
         <div className="w-full flex flex-row-reverse items-center justify-center">
             <div className="flex-col flex justify-start w-[1536px] gap-4">
                 <h2 className="font-bold text-2xl">Team Options</h2>
-
                 <div className="flex gap-2">
-                    <label className="flex gap-2">
+                    <label className="flex items-center gap-2">
+                        <span>Username:</span>
                         <input type="checkbox" checked={username} onChange={() => { setUsername(!username) }} />
-                        <span>Username</span>
                     </label>
-                    <label className="flex gap-2">
+                    <label className="flex items-center gap-2">
+                        <span>UID:</span>
                         <input type="checkbox" checked={UID} onChange={() => { setUID(!UID) }} />
-                        <span>UID</span>
+                    </label>
+                    <label className="flex items-center gap-2">
+                        <span>Team Name:</span>
+                        <input type="input" value={teamName} className="px-2 py-1 rounded-xl" maxLength={25} onChange={(e) => { setTeamName(e.target.value) }} />
                     </label>
 
                 </div>

@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.scss";
 import NextTopLoader from 'nextjs-toploader';
-import { Providers } from './providers'
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], variable: '--font-poppins' });
@@ -33,8 +32,8 @@ export const metadata: Metadata = {
   },
   keywords: ["Genshin Impact", "Team Builder", "Genshin Weapons", "Genshin Fantasy", "Genshin Database", "User Search", "Daily Info", "Genshin Artifacts", "Genshin Characters", "Powered By Enka.Network", "Genshin DB", "Genshin Information", "Birthdays", "Genshin", "Genshin Daily Farming", "Genshin PC Game", "Mihoyo", "Genshin Elements", "Genshin Outfits and Models", "Farming", "Genshin Materials", "Genshin Stats", "Genshin Profile Cards", "Genshin Team Cards"],
   applicationName: "Tenryou",
-  twitter:{
-    card:'summary'
+  twitter: {
+    card: 'summary'
   },
 };
 
@@ -49,7 +48,6 @@ export default function RootLayout({
       {/* <SpeedInsights/> */}
       <html lang="en" suppressHydrationWarning>
         <body className={` ${signika.className} ${signika.variable} ${poppins.variable} bg-bg transition-all scroll-smooth `}>
-          {/* <Providers> */}
           <NextTopLoader
             color="#FF7373"
             height={5} zIndex={2000}
@@ -57,13 +55,12 @@ export default function RootLayout({
             easing="easeInOut"
           />
           <NavBar />
-          <main className="pt-4 sm:pt-8 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-center items-center gap-2">
+          <main className="pt-4 sm:pt-8 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-between items-center gap-2 min-h-[100dvh]">
             <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
               {children}
             </div>
+            <Footer />
           </main>
-          <Footer />
-          {/* </Providers> */}
         </body>
       </html>
     </>

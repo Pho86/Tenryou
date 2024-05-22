@@ -24,7 +24,7 @@ Tenryou is a companion website meant for the action-rpg game [Genshin Impact](ht
 
 ## Current Roadmap
 - [ ] Add more options to edit user images
-- [ ] Improve Teambuilder and add example teams
+- [ ] Improve Teambuilder by migrating to a different AI and add example teams
 - [ ] TCG Support
 - [ ] Add calculator for stats, and ascension
 - [ ] Multi-language Support
@@ -53,6 +53,7 @@ Tenryou is create via Next.js and information is pulled using axios by these sou
 * [Git](https://git-scm.com/downloads) Installed.
 * [Node.js](https://nodejs.org/en/) Installed.
 * Some knowledge of bash (a shell) commands (ex.: cd, ls).
+* An api key for the prototype for the Team Builder [Gemini](https://ai.google.dev/gemini-api) or [OpenAI](https://platform.openai.com/) depending on which one you choose.
 
 ## Getting Started
 ``` bash
@@ -64,6 +65,9 @@ cd Tenryou
 
 # install dependencies
 npm i, pnpm i
+
+# create .env.local and add a key depending on which AI wanted
+touch .env.local
 
 # run in dev mode and open in http://localhost:3000.
 npm run dev, pnpm dev

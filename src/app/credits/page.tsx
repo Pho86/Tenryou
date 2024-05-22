@@ -24,14 +24,14 @@ export default function CreditsPage() {
                 </Link>
             </div>
             <ChangelogComponent />
-            <h2>Debug</h2>
+            <h2 className="text-xl text-primary">Debug</h2>
             <button className="p-1 rounded-xl border-2 w-min text-nowrap transition-all hover:bg-bg-dark" onClick={() => {setShowConfirmation(true) }}>Clear Storage</button>
             <Modal visible={showConfirmation} exit={() => setShowConfirmation(false)}>
-                <div className="flex flex-col gap-2 items-center">
+                <div className="flex flex-col gap-4 items-center">
                     Are you sure you want to reset your data?
                     <div className="flex gap-2 items-center">
-                        <button className="p-1 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { debug(); setShowConfirmation(false) }}>Yes</button>
-                        <button className="p-1 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { setShowConfirmation(false) }}>No</button>
+                        <button className="px-4 py-2 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { debug(); setShowConfirmation(false) }}>Yes</button>
+                        <button className="px-4 py-2 rounded-xl border-2 w-auto text-nowrap transition-all hover:bg-bg-dark" onClick={() => { setShowConfirmation(false) }}>No</button>
                     </div>
                 </div>
             </Modal>
