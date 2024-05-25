@@ -1,4 +1,3 @@
-export const maxDuration = 60;
 import { NextResponse } from "next/server";
 import { streamText } from 'ai';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';

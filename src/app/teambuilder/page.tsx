@@ -33,6 +33,7 @@ export default function TeamBuilderPage() {
     const [owned, setOwned] = useState<any[]>([]);
     const [recommendations, setRecommendations] = useState<string>("");
     const [AILoad, setAILoading] = useState<boolean>(false);
+    const [errorMessage, setError] = useState<string>("Please put 2 or more characters in the team (Slot 1/2).")
 
     useLayoutEffect(() => {
         const storedData = sessionStorage.getItem('characterData');
@@ -145,20 +146,29 @@ export default function TeamBuilderPage() {
         setRecommendations("")
     }
 
+
     const sendDataToAI = async () => {
+        
         setAILoading(true);
-        const response = await axios.post("/api/teambuild/google", {
-            activeCharacters,
-        });
-        const recommendedData = response.data;
-        setRecommendations(recommendedData);
+        if (Object.keys(activeCharacters[0]).length === 0 || Object.keys(activeCharacters[1]).length === 0) {
+            console.log("First two objects are empty, aborting API call.");
+            setAILoading(false);
+            return;
+        }
+        
         try {
+            const response = await axios.post("/api/teambuild/google", {
+                activeCharacters,
+            });
+            const recommendedData = response.data;
+            console.log(response.data)
+            setRecommendations(recommendedData);
         } catch (err) {
             console.error(err);
         } finally {
             setAILoading(false);
         }
-    }
+    };
 
 
     return (
@@ -272,7 +282,13 @@ export default function TeamBuilderPage() {
                                 <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl">
                                     {AILoad ? <Loader /> :
                                         <>
-                                            <Markdown content={recommendations} />
+                                            {recommendations.length > 0 ?
+                                                <Markdown content={recommendations} />
+                                                :
+                                                <>
+                                                    {errorMessage}
+                                                </>
+                                            }
                                         </>
                                     }
                                 </div>
