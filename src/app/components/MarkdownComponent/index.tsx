@@ -11,8 +11,8 @@ export default function Markdown({
             components={{
                 h1: ({ node, ...props }) => <h2 className="text-3xl text-primary font-semibold" {...props} />,
                 h2: ({ node, ...props }) => <h3 className="font-bold text-xl" {...props} />,
-                h3: ({ node, ...props }) => <h4 className="font-bold text-xl -mb-1" {...props} />,
-                h4: ({ node, ...props }) => <h5 className="font-semibold text-xl -mb-2 text-primary" {...props} />,
+                h3: ({ node, ...props }) => <h4 className="font-bold text-2xl text-primary -mb-1" {...props} />,
+                h4: ({ node, ...props }) => <h5 className="font-semibold text-xl -mb-2 " {...props} />,
                 p: ({ node, ...props }) => <p className="text-base" {...props} />,
                 ul: ({ node, ...props }) => <ul className="text-base" {...props} />,
                 ol: ({ node, ...props }) => <ol className="list-decimal list-inside my-1" {...props} />,
