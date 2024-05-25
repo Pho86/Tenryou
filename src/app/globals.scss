@@ -69,7 +69,7 @@ table tr td {
 .grid-auto-fit-200 {
   display: grid;
   gap: 1.5em 1.2em;
-  grid-template-columns: repeat(auto-fit, minmax(8.2em, min-content));
+  grid-template-columns: repeat(auto-fit, minmax(8.2em, max-content));
   grid-auto-rows: minmax(min-content, max-content);
 
   @media (max-width: 768px) {

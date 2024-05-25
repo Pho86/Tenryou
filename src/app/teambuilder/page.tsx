@@ -176,7 +176,7 @@ export default function TeamBuilderPage() {
             <div className="flex flex-col gap-2 max-w-screen-2xl w-full">
                 <h1 className="text-3xl text-primary">Team Builder (Beta)</h1>
                 <div className="flex gap-3 justify-around flex-col md:flex-row">
-                    <div className="flex gap-3 justify-center ">
+                    <div className="flex gap-3 justify-center flex-wrap">
                         <IconButtonSwitch name="Pyro" onClick={() => { setActiveElement(activeElement === 1 ? 0 : 1) }} type="elements" index={1} active={activeElement} />
                         <IconButtonSwitch name="Hydro" onClick={() => { setActiveElement(activeElement === 2 ? 0 : 2) }} type="elements" index={2} active={activeElement} />
                         <IconButtonSwitch name="Anemo" onClick={() => { setActiveElement(activeElement === 3 ? 0 : 3) }} type="elements" index={3} active={activeElement} />
@@ -185,7 +185,7 @@ export default function TeamBuilderPage() {
                         <IconButtonSwitch name="Cryo" onClick={() => { setActiveElement(activeElement === 6 ? 0 : 6) }} type="elements" index={6} active={activeElement} />
                         <IconButtonSwitch name="Geo" onClick={() => { setActiveElement(activeElement === 7 ? 0 : 7) }} type="elements" index={7} active={activeElement} />
                     </div>
-                    <div className="flex gap-3 justify-center">
+                    <div className="flex gap-3 justify-center flex-wrap">
                         <IconButtonSwitch name="Bow" onClick={() => { setActiveWeapon(activeWeapon === 1 ? 0 : 1) }} index={1} active={activeWeapon} />
                         <IconButtonSwitch name="Sword" onClick={() => { setActiveWeapon(activeWeapon === 2 ? 0 : 2) }} index={2} active={activeWeapon} />
                         <IconButtonSwitch name="Polearm" onClick={() => { setActiveWeapon(activeWeapon === 3 ? 0 : 3) }} index={3} active={activeWeapon} />
