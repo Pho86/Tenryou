@@ -39,7 +39,7 @@ const data = [
         description: "Use the official hoyolab map to find specific landmarks."
     },
     {
-        title: 'Team Builder (WIP)',
+        title: 'Team Builder (Beta)',
         image: "/icons/teambuilder.webp",
         bg: "/namecards/UI_NameCardPic_Md2_P.png",
         link: "/teambuilder",

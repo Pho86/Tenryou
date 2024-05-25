@@ -53,7 +53,7 @@ Tenryou is create via Next.js and information is pulled using axios by these sou
 * [Git](https://git-scm.com/downloads) Installed.
 * [Node.js](https://nodejs.org/en/) Installed.
 * Some knowledge of bash (a shell) commands (ex.: cd, ls).
-* An api key for the prototype for the Team Builder [Gemini](https://ai.google.dev/gemini-api) or [OpenAI](https://platform.openai.com/) depending on which one you choose.
+* An api key for the Team Builder [Gemini](https://ai.google.dev/gemini-api) or [OpenAI](https://platform.openai.com/) depending on which one you choose.
 
 ## Getting Started
 ``` bash
