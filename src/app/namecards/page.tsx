@@ -32,11 +32,8 @@ export default function NamecardsPage() {
         <>
             <h1 className="text-3xl text-primary">Namecards List</h1>
             <section className="flex flex-col gap-8">
-                <div className="flex w-full justify-around gap-2 flex-col md:flex-row">
-
-                </div>
                 <div className="grid lg:grid-cols-2 gap-8">
-                    <div className="grid-auto-fit-200 md:grid-auto-fit-300 overflow-y-scroll p-2 max-h-[90dvh] ">
+                    <div className="grid-auto-fit-300 overflow-y-scroll p-2 max-h-[90dvh] ">
                         {nameCardData.length > 0 ? nameCardData.map((namecard: Namecard, index: number) => {
                             return <div key={index} className="">
                                 <div className={`flex w-full flex-col cursor-pointer items-center hover:scale-105 hover:shadow-light transition-all rounded-lg bg-[#efeeee] ${active && active.id == namecard.id && "shadow-light scale-105"}`} onClick={() => { setActive(namecard) }}>
