@@ -37,7 +37,7 @@ Tenryou is a companion website create for the action-rpg game [Genshin Impact](h
 Tenryou is create via Next.js and information is pulled using axios by these sources:
 
 * [Genshin-db](https://github.com/theBowja/genshin-db)
-* [Enka.network](https://enka.network/)
+* [Enka.network](https://enka.network/) via [Enka.network.js](https://github.com/Jelosus2/enkanetwork.js)
 * [Ambr.top](https://ambr.top/)
 
 ## Built With

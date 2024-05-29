@@ -34,7 +34,7 @@ function BentoItem({ item, index, type }: { item: {
 }, index: number, type?:string }) {
     return (
         <>
-            <div className={`overflow-hidden group rounded-xl transition-all bg-bg-dark border-bg-light border-2 flex flex-col ${type == "home" ? index === 2 && ' lg:row-span-2 md:row-span-1 row-span-2' : ""} ${type == "home" ? index === 1 ? 'lg:col-span-2 md:row-span-2 lg:row-span-1' : '' : ""} ${type == "home" ? index == 3 ? "row-span-2 md:row-span-3 md:col-span-2 " : "" : ""}  ${type == "home" ? index == 7 ? "lg:col-span-2 " : "" : ""} ${type == "home" ? index == 14 ? "md:col-span-2" : "" :""} transition-all`}>
+            <div className={`overflow-hidden group rounded-xl transition-all bg-bg-dark border-bg-light border-2 flex flex-col ${type == "home" ? index === 2 && ' lg:row-span-2 md:row-span-1 row-span-2' : ""} ${type == "home" ? index === 1 ? 'lg:col-span-2 md:row-span-2 lg:row-span-1' : '' : ""} ${type == "home" ? index == 3 ? "row-span-2 md:row-span-3 md:col-span-2 " : "" : ""}  ${type == "home" ? index == 7 ? "lg:col-span-2 " : "" : ""} transition-all`}>
                 {item.link ?
                     <Link
                         className={`transition-all hover:bg-bg-light flex flex-col h-full cursor-pointer`}

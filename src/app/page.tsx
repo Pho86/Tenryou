@@ -98,6 +98,13 @@ const data = [
         link: "/achievements",
         description: "Find Information about the achievements from Genshin Impact."
     },
+    {
+        title: `Credits/Changelog`,
+        image: "/icons/credits.webp",
+        bg: "/namecards/UI_NameCardPic_Bp18_P.png",
+        link: "/credits",
+        description: "Find Information about the changelog and credits of Tenryou."
+    },
 
 ]
 export default function Home() {
