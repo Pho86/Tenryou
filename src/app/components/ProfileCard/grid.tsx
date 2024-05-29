@@ -112,15 +112,15 @@ export function ProfileCardGrid({
             <div className="flex-col flex justify-start w-[1536px] gap-4">
                 <h2 className="font-bold text-2xl">Team Options</h2>
                 <div className="flex gap-2">
-                    <label className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                         <span>Username:</span>
                         <input type="checkbox" checked={username} onChange={() => { setUsername(!username) }} />
                     </label>
-                    <label className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                         <span>UID:</span>
                         <input type="checkbox" checked={UID} onChange={() => { setUID(!UID) }} />
                     </label>
-                    <label className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer" >
                         <span>Team Name:</span>
                         <input type="input" value={teamName} className="px-2 py-1 rounded-xl" maxLength={25} onChange={(e) => { setTeamName(e.target.value) }} />
                     </label>

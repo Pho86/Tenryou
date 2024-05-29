@@ -31,8 +31,9 @@ export default function TeamBuilderPage() {
     const [secondTeam, setSecondTeam] = useState<boolean>(false);
     const [showIcons, setShowIcons] = useState<boolean>(true);
     const [owned, setOwned] = useState<any[]>([]);
-    const [recommendations, setRecommendations] = useState<string>("");
+    const [recommendations, setRecommendations] = useState<string[]>([]);
     const [AILoad, setAILoading] = useState<boolean>(false);
+    const [finalizeLoad, setFinalizeLoading] = useState<boolean>(false);
     const [errorMessage, setError] = useState<string>("Please put 2 or more characters in the team (Slot 1/2).")
 
     useLayoutEffect(() => {
@@ -139,34 +140,43 @@ export default function TeamBuilderPage() {
         }
         setActiveElements(elements);
     }
+
     const clearTeam = () => {
         setActiveCharacters([{}, {}, {}, {}, {}, {}, {}, {}]);
         setActiveElements(["", "", "", "", "", "", "", ""]);
         setSelectedSlot(0);
-        setRecommendations("")
+        setRecommendations([])
     }
 
-
     const sendDataToAI = async () => {
-        
         setAILoading(true);
         if (Object.keys(activeCharacters[0]).length === 0 || Object.keys(activeCharacters[1]).length === 0) {
             console.log("First two objects are empty, aborting API call.");
+            setFinalizeLoading(false);
             setAILoading(false);
             return;
         }
-        
         try {
-            const response = await axios.post("/api/teambuild/google", {
-                activeCharacters,
-            });
-            const recommendedData = response.data;
-            console.log(response.data)
-            setRecommendations(recommendedData);
+            let accumulatedData: any = [];
+            let response;
+            for (let part = 1; part <= 3; part++) {
+                response = await axios.post("/api/teambuild/google", {
+                    activeCharacters,
+                    part,
+                    currentInfo: accumulatedData 
+                });
+                const recommendedData = response.data;
+
+                accumulatedData = [...accumulatedData, recommendedData];
+                
+                setRecommendations([...accumulatedData]);
+                setAILoading(false);
+                setFinalizeLoading(true);
+            }
         } catch (err) {
             console.error(err);
         } finally {
-            setAILoading(false);
+            setFinalizeLoading(false);
         }
     };
 
@@ -278,12 +288,17 @@ export default function TeamBuilderPage() {
                         </div> */}
                         {!secondTeam ?
                             <>
-                                <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI() }} disabled={AILoad}>{AILoad ? "Loading..." : "Recommendations"}</button>
-                                <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl">
-                                    {AILoad ? <Loader /> :
+                                <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(); }} disabled={AILoad}>{AILoad ? "Loading..." : "Recommendations"}</button>
+                                <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl text-pretty" >
+                                    {AILoad ? <Loader />
+                                        :
                                         <>
                                             {recommendations.length > 0 ?
-                                                <Markdown content={recommendations} />
+                                                <>
+                                                    {recommendations.map((rec, index) => (
+                                                        <Markdown content={rec} key={index} />
+                                                    ))}
+                                                </>
                                                 :
                                                 <>
                                                     {errorMessage}
@@ -291,6 +306,7 @@ export default function TeamBuilderPage() {
                                             }
                                         </>
                                     }
+                                    {finalizeLoad && <Loader />}
                                 </div>
                             </> :
                             <p>

@@ -464,23 +464,23 @@ export function ProfileCardWide({
             <div className="flex-end flex flex-col justify-start w-[1280px] max-w-7xl gap-2">
                 <h2 className="font-bold text-2xl">Card Options</h2>
                 <div className="flex gap-4">
-                    <label className="flex gap-2 items-center">
+                    <label className="flex gap-2 items-center cursor-pointer">
                         <span>Username:</span>
                         <input type="checkbox" checked={username} onChange={() => { setUsername(!username) }} />
                     </label>
-                    <label className="flex gap-2 items-center">
+                    <label className="flex gap-2 items-center cursor-pointer">
                         <span>UID:</span>
                         <input type="checkbox" checked={UID} onChange={() => { setUID(!UID) }} />
                     </label>
-                    <label className="flex gap-2 items-center">
+                    <label className="flex gap-2 items-center cursor-pointer">
                         <span>Crit Value:</span>
                         <input type="checkbox" checked={critValue} onChange={() => { setCritValue(!critValue) }} />
                     </label>
-                    <label className="flex gap-2 items-center">
+                    <label className="flex gap-2 items-center cursor-pointer">
                         <span>Substat Rolls:</span>
                         <input type="checkbox" checked={subStatRolls} onChange={() => { setSubStatRolls(!subStatRolls) }} />
                     </label>
-                    <label className="flex gap-2 items-center">
+                    <label className="flex gap-2 items-center cursor-pointer">
                         <span>Namecard BG:</span>
                         <input type="checkbox" checked={!starsBackground} onChange={() => { setStarsBackground(!starsBackground) }} />
                     </label>
