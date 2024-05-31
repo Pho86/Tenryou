@@ -76,7 +76,10 @@ npm run dev, pnpm dev
 npm run build, pnpm build
 
 # run e2e tests
-npm run test, npx playwright test
+npm run test, npx playwright test, 
+
+# run e2e tests in a specific file
+npm run test characters.spec.ts, npx playwright test characters.spec.ts 
 ```
 
 ## Contributing

@@ -10,7 +10,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400
 const signika = Signika({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700',], variable: '--font-signika' });
 export const metadata: Metadata = {
   title: "Home - Tenryou 💮",
-  description: "Your Genshin Impact companion website, helps players visualize other's characters along with a comprehensive database and viewer for the game, Genshin Impact.",
+  description: "Your Genshin Impact companion website, Tenryou, helps visualize playable characters along with a comprehensive database and data viewer for the game, Genshin Impact.",
   icons: {
     icon: [
       {
@@ -53,6 +53,7 @@ export default function RootLayout({
             height={5} zIndex={2000}
             showSpinner={false}
             easing="easeInOut"
+            shadow="false"
           />
           <NavBar />
           <main className="pt-4 sm:pt-8 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-16 w-full flex flex-col justify-between items-center gap-2 min-h-[100dvh]">

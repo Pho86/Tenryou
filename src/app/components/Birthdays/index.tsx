@@ -57,33 +57,33 @@ export default function Birthdays({ }: {}) {
         }
     }, [selectedMonth]);
 
-    return <div className="flex flex-col gap-2 p-2 overflow-y-scroll">
+    return <div className="flex flex-col gap-2 p-2 overflow-y-scroll h-full">
         <label className="w-full" htmlFor="months">
             <span className="hidden">Months</span>
             <select title="Months" aria-label="Months" id="months" value={selectedMonth} onChange={(e) => { setSelectedMonth(e.target.value); }} className="p-1 w-full">
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="July">July</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
+                <option value="January" id="January">January</option>
+                <option value="February" id="February">February</option>
+                <option value="March" id="March">March</option>
+                <option value="April" id="April">April</option>
+                <option value="May" id="May">May</option>
+                <option value="June" id="June">June</option>
+                <option value="July" id="July">July</option>
+                <option value="August" id="August">August</option>
+                <option value="September" id="September">September</option>
+                <option value="July" id="July">July</option>
+                <option value="October" id="October">October</option>
+                <option value="November" id="November">November</option>
+                <option value="December" id="December">December</option>
             </select>
         </label>
-        <div className="p-2 justify-center grid-auto-fit-150 ">
+        <div className="p-2 justify-center grid-auto-fit-150">
             {loading ?
                 <Loader />
                 :
                 <>
                     {characters.map((character, index) => {
-                        return <div key={index} className="bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light">
-                            <Link id={`${character.name}_month`} href={`/characters/${character.name}`} className={`flex flex-col self-start `}>
+                        return <Link id={`${character.name}_month`}  key={index} href={`/characters/${character.name}`} className="bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light">
+                            <div className={`flex flex-col self-start `}>
                                 <Image
                                     src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
                                     width={150}
@@ -92,9 +92,9 @@ export default function Birthdays({ }: {}) {
                                     title={`${character.name}`}
                                     className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
                                 />
-                                <p className="text-center w-full h-full text-xs text-nowrap p-2 text-black relative font-bold rounded-b-xl after:absolute after:p-2 absolute:top-0 absolute:bg-red ">{character.birthdaymmdd}</p>
-                            </Link>
-                        </div>
+                                <p className="text-center w-full h-full text-xs text-nowrap p-1 text-black relative font-bold rounded-b-xl after:absolute after:p-2 absolute:top-0 absolute:bg-red ">{character.birthdaymmdd}</p>
+                            </div>
+                        </Link>
                     })}
                 </>
             }

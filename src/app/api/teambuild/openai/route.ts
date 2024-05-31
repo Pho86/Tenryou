@@ -28,10 +28,11 @@ export async function POST(req: Request, res: NextResponse) {
                 }
             }
         });
+        let teams = ""
+        if (body.team == 1) teams = team1;
+        else teams = team2;
 
-        const teams = team2 ? `${team1} +++ ${team2}` : team1;
-
-        const systemPrompt = `Print only [PART ${body.part}] ${prompt} ${body.part > 1 && `Past Info Provided: ${currentInfo}`}`;
+        const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}]  ${body.part > 1 && `Past Info Provided: ${currentInfo}`}`;
         const message = await openai.chat.completions.create({
             messages: [
                 { role: 'system', content: systemPrompt },

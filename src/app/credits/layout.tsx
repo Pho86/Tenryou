@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Credits - Tenryou 💮",
-    description: "Credits for Tenryou,",
+    description: "Credits and Changelog for Tenryou,",
 };
 
 export default function Layout({
