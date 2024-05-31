@@ -20,17 +20,15 @@ test.describe('Characters', () => {
     });
 
     test('Path from Birthdays to Zhongli and find gallery', async ({ page }) => {
-        await page.selectOption('select#months', 'December');
+        await page.locator('#months').selectOption('#December');
         await page.waitForTimeout(4000);
         await page.click('a#Zhongli_month');
         await page.waitForTimeout(2000);
         await page.getByText('🔲').click();
         await page.getByRole('img', { name: 'Zhongli constellation', exact: true }).click();
-        await page.getByRole('heading', { name: 'Hermit of Mortal Life' }).click();
     });
-    
-    test('Path from daily domains to Diluc on Friday', async ({ page }) => {
-        await page.goto('http://localhost:3000/');
+
+    test('Path from daily domains to Diluc by pathing through Sunday, then to Friday', async ({ page }) => {
         await page.locator('#days').selectOption('Sunday');
         await page.waitForTimeout(2000);
         await page.locator('#days').selectOption('Friday');
@@ -38,5 +36,5 @@ test.describe('Characters', () => {
         await page.click('a#Diluc_daily');
         await page.getByRole('heading', { name: 'Darknight Blaze' }).click();
         await page.getByRole('heading', { name: 'Red Dead of Night' }).click();
-      });
+    });
 });

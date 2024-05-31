@@ -2,11 +2,12 @@
 import Image from "next/image";
 import { addFileName, getRandomNumber } from "../utils/helper";
 import axios from "axios";
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState, useRef } from "react"
 import Loader from "../components/Loader";
 import IconButtonSwitch from "../components/IconButtonSwitch";
 import { Character } from "@/app/types/character";
 import Markdown from "../components/MarkdownComponent";
+
 export default function TeamBuilderPage() {
     const [characterData, setCharacterData] = useState<Character[]>([]);
     const [activeElement, setActiveElement] = useState<number>(0);
@@ -31,10 +32,17 @@ export default function TeamBuilderPage() {
     const [secondTeam, setSecondTeam] = useState<boolean>(false);
     const [showIcons, setShowIcons] = useState<boolean>(true);
     const [owned, setOwned] = useState<any[]>([]);
-    const [recommendations, setRecommendations] = useState<string[]>([]);
-    const [AILoad, setAILoading] = useState<boolean>(false);
-    const [finalizeLoad, setFinalizeLoading] = useState<boolean>(false);
-    const [errorMessage, setError] = useState<string>("Please put 2 or more characters in the team (Slot 1/2).")
+    const [team1AILoading, setTeam1AILoading] = useState(false);
+    const [team2AILoading, setTeam2AILoading] = useState(false);
+    const [team1FinalizeLoading, setTeam1FinalizeLoading] = useState(false);
+    const [team2FinalizeLoading, setTeam2FinalizeLoading] = useState(false);
+    const [team1Recommendations, setTeam1Recommendations] = useState<any[]>([]);
+    const [team2Recommendations, setTeam2Recommendations] = useState<any[]>([]);
+    const [team1ErrorMessage, setTeam1ErrorMessage] = useState<string>("Please put 2 or more characters in the team (Slot 1/2).")
+    const [team2ErrorMessage, setTeam2ErrorMessage] = useState<string>("Please put 2 or more characters in the team (Slot 5/6).")
+    const [availableCharacters, setAvailableCharacters] = useState<Character[]>([]);
+    const [deletedChars, setDeletedChars] = useState<boolean>(false);
+    const [selectTeam, setSelectTeam] = useState<boolean>(true);
 
     useLayoutEffect(() => {
         const storedData = sessionStorage.getItem('characterData');
@@ -98,8 +106,7 @@ export default function TeamBuilderPage() {
         else setSelectedSlot(prevSlot => (prevSlot + 1) % 8);
         return element;
     };
-    const [availableCharacters, setAvailableCharacters] = useState<Character[]>([]);
-    const [deletedChars, setDeletedChars] = useState<boolean>(false);
+
     const removeCharacter = (character: Character) => {
         const updatedCharacters = activeCharacters.map((item, i) => {
             if (item.name === character.name) {
@@ -114,6 +121,7 @@ export default function TeamBuilderPage() {
         });
         setActiveCharacters(updatedCharacters);
     };
+
     const randomizeTeam = () => {
         let charactersAvailable;
         if (!deletedChars) {
@@ -145,17 +153,43 @@ export default function TeamBuilderPage() {
         setActiveCharacters([{}, {}, {}, {}, {}, {}, {}, {}]);
         setActiveElements(["", "", "", "", "", "", "", ""]);
         setSelectedSlot(0);
-        setRecommendations([])
+        setTeam1Recommendations([])
+        setTeam2Recommendations([])
     }
 
-    const sendDataToAI = async () => {
-        setAILoading(true);
-        if (Object.keys(activeCharacters[0]).length === 0 || Object.keys(activeCharacters[1]).length === 0) {
-            console.log("First two objects are empty, aborting API call.");
-            setFinalizeLoading(false);
-            setAILoading(false);
+    const sendDataToAI = async (team: number) => {
+        let isInvalid = false;
+        switch (team) {
+            case 1:
+                if (Object.keys(activeCharacters[0]).length === 0 || Object.keys(activeCharacters[1]).length === 0) {
+                    isInvalid = true;
+                } else {
+                    setTeam1AILoading(true);
+                }
+                break;
+            case 2:
+                if (Object.keys(activeCharacters[4]).length === 0 || Object.keys(activeCharacters[5]).length === 0) {
+                    isInvalid = true;
+                } else {
+                    setTeam2AILoading(true);
+                }
+                break;
+            default:
+                console.error("Invalid team number");
+                return;
+        }
+        if (isInvalid) {
+            console.log("Required character slots are empty, aborting API call.");
+            if (team === 1) {
+                setTeam1FinalizeLoading(false);
+                setTeam1AILoading(false);
+            } else {
+                setTeam2FinalizeLoading(false);
+                setTeam2AILoading(false);
+            }
             return;
         }
+
         try {
             let accumulatedData: any = [];
             let response;
@@ -163,22 +197,44 @@ export default function TeamBuilderPage() {
                 response = await axios.post("/api/teambuild/google", {
                     activeCharacters,
                     part,
-                    currentInfo: accumulatedData 
+                    currentInfo: accumulatedData,
+                    team
                 });
                 const recommendedData = response.data;
 
                 accumulatedData = [...accumulatedData, recommendedData];
-                
-                setRecommendations([...accumulatedData]);
-                setAILoading(false);
-                setFinalizeLoading(true);
+
+                if (team === 1) {
+                    setTeam1Recommendations([...accumulatedData]);
+                    setTeam1AILoading(false);
+                    setTeam1FinalizeLoading(true);
+                } else {
+                    setTeam2Recommendations([...accumulatedData]);
+                    setTeam2AILoading(false);
+                    setTeam2FinalizeLoading(true);
+                }
             }
         } catch (err) {
             console.error(err);
         } finally {
-            setFinalizeLoading(false);
+            if (team === 1) {
+                setTeam1FinalizeLoading(false);
+            } else {
+                setTeam2FinalizeLoading(false);
+            }
         }
     };
+
+    const dragCharacter = useRef<number>(0)
+    const draggedOverCharacter = useRef<number>(0)
+
+    function handleSort() {
+        const activeCharactersClone = [...activeCharacters]
+        const temp = activeCharactersClone[dragCharacter.current]
+        activeCharactersClone[dragCharacter.current] = activeCharactersClone[draggedOverCharacter.current]
+        activeCharactersClone[draggedOverCharacter.current] = temp
+        setActiveCharacters(activeCharactersClone)
+    }
 
 
     return (
@@ -244,21 +300,22 @@ export default function TeamBuilderPage() {
                             </label>
 
                         </div>
-                        <div className="max-w-7xl flex items-center w-full justify-center">
-
-                            <div className="grid grid-cols-4 gap-4 md:gap-8 h-full w-full">
+                        <div className="">
+                            <div className="grid grid-cols-4 gap-2 md:gap-4 h-full w-full">
                                 {activeCharacters.length > 0 && activeCharacters.map((character: any, index: number) => {
                                     if (!secondTeam) {
                                         if (index > 3) return
                                     }
-                                    return <div key={index} className={`transition-all overflow-hidden h-max rounded-xl ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light  "} hover:shadow-light`} onClick={() => setSelectedSlot(index)}>
-                                        {character.active ? <div className={` transition-transform hover:scale-100 relative`} >
-                                            <> {showIcons ?
-                                                <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
-                                                :
-                                                <Image src={character.images.cover2} width={1000} height={1000} alt={character.name} title={character.name} className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} draggable="false" />
-                                            }
-                                            </>
+                                    return <div key={index} className={`rounded-xl cursor-move overflow-hidden transition-shadow ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light  "}`}
+                                        onClick={() => setSelectedSlot(index)}
+                                        draggable
+                                        onDragStart={() => (dragCharacter.current = index)}
+                                        onDragEnter={() => (draggedOverCharacter.current = index)}
+                                        onDragEnd={handleSort}
+                                        onDragOver={(e) => e.preventDefault()}
+                                    >
+                                        {character.active ? <div className={` hover:scale-100 relative`} >
+                                            <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt="" draggable="false" className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} />
                                         </div>
                                             :
                                             <div className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}>
@@ -270,48 +327,87 @@ export default function TeamBuilderPage() {
                                         }
                                     </div>
                                 })}
-
                             </div>
                         </div>
-                        {/* <div className="grid grid-cols-4 gap-2 max-w-64">
-                            {activeElements.map((element, index) => {
-                                if (element.length > 0) {
-                                    return <div key={index}>
-                                        <Image src={`/elements/${element}.webp`} width={50} height={50} className="" alt={`${element} icon`} title={element} />
-                                    </div>
-                                }
-                                else {
-                                    return <div key={index}>
-                                    </div>
-                                }
-                            })}
-                        </div> */}
                         {!secondTeam ?
                             <>
-                                <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(); }} disabled={AILoad}>{AILoad ? "Loading..." : "Recommendations"}</button>
+                                <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(1); }} disabled={team1AILoading}>{team1AILoading ? "Loading..." : "Build Recommendations"}</button>
                                 <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl text-pretty" >
-                                    {AILoad ? <Loader />
+                                    {team1AILoading ? <Loader />
                                         :
                                         <>
-                                            {recommendations.length > 0 ?
+                                            {team1Recommendations.length > 0 ?
                                                 <>
-                                                    {recommendations.map((rec, index) => (
+                                                    {team1Recommendations.map((rec, index) => (
                                                         <Markdown content={rec} key={index} />
                                                     ))}
                                                 </>
                                                 :
                                                 <>
-                                                    {errorMessage}
+                                                    {team1ErrorMessage}
                                                 </>
                                             }
                                         </>
                                     }
-                                    {finalizeLoad && <Loader />}
+                                    {team1FinalizeLoading && <Loader />}
                                 </div>
                             </> :
-                            <p>
-                                Recommendations does not support 2 teams as of right now. Sorry.
-                            </p>
+                            <>
+                                <div className="flex gap-2">
+                                    {selectTeam ?
+                                        <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(1); }} disabled={team1AILoading}>{team1AILoading ? "Loading..." : "Build Team 1"}</button>
+                                        :
+                                        <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(2); }} disabled={team2AILoading}>{team2AILoading ? "Loading..." : "Build Team 2"}</button>
+                                    }
+                                    <label className="flex gap-2 font-bold items-center">
+                                        <input type="checkbox" checked={selectTeam} onChange={() => { setSelectTeam(!selectTeam) }} />
+                                        Build Team 1
+                                    </label>
+                                </div>
+                                <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl text-pretty" >
+                                    {selectTeam ?
+                                        <>
+                                            {team1AILoading ? <Loader />
+                                                :
+                                                <>
+                                                    {team1Recommendations.length > 0 ?
+                                                        <>
+                                                            {team1Recommendations.map((rec, index) => (
+                                                                <Markdown content={rec} key={index} />
+                                                            ))}
+                                                        </>
+                                                        :
+                                                        <>
+                                                            {team1ErrorMessage}
+                                                        </>
+                                                    }
+                                                </>
+                                            }
+                                            {team1FinalizeLoading && <Loader />}
+                                        </>
+                                        :
+                                        <>
+                                            {team2AILoading ? <Loader />
+                                                :
+                                                <>
+                                                    {team2Recommendations.length > 0 ?
+                                                        <>
+                                                            {team2Recommendations.map((rec, index) => (
+                                                                <Markdown content={rec} key={index} />
+                                                            ))}
+                                                        </>
+                                                        :
+                                                        <>
+                                                            {team2ErrorMessage}
+                                                        </>
+                                                    }
+                                                </>
+                                            }
+                                            {team2FinalizeLoading && <Loader />}
+                                        </>
+                                    }
+                                </div>
+                            </>
                         }
                     </section>
                     :

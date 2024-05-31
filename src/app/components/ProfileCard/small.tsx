@@ -25,11 +25,11 @@ export function ProfileCardSmall({
         setArtifactSet(artifactSetArray);
     }, []);
 
-    return <div className="w-full flex flex-col gap-2 cursor-pointer" onClick={() => { setShowStats(!showStats) }}>
+    return <div className="w-full flex flex-col gap-2" onClick={() => { setShowStats(!showStats) }} >
         <div className={`grid p-1 rounded-xl self-center relative bg-gradient-to-br from-gradient-${character.element}-start to-gradient-${character.element}-end relative`} ref={cardRef}>
             <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${character.name} background stars image`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full  " />
             <div className="w-full h-full relative min-h-[600px] flex items-center justify-center">
-                <Image src={`https://enka.network/ui/${character.assets.gachaIcon}.png`} blurDataURL="data:..." placeholder="blur" width={2500} height={2500} alt={`${character.name} gacha splash art`} className="bg-bg bg-opacity-45 object-center rounded-xl object-cover h-full w-full" />
+                <Image src={`https://enka.network/ui/${character.assets.gachaIcon}.png`} blurDataURL="data:..." placeholder="blur" draggable={false} width={2500} height={2500} alt={`${character.name} gacha splash art`} className="bg-bg bg-opacity-45 object-center rounded-xl object-cover h-full w-full" />
             </div>
             <div className="absolute p-3 drop-shadow-text z-40">
                 <div className="flex flex-col">

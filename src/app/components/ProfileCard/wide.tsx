@@ -34,7 +34,7 @@ export function ProfileCardWide({
     const [UID, setUID] = useState<boolean>(true);
     const [critValue, setCritValue] = useState<boolean>(true);
     const [subStatRolls, setSubStatRolls] = useState<boolean>(true);
-    const [starsBackground, setStarsBackground] = useState<boolean>(true);
+    const [starsBackground, setStarsBackground] = useState<boolean>(false);
     return <>
         <div className="overflow-x-scroll 2xl:overflow-x-hidden grid place-items-center" id="wide_player_card">
 

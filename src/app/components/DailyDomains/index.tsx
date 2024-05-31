@@ -100,14 +100,14 @@ export default function DailyDomains({ }: {}) {
     return (<div className="overflow-y-scroll h-full p-2 gap-2 flex flex-col">
         <label className="w-full" htmlFor="days">
             <span className="hidden">Days of the Week</span>
-            <select value={selectedDay} aria-label="Days" id="days" onChange={(e) => { setSelectedDay(e.target.value); }} className="p-1 w-full">
-                <option value="Sunday">Sunday</option>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
+            <select title="Days" value={selectedDay} aria-label="Days" id="days" onChange={(e) => { setSelectedDay(e.target.value); }} className="p-1 w-full">
+                <option value="Sunday" id="Sunday">Sunday</option>
+                <option value="Monday" id="Monday">Monday</option>
+                <option value="Tuesday" id="Tuesday">Tuesday</option>
+                <option value="Wednesday" id="Wednesday">Wednesday</option>
+                <option value="Thursday" id="Thursday">Thursday</option>
+                <option value="Friday" id="Friday">Friday</option>
+                <option value="Saturday" id="Saturday">Saturday</option>
             </select>
         </label>
         {!loading ?

@@ -5,6 +5,7 @@ import { toPng } from 'html-to-image';
 import React from "react";
 import { User, Characters } from "@/app/types/user";
 import { ProfileCardSmall } from "./small";
+import { Reorder } from "framer-motion";
 export function ProfileCardGrid({
     user
 }: {
@@ -53,6 +54,7 @@ export function ProfileCardGrid({
         });
         setActiveCharacters(updatedCharacters);
     };
+
     return <>
         <div className="grid-auto-fit-150 mt-10">
             {
@@ -68,26 +70,25 @@ export function ProfileCardGrid({
             }
         </div>
         <div className="overflow-x-scroll grid place-items-center mt-2">
-            <div className="grid grid-cols-4 gap-2 w-[1536px] rounded-xl self-center bg-gradient-to-br p-2 relative bg-bg-dark" ref={cardRef}>
-                <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`background stars image`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-60 rounded-xl object-cover h-full  " />
-                {activeCharacters.length > 0 && activeCharacters.map((character: any, index: number) => {
-                    return <div key={index} className={`transition-all overflow-hidden h-max rounded-xl ${!character.active && "border-2"} ${selectedSlot == index && " "} hover:shadow-light`} onClick={() => setSelectedSlot(index)}>
-                        {character.active ? <div className={`transition-transform `} >
-                            <>
-                                <ProfileCardSmall character={character} />
-                            </>
-                        </div>
-                            :
-                            <div className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}>
-                                <Image src={"/elements/None.png"} alt="placeholder empty image" height={256} width={256} className="" />
-                                <p className={`absolute ${selectedSlot == index && "text-primary"} `}>
-                                    +
-                                </p>
-                            </div>
-                        }
-                    </div>
-                })}
-                <div className="grid grid-cols-2 w-full col-span-4 drop-shadow-text">
+            <div className="gap-2 w-[1536px] rounded-xl self-center bg-gradient-to-br relative bg-bg-dark p-2" ref={cardRef}>
+                <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`background stars image`} className="pointer-events-none absolute top-0 left-0 mix-blend-overlay opacity-60 rounded-xl object-cover h-full  " />
+                <Reorder.Group values={activeCharacters} onReorder={setActiveCharacters} className="grid grid-cols-4 w-full gap-2 " axis="x" >
+                    {activeCharacters.map((item, index) => {
+                        return <Reorder.Item value={item} key={item.name ? item.name : index} className={`rounded-xl cursor-move overflow-hidden ${!item.active && "border-2"} `} onClick={() => setSelectedSlot(index)}>
+                            {item.active ?
+                                <ProfileCardSmall character={item} />
+                                :
+                                <div className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}>
+                                    <Image src={"/elements/None.png"} alt="placeholder empty image" height={256} width={256} className="" />
+                                    <p className={`absolute ${selectedSlot == index && "text-primary"} `}>
+                                        +
+                                    </p>
+                                </div>
+                            }
+                        </Reorder.Item>
+                    })}
+                </Reorder.Group>
+                <div className="grid grid-cols-2 w-full col-span-4 drop-shadow-text ">
                     <div className="flex gap-1 text-5xl font-bold items-center">
                         <Image src={'/icon.svg'} width={55} height={55} alt="Tenryou Logo" className="z-10 pointer-events-none" />
                         {teamName.length >= 1 ? <span className="z-20 absolute">{teamName}</span> : <div></div>}
@@ -108,7 +109,7 @@ export function ProfileCardGrid({
                 <FaDownload className="hover:text-primary text-xl transition-all cursor-pointer" title="Download Card" onClick={() => { prepareURL() }} />
             </div>
         </div>
-        <div className="w-full flex flex-row-reverse items-center justify-center">
+        <div className="w-full flex flex-row-reverse items-center justify-center ">
             <div className="flex-col flex justify-start w-[1536px] gap-4">
                 <h2 className="font-bold text-2xl">Team Options</h2>
                 <div className="flex gap-2">
@@ -122,7 +123,7 @@ export function ProfileCardGrid({
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer" >
                         <span>Team Name:</span>
-                        <input type="input" value={teamName} className="px-2 py-1 rounded-xl" maxLength={25} onChange={(e) => { setTeamName(e.target.value) }} />
+                        <input type="input" value={teamName} className="px-2 py-1 rounded-xl" maxLength={35} onChange={(e) => { setTeamName(e.target.value) }} />
                     </label>
 
                 </div>
