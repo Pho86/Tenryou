@@ -111,7 +111,6 @@ export default function DailyDomains({ }: {}) {
             </select>
         </label>
         {!loading ?
-
             <>
                 {selectedDay == "Sunday" ?
                     <div className="p-2 text-xl">

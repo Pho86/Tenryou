@@ -38,7 +38,7 @@ export default function Footer({
                 </div>
                 <div className="w-full flex gap-2 md:flex-row flex-col md:justify-between mt-4">
                     <div className="flex justify-end md:items-center">
-                        <p>Your Genshin Impact Companion Site | <Link href={"/credits"} className="hover:text-primary transition-all">V1.0</Link> | </p>
+                        <p>Your Genshin Impact Companion Site | <Link href={"/credits"} className="hover:text-primary transition-all">V0.9</Link> | </p>
                         <Link href="https://github.com/pho86/Tenryou" target="__blank" className="text-xl hover:text-primary transition-all p-1">
                             <FaGithub title="Github" />
                         </Link>

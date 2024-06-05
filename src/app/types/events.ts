@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export type Events = {
-    [key: string]: {
+    [key: string | number]: {
         banner:{
             EN:string
         };

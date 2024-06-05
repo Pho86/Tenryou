@@ -1,56 +1,22 @@
-"use client"
-
-import { useState, useLayoutEffect } from "react";
 import Profile from "@/app/components/Profile";
-import axios from "axios";
 import Loader from "@/app/components/Loader";
-import { addFileName } from "@/app/utils/helper";
-import Footer from "@/app/components/Footer";
 import Link from "next/link";
-import { User } from "@/app/types/user"
+import { addFileName } from "@/app/utils/helper";
+import { Suspense } from "react";
 
-export default function UIDPage({ params }: { params: { uid: string } }) {
-    const [playerData, setPlayerData] = useState<User>();
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<boolean>(false);
-
-    useLayoutEffect(() => {
-        const storedData = sessionStorage.getItem(`userData_${params.uid}`);
-        if (storedData) {
-            const parsedData = JSON.parse(storedData);
-            setPlayerData(parsedData);
-            setLoading(false);
-            document.title = `${parsedData.player.username} - Tenryou 💮`;
-        } else {
-            axios.get(`/api/user/${params.uid}`)
-                .then(response => {
-                    response.data.characters.forEach((character: any) => {
-                        addFileName([character]);
-                    });
-                    setPlayerData(response.data);
-                    setLoading(false);
-                    document.title = `${response.data.player.username} - Tenryou 💮`;
-                    sessionStorage.setItem(`userData_${params.uid}`, JSON.stringify(response.data));
-                })
-                .catch(error => {
-                    console.error(error);
-                    setLoading(false);
-                    setError(true);
-                });
-        }
-    }, [params.uid]);
-
-    if (loading) {
-        return <>
-            <main className="flex flex-col md:pt-16 px-8 justify-center items-center relative h-screen">
-                <div className="w-full max-w-screen-2xl">
-                    <Loader />
-                </div>
-            </main>
-        </>;
+export default async function UIDPage({ params }: { params: { uid: string } }) {
+    const response = await fetch(`http://localhost:3000/api/user/${params.uid}`);
+    if (!response.ok) {
+        throw new Error("failed to fetch")
     }
+    const res = await response.json()
+    const playerData = res;
+    playerData.characters.forEach((character: any) => {
+        addFileName([character]);
+    });
+    document.title = `${playerData.player.username} - Tenryou 💮`;
 
-    if (error || !playerData || !playerData.characters || playerData.characters.length === 0) {
+    if (!playerData || !playerData.characters || playerData.characters.length === 0) {
         return (
             <>
                 <div className="h-[80dvh] flex flex-col gap-4 items-center justify-center">
@@ -66,7 +32,9 @@ export default function UIDPage({ params }: { params: { uid: string } }) {
 
     return (
         <>
-            {playerData ? <Profile user={playerData} /> : <Loader />}
+            <Suspense fallback={<Loader />}>
+                <Profile user={playerData} />
+            </Suspense>
         </>
     );
 }

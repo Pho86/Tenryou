@@ -1,4 +1,3 @@
-"use client"
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -50,7 +49,7 @@ function BentoItem({ item, index, type }: { item: {
                         </div>
                         {item.image && <div className={`overflow-hidden w-full h-full relative bg-no-repeat `}>
                             {item.bg && <Image className="object-cover group-hover:scale-105 transition-all brightness-50 group-hover:brightness-90 " fill alt={`${item.description}`} src={item.bg} priority />}
-                            <Image src={item.image} width={250} height={250} alt={`${item.title} title icon`}  className="absolute top-0 h-full p-4 w-full object-contain group-hover:scale-105 transition-all drop-shadow-icon " />
+                            <Image src={item.image} fill alt={`${item.title} title icon`}  className="absolute top-0 h-full p-4 w-full object-contain group-hover:scale-105 transition-all drop-shadow-icon " />
                         </div>
                         }
                     </Link>
