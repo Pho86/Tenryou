@@ -5,7 +5,10 @@ import { addFileName } from "@/app/utils/helper";
 import { Suspense } from "react";
 export default async function CharacterPage({ params }: { params: { name: string } }) {
 
-  const mergeWithPreference = (firstData: any, secondData: any) => {
+  const mergeWithPreference = (firstData:any, secondData:any) => {
+    if (!firstData) {
+      return secondData; 
+    }
     for (const key in secondData) {
       if (firstData.hasOwnProperty(key) && typeof firstData[key] === 'object' && secondData[key] !== null) {
         firstData[key] = mergeWithPreference(firstData[key], secondData[key]);
@@ -15,41 +18,52 @@ export default async function CharacterPage({ params }: { params: { name: string
     }
     return firstData;
   };
-  const response = await fetch(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true`)
+  let CharacterData;
+
+  const response = await fetch(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true`);
   if (!response.ok) {
-    throw new Error("Failed to fetch");
+    throw new Error("Failed to fetch character data");
   }
   const res = await response.json();
-  let characterData = res.result;
-  const stats = res.stats
-  const names = addFileName([characterData]);
+  CharacterData = res.result;
+  const names = addFileName([CharacterData]);
   const characterName = names[0].fileName;
-  Promise.all([
-    fetch(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`).then(res => res.json()),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`).then(res => res.json()),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${characterName}&matchCategories=true`).then(res => res.json()),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true`).then(res => res.json()),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`).then(res => res.json())
-  ]).then(([constellationsData, talentsData, nameCardData, voiceData, outfitData]) => {
-    const mergedData = {
-      stats: stats,
-      constellations: constellationsData,
-      talents: talentsData,
-      nameCard: nameCardData,
-      voices: voiceData,
-      outfits: outfitData,
-      ...characterData,
-    };
-    characterData = mergeWithPreference(characterData, mergedData);
-  })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
+
+  const [constellationsResponse, talentsResponse, nameCardResponse, voiceResponse, outfitResponse] = await Promise.all([
+    fetch(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
+    fetch(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
+    fetch(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${characterName}&matchCategories=true`),
+    fetch(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true`),
+    fetch(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`)
+  ]);
+
+  if (!constellationsResponse.ok || !talentsResponse.ok || !nameCardResponse.ok || !voiceResponse.ok || !outfitResponse.ok) {
+    throw new Error("Failed to fetch additional data");
+  }
+  const [constellationsData, talentsData, nameCardData, voiceData, outfitData] = await Promise.all([
+    constellationsResponse.json(),
+    talentsResponse.json(),
+    nameCardResponse.json(),
+    voiceResponse.json(),
+    outfitResponse.json()
+  ]);
+
+  const mergedData = {
+    stats: CharacterData.stats,
+    constellations: constellationsData,
+    talents: talentsData,
+    nameCard: nameCardData,
+    voices: voiceData,
+    outfits: outfitData,
+    ...CharacterData,
+  };
+
+  CharacterData = mergeWithPreference(CharacterData, mergedData);
 
   return (
     <>
       <Suspense fallback={<Loader />}>
-        <CharacterInfo CharacterData={characterData} params={params} />
+        {CharacterData != undefined && <CharacterInfo CharacterData={CharacterData} params={params} />}
       </Suspense>
     </>
   );
