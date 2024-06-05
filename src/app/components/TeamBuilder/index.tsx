@@ -29,8 +29,6 @@ export default function TeamBuilder({
             const storedActiveCharacters = localStorage.getItem('activeCharacters');
             return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}];
         } else {
-            const storedActiveCharacters = localStorage.getItem('activeCharacters');
-            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}];
             return [{}, {}, {}, {}, {}, {}, {}, {}];
         }
     });
