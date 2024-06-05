@@ -5,9 +5,10 @@ export type Outfit = {
     isDefault: boolean;
     characterId: number;
     characterName: string;
-    source?: string[];
+    source: string[];
 
     images: {
+        namesplash: any;
         namecard: any;
         nameicon: string;
         filename_card: string;

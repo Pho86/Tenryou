@@ -10,7 +10,7 @@ export type Artifact = {
     sands?: ArtifactDetail;
     goblet?: ArtifactDetail;
     circlet?: ArtifactDetail;
-    hover:string;
+    hover?:string;
     images: {
         filename_flower?: string;
         filename_plume?: string;

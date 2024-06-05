@@ -4,50 +4,50 @@ const data = [
     {
         title: `Materials`,
         image: "/icons/materials.webp",
-        bg: "/namecards/UI_NameCardPic_Mxsy_P.png",
+        bg: "/homepage/materials.webp",
         link: "/materials",
     },
     {
         title: 'Artifacts',
         image: "/icons/artifacts.webp",
-        bg: "/namecards/UI_NameCardPic_Bp23_P.png",
+        bg: "/homepage/artifacts.webp",
         link: "/artifacts",
     },
     {
         title: 'Weapons',
         image: "/icons/weapons.webp",
-        bg: "/namecards/UI_NameCardPic_Bp10_P.png",
+        bg: "/homepage/weapons.webp",
         link: "/weapons",
     },
     {
         title: `Namecards`,
         image: "/icons/namecards.svg",
-        bg: "/namecards/UI_NameCardPic_Bp16_P.png",
+        bg: "/homepage/namecards.webp",
         link: "/namecards",
     },
     {
         title: `Outfits`,
         image: "/icons/outfits.svg",
-        bg: "/namecards/UI_NameCardPic_Bp29_P.png",
+        bg: "/homepage/outfits.webp",
         link: "/outfits",
     },
     {
         title: `Elements`,
         image: "/icons/elements.webp",
-        bg: "/namecards/UI_NameCardPic_EffigyChallenge_P.png",
+        bg: "/homepage/elements.webp",
         link: "/elements",
     },
     {
         title: `Achievements`,
         image: "/icons/achievements.webp",
-        bg: "/namecards/UI_NameCardPic_Google_P.png",
+        bg: "/homepage/achievements.webp",
         link: "/achievements",
     },
     {
         title: 'Interactive Map',
         image: "/icons/map.webp",
         link: "https://act.hoyolab.com/ys/app/interactive-map/index.html",
-        bg: "/namecards/UI_NameCardPic_Bp4_P.png",
+        bg: "/homepage/map.webp",
         target: true
     },
 ]

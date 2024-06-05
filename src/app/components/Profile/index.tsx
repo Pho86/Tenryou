@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import React, { useState, useEffect } from "react";
 import Loader from "../Loader";
@@ -69,7 +70,7 @@ export default function Profile({ user }: { user: User }) {
                         </div>
                     }
                     <AnimatePresence>
-                       <StatsModal exit={() => { setShowStatsModal(!showStatsModal) }} visible={showStatsModal}/>
+                        <StatsModal exit={() => { setShowStatsModal(!showStatsModal) }} visible={showStatsModal} />
                     </AnimatePresence>
                 </div>
                 <div className="flex flex-col">
@@ -150,7 +151,6 @@ export default function Profile({ user }: { user: User }) {
                 })}
             </section>}
 
-            <div className="from-gradient-Pyro-start to-gradient-Pyro-end  from-gradient-Electro-start to-gradient-Electro-end from-gradient-Cryo-start to-gradient-Cryo-end from-gradient-Hydro-start to-gradient-Hydro-end from-gradient-Dendro-start to-gradient-Dendro-end from-gradient-Anemo-start to-gradient-Anemo-end from-gradient-Geo-start to-gradient-Geo-end"></div>
             {loading
                 ?
                 <div className="h-[50dvh]">

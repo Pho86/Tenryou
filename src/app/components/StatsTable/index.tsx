@@ -49,7 +49,6 @@ export default function StatsTable({ characterData }: { characterData: Character
     return <div className="flex flex-col gap-4">
         <h2 className="font-bold text-3xl">Ascension Materials and Stats</h2>
         <button className="text-start hover:bg-bg-dark border-2 p-2 w-max rounded-xl transition-all" onClick={() => { setAscension(!showAscension) }}>{showAscension ? "Hide" : "Show"} Materials</button>
-        <div className="bg-gradient-to-br from-gradient-R-start to-gradient-R-end from-gradient-SR-start to-gradient-SR-end from-gradient-UC-start to-gradient-UC-end from-gradient-C-start to-gradient-C-end"></div>
 
         {characterData.stats && <table className="table-cell border-collapse w-full rounded-xl">
             <thead className="w-full">
