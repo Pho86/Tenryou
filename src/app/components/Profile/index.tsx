@@ -8,6 +8,11 @@ import { AnimatePresence } from "framer-motion";
 import { ProfileCardGrid, ProfileCardWide } from "../ProfileCard";
 import { User, Characters } from "@/app/types/user";
 export default function Profile({ user }: { user: User }) {
+
+    useEffect(() => {
+        document.title = `${user.player.username} - Tenryou`
+    }, [])
+    
     const [newUser, setNewUser] = useState<any>({
         uid: user.uid
     });
@@ -168,7 +173,7 @@ export default function Profile({ user }: { user: User }) {
                 :
                 <ProfileCardGrid user={user} />
             }
-
+            <div className="from-gradient-Pyro-start to-gradient-Pyro-end from-gradient-Electro-start to-gradient-Electro-end from-gradient-Cryo-start to-gradient-Cryo-end from-gradient-Hydro-start to-gradient-Hydro-end from-gradient-Dendro-start to-gradient-Dendro-end from-gradient-Anemo-start to-gradient-Anemo-end from-gradient-Geo-start to-gradient-Geo-end"></div>
         </div>
     )
 }

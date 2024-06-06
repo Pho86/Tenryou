@@ -167,7 +167,6 @@ export function ProfileCardWide({
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div className="flex flex-col gap-2 ">
                         <div className={`flex gap-2 items-center rounded-xl font-semibold transition-all bg-opacity-75 justify-between ${activeHover == "HP" && "bg-bg"} py-1 px-2`} onMouseEnter={() => { setActiveHover("HP") }} onMouseLeave={() => { setActiveHover("") }}>
