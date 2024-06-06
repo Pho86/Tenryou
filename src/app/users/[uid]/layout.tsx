@@ -11,7 +11,7 @@ export async function generateMetadata(
     const uid = params.uid
 
     return {
-        title: `${uid}'s Characters - Tenryou 💮`,
+        title: `${uid}'s Profile - Tenryou 💮`,
         description:`${uid}'s, page to see all of their characters and create character or team cards.`
     }
 }

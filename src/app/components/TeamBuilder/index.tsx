@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from "react";
 import { Character } from "@/app/types/character";
 import Loader from "../Loader";
 import { getRandomNumber } from "@/app/utils/helper";
-import Image from "next/image";
 import Markdown from "../MarkdownComponent";
-
+import TeamCharacterCard from "../CharacterCard/team";
+import Image from "next/image";
 export default function TeamBuilder({
     CharacterData
 }: {
@@ -16,6 +16,7 @@ export default function TeamBuilder({
 }) {
     const [activeElement, setActiveElement] = useState<number>(0);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
+    const [mounted, setMounted] = useState<boolean>(false);
     const [activeElements, setActiveElements] = useState<string[]>(() => {
         if (typeof window !== "undefined") {
             const storedActiveElements = localStorage.getItem('activeElements');
@@ -24,18 +25,19 @@ export default function TeamBuilder({
             return ["", "", "", "", "", "", "", ""];
         }
     });
+
     const [activeCharacters, setActiveCharacters] = useState<any[]>(() => {
         if (typeof window !== "undefined") {
             const storedActiveCharacters = localStorage.getItem('activeCharacters');
-            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}];
+            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}, {}];
         } else {
-            return [{}, {}, {}, {}, {}, {}, {}, {}];
+            return [{}, {}, {}, {}, {}, {}, {}, {}, {}];
         }
     });
+    
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
     const [secondTeam, setSecondTeam] = useState<boolean>(false);
     const [showIcons, setShowIcons] = useState<boolean>(true);
-    const [owned, setOwned] = useState<any[]>([]);
     const [team1AILoading, setTeam1AILoading] = useState(false);
     const [team2AILoading, setTeam2AILoading] = useState(false);
     const [team1FinalizeLoading, setTeam1FinalizeLoading] = useState(false);
@@ -47,20 +49,11 @@ export default function TeamBuilder({
     const [availableCharacters, setAvailableCharacters] = useState<Character[]>([]);
     const [deletedChars, setDeletedChars] = useState<boolean>(false);
     const [selectTeam, setSelectTeam] = useState<boolean>(true);
-
+    
     useEffect(() => {
-        const storedActiveElements = localStorage.getItem('activeElements');
-        if (storedActiveElements) {
-            setActiveElements(JSON.parse(storedActiveElements));
-        }
+        setMounted(true);
     }, []);
-
-    useEffect(() => {
-        const storedActiveCharacters = localStorage.getItem('activeCharacters');
-        if (storedActiveCharacters) {
-            setActiveCharacters(JSON.parse(storedActiveCharacters));
-        }
-    }, []);
+    
     useEffect(() => {
         localStorage.setItem('activeElements', JSON.stringify(activeElements));
     }, [activeElements]);
@@ -241,17 +234,28 @@ export default function TeamBuilder({
             </div>
             <div className="grid lg:grid-cols-2 w-full max-w-screen-2xl ">
                 <section className="grid-auto-fit-100 w-full p-4 max-h-[100dvh] overflow-y-scroll py-2 order-1">
-                    {CharacterData.map((character: Character, index: number) => {
+                    {mounted ? CharacterData.map((character: Character, index: number) => {
                         const elementConditions = [true, "Pyro", "Hydro", "Anemo", "Electro", "Dendro", "Cryo", "Geo"];
                         const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
                         const validElement = activeElement === 0 || elementConditions[activeElement] === character.elementText;
                         const validWeapon = activeWeapon === 0 || weaponConditions[activeWeapon] === character.weaponText;
                         if (character.name == "Aether" || character.name == "Lumine") return //temp
-                        if (validWeapon && validElement) return <CharacterCard activeProp={() => {
-                            const count = activeCharacters.filter(item => item.name === character.name).length;
-                            return count === 1;
-                        }} character={character} key={index} index={index} removeCharacter={() => { removeCharacter(character) }} selectCharacter={() => { selectCharacter(character) }} />
-                    })}
+                        if (validWeapon && validElement) return <TeamCharacterCard
+                            key={index}
+                            index={index}
+                            character={character}
+                            selectCharacter={selectCharacter}
+                            removeCharacter={removeCharacter}
+                            activeProp={() => {
+                                const count = activeCharacters.filter(item => item.name === character.name).length;
+                                return count === 1;
+                            }}
+                        />
+                    }) :
+                        <div className="col-span-full">
+                            <Loader />
+                        </div>
+                    }
                 </section>
 
                 <section className="w-full flex flex-col gap-4 p-4 order-0 lg:order-1">
@@ -276,11 +280,11 @@ export default function TeamBuilder({
                     </div>
                     <div className="">
                         <div className="grid grid-cols-4 gap-2 md:gap-4 h-full w-full">
-                            {activeCharacters.length > 0 && activeCharacters.map((character: any, index: number) => {
+                            {mounted ? activeCharacters.map((character: any, index: number) => {
                                 if (!secondTeam) {
                                     if (index > 3) return
                                 }
-                                return <div key={index} className={`rounded-xl cursor-move overflow-hidden transition-shadow ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light  "}`}
+                                return <div key={index} className={`rounded-xl cursor-move overflow-hidden transition-shadow ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light"}`}
                                     onClick={() => setSelectedSlot(index)}
                                     draggable
                                     onDragStart={() => (dragCharacter.current = index)}
@@ -300,7 +304,31 @@ export default function TeamBuilder({
                                         </div>
                                     }
                                 </div>
-                            })}
+
+                            }) :
+                                <>
+                                    {Array.from({ length: 4 }).map((_:any, index:number) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={`rounded-xl cursor-move overflow-hidden transition-shadow border-2 ${selectedSlot == index && "scale-105 shadow-light"}`}
+                                            >
+                                                <div className="w-full h-full flex items-center justify-center font-bold text-7xl relative">
+                                                    <Image
+                                                        src="/elements/None.png"
+                                                        alt="placeholder empty image"
+                                                        height={256}
+                                                        width={256}
+                                                        className=""
+                                                    />
+                                                    <p className="absolute">+</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </>
+
+                            }
                         </div>
                     </div>
                     {!secondTeam ?
@@ -383,43 +411,10 @@ export default function TeamBuilder({
                             </div>
                         </>
                     }
-                </section>
-            </div>
+                </section >
+            </div >
         </>
     )
 }
 
 
-function CharacterCard({ character, selectCharacter, removeCharacter, activeProp }: { character: Character, index: number, selectCharacter: (char: any) => void, removeCharacter: (char: any) => void, activeProp: () => boolean; }) {
-    const [active, setActive] = useState<boolean>(activeProp);
-    useEffect(() => {
-        setActive(activeProp());
-    }, [activeProp])
-
-    return <div onClick={() => {
-        if (active) {
-            removeCharacter(character); setActive(!active);
-        } else {
-            selectCharacter(character); setActive(!active);
-
-        }
-    }} className={`min-w-[4rem] md:min-w-[6rem] bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer ${active ? "scale-[103%] shadow-light" : ""} ${active ? "hover:scale-100" : "hover:scale-[103%] hover:shadow-light"}`}>
-        <div className={`flex flex-col self-start `}>
-            <div className="absolute top-1 left-1 text-black">
-                <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} className="" alt={`${character.element} icon`} />
-            </div>
-            {character.region && <div className="absolute top-1 right-1 text-black">
-                <Image src={`/regions/${character.region}.webp`} width={25} height={25} className="" alt={`${character.region} icon`} />
-            </div>}
-            <Image
-                src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
-                width={200}
-                height={200}
-                alt={`${character.name}`}
-                title={`${character.name}`}
-                className={`rounded-t-xl rounded-br-4xl max-h-40 object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
-            />
-            <p className="text-center w-full text-[.65rem] text-nowrap p-1 text-black relative font-bold rounded-b-xl ">{character.name}</p>
-        </div>
-    </div>
-}
