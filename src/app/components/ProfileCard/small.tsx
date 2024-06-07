@@ -243,7 +243,7 @@ export function ProfileCardSmall({
                         <div className="flex flex-col ">
                             {artifactSet.map((set: any, index: number) => {
                                 if (set.count >= 2) return <div key={index} className="font-bold text-xs text-green-500">
-                                    <p className="text-nowrap">{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
+                                    <p className="text-nowrap">{set.name.length > 22 ? set.name.slice(0, 22) + '...' : set.name}  x<span>{set.count <= 3 ? 2 : 4}</span></p>
                                 </div>
                             })}
                         </div>
