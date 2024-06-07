@@ -10,7 +10,7 @@
     "test": "npx playwright test"
   },
   "dependencies": {
-    "@ai-sdk/google": "^0.0.18",
+    "@ai-sdk/google": "^0.0.20",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.3",
