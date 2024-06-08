@@ -3,7 +3,9 @@ import Loader from "../components/Loader";
 import WeaponsList from "../components/Lists/WeaponsList";
 export default async function WeaponsPage() {
 
-    const response = await fetch('https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true');
+    const response = await fetch('https://genshin-db-api.vercel.app/api/v5/weapons?query=names&matchCategories=true&dumpResults=true&verboseCategories=true', {
+        cache: 'no-cache'
+    });
     if (!response.ok) {
         throw new Error("failed to fetch")
     }

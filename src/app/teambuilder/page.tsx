@@ -4,7 +4,9 @@ import { addFileName } from "../utils/helper";
 import Loader from "../components/Loader";
 
 export default async function TeamBuilderPage() {
-    const response = await fetch('https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true');
+    const response = await fetch('https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true', {
+        cache: 'no-cache'
+    });
     if (!response.ok) {
         throw new Error("failed to fetch")
     }

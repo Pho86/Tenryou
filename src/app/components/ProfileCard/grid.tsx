@@ -90,7 +90,7 @@ export function ProfileCardGrid({
                 </Reorder.Group>
                 <div className="grid grid-cols-2 w-full col-span-4 drop-shadow-text ">
                     <div className="flex gap-1 text-5xl font-bold items-center">
-                        <Image src={'/icon.svg'} width={55} height={55} alt="Tenryou Logo" className="z-10 pointer-events-none" />
+                        <Image src={'/icon.svg'} width={55} height={55} alt="Tenryou Logo" className={`z-10 pointer-events-none ${teamName.length >= 1 ? "brightness-50" : "brightness-100"}`} />
                         {teamName.length >= 1 ? <span className="z-20 absolute">{teamName}</span> : <div></div>}
                     </div>
                     <div className="flex flex-col px-2 w-full text-end">

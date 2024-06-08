@@ -4,7 +4,9 @@ import Loader from "../components/Loader";
 import { Suspense } from "react";
 export default async function AchievementsPage() {
     
-    const response = await fetch('https://genshin-db-api.vercel.app/api/achievements?query=names&dumpResult=true&matchAliases=true&matchCategories=true&verboseCategories=true');
+    const response = await fetch('https://genshin-db-api.vercel.app/api/achievements?query=names&dumpResult=true&matchAliases=true&matchCategories=true&verboseCategories=true', {
+        cache: 'no-cache'
+      });
     if (!response.ok) {
         throw new Error("failed to fetch")
     }
