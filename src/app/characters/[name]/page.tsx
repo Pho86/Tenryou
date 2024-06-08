@@ -5,9 +5,9 @@ import { addFileName } from "@/app/utils/helper";
 import { Suspense } from "react";
 export default async function CharacterPage({ params }: { params: { name: string } }) {
 
-  const mergeWithPreference = (firstData:any, secondData:any) => {
+  const mergeWithPreference = (firstData: any, secondData: any) => {
     if (!firstData) {
-      return secondData; 
+      return secondData;
     }
     for (const key in secondData) {
       if (firstData.hasOwnProperty(key) && typeof firstData[key] === 'object' && secondData[key] !== null) {

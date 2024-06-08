@@ -6,7 +6,9 @@ import { Suspense } from "react";
 
 export default async function UIDPage({ params }: { params: { uid: string } }) {
     try {
-        const response = await fetch(`https://tenryou.live/api/user/${params.uid}`);
+        const response = await fetch(`https://tenryou.live/api/user/${params.uid}`, {
+            cache: 'no-cache'
+        });
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

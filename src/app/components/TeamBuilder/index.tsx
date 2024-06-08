@@ -17,14 +17,6 @@ export default function TeamBuilder({
     const [activeElement, setActiveElement] = useState<number>(0);
     const [activeWeapon, setActiveWeapon] = useState<number>(0);
     const [mounted, setMounted] = useState<boolean>(false);
-    const [activeElements, setActiveElements] = useState<string[]>(() => {
-        if (typeof window !== "undefined") {
-            const storedActiveElements = localStorage.getItem('activeElements');
-            return storedActiveElements ? JSON.parse(storedActiveElements) : ["", "", "", "", "", "", "", ""];
-        } else {
-            return ["", "", "", "", "", "", "", ""];
-        }
-    });
 
     const [activeCharacters, setActiveCharacters] = useState<any[]>(() => {
         if (typeof window !== "undefined") {
@@ -34,10 +26,19 @@ export default function TeamBuilder({
             return [{}, {}, {}, {}, {}, {}, {}, {}, {}];
         }
     });
-    
+
+    const [ownedCharacters, setOwnedCharacters] = useState<any[]>(() => {
+        if (typeof window !== "undefined") {
+            const storedActiveCharacters = localStorage.getItem('ownedCharacters');
+            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [];
+        } else {
+            return [];
+        }
+    });
+
+    const [selectedOwned, setSelectedOwned] = useState<boolean>(false);
     const [selectedSlot, setSelectedSlot] = useState<number>(0);
     const [secondTeam, setSecondTeam] = useState<boolean>(false);
-    const [showIcons, setShowIcons] = useState<boolean>(true);
     const [team1AILoading, setTeam1AILoading] = useState(false);
     const [team2AILoading, setTeam2AILoading] = useState(false);
     const [team1FinalizeLoading, setTeam1FinalizeLoading] = useState(false);
@@ -49,14 +50,10 @@ export default function TeamBuilder({
     const [availableCharacters, setAvailableCharacters] = useState<Character[]>([]);
     const [deletedChars, setDeletedChars] = useState<boolean>(false);
     const [selectTeam, setSelectTeam] = useState<boolean>(true);
-    
+
     useEffect(() => {
         setMounted(true);
     }, []);
-    
-    useEffect(() => {
-        localStorage.setItem('activeElements', JSON.stringify(activeElements));
-    }, [activeElements]);
 
     useEffect(() => {
         localStorage.setItem('activeCharacters', JSON.stringify(activeCharacters));
@@ -64,33 +61,23 @@ export default function TeamBuilder({
 
     const selectCharacter = (character: Character, index?: number) => {
         let slot = selectedSlot;
-        let element = "";
-        element = character.elementText;
         setActiveCharacters(prevActiveCharacters => {
             const updatedCharacters = [...prevActiveCharacters];
             if (index != undefined) {
                 updatedCharacters[index] = { ...character, active: true };
             } else {
-                const updatedActiveElements = [...activeElements];
-                updatedActiveElements[slot] = character.elementText;
                 updatedCharacters[slot] = { ...character, active: true };
-                setActiveElements(updatedActiveElements);
             }
             return updatedCharacters;
         });
         if (!secondTeam) setSelectedSlot(prevSlot => (prevSlot + 1) % 4);
         else setSelectedSlot(prevSlot => (prevSlot + 1) % 8);
-        return element;
+        return character
     };
 
     const removeCharacter = (character: Character) => {
         const updatedCharacters = activeCharacters.map((item, i) => {
             if (item.name === character.name) {
-                setActiveElements(prevActiveElements => {
-                    const updatedActiveElements = [...prevActiveElements];
-                    updatedActiveElements[i] = "";
-                    return updatedActiveElements;
-                });
                 return {};
             }
             return item;
@@ -100,40 +87,171 @@ export default function TeamBuilder({
 
     const randomizeTeam = () => {
         let charactersAvailable;
+
         if (!deletedChars) {
             charactersAvailable = [...CharacterData];
-            for (let x = 0; x < charactersAvailable.length - 1; x++) {
-                if (charactersAvailable[x].name == "Aether" || charactersAvailable[x].name == "Lumine") {
-                    charactersAvailable.splice(x, 1)
-                }
-            }
+            charactersAvailable = charactersAvailable.filter(character => character.name !== "Aether" && character.name !== "Lumine");
             setDeletedChars(true);
-            setAvailableCharacters(charactersAvailable)
+            setAvailableCharacters(charactersAvailable);
         } else {
-            charactersAvailable = [...availableCharacters]
+            charactersAvailable = selectedOwned ? [...ownedCharacters] : [...availableCharacters];
         }
-        let i = 0;
-        let count = 4;
-        let elements = [];
-        if (secondTeam) count = 8;
-        for (i = 0; i < count; i++) {
+
+        let count = secondTeam ? 8 : 4;
+        count = Math.min(count, charactersAvailable.length);
+
+        let selectedCharacters = [];
+        for (let i = 0; i < count; i++) {
             let number = Math.floor(getRandomNumber(0, charactersAvailable.length));
             let selectedCharacter = charactersAvailable[number];
-            elements.push(selectCharacter(selectedCharacter, i));
+            selectedCharacters.push(selectedCharacter);
             charactersAvailable.splice(number, 1);
         }
-        setActiveElements(elements);
-    }
+
+        let activeCharacters = new Array(secondTeam ? 8 : 4).fill(null);
+        for (let i = 0; i < selectedCharacters.length; i++) {
+            activeCharacters[i] = { ...selectedCharacters[i], active: true };
+        }
+
+        for (let i = selectedCharacters.length; i < activeCharacters.length; i++) {
+            activeCharacters[i] = {};
+        }
+
+        setActiveCharacters(activeCharacters);
+    };
+
 
     const clearTeam = () => {
         setActiveCharacters([{}, {}, {}, {}, {}, {}, {}, {}]);
-        setActiveElements(["", "", "", "", "", "", "", ""]);
         setSelectedSlot(0);
         setTeam1Recommendations([])
         setTeam2Recommendations([])
     }
 
-    const sendDataToAI = async (team: number) => {
+    const handleSort = () => {
+        const activeCharactersClone = [...activeCharacters]
+        const temp = activeCharactersClone[dragCharacter.current]
+        activeCharactersClone[dragCharacter.current] = activeCharactersClone[draggedOverCharacter.current]
+        activeCharactersClone[draggedOverCharacter.current] = temp
+        setActiveCharacters(activeCharactersClone)
+    }
+
+    const handleOwnedClick = (character: Character) => {
+        const isOwned = ownedCharacters.some(c => c.id === character.id);
+        let updatedOwnedCharacters;
+        if (isOwned) {
+            updatedOwnedCharacters = ownedCharacters.filter(c => c.id !== character.id);
+        } else {
+            updatedOwnedCharacters = [...ownedCharacters, character];
+        }
+        setOwnedCharacters(updatedOwnedCharacters);
+        localStorage.setItem('ownedCharacters', JSON.stringify(updatedOwnedCharacters));
+    };
+
+    const recommendTeam = async (team: number) => {
+        let isInvalid = false;
+        if (team == 1) {
+            setTeam1AILoading(true);
+        } else {
+            setTeam2AILoading(true);
+        }
+        if (secondTeam) {
+            if (ownedCharacters.length < 8) {
+                isInvalid = true;
+            }
+        }
+        else {
+            if (ownedCharacters.length < 4) {
+                isInvalid = true;
+            }
+        }
+        if (isInvalid) {
+            if (team === 1) {
+                setTeam1FinalizeLoading(false);
+                setTeam1AILoading(false);
+            } else {
+                setTeam2FinalizeLoading(false);
+                setTeam2AILoading(false);
+            }
+        }
+        if(isInvalid) {
+            setTeam1ErrorMessage("Please select more than 4 owned characters")
+            setTeam2ErrorMessage("Please select more than 8 owned characters")
+            return;
+        }
+        try {
+            if (team === 1) {
+                setActiveCharacters([...Array(4).fill({}), ...activeCharacters.slice(4)]);
+            } else if (team === 2) {
+                setActiveCharacters([...activeCharacters.slice(0, -4), ...Array(4).fill({})]);
+            }
+
+            let accumulatedData: any = [];
+            let response;
+
+            let copiedOwnedCharacters = [...ownedCharacters];
+            copiedOwnedCharacters = copiedOwnedCharacters.filter(character =>
+                !activeCharacters.some(activeCharacter =>
+                    activeCharacter.fileName === character.fileName
+                )
+            );
+
+            for (let part = 1; part <= 4; part++) {
+                response = await axios.post("/api/teamrec/google", {
+                    ownedCharacters: copiedOwnedCharacters,
+                    part,
+                    currentInfo: accumulatedData,
+                    team,
+                });
+
+                const recommendedData = response.data;
+                accumulatedData = [...accumulatedData, recommendedData];
+                
+                if (part == 1) {
+                    const namesArray = recommendedData.trim().split(", ");
+                    let startIndex = 0;
+                    let endIndex = 0;
+                    if (team === 1) {
+                        startIndex = 0;
+                        endIndex = Math.min(4, namesArray.length);
+                    } else if (team === 2) {
+                        startIndex = 4;
+                        endIndex = Math.min(8);
+                    }
+
+                    for (let i = startIndex; i < endIndex; i++) {
+                        const nameToSearch = namesArray[i - startIndex];
+
+                        const character = CharacterData.find(character => character.fileName.toLowerCase().includes(nameToSearch.toLowerCase()));
+                        if (character) {
+                            selectCharacter(character, i);
+                        } else {
+                            console.log(`Error for character: ${nameToSearch}`);
+                        }
+                    }
+                } else {
+                    if (team === 1) {
+                        setTeam1Recommendations([...accumulatedData.slice(1)]);
+                        setTeam1AILoading(false);
+                        setTeam1FinalizeLoading(true);
+                    } else {
+                        setTeam2Recommendations([...accumulatedData.slice(1)]);
+                        setTeam2AILoading(false);
+                        setTeam2FinalizeLoading(true);
+                    }
+                }
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            if (team === 1) {
+                setTeam1FinalizeLoading(false);
+            } else {
+                setTeam2FinalizeLoading(false);
+            }
+        }
+    }
+    const createBuilds = async (team: number) => {
         let isInvalid = false;
         switch (team) {
             case 1:
@@ -157,15 +275,17 @@ export default function TeamBuilder({
         if (isInvalid) {
             console.log("Required character slots are empty, aborting API call.");
             if (team === 1) {
+                setTeam1ErrorMessage("Please put 2 or more characters in the team (Slot 1/2).")
                 setTeam1FinalizeLoading(false);
                 setTeam1AILoading(false);
             } else {
+                setTeam2ErrorMessage("Please put 2 or more characters in the team (Slot 5/6).")
                 setTeam2FinalizeLoading(false);
                 setTeam2AILoading(false);
             }
             return;
         }
-
+        if (isInvalid) return
         try {
             let accumulatedData: any = [];
             let response;
@@ -204,13 +324,7 @@ export default function TeamBuilder({
     const dragCharacter = useRef<number>(0)
     const draggedOverCharacter = useRef<number>(0)
 
-    function handleSort() {
-        const activeCharactersClone = [...activeCharacters]
-        const temp = activeCharactersClone[dragCharacter.current]
-        activeCharactersClone[dragCharacter.current] = activeCharactersClone[draggedOverCharacter.current]
-        activeCharactersClone[draggedOverCharacter.current] = temp
-        setActiveCharacters(activeCharactersClone)
-    }
+
 
     return (
         <>
@@ -250,6 +364,9 @@ export default function TeamBuilder({
                                 const count = activeCharacters.filter(item => item.name === character.name).length;
                                 return count === 1;
                             }}
+                            selectOwned={handleOwnedClick}
+                            ownedOption={selectedOwned}
+                            ownedCharacters={ownedCharacters}
                         />
                     }) :
                         <div className="col-span-full">
@@ -259,16 +376,15 @@ export default function TeamBuilder({
                 </section>
 
                 <section className="w-full flex flex-col gap-4 p-4 order-0 lg:order-1">
-                    <div className="flex gap-4 items-center">
+                    <div className="flex gap-4 items-center flex-wrap">
+                        <button onClick={() => { setSelectedOwned(!selectedOwned) }} className={`border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl ${selectedOwned ? "border-primary bg-bg-dark" : "border-2"}`}>{selectedOwned ? "Toggle Owned Characters" : "Select Characters Manually"}</button>
                         <button onClick={() => { randomizeTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Randomize Team</button>
                         <button onClick={() => { clearTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Clear Team</button>
-                        {/* <button onClick={() => { setShowIcons(!showIcons) }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">{showIcons ? "Expand Imgs" : "Collapse Imgs"}</button> */}
                         <label className="flex gap-2 font-bold">
                             <input type="checkbox" checked={secondTeam} onChange={() => {
                                 if (secondTeam) {
                                     setSecondTeam(!secondTeam)
                                     setActiveCharacters(prevCharacters => [...prevCharacters.slice(0, 4), {}, {}, {}, {}]);
-                                    setActiveElements(prevElements => [...prevElements.slice(0, 4), "", "", "", ""]);
                                 } else {
                                     setSecondTeam(!secondTeam)
 
@@ -304,10 +420,9 @@ export default function TeamBuilder({
                                         </div>
                                     }
                                 </div>
-
                             }) :
                                 <>
-                                    {Array.from({ length: 4 }).map((_:any, index:number) => {
+                                    {Array.from({ length: 4 }).map((_: any, index: number) => {
                                         return (
                                             <div
                                                 key={index}
@@ -333,7 +448,19 @@ export default function TeamBuilder({
                     </div>
                     {!secondTeam ?
                         <>
-                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(1); }} disabled={team1AILoading}>{team1AILoading ? "Loading..." : "Build Recommendations"}</button>
+                            <div className="flex gap-2">
+                                <>
+                                    {selectedOwned ? (
+                                        <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { recommendTeam(1); }} disabled={team1AILoading}>
+                                            {team1AILoading ? "Loading..." : "Build AI Team"}
+                                        </button>
+                                    ) : (
+                                        <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(1) }} disabled={team1AILoading}>
+                                            {team1AILoading ? "Loading..." : "Create Builds"}
+                                        </button>
+                                    )}
+                                </>
+                            </div>
                             <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl text-pretty" >
                                 {team1AILoading ? <Loader />
                                     :
@@ -357,13 +484,33 @@ export default function TeamBuilder({
                         <>
                             <div className="flex gap-2">
                                 {selectTeam ?
-                                    <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(1); }} disabled={team1AILoading}>{team1AILoading ? "Loading..." : "Build Team 1"}</button>
+                                    <>
+                                        {selectedOwned ? (
+                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { recommendTeam(1); }} disabled={team1AILoading}>
+                                                {team1AILoading ? "Loading..." : "Build AI Team 1"}
+                                            </button>
+                                        ) : (
+                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(1) }} disabled={team1AILoading}>
+                                                {team1AILoading ? "Loading..." : "Create Builds 1"}
+                                            </button>
+                                        )}
+                                    </>
                                     :
-                                    <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { sendDataToAI(2); }} disabled={team2AILoading}>{team2AILoading ? "Loading..." : "Build Team 2"}</button>
+                                    <>
+                                        {selectedOwned ? (
+                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { recommendTeam(2); }} disabled={team2AILoading}>
+                                                {team2AILoading ? "Loading..." : "Build AI Team 2"}
+                                            </button>
+                                        ) : (
+                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(2); }} disabled={team2AILoading}>
+                                                {team2AILoading ? "Loading..." : "Create Builds 2"}
+                                            </button>
+                                        )}
+                                    </>
                                 }
                                 <label className="flex gap-2 font-bold items-center">
                                     <input type="checkbox" checked={selectTeam} onChange={() => { setSelectTeam(!selectTeam) }} />
-                                    Build Team 1
+                                    Swap Team
                                 </label>
                             </div>
                             <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl text-pretty" >
