@@ -33,12 +33,10 @@ function AttackCard({ attack, name, attackImage, index, stats = false }: { attac
     let attributes;
     let labels;
     if (stats) {
-        labels = attack.attributes.labels; // Move labels assignment inside the stats block
+        labels = attack.attributes.labels; 
         attributes = labels.map((label: any) => {
             const [name, params] = label.split('|');
-            // Extract parameter keys from the params string
             const paramKeys = params.match(/{(.*?)}/g).map((param: string) => param.substring(1, param.indexOf(':')));
-            // Extract parameter values from the parameters object
             const paramValues = paramKeys.map((paramKey: string) => attack.attributes.parameters[paramKey]);
             return { name, paramValues };
         });

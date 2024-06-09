@@ -174,7 +174,7 @@ export default function TeamBuilder({
                 setTeam2AILoading(false);
             }
         }
-        if(isInvalid) {
+        if (isInvalid) {
             setTeam1ErrorMessage("Please select more than 4 owned characters")
             setTeam2ErrorMessage("Please select more than 8 owned characters")
             return;
@@ -206,7 +206,7 @@ export default function TeamBuilder({
 
                 const recommendedData = response.data;
                 accumulatedData = [...accumulatedData, recommendedData];
-                
+
                 if (part == 1) {
                     const namesArray = recommendedData.trim().split(", ");
                     let startIndex = 0;
@@ -377,7 +377,16 @@ export default function TeamBuilder({
 
                 <section className="w-full flex flex-col gap-4 p-4 order-0 lg:order-1">
                     <div className="flex gap-4 items-center flex-wrap">
-                        <button onClick={() => { setSelectedOwned(!selectedOwned) }} className={`border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl ${selectedOwned ? "border-primary bg-bg-dark" : "border-2"}`}>{selectedOwned ? "Toggle Owned Characters" : "Select Characters Manually"}</button>
+                        <button onClick={() => {
+                            if (selectedOwned) {
+                                setTeam1ErrorMessage("Please put 2 or more characters in the team (Slot 1/2).")
+                                setTeam2ErrorMessage("Please put 2 or more characters in the team (Slot 5/6).")
+                            } else {
+                                setTeam1ErrorMessage("Please select more than 4 owned characters")
+                                setTeam2ErrorMessage("Please select more than 8 owned characters")
+                            }
+                            setSelectedOwned(!selectedOwned)
+                        }} className={`border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl ${selectedOwned ? "border-primary bg-bg-dark" : "border-2"}`}>{selectedOwned ? "Toggle Owned Characters" : "Select Characters Manually"}</button>
                         <button onClick={() => { randomizeTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Randomize Team</button>
                         <button onClick={() => { clearTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Clear Team</button>
                         <label className="flex gap-2 font-bold">
