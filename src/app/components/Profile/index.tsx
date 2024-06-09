@@ -85,7 +85,7 @@ export default function Profile({ user }: { user: User }) {
                             <button className={`hover:bg-bg-dark p-2 rounded-xl transition-all border-2`} type="submit">Search</button>
                         </Link>
                     </form>
-                    <p className="hover:text-primary transition-all cursor-pointer" onClick={() => { setShowStatsModal(!showStatsModal) }}>Stats Explaination</p>
+                    <p className="hover:text-primary transition-all cursor-pointer" onClick={() => { setShowStatsModal(!showStatsModal) }}>Stats Explanation</p>
                 </div>
             </div>
             {user.characters && <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 w-full self-center">

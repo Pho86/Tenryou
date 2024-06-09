@@ -21,7 +21,7 @@ If there is another list of characters provided that cannot be chosen, please in
 
 [PART 2 START]
 
-Create reasoning for a short exercept of why certain characters were chosen, and create a teamname.
+Create reasoning for a short exercept of why certain characters were chosen, and create a teamname. This part should only be the team name and a 1 short paragraph description of who the team is and what each character does.
 
 [PART 2 END]
 

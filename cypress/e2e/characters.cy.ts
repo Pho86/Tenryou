@@ -4,9 +4,7 @@ describe('Characters', () => {
     });
 
     it('Path to find Amber and find certain information', () => {
-        // cy.get('nav').within(() => {
         cy.get('a').contains('Characters').click();
-        // });
         cy.wait(2000);
         cy.contains('h1', 'Characters List').should('be.visible');
         cy.wait(2000);
