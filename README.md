@@ -31,7 +31,9 @@ Tenryou is a companion website create for the action-rpg game [Genshin Impact](h
     - [ ] Japanese
     - [ ] Chinese
     - [ ] Korean
+    - [ ] Etc...
 - [ ] HSR/ZZZ support
+- [ ] Discord Bot
 
 ## Development
 Tenryou is create via Next.js and information is pulled using axios by these sources:
@@ -89,14 +91,15 @@ Contribute by reporting a bug/suggesting an enhancement
 3. Give it an appropriate label
 4. Thank you for your contribution!
 
-Contribute through development
+Contribute through development,
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b Feature`)
-3. Commit your Changes (`git commit -m 'Add some Feature'`)
-4. Push to the Branch (`git push origin Feature`)
-5. Open a Pull Request with a clear and concise title and description.
-6. Thank you for your contribution!
+1. Create an issue before contributing
+2. Fork the Project
+3. Create your Feature Branch (`git checkout -b Feature`)
+4. Commit your Changes (`git commit -m 'Add some Feature'`)
+5. Push to the Branch (`git push origin Feature`)
+6. Open a Pull Request with a clear and concise title and description.
+7. Thank you for your contribution!
 
 
 ## License

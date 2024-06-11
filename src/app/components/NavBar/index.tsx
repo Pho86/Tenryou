@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -53,10 +53,6 @@ export default function NavBar() {
     if (pathname.includes("/characters")) pathname = "/characters";
     if (pathname.includes("/users")) pathname = "/users";
 
-    const [hoveredPath, setHoveredPath] = useState(pathname);
-    useEffect(() => {
-        setHoveredPath(pathname)
-    }, [pathname])
     return (
         <>
             <motion.nav className="w-full hidden px-8 md:px-16 md:flex justify-center z-[1000]  bg-bg-darker items-center py-2 rounded-lg fixed "
@@ -83,20 +79,8 @@ export default function NavBar() {
                                     className={`px-4 py-2 rounded-xl w-full font-semibold h-full relative duration-300 ease-in ${isActive ? "text-primary" : "text-text"} hover:text-accent`}
                                     data-active={isActive}
                                     href={item.path}
-                                    onMouseOver={() => setHoveredPath(item.path)}
                                 >
                                     <span>{item.name}</span>
-                                    {item.path === hoveredPath && (
-                                        <motion.div
-                                            className="absolute bottom-0 left-0 h-full bg-bg-lighter rounded-xl -z-10 w-full"
-                                            layoutId="navbar"
-                                            aria-hidden="true"
-                                            transition={{
-                                                duration: 0.3,
-                                                ease: "easeInOut"
-                                            }}
-                                        />
-                                    )}
                                 </Link>
                             );
                         })}
@@ -113,7 +97,6 @@ export default function NavBar() {
                             className={`px-4 py-2 rounded-xl w-full font-semibold text-center flex flex-col items-center justify-center h-full relative transition-all ease-in ${isActive ? "text-primary" : "text-text"} hover:text-accent`}
                             data-active={isActive}
                             href={item.path}
-                            onMouseOver={() => setHoveredPath(item.path)}
                         >
                             <Image src={item.icon} width={30} height={30} alt="Home Icon" className=" h-10 w-10" />
                             <h3 className=" group-hover:text-primary relative font-normal transition-all">{item.altname ? item.altname : item.name}</h3>

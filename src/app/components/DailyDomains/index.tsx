@@ -55,6 +55,7 @@ export default function DailyDomains({ }: {}) {
     };
     const [done, setDone] = useState<boolean>(false)
     const weekday: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
     useLayoutEffect(() => {
         setLoading(true);
         let day = selectedDay;
@@ -63,10 +64,12 @@ export default function DailyDomains({ }: {}) {
             day = weekday[d.getDay()];
             setSelectedDay(day);
             setDone(true);
+            setActiveCharacters([]);
         }
         const storedData = sessionStorage.getItem(`domainData_${selectedDay}`);
         if (storedData) {
             const parsedData = JSON.parse(storedData);
+            setActiveCharacters([]);
             setActiveWeapons(parsedData.weapons);
             setActiveArtifacts([]);
             fetchAndSetData(parsedData.allData);
@@ -97,6 +100,7 @@ export default function DailyDomains({ }: {}) {
             }
         }
     }, [selectedDay]);
+
     return (<div className="overflow-y-scroll h-full p-2 gap-2 flex flex-col">
         <label className="w-full" htmlFor="days">
             <span className="hidden">Days of the Week</span>
@@ -125,18 +129,30 @@ export default function DailyDomains({ }: {}) {
                                         <Image src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[domain.rewardPreview.length - 1].id}.png`} width={75} height={75} alt={` material icon`} className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end rounded-xl hover:scale-105 hover:shadow-light transition-all`} title={`${domain.rewardPreview[domain.rewardPreview.length - 1].name}`} />
                                     </div>
                                     <div className="grid-auto-fit-10">
-                                        {activeCharacters.length > 1 && activeCharacters[index].map((character: Character, i: number) => {
-                                            return <Link id={`${character.name}_daily`} key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
-                                                <Image
-                                                    src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
-                                                    width={200}
-                                                    height={200}
-                                                    alt={`${character.name}`}
-                                                    title={`${character.name}`}
-                                                    className={`w-full hover:scale-105 hover:shadow-light transition-all rounded-xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
-                                                />
-                                            </Link>
-                                        })}
+                                        {activeCharacters.length > 1 ?
+                                            <>
+                                                {activeCharacters[index].map((character: Character, i: number) => {
+                                                    return (
+                                                        <Link id={`${character.name}_daily`} key={i} className="cursor-pointer max-w-12 min-h-4" href={`/characters/${character.name}`}>
+                                                            <Image
+                                                                src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
+                                                                width={200}
+                                                                height={200}
+                                                                alt={`${character.name}`}
+                                                                title={`${character.name}`}
+                                                                className={`w-full hover:scale-105 hover:shadow-light transition-all rounded-xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"
+                                                                    }`}
+                                                            />
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </> : index === 0 ?
+                                                <div className="col-span-full row-span-full">
+                                                    <Loader />
+                                                </div>
+                                                :
+                                                null
+                                        }
                                     </div>
                                 </div>
                             })}

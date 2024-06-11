@@ -36,9 +36,9 @@ export default function AchievementsList({
             </label>
         </div>
         <section className="grid md:grid-cols-[30%_70%] gap-4 flex-col w-full p-2">
-            <div className="flex flex-col gap-4 font-bold text-xl p-5 max-h-[30dvh] md:max-h-[100dvh] overflow-y-scroll ">
+            <div className="flex flex-col gap-4 font-bold text-xl p-4 max-h-[30dvh] md:max-h-[100dvh] overflow-y-scroll ">
                 {AchievementGroups.map((group: any, index: number) => (
-                    <div onClick={() => { setActiveGroup(group); setSearch("") }} className={`flex gap-2 rounded-xl p-2 transition-all bg-bg-dark items-center hover:scale-105 hover:shadow-light ${groupsActivated && activeGroup == group && "scale-105 shadow-light"}`} key={index}>
+                    <div onClick={() => { setActiveGroup(group); setSearch("") }} className={`flex gap-2 rounded-xl p-2 transition-all bg-bg-dark items-center hover:scale-[102%] hover:shadow-light ${groupsActivated && activeGroup == group && "scale-[102%] shadow-light"}`} key={index}>
                         {group}&nbsp;
                     </div>
                 ))}
