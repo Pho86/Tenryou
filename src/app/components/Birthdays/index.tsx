@@ -76,7 +76,7 @@ export default function Birthdays({ }: {}) {
                 <option value="December" id="December">December</option>
             </select>
         </label>
-        <div className="p-2 justify-center grid-auto-fit-150">
+        <div className="p-2 justify-center grid-auto-fit-100">
             {loading ?
                 <Loader />
                 :

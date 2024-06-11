@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Link from "next/link";
 export default function UserPage() {
-    const [user, setUser] = useState<any>({
+    const [user, setUser] = useState({
         uid: '' as string
     });
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -20,9 +20,9 @@ export default async function TeamBuilderPage() {
         <>
             <h1 className="text-3xl text-primary">Team Builder (Beta)</h1>
 
-            {/* <Suspense fallback={<Loader />}> */}
-            <TeamBuilder CharacterData={characterData} />
-            {/* </Suspense> */}
+            <Suspense fallback={<Loader />}>
+                <TeamBuilder CharacterData={characterData} />
+            </Suspense>
         </>
     );
 }

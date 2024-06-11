@@ -5,7 +5,10 @@ import Birthdays from "./components/Birthdays";
 
 
 export default async function Home() {
-    const response = await fetch(`https://api.ambr.top/assets/data/event.json`);
+    const response = await fetch(`https://api.ambr.top/assets/data/event.json`, {
+        cache: 'no-cache'
+    });
+    
     if (!response.ok) {
         throw new Error("failed to fetch")
     }
@@ -29,7 +32,7 @@ export default async function Home() {
         },
         {
             title: 'Current Events',
-            children: <Events Events={EventsData}/>
+            children: <Events Events={EventsData} />
         },
         {
             title: 'Users',
@@ -113,7 +116,7 @@ export default async function Home() {
             link: "/credits",
             description: "Find Information about the changelog and credits of Tenryou."
         },
-    
+
     ]
 
     return (
