@@ -26,7 +26,7 @@ export async function POST(req: Request, res: NextResponse) {
         });
     
         const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}]  ${body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""} PRINT ONLY [PART ${body.part}]`;
-        console.log(`YOU ARE ON [PART ${body.part}] `)
+        console.log(`YOU ARE ON [PART ${body.part}], ${availableCharacters} `)
         if(body.part == 1) {
             const result = await streamText({
                 model: google('models/gemini-1.5-flash-latest'),

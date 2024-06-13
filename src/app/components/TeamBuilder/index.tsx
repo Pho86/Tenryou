@@ -76,8 +76,8 @@ export default function TeamBuilder({
     };
 
     const removeCharacter = (character: Character) => {
-        const updatedCharacters = activeCharacters.map((item, i) => {
-            if (item.name === character.name) {
+        const updatedCharacters = activeCharacters.map(item => {
+            if (typeof item.name === 'string' && item.name.startsWith("Traveller") || item.name === character.name) {
                 return {};
             }
             return item;
@@ -137,10 +137,10 @@ export default function TeamBuilder({
     }
 
     const handleOwnedClick = (character: Character) => {
-        const isOwned = ownedCharacters.some(c => c.id === character.id);
+        const isOwned = ownedCharacters.some(c => c.name === character.name);
         let updatedOwnedCharacters;
         if (isOwned) {
-            updatedOwnedCharacters = ownedCharacters.filter(c => c.id !== character.id);
+            updatedOwnedCharacters = ownedCharacters.filter(c => c.name !== character.name);
         } else {
             updatedOwnedCharacters = [...ownedCharacters, character];
         }
@@ -209,6 +209,7 @@ export default function TeamBuilder({
 
                 if (part == 1) {
                     const namesArray = recommendedData.trim().split(", ");
+                    console.log(namesArray)
                     let startIndex = 0;
                     let endIndex = 0;
                     if (team === 1) {
@@ -221,8 +222,14 @@ export default function TeamBuilder({
 
                     for (let i = startIndex; i < endIndex; i++) {
                         const nameToSearch = namesArray[i - startIndex];
-
-                        const character = CharacterData.find(character => character.fileName.toLowerCase().includes(nameToSearch.toLowerCase()));
+                        const character = CharacterData.find(character => {
+                            if(nameToSearch.toLowerCase().startsWith("traveller")) {
+                                return character.name.toLowerCase().includes(nameToSearch.toLowerCase())
+                            } else {
+                                return character.fileName.toLowerCase().includes(nameToSearch.toLowerCase())
+                            }
+                        }
+                        );
                         if (character) {
                             selectCharacter(character, i);
                         } else {
@@ -324,8 +331,6 @@ export default function TeamBuilder({
     const dragCharacter = useRef<number>(0)
     const draggedOverCharacter = useRef<number>(0)
 
-
-
     return (
         <>
             <div className="flex gap-3 justify-around flex-col md:flex-row">
@@ -353,18 +358,23 @@ export default function TeamBuilder({
                         const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
                         const validElement = activeElement === 0 || elementConditions[activeElement] === character.elementText;
                         const validWeapon = activeWeapon === 0 || weaponConditions[activeWeapon] === character.weaponText;
-                        if (character.name == "Aether" || character.name == "Lumine") return //temp
+                        if (character.name == "Aether" || character.name == "Lumine") return null
                         if (validWeapon && validElement) return <TeamCharacterCard
                             key={index}
                             index={index}
                             character={character}
                             selectCharacter={selectCharacter}
                             removeCharacter={removeCharacter}
-                            activeProp={() => {
-                                const count = activeCharacters.filter(item => item.name === character.name).length;
-                                return count === 1;
-                            }}
                             selectOwned={handleOwnedClick}
+                            traveller={character.name.startsWith("Traveller")}
+                            activeProp={() => {
+                                let travellerActive = 0
+                                if (character.name.startsWith("Traveller")) {
+                                    travellerActive = activeCharacters.filter(item => typeof item.name === 'string' && item.name.startsWith("Traveller")).length;
+                                }
+                                const isCurrentActive = activeCharacters.some(item => item.name === character.name);
+                                return travellerActive > 0 || isCurrentActive;
+                            }}
                             ownedOption={selectedOwned}
                             ownedCharacters={ownedCharacters}
                         />
@@ -407,9 +417,10 @@ export default function TeamBuilder({
                         <div className="grid grid-cols-4 gap-2 md:gap-4 h-full w-full">
                             {mounted ? activeCharacters.map((character: any, index: number) => {
                                 if (!secondTeam) {
-                                    if (index > 3) return
+                                    if (index > 3) return null
                                 }
-                                return <div key={index} className={`rounded-xl cursor-move overflow-hidden transition-shadow ${!character.active && "border-2"} ${selectedSlot == index && "scale-105 shadow-light"}`}
+
+                                return <div key={index} className={`rounded-xl cursor-move overflow-hidden transition-shadow ${!character.active && "border-2"} ${selectedSlot == index && "scale-[103%] shadow-light"}`}
                                     onClick={() => setSelectedSlot(index)}
                                     draggable
                                     onDragStart={() => (dragCharacter.current = index)}
@@ -418,7 +429,14 @@ export default function TeamBuilder({
                                     onDragOver={(e) => e.preventDefault()}
                                 >
                                     {character.active ? <div className={` hover:scale-100 relative`} >
-                                        <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt="" draggable="false" className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`} />
+                                        {character.name.startsWith("Traveller") ?
+                                            <Image src={`/characters/travellers.webp`} width={1000} height={1000} alt="" draggable="false" className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"} relative`} />
+                                            :
+                                            <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt="" draggable="false" className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"} relative`} />
+                                        }
+                                        <div className="absolute top-1 left-1 text-black">
+                                            <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} alt={`${character.element} icon`} />
+                                        </div>
                                     </div>
                                         :
                                         <div className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}>

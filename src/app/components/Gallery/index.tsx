@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import { useState } from "react"
 import Link from "next/link";
@@ -10,7 +11,6 @@ export default function Gallery({
     characterData: Character
 }) {
     const [active, setActive] = useState<number>(0);
-    // console.log(characterData)
     return (
         <>
             <h2 className="font-bold text-3xl">Gallery</h2>

@@ -71,6 +71,7 @@ export function addFileName(names: any[]) {
         {
             name: "Raiden Shogun",
             fileName: "Shougun",
+            nameCardName: "Raiden"
         },
         {
             name: "Sangonomiya Kokomi",
@@ -111,21 +112,33 @@ export function addFileName(names: any[]) {
         {
             name: "Xianyun",
             fileName: "Liuyun"
+        },
+        {
+            name:"Tartaglia",
+            fileName:"Tartaglia",
+            nameCardName:"Childe"
         }
     ];
 
     MihoyoNames.sort((a, b) => a.name.localeCompare(b.name));
 
     const mihoyoMap = new Map();
-    MihoyoNames.forEach(({ name, fileName }) => {
-        mihoyoMap.set(name, fileName);
+    MihoyoNames.forEach(({ name, fileName, nameCardName }) => {
+        mihoyoMap.set(name, { fileName, nameCardName });
     });
 
     for (const nameEntry of names) {
-        const fileName = mihoyoMap.get(nameEntry.name);
-        nameEntry.fileName = fileName !== undefined ? fileName : nameEntry.name;
+        const mihoyoEntry = mihoyoMap.get(nameEntry.name);
+        if (mihoyoEntry) {
+            nameEntry.fileName = mihoyoEntry.fileName;
+            nameEntry.nameCardName = mihoyoEntry.nameCardName;
+        } else {
+            nameEntry.fileName = nameEntry.name;
+            nameEntry.nameCardName = undefined;
+        }
     }
-    return names
+
+    return names;
 }
 
 export function parseColorTags(text: string) {
