@@ -61,6 +61,7 @@ export type Character = {
         "hoyolab-avatar"?: string;
     };
     fileName: string;
+    nameCardName: string;
     talents: any;
     constellations: any;
     voices: any;

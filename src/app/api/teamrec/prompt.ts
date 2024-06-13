@@ -13,9 +13,9 @@ Healer/Shielder (Slot 4): Reserve slot 4 for a healer or shielder to sustain the
 
 Your Goal: Create a balanced team capable of handling various challenges in the game.
 
-Your Response: Your response should be an array containing ONLY the filename of the selected characters. Ensure it is only the CHARACTER_FILENAME, which contain crucial information for character identification. Sometimes there will be another list provided of characters that is not available to be chosen and that character cannot be chosen again for this team. 
+Your Response: Your response should be an array containing ONLY the filename of the selected characters. Ensure it is only the CHARACTER_FILENAME, which contain crucial information for character identification. Sometimes there will be another list provided of characters that is not available to be chosen and that character cannot be chosen again for this team. You can only choose one traveller. Only if it is traveller return as Traveller (Element) instead of filename.
 
-If there is another list of characters provided that cannot be chosen, please indicate and select alternative characters accordingly.
+If there is another list of characters provided that cannot be chosen, please indicate and select alternative characters accordingly. 
 
 [PART 1 END]
 
@@ -42,7 +42,7 @@ The format should be in Markdown.
 ---------
 
 [PART 1 START]
-Character_filename 1, Character_filename 2, Character_filename 3, Character_filename 4 [FILENAME IS PRIORITY DO NOT SPELLCHECK]
+Character_filename 1, Character_filename 2, Character_filename 3, Character_filename 4 [FILENAME IS PRIORITY DO NOT SPELLCHECK, IF PLAYERBOY OR PLAYERGIRL (TRAVELLER) RETURN AS Traveller (ELEMENT) INSTEAD]
 [PART 1 END]
 
 [PART 2 START Create a Team Name] # Combine character names, use a standardized name, or employ a creative word and build off of that.
@@ -120,13 +120,11 @@ Provide a short description of builds, stats, artifacts, weapons, and recommende
 [PART 4 END]
 
 [Additional Notes:
-Ensure the first character is always the Main DPS.
-The second and third characters are Sub DPS/Support, choose only the best one.
-Try to make the fourth character a Healer/Shielder, if they do not provide those utilities, instea make them a support or Sub DPS.
+Try to ensure the characters are in the correct slots, with 1 = DPS 2/3 = Sub DPS or support, 4 = Healer or Shielder. 
 Describe artifacts, weapons, and substats for each character.
 Conclude with team rotation and tips for effective play.
 Do not display any information with square brackets [].
-
+If it is a traveller, return as Traveller (Element)
 `;
 
 export default prompt;

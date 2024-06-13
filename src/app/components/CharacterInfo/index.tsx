@@ -1,4 +1,3 @@
-"use client"
 import { Character } from "@/app/types/character";
 import StatsTable from "@/app/components/StatsTable";
 import InfoCharacterBanner from "@/app/components/CharacterInfoBanner";

@@ -2,11 +2,12 @@
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef, useState, } from "react"
+import { Character } from "@/app/types/character"
 
 export default function InfoCharacterBanner({
     characterData, params
 }: {
-    characterData: any,
+    characterData: Character,
     params: {
         name: string
     },

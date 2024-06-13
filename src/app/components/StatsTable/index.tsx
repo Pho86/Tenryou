@@ -1,3 +1,4 @@
+"use client"
 import { Character } from "@/app/types/character";
 import Image from "next/image";
 import { useLayoutEffect, useState } from "react";
