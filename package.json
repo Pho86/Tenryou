@@ -43,7 +43,7 @@
     "@types/react-dom": "^18",
     "@types/react-scroll": "^1.8.10",
     "cypress": "^13.11.0",
-    "eslint": "^8",
+    "eslint": "^9",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",
     "sass": "^1.77.4",
