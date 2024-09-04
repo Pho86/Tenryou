@@ -11,6 +11,7 @@ export default function Profile({ user }: { user: User }) {
 
     useEffect(() => {
         document.title = `${user.player.username} - Tenryou`
+        console.log(user)
     }, [])
     
     const [newUser, setNewUser] = useState<any>({
@@ -58,7 +59,7 @@ export default function Profile({ user }: { user: User }) {
                             </span>
                             <span className="flex gap-1">
                                 <Image src={"/stats/abyss.png"} width={35} height={35} alt="Abyss Icon" className="w-8 h-8" />
-                                <p className=" flex gap-1"><span className="hidden md:block">Abyss:</span> {user.player.abyss.floor}-{user.player.abyss.chamber}</p>
+                                <p className="flex gap-1"><span className="hidden md:block">Abyss:</span> {user.player.abyss.floor}-{user.player.abyss.chamber}</p>
                             </span>
                         </div>
                     </div>
@@ -66,7 +67,7 @@ export default function Profile({ user }: { user: User }) {
                 <div className="relative">
                     <Image src={"/icons/grid.svg"} width={25} height={25} alt="Open Namecards" title="Open Namecards" onClick={() => { setNamecardsHover(!namecardsHover) }} onMouseEnter={() => { setNamecardsHover(true) }} onMouseLeave={() => { setNamecardsHover(false) }} />
                     {namecardsHover &&
-                        <div className="absolute grid grid-cols-3 bg-bg w-96 z-[100] rounded-xl p-2" onMouseEnter={() => { setNamecardsHover(true) }} onMouseLeave={() => { setNamecardsHover(false) }}>
+                        <div className="absolute grid grid-cols-4 bg-bg w-96 z-[100] rounded-xl p-2" onMouseEnter={() => { setNamecardsHover(true) }} onMouseLeave={() => { setNamecardsHover(false) }}>
                             {user.player.namecardsList.map((namecard: any, index: number) => {
                                 return <div key={index} className="">
                                     <Image src={`https://enka.network/ui/${namecard.assets.icon}.png`} width={250} height={250} className="w-28" alt={`${namecard.name} namecard picture`} title={namecard.name} />
