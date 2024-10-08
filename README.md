@@ -8,11 +8,6 @@
 
 Tenryou is a companion website create for the action-rpg game [Genshin Impact](https://genshin.mihoyo.com/). Tenryou is intended to help players view information from the game in a visual and cohesive manner with via information pulled from various resources to provide up-to-date information with a teambuilder prototype to help you create your team.
 
-<!-- [![Contributors][contributors-shield]][contributors-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url] -->
-
 ## Current Features
 * User Card Profile/Team Builder
 * Characters
@@ -23,7 +18,7 @@ Tenryou is a companion website create for the action-rpg game [Genshin Impact](h
 * And more...
 
 ## Current Roadmap
-- [ ] Add more options to edit user images
+- [ ] Add more customization options to edit user images
 - [ ] Improve Teambuilder by migrating to a different AI and add example teams
 - [ ] TCG Support
 - [ ] Add calculator for stats, and ascension
@@ -81,6 +76,10 @@ npm run build, pnpm build
 npm run cypress:open
 
 ```
+
+## Screenshots
+<img src="public/HomePage.png" alt="homepage page"/>
+<img src="public/Teambuilder.png" alt="teambuilder page"/>
 
 ## Contributing
 
