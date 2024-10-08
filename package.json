@@ -21,7 +21,7 @@
     "ai": "^3.3.26",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
-    "enkanetwork.js": "^2.8.6",
+    "enkanetwork.js": "^2.8.8",
     "framer-motion": "^11.4.0",
     "genshin-db": "^5.1.8",
     "html-react-parser": "^5.1.15",

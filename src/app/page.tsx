@@ -5,14 +5,23 @@ import Birthdays from "./components/Birthdays";
 
 
 export default async function Home() {
-    const response = await fetch(`https://api.ambr.top/assets/data/event.json`, {
-        cache: 'no-cache'
-    });
-    
-    if (!response.ok) {
-        throw new Error("failed to fetch")
+    let EventsData = null;
+    let eventsError = false;
+
+    try {
+        const response = await fetch(`https://gi.yatta.moe/assets/data/event.jsons`, {
+            cache: 'no-cache'
+        });
+
+        if (!response.ok) {
+            eventsError = true;
+        } else {
+            EventsData = await response.json();
+        }
+    } catch (error) {
+        eventsError = true;
+        console.error("Failed to fetch events data:", error);
     }
-    const EventsData = await response.json()
 
     const data = [
         {
@@ -32,7 +41,7 @@ export default async function Home() {
         },
         {
             title: 'Current Events',
-            children: <Events Events={EventsData} />
+            children: !eventsError ? <Events Events={EventsData}  /> : <p className="px-3 text-lg">An error has occured, please try again later.</p>
         },
         {
             title: 'Users',
