@@ -80,6 +80,7 @@ npm run cypress:open
 ## Screenshots
 <img src="public/HomePage.png" alt="homepage page"/>
 <img src="public/Teambuilder.png" alt="teambuilder page"/>
+<img src="public/UserPage.gif" alt="User profile page"/>
 
 ## Contributing
 

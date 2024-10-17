@@ -43,12 +43,12 @@ export function ProfileCardWide({
                     <Image src={`/namecards/stars_background.png`} width={2500} height={2500} alt={`${activeCharacter.name} background stars image`} blurDataURL="data:..." placeholder="blur"  className="pointer-events-none absolute top-0 mix-blend-overlay opacity-40 rounded-xl object-cover h-full  " /> 
                     :
                     activeCharacter.name === "Yae Miko" ?
-                        <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}1_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full " />
+                        <Image src={`https://gi.yatta.moe/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}1_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full " />
                         :
                         (activeCharacter.name === "Traveler") ?
                             <Image src={`/namecards/UI_NameCardPic_Ysxf4_P.png`} width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full w-full" />
                             :
-                            <Image src={`https://api.ambr.top/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full w-full" />
+                            <Image src={`https://gi.yatta.moe/assets/UI/namecard/UI_NameCardPic_${activeCharacter.fileName}_P.png`} blurDataURL="data:..." placeholder="blur"  width={2000} height={1000} alt={`${activeCharacter.name} namecard image banner`} className="pointer-events-none absolute top-0 mix-blend-overlay opacity-50 rounded-xl object-cover h-full w-full" />
                 }
                 <Image src={'/icon.svg'} alt="Tenryou Logo" width={50} height={50} className="absolute right-2 top-2 drop-shadow-icon"/>
                 <div className="w-full h-full relative min-h-[400px] col-span-1">
