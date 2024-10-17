@@ -56,7 +56,7 @@ export function ProfileCardGrid({
     };
 
     return <>
-        <div className="grid-auto-fit-150 mt-10">
+        <div className="grid-auto-fit-200 mt-10">
             {
                 user.characters.length > 0 ? user.characters.map((character: any, index: number) => {
                     return <CharacterCard activeProp={() => {
