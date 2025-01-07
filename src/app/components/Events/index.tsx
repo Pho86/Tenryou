@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import parse from 'html-react-parser';
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { Events as EventTypes } from "@/app/types/events";
 export default function EventsModal({
     Events

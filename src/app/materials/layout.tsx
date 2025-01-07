@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Materials - Tenryou 💮",
+    title: "Materials",
     description: "Genshin Impact material viewer with sources to farm all your material",
 };
 

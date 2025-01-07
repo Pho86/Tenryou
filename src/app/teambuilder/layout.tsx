@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Team Builder - Tenryou 💮",
+    title: "Team Builder",
     description: "Genshin Impact team builder tool to build abyss or exploration teams",
 };
 

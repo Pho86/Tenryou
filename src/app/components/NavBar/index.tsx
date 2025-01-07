@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";

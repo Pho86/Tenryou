@@ -63,7 +63,7 @@ export default function TeamCharacterCard({ character, selectCharacter, removeCh
                         height={1000}
                         alt={`${character.name}`}
                         title={`${character.name}`}
-                        className={`rounded-t-xl rounded-br-4xl max-h-40 object-cover bg-gradient-to-br ${character.rarity == 4 ? "from-gradient-SR-start to-gradient-SR-end" : "from-gradient-SSR-start to-gradient-SSR-end"} `}
+                        className={`w-full rounded-t-xl rounded-br-4xl max-h-40 object-cover bg-gradient-to-br ${character.rarity == 4 ? "from-gradient-SR-start to-gradient-SR-end" : "from-gradient-SSR-start to-gradient-SSR-end"} `}
                     /> :
                     <Image
                         src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
@@ -71,7 +71,7 @@ export default function TeamCharacterCard({ character, selectCharacter, removeCh
                         height={200}
                         alt={`${character.name}`}
                         title={`${character.name}`}
-                        className={`rounded-t-xl rounded-br-4xl max-h-40 object-cover bg-gradient-to-br ${character.rarity == 4 ? "from-gradient-SR-start to-gradient-SR-end" : "from-gradient-SSR-start to-gradient-SSR-end"} `}
+                        className={`w-full rounded-t-xl rounded-br-4xl max-h-40 object-cover bg-gradient-to-br ${character.rarity == 4 ? "from-gradient-SR-start to-gradient-SR-end" : "from-gradient-SSR-start to-gradient-SSR-end"} `}
                     />
                 }
                 <p className="text-center w-full text-[.65rem] whitespace-nowrap p-1 text-black relative font-bold rounded-b-xl">{character.name}</p>

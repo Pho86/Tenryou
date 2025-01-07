@@ -9,10 +9,7 @@ export default async function Home() {
     let eventsError = false;
 
     try {
-        const response = await fetch(`https://gi.yatta.moe/assets/data/event.json`, {
-            cache: 'no-cache'
-        });
-
+        const response = await fetch(`https://gi.yatta.moe/assets/data/event.json`);
         if (!response.ok) {
             eventsError = true;
         } else {

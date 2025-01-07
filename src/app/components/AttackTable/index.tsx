@@ -4,28 +4,71 @@ import parse from "html-react-parser"
 import { parseColorTags } from "@/app/utils/helper";
 import { Fragment } from "react";
 
-export default function AttackTable({ attackData, params }: { attackData: any, params: any }) {
-    return <>
-        {attackData && <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-3xl text-pretty">Combat Talents</h3>
-            {/* <div className="grid gap-5"> */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <AttackCard attack={attackData.combat1} name={params.name} attackImage={attackData.images.filename_combat1} index={1} stats />
-                <AttackCard attack={attackData.combat2} name={params.name} attackImage={attackData.images.filename_combat2} index={2} stats />
-                <AttackCard attack={attackData.combat3} name={params.name} attackImage={attackData.images.filename_combat3} index={3} stats />
-            </div>
+export default function AttackTable({
+  attackData,
+  charName,
+}: {
+  attackData: any;
+  charName: string;
+}) {
+  return (
+    <>
+      {attackData && (
+        <div className="flex flex-col gap-2">
+          <h3 className="font-bold text-3xl text-pretty">Combat Talents</h3>
+          {/* <div className="grid gap-5"> */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <AttackCard
+              attack={attackData.combat1}
+              name={charName}
+              attackImage={attackData.images.filename_combat1}
+              index={1}
+              stats
+            />
+            <AttackCard
+              attack={attackData.combat2}
+              name={charName}
+              attackImage={attackData.images.filename_combat2}
+              index={2}
+              stats
+            />
+            <AttackCard
+              attack={attackData.combat3}
+              name={charName}
+              attackImage={attackData.images.filename_combat3}
+              index={3}
+              stats
+            />
+          </div>
         </div>
-        }
-        {attackData && <div className="flex flex-col gap-2">
-            <h3 className="font-bold text-3xl text-pretty">Passive Talents</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <AttackCard attack={attackData.passive1} name={params.name} attackImage={attackData.images.filename_passive1} index={1} />
-                <AttackCard attack={attackData.passive2} name={params.name} attackImage={attackData.images.filename_passive2} index={2} />
-                <AttackCard attack={attackData.passive3} name={params.name} attackImage={attackData.images.filename_passive3} index={3} />
-            </div>
+      )}
+      {attackData && (
+        <div className="flex flex-col gap-2">
+          <h3 className="font-bold text-3xl text-pretty">Passive Talents</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <AttackCard
+              attack={attackData.passive1}
+              name={charName}
+              attackImage={attackData.images.filename_passive1}
+              index={1}
+            />
+            <AttackCard
+              attack={attackData.passive2}
+              name={charName}
+              attackImage={attackData.images.filename_passive2}
+              index={2}
+            />
+            <AttackCard
+              attack={attackData.passive3}
+              name={charName}
+              attackImage={attackData.images.filename_passive3}
+              index={3}
+            />
+          </div>
         </div>
-        }
+      )}
     </>
+  );
 }
 function AttackCard({ attack, name, attackImage, index, stats = false }: { attack: any, name: string, attackImage: string, index: number, stats?: boolean }) {
     const parsedHTML = parseColorTags(attack.descriptionRaw);

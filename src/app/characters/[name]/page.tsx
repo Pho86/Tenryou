@@ -5,6 +5,9 @@ import { addFileName } from "@/app/utils/helper";
 import { Suspense } from "react";
 export default async function CharacterPage({ params }: { params: { name: string } }) {
 
+  const { name } = await params;
+  const charName = name;
+
   const mergeWithPreference = (firstData: any, secondData: any) => {
     if (!firstData) {
       return secondData;
@@ -20,18 +23,39 @@ export default async function CharacterPage({ params }: { params: { name: string
   };
   let CharacterData;
 
-  const response = await fetch(`https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${params.name}&dumpResult=true`);
+  const response = await fetch(
+    `https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${charName}&dumpResult=true`
+  );
+
   
   const res = await response.json();
   CharacterData = res.result;
   const names = addFileName([CharacterData]);
   const characterName = names[0].fileName;
-  const [constellationsResponse, talentsResponse, nameCardResponse, voiceResponse, outfitResponse] = await Promise.all([
-    fetch(`https://genshin-db-api.vercel.app/api/v5/constellations?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/talents?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/namecards?query=${CharacterData.nameCardName ? CharacterData.nameCardName : characterName}&matchCategories=true`),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${params.name}&matchCategories=true`),
-    fetch(`https://genshin-db-api.vercel.app/api/v5/outfits?query=${params.name}&matchCategories=true&dumpResults=true&verboseCategories=true`)
+  const [
+    constellationsResponse,
+    talentsResponse,
+    nameCardResponse,
+    voiceResponse,
+    outfitResponse,
+  ] = await Promise.all([
+    fetch(
+      `https://genshin-db-api.vercel.app/api/v5/constellations?query=${charName}&matchCategories=true&dumpResults=true&verboseCategories=true`
+    ),
+    fetch(
+      `https://genshin-db-api.vercel.app/api/v5/talents?query=${charName}&matchCategories=true&dumpResults=true&verboseCategories=true`
+    ),
+    fetch(
+      `https://genshin-db-api.vercel.app/api/v5/namecards?query=${
+        CharacterData.nameCardName ? CharacterData.nameCardName : characterName
+      }&matchCategories=true`
+    ),
+    fetch(
+      `https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${charName}&matchCategories=true`
+    ),
+    fetch(
+      `https://genshin-db-api.vercel.app/api/v5/outfits?query=${charName}&matchCategories=true&dumpResults=true&verboseCategories=true`
+    ),
   ]);
 
   if (!constellationsResponse.ok || !talentsResponse.ok || !nameCardResponse.ok || !voiceResponse.ok || !outfitResponse.ok) {
@@ -60,7 +84,9 @@ export default async function CharacterPage({ params }: { params: { name: string
   return (
     <>
       <Suspense fallback={<Loader />}>
-        {CharacterData != undefined && <CharacterInfo CharacterData={CharacterData} params={params} />}
+        {CharacterData != undefined && (
+          <CharacterInfo CharacterData={CharacterData} charName={charName} />
+        )}
       </Suspense>
     </>
   );

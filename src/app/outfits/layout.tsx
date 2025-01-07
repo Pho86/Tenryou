@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Outfits - Tenryou 💮",
+    title: "Outfits",
     description: "Genshin Impact outfit and skin viewer",
 };
 

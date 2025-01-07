@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Elements - Tenryou 💮",
+    title: "Elements",
     description: "Genshin Impact elements and elemental reactions to learn and improve your gameplay.",
 };
 

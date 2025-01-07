@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa6";
 import React from "react";
 import { Characters, Artifact, SubStat } from "@/app/types/user";
 import { isDefenseStat, isAttackStat, isHPStat, isPropertyDamageBonus, isPropertyFlat } from "./index";
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 
 export function ProfileCardSmall({
     character,

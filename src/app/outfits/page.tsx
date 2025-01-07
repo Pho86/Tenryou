@@ -6,7 +6,6 @@ import OutfitsList from "../components/Lists/OutfitsList";
 export default async function OutfitsPage() {
 
     const response = await fetch('https://genshin-db-api.vercel.app/api/outfits?query=names&dumpResult=true&matchNames=false&matchAltNames=false&matchAliases=true&matchCategories=true&verboseCategories=true', {
-        cache: 'no-cache'
     });
     if (!response.ok) {
         throw new Error("failed to fetch")

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Namecards - Tenryou 💮",
+    title: "Namecards",
     description: "Genshin Impact namecard viewer provided with information such as sources, descriptions, and story.",
 };
 

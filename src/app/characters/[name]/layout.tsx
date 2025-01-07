@@ -4,16 +4,15 @@ type Props = {
     params: { name: string }
 }
 
-export async function generateMetadata(
-    { params }: Props,
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { name } = await params;
 
-): Promise<Metadata> {
-    const name = decodeURIComponent(params.name);
+    const decodedName = decodeURIComponent(name);
 
     return {
-        title: `${name} - Tenryou 💮`,
-        description:`${name} from Genshin Impact information and statistics viewer`
-    }
+        title: decodedName,
+        description: `${decodedName} from Genshin Impact information and statistics viewer`,
+    };
 }
 
 export default function Layout({

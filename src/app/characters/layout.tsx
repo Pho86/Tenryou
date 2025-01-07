@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Characters - Tenryou 💮",
-    description: "Genshin Impact character database for your building needs with certain statistics",
+  title: {
+    absolute: "Characters - Tenryou 💮",
+    default: "Characters - Tenryou 💮",
+    template: "%s - Tenryou 💮",
+  },
+  description:
+    "Genshin Impact character database for your building needs with certain statistics",
 };
 
 export default function Layout({

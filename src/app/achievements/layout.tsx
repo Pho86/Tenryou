@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Achievements - Tenryou 💮",
+    title: "Achievements",
     description: "Find your specific Genshin Impact achievements and earn your primogems",
 };
 

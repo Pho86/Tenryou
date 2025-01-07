@@ -8,7 +8,7 @@ export async function generateMetadata(
     { params }: Props,
 
 ): Promise<Metadata> {
-    const uid = params.uid
+    const {uid} = await params;
 
     return {
         title: `${uid}'s Profile - Tenryou 💮`,

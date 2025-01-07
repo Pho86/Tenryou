@@ -432,7 +432,7 @@ export default function TeamBuilder({
                                         {character.name.startsWith("Traveller") ?
                                             <Image src={`/characters/travellers.webp`} width={1000} height={1000} alt="" draggable="false" className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"} relative`} />
                                             :
-                                            <Image src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`} width={1000} height={1000} alt="" draggable="false" className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"} relative`} />
+                                            <div />
                                         }
                                         <div className="absolute top-1 left-1 text-black">
                                             <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} alt={`${character.element} icon`} />

@@ -9,7 +9,10 @@ import Footer from "./components/Footer";
 const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], variable: '--font-poppins' });
 const signika = Signika({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700',], variable: '--font-signika' });
 export const metadata: Metadata = {
-  title: "Home - Tenryou 💮",
+  title: {
+    default:"Home | Tenryou 💮",
+    template: "%s | Tenryou 💮"
+  },
   description: "Your Genshin Impact companion website, Tenryou, helps visualize playable characters along with a comprehensive database and data viewer for the game, Genshin Impact.",
   icons: {
     icon: [

@@ -117,7 +117,15 @@ export function addFileName(names: any[]) {
             name:"Tartaglia",
             fileName:"Tartaglia",
             nameCardName:"Childe"
-        }
+        },
+        {
+            name:'Ororon', 
+            fileName:"Olorun"
+        }, 
+        {
+            name: "Lan Yan",
+            fileName: "LanYan"
+        },
     ];
 
     MihoyoNames.sort((a, b) => a.name.localeCompare(b.name));

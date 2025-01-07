@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Weapons - Tenryou 💮",
+    title: "Weapons",
     description: "Genshin Impact weapon viewer with stats to improve your builds",
 };
 
