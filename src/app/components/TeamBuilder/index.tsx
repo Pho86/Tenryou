@@ -70,6 +70,7 @@ export default function TeamBuilder({
             }
             return updatedCharacters;
         });
+        console.log(character)
         if (!secondTeam) setSelectedSlot(prevSlot => (prevSlot + 1) % 4);
         else setSelectedSlot(prevSlot => (prevSlot + 1) % 8);
         return character
@@ -205,6 +206,7 @@ export default function TeamBuilder({
                 });
 
                 const recommendedData = response.data;
+                console.log(recommendedData)
                 accumulatedData = [...accumulatedData, recommendedData];
 
                 if (part == 1) {
@@ -248,7 +250,8 @@ export default function TeamBuilder({
                     }
                 }
             }
-        } catch (err) {
+        } 
+        catch (err) {
             console.error(err);
         } finally {
             if (team === 1) {
@@ -413,40 +416,91 @@ export default function TeamBuilder({
                         </label>
 
                     </div>
-                    <div className="">
+                    <div className="h-auto">
                         <div className="grid grid-cols-4 gap-2 md:gap-4 h-full w-full">
                             {mounted ? activeCharacters.map((character: any, index: number) => {
                                 if (!secondTeam) {
                                     if (index > 3) return null
                                 }
 
-                                return <div key={index} className={`rounded-xl cursor-move overflow-hidden transition-shadow ${!character.active && "border-2"} ${selectedSlot == index && "scale-[103%] shadow-light"}`}
+                                return (
+                                  <div
+                                    key={index}
+                                    className={`h-full rounded-xl cursor-move overflow-hidden transition-shadow ${
+                                      !character.active && "border-2"
+                                    } ${
+                                      selectedSlot == index &&
+                                      "scale-[103%] shadow-light"
+                                    }`}
                                     onClick={() => setSelectedSlot(index)}
                                     draggable
-                                    onDragStart={() => (dragCharacter.current = index)}
-                                    onDragEnter={() => (draggedOverCharacter.current = index)}
+                                    onDragStart={() =>
+                                      (dragCharacter.current = index)
+                                    }
+                                    onDragEnter={() =>
+                                      (draggedOverCharacter.current = index)
+                                    }
                                     onDragEnd={handleSort}
                                     onDragOver={(e) => e.preventDefault()}
-                                >
-                                    {character.active ? <div className={` hover:scale-100 relative`} >
-                                        {character.name.startsWith("Traveller") ?
-                                            <Image src={`/characters/travellers.webp`} width={1000} height={1000} alt="" draggable="false" className={`w-full object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"} relative`} />
-                                            :
-                                            <div />
-                                        }
+                                  >
+                                    {character.active ? (
+                                      <div
+                                        className={`h-full hover:scale-100 relative`}
+                                      >
+                                        {character.name.startsWith(
+                                          "Traveller"
+                                        ) ? (
+                                          <Image
+                                            src={`/characters/travellers.webp`}
+                                            width={1000}
+                                            height={1000}
+                                            alt=""
+                                            draggable="false"
+                                            className={`w-full object-cover bg-gradient-to-br ${
+                                              character.rarity == 4
+                                                ? " from-gradient-SR-start  to-gradient-SR-end"
+                                                : "from-gradient-SSR-start  to-gradient-SSR-end"
+                                            } relative`}
+                                          />
+                                        ) : (
+                                          <Image
+                                            src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
+                                            width={1000}
+                                            height={1000}
+                                            alt=""
+                                            draggable="false"
+                                            className={`w-full object-cover bg-gradient-to-br ${
+                                              character.rarity == 4
+                                                ? " from-gradient-SR-start  to-gradient-SR-end"
+                                                : "from-gradient-SSR-start  to-gradient-SSR-end"
+                                            } relative`}
+                                          />
+                                        )}
                                         <div className="absolute top-1 left-1 text-black">
-                                            <Image src={`/elements/${character.elementText}.webp`} width={25} height={25} alt={`${character.element} icon`} />
+                                          <Image
+                                            src={`/elements/${character.elementText}.webp`}
+                                            width={25}
+                                            height={25}
+                                            alt={`${character.element} icon`}
+                                          />
                                         </div>
-                                    </div>
-                                        :
-                                        <div className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}>
-                                            <Image src={"/elements/None.png"} alt="placeholder empty image" height={256} width={256} className="" />
-                                            <p className="absolute">
-                                                +
-                                            </p>
-                                        </div>
-                                    }
-                                </div>
+                                      </div>
+                                    ) : (
+                                      <div
+                                        className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}
+                                      >
+                                        <Image
+                                          src={"/elements/None.png"}
+                                          alt="placeholder empty image"
+                                          height={256}
+                                          width={256}
+                                          className=""
+                                        />
+                                        <p className="absolute">+</p>
+                                      </div>
+                                    )}
+                                  </div>
+                                );
                             }) :
                                 <>
                                     {Array.from({ length: 4 }).map((_: any, index: number) => {
@@ -518,7 +572,7 @@ export default function TeamBuilder({
                                             </button>
                                         ) : (
                                             <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(1) }} disabled={team1AILoading}>
-                                                {team1AILoading ? "Loading..." : "Create Builds 1"}
+                                                {team1AILoading ? "Loading..." : "Create Builds For Team 1"}
                                             </button>
                                         )}
                                     </>
@@ -530,7 +584,7 @@ export default function TeamBuilder({
                                             </button>
                                         ) : (
                                             <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(2); }} disabled={team2AILoading}>
-                                                {team2AILoading ? "Loading..." : "Create Builds 2"}
+                                                {team2AILoading ? "Loading..." : "Create Builds For Team 2"}
                                             </button>
                                         )}
                                     </>

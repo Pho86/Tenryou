@@ -1,14 +1,18 @@
 import { NextResponse } from "next/server";
-import { streamText } from 'ai';
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import prompt from "../prompt";
 
-export const runtime = "edge"
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const google = createGoogleGenerativeAI({
-    apiKey: process.env.GOOGLE_API_KEY as string || '',
-    
-});
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
+const generationConfig = {
+};
+
+const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig });
+
+
+export const runtime = "edge";
+
+
 export async function POST(req: Request, res: NextResponse) {
     try {
         const body = await req.json();
@@ -17,36 +21,26 @@ export async function POST(req: Request, res: NextResponse) {
         if (body.part > 1) {
             currentInfo = body.currentInfo.join(' ');
         }
-        let availableCharacters = ""
-        body.ownedCharacters.forEach((character:any, index:number) => {
+
+        let availableCharacters = "";
+        body.ownedCharacters.forEach((character: any) => {
             if (character.name) {
                 const characterInfo = `${character.name}, (${character.weaponText}), (${character.elementText}) (${character.fileName}) | `;
                 availableCharacters += characterInfo;
             }
         });
-    
-        const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}]  ${body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""} PRINT ONLY [PART ${body.part}]`;
-        console.log(`YOU ARE ON [PART ${body.part}], ${availableCharacters} `)
-        if(body.part == 1) {
-            const result = await streamText({
-                model: google('models/gemini-1.5-flash-latest'),
-                system: systemPrompt,
-                prompt: availableCharacters
-            });
-            return result.toTextStreamResponse();
-        } else {
-            const result = await streamText({
-                model: google('models/gemini-1.5-flash-latest'),
-                system: systemPrompt,
-                prompt: currentInfo
-            });
-            return result.toTextStreamResponse();
-        }
+        
+        const promptText = body.part === 1 ? availableCharacters : currentInfo;
+        const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}] ${body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""} PRINT ONLY [PART ${body.part}], ${promptText}`;
+
+
+        const result = await model.generateContent(systemPrompt);
+        return NextResponse.json(result.response.text(), { status: 200 });
 
     } catch (error) {
         console.error('Error processing the prompt:', error);
         return NextResponse.json({
-            text: "Unable to process the prompt. Please try again."
+            text: "Unable to process the prompt. Please ensure all required data is provided and try again."
         });
     }
 }

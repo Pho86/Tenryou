@@ -1,12 +1,13 @@
 import { NextResponse, NextRequest } from "next/server"; 
-import { streamText } from "ai";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import prompt from "../prompt";
 export const runtime = "edge";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const google = createGoogleGenerativeAI({
-  apiKey: (process.env.GOOGLE_API_KEY as string) || "",
-});
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
+const generationConfig = {
+};
+
+const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig });
 
 export async function POST(req: NextRequest, ) {
 
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest, ) {
     if (body.part > 1) {
       currentInfo = body.currentInfo.join("");
     }
-
+    
     body.activeCharacters.forEach((character: any, index: number) => {
       if (character.name) {
         const characterInfo = `${character.name}, (${character.weaponText}), (${character.elementText}) | `;
@@ -33,22 +34,12 @@ export async function POST(req: NextRequest, ) {
 
     let teams = body.team === 1 ? team1 : team2;
 
-    const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}] ${
+    const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}], the team is ${teams} ${
       body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""
     }`;
-    console.log(
-      `YOU ARE ON [PART ${body.part}] ${
-        body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""
-      }`
-    );
 
-    const result = await streamText({
-      model: google("models/gemini-1.5-flash-latest"),
-      system: systemPrompt,
-      prompt: teams,
-    });
-
-    return NextResponse.json(await result.toTextStreamResponse());
+    const result = await model.generateContent(systemPrompt);
+    return NextResponse.json(result.response.text(), { status: 200 });
   } catch (error) {
     console.error("Error processing the prompt:", error);
     return NextResponse.json({
