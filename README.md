@@ -22,12 +22,6 @@ Tenryou is a companion website create for the action-rpg game [Genshin Impact](h
 - [ ] Improve Teambuilder by migrating to a different AI and add example teams
 - [ ] TCG Support
 - [ ] Add calculator for stats, and ascension
-- [ ] Multi-language Support
-    - [ ] Japanese
-    - [ ] Chinese
-    - [ ] Korean
-    - [ ] Etc...
-- [ ] HSR/ZZZ support
 - [ ] Discord Bot
 
 ## Development
