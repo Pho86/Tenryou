@@ -15,7 +15,7 @@ export default function UserPage() {
   return (
     <>
       <div className="flex flex-col gap-4 justify-center items-center mt-64">
-        <div className="grid md:grid-cols-2">
+        <div className="grid md:grid-cols-2 gap-2">
           <div className="text-left text-pretty flex flex-col gap-2">
             <h1 className="text-4xl text-primary text-pretty">
               Your Genshin Builds and Team Cards
@@ -31,7 +31,7 @@ export default function UserPage() {
             </p>
           </div>
           <form
-            className="flex justify-center items-center h-full w-full gap-2"
+            className="flex md:justify-center items-center h-full w-full gap-2"
             onSubmit={handleSubmit}
           >
             <input

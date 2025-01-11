@@ -151,7 +151,7 @@ function CharacterCard({ character, selectCharacter, removeCharacter, activeProp
                 height={200}
                 alt={`${character.name}`}
                 title={`${character.name}`}
-                className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
+                className={`rounded-t-xl w-full rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
             />
             <p className="text-center w-full text-xs p-2 text-black relative font-bold rounded-b-xl ">{character.name}</p>
         </div>

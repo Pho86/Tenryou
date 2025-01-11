@@ -98,7 +98,7 @@ export function ProfileCardWide({
                                 <Image src={`https://enka.network/ui/${activeCharacter.skills.elementalSkill.assets.icon}.png`} width={250} height={250} alt={`${activeCharacter.skills.elementalSkill.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                 <div className="w-full justify-center flex items-center">
                                     {activeCharacter.constellationsList[2] != undefined ?
-                                        <p className="-mt-2 text-green-600">{activeCharacter.skills.elementalSkill.level + 3}</p> :
+                                        <p className="-mt-2 text-green-500">{activeCharacter.skills.elementalSkill.level + 3}</p> :
                                         <p className="-mt-2">{activeCharacter.skills.elementalSkill.level}</p>
                                     }
                                 </div>
@@ -107,7 +107,7 @@ export function ProfileCardWide({
                                 <Image src={`https://enka.network/ui/${activeCharacter.skills.elementalBurst.assets.icon}.png`} width={250} height={250} alt={`${activeCharacter.skills.elementalBurst.name}`} className={`w-12 bg-bg-dark rounded-full bg-opacity-70 p-1`} />
                                 <div className="w-full justify-center flex items-center">
                                     {activeCharacter.constellationsList[4] != undefined ?
-                                        <p className="-mt-2 text-green-600">{activeCharacter.skills.elementalBurst.level + 3}</p> :
+                                        <p className="-mt-2 text-green-500">{activeCharacter.skills.elementalBurst.level + 3}</p> :
                                         <p className="-mt-2 ">{activeCharacter.skills.elementalBurst.level}</p>
                                     }
                                 </div>
@@ -180,7 +180,7 @@ export function ProfileCardWide({
                                 </span>
                                 <span className="text-xs ">
                                     ({activeCharacter.stats.baseHp.value.toFixed()}&nbsp;
-                                    <span className="text-green-600">
+                                    <span className="text-green-500">
                                         +{activeCharacter.stats.maxHp.value.toFixed() - activeCharacter.stats.baseHp.value.toFixed()}
                                     </span>
                                     )
@@ -198,7 +198,7 @@ export function ProfileCardWide({
                                 </span>
                                 <span className="text-xs">
                                     ({activeCharacter.stats.baseAtk.value.toFixed()}&nbsp;
-                                    <span className="text-green-600">
+                                    <span className="text-green-500">
                                         +{activeCharacter.stats.atk.value.toFixed() - activeCharacter.stats.baseAtk.value.toFixed()}
                                     </span>
                                     )
@@ -216,7 +216,7 @@ export function ProfileCardWide({
                                 </span>
                                 <span className="text-xs">
                                     ({activeCharacter.stats.baseDef.value.toFixed()}&nbsp;
-                                    <span className="text-green-600">
+                                    <span className="text-green-500">
                                         +{activeCharacter.stats.def.value.toFixed() - activeCharacter.stats.baseDef.value.toFixed()}
                                     </span>
                                     )
@@ -338,7 +338,7 @@ export function ProfileCardWide({
                             </div>
                             <div className="flex flex-col ">
                                 {artifactSet.map((set: any, index: number) => {
-                                    if (set.count >= 2) return <div key={index} className="font-bold text-sm text-green-600">
+                                    if (set.count >= 2) return <div key={index} className="font-medium text-md text-green-500">
                                         <p className="text-nowrap">{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
                                     </div>
                                 })}
