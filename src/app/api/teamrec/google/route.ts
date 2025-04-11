@@ -5,42 +5,58 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
 const generationConfig = {
+  temperature: 0.7,
+  topP: 0.8,
+  topK: 40,
+  maxOutputTokens: 4096, 
 };
 
-const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig });
-
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig });
 
 export const runtime = "edge";
 
-
-export async function POST(req: Request, res: NextResponse) {
+export async function POST(req: Request) {
     try {
         const body = await req.json();
         let currentInfo = "";
 
-        if (body.part > 1) {
+        if (body.part > 1 && Array.isArray(body.currentInfo)) {
             currentInfo = body.currentInfo.join(' ');
         }
 
         let availableCharacters = "";
-        body.ownedCharacters.forEach((character: any) => {
-            if (character.name) {
-                const characterInfo = `${character.name}, (${character.weaponText}), (${character.elementText}) (${character.fileName}) | `;
-                availableCharacters += characterInfo;
-            }
-        });
+        if (Array.isArray(body.ownedCharacters)) {
+            body.ownedCharacters.forEach((character: any) => {
+                if (character && character.name) {
+                    const characterInfo = `${character.name}, (${character.weaponText || 'Unknown'}), (${character.elementText || 'Unknown'}) (${character.fileName || 'Unknown'}) | `;
+                    availableCharacters += characterInfo;
+                }
+            });
+        }
+        
+        if (!availableCharacters && body.part === 1) {
+            return NextResponse.json({
+                error: "No character data provided"
+            }, { status: 400 });
+        }
         
         const promptText = body.part === 1 ? availableCharacters : currentInfo;
-        const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}] ${body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""} PRINT ONLY [PART ${body.part}], ${promptText}`;
+        const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part || 1}] ${
+            body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""
+        } PRINT ONLY [PART ${body.part || 1}], ${promptText}`;
 
-
+        console.log(`Sending request to Gemini for part ${body.part || 1}`);
+        
         const result = await model.generateContent(systemPrompt);
-        return NextResponse.json(result.response.text(), { status: 200 });
+        const responseText = result.response.text();
+        
+        return NextResponse.json(responseText, { status: 200 });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error processing the prompt:', error);
         return NextResponse.json({
-            text: "Unable to process the prompt. Please ensure all required data is provided and try again."
-        });
+            error: error.message || "Unknown error occurred",
+            details: error.toString()
+        }, { status: 500 });
     }
 }

@@ -5,9 +5,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
 const generationConfig = {
+  temperature: 0.7,
+  topP: 0.8,
+  topK: 40,
+  maxOutputTokens: 4096, 
 };
 
-const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig });
 
 export async function POST(req: NextRequest, ) {
 
