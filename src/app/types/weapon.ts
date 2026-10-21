@@ -21,6 +21,8 @@ export type Weapon = {
 
     effectName?: string; // low rarity weapons dont have this
     effectTemplateRaw?: string; // low rarity weapons dont have this
+    parsedStory?: string;
+    parsedEffect?: string;
     r1?: WeaponRefine; // for example dull blade doesn't have any refinement
     r2?: WeaponRefine;
     r3?: WeaponRefine;
@@ -28,12 +30,12 @@ export type Weapon = {
     r5?: WeaponRefine;
 
     costs: {
-        "ascend1": any[];
-        "ascend2": any[];
-        "ascend3": any[];
-        "ascend4": any[];
-        "ascend5"?: any[]; // 1 and 2 star weapons only have 4 ascensions
-        "ascend6"?: any[]; // 1 and 2 star weapons only have 4 ascensions
+        "ascend1": WeaponCost[];
+        "ascend2": WeaponCost[];
+        "ascend3": WeaponCost[];
+        "ascend4": WeaponCost[];
+        "ascend5"?: WeaponCost[];
+        "ascend6"?: WeaponCost[];
     };
     images: {
         filename_icon: string;
@@ -42,12 +44,17 @@ export type Weapon = {
         mihoyo_icon?: string; 
         mihoyo_awakenIcon?: string; 
     };
-    stats: any;
+    stats: Record<number, { attack: number; specialized: number }>;
     version: string;
-    [key: string]: any;
 }
 
 export interface WeaponRefine {
     description: string; // sanitized with removeColorHTML, replaceNonBreakSpace, removeHashtag, replaceGenderM
     values: string[];
 }
+
+export type WeaponCost = {
+    id: number;
+    name: string;
+    count: number;
+};

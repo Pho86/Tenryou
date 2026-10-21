@@ -1,6 +1,6 @@
 
 export type User = {
-    characters: Characters;
+    characters: Characters[];
     player: Player;
     uid: string;
 }
@@ -16,8 +16,11 @@ export type PlayerData = {
 export type Player = {
     username: string
     level: number
-    levels: any
-    achievements: any
+    levels: {
+        world: number
+        rank: number
+    }
+    achievements: number
     signature: string
     worldLevel: number
     nameCardId: number
@@ -30,8 +33,18 @@ export type Player = {
     abyss: {
         floor: number
         chamber: number
+        stars: number
     }
-    namecardsList: any[]
+    namecardsList: NamecardItem[]
+}
+
+export type NamecardItem = {
+    id: number
+    name: string
+    assets: {
+        icon: string
+        picPath: string[]
+    }
 }
 
 export type Showcase = {
@@ -48,26 +61,85 @@ export type ProfilePicture = {
     }
 }
 
+export type ConstellationItem = {
+    id: number
+    name: string
+    assets: { icon: string }
+} | undefined
+
+export type Skill = {
+    level: number
+    id: number
+    assets: { icon: string }
+    name: string
+}
+
+export type CharacterAssets = {
+    icon: string
+    sideIcon: string
+    gachaIcon: string
+    constellations: string[]
+    talents: {
+        normalAttack: string
+        elementalSkill: string
+        elementalBurst: string
+    }
+    costumes: { sideIconName: string; icon: string; art: string }[]
+}
+
+export type CharacterStats = {
+    baseHp: { value: number }
+    hpPercentage: { value: number }
+    baseAtk: { value: number }
+    atkPercentage: { value: number }
+    baseDef: { value: number }
+    defPercentage: { value: number }
+    critRate: { value: number }
+    critDamage: { value: number }
+    energyRecharge: { value: number }
+    healingBonus: { value: number }
+    incomingHealingBonus: { value: number }
+    elementalMastery: { value: number }
+    physicalRes: { value: number }
+    physicalDamageBonus: { value: number }
+    physicalAddHurt: number
+    pyroDamageBonus: { value: number }
+    electroDamageBonus: { value: number }
+    hydroDamageBonus: { value: number }
+    dendroDamageBonus: { value: number }
+    anemoDamageBonus: { value: number }
+    geoDamageBonus: { value: number }
+    cryoDamageBonus: { value: number }
+    pyroRes: { value: number }
+    electroRes: { value: number }
+    hydroRes: { value: number }
+    dendroRes: { value: number }
+    anemoRes: { value: number }
+    geoRes: { value: number }
+    cryoRes: { value: number }
+    currentHp: { value: number }
+    maxHp: { value: number }
+    atk: { value: number }
+    def: { value: number }
+}
+
 export type Characters = {
     avatarId: number
     skillDepotId: number
     costumeId: number
-    length: number;
     equipment: Equipment
-    [index: number]: Characters
-    map: any
     element: string
     maxLevel: number
     name: string
-    fileName:string
-    filename:string
-    assets: any
+    fileName: string
+    filename: string
+    assets: CharacterAssets
     skills: {
-        normalAttacks: any
-        elementalSkill: any
-        elementalBurst: any
+        normalAttacks: Skill
+        elementalSkill: Skill
+        elementalBurst: Skill
     }
-    constellationsList: any
+    constellationsList: ConstellationItem[]
     friendship: {
         level: number
     }
@@ -76,94 +148,58 @@ export type Characters = {
             val: number
         }
     }
-    stats: any
+    stats: CharacterStats
+    rarity: 4 | 5
+    active?: boolean
 }
+
+export type WeaponAssets = {
+    icon: string
+    awakenIcon: string
+}
+
 export type Equipment = {
     weapon: {
         name: string
-        assets: any
+        assets: WeaponAssets
         stars: number
-        weaponStats: StatsAPI[]
+        weaponStats: WeaponStat[]
         refinement: {
             level: number
         }
         level: number
     }
-    artifacts: {
-        map: any
-    }
+    artifacts: Artifact[]
 }
+
+export type WeaponStat = {
+    stat: string
+    statValue: number
+}
+
+export type RollQualityItem = {
+    id: number
+    type: string
+    rollQuality: number[]
+}
+
 export type Artifact = {
     mainstat: {
         stat: string
         statValue: number
     }
-    rollquality: any
-    substatsRollQuality: any
+    rollquality: RollQualityItem[]
+    substatsRollQuality: RollQualityItem[]
     critvalue: number
-    substats: SubStat
+    substats: SubStat[]
     critValue: number
     stars: number
     name: string
+    setName: string
     icon: string
 }
 
 export type SubStat = {
-    forEach: any;
     statValue: number
     stat: string
-    map: any
 }
-
-
-export type StatsAPI = {
-    1: number
-    3: number
-    4: number
-    6: number
-    7: number
-    9: number
-    20: number
-    22: number
-    23: number
-    26: number
-    27: number
-    28: number
-    29: number
-    30: number
-    40: number
-    41: number
-    42: number
-    43: number
-    44: number
-    45: number
-    46: number
-    50: number
-    51: number
-    52: number
-    53: number
-    54: number
-    55: number
-    56: number
-    70: number
-    71: number
-    72: number
-    73: number
-    74: number
-    75: number
-    76: number
-    80: number
-    81: number
-    1000: number
-    1001: number
-    1002: number
-    1003: number
-    1004: number
-    1005: number
-    1006: number
-    1010: number
-    2000: number
-    2001: number
-    2002: number
-}
-

@@ -25,7 +25,7 @@ export type Artifact = {
     };
 
     version: string;
-    rewardPreview:any;
+    rewardPreview: { id: number; name: string }[];
 }
 
 export type ArtifactDetail = {
