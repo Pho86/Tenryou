@@ -1,133 +1,53 @@
-import BentoGrid from "./components/BentoGrid";
-import Events from "./components/Events";
-import DailyDomains from "./components/DailyDomains";
-import Birthdays from "./components/Birthdays";
+import QuickNavCards from "./components/Home/QuickNavCards";
+import DailiesCard from "./components/Home/DailiesCard";
+import EventsCard, { SingleEvent } from "./components/Home/EventsCard";
+import BirthdaysCard from "./components/Home/BirthdaysCard";
 
+export const revalidate = 3600;
 
 export default async function Home() {
-    let EventsData = null;
-    let eventsError = false;
+  let eventsData: Record<string, SingleEvent> | null = null;
 
-    try {
-        const response = await fetch(`https://gi.yatta.moe/assets/data/event.json`);
-        if (!response.ok) {
-            eventsError = true;
-        } else {
-            EventsData = await response.json();
-        }
-    } catch (error) {
-        eventsError = true;
-        console.error("Failed to fetch events data:", error);
+  try {
+    const response = await fetch("https://gi.yatta.moe/assets/data/event.json", {
+      next: { revalidate: 3600 },
+    });
+    if (response.ok) {
+      eventsData = await response.json();
     }
+  } catch (error) {
+    console.error("Failed to fetch events data:", error);
+  }
 
-    const data = [
-        {
-            title: 'Welcome, Traveler! 💮',
-            alt: "At Tenryou, you can find information from the game, Genshin Impact, visualized with various useful information, including information about characters, weapons, artifacts, and other specific items.",
-        },
-        {
-            title: 'Characters',
-            image: "/icons/characters.webp",
-            bg: "/homepage/characters.webp",
-            link: "/characters",
-            description: "Find Information about characters from Genshin Impact."
-        },
-        {
-            title: `Dailies Today`,
-            children: <DailyDomains />
-        },
-        {
-            title: 'Current Events',
-            children: !eventsError ? <Events Events={EventsData}  /> : <p className="px-3 text-lg">An error has occured, please try again later.</p>
-        },
-        {
-            title: 'Users',
-            image: "/icons/character.svg",
-            bg: "/homepage/users.webp",
-            link: "/users",
-            description: "Find Information about the specific users that play Genshin Impact."
-        },
-        {
-            title: 'Interactive Map',
-            image: "/icons/map.webp",
-            link: "https://act.hoyolab.com/ys/app/interactive-map/index.html",
-            bg: "/homepage/map.webp",
-            target: true,
-            description: "Use the official hoyolab map to find specific landmarks."
-        },
-        {
-            title: 'Team Builder (Beta)',
-            image: "/icons/teambuilder.webp",
-            bg: "/homepage/teambuilder.webp",
-            link: "/teambuilder",
-            description: "Create and visualize your team."
-        },
-        {
-            title: `Birthdays This Month`,
-            children: <Birthdays />,
-        },
-        {
-            title: `Materials`,
-            image: "/icons/materials.webp",
-            bg: "/homepage/materials.webp",
-            link: "/materials",
-            description: "Find Information about the materials and resources from Genshin Impact."
-        },
-        {
-            title: 'Artifacts',
-            image: "/icons/artifacts.webp",
-            bg: "/homepage/artifacts.webp",
-            link: "/artifacts",
-            description: "Find Information about the artifacts from Genshin Impact."
-        },
-        {
-            title: 'Weapons',
-            image: "/icons/weapons.webp",
-            bg: "/homepage/weapons.webp",
-            link: "/weapons",
-            description: "Find Information about the weapons from Genshin Impact."
-        },
-        {
-            title: `Namecards`,
-            image: "/icons/namecards.webp",
-            bg: "/homepage/namecards.webp",
-            link: "/namecards",
-            description: "Find Information about the namecards from Genshin Impact."
-        },
-        {
-            title: `Outfits`,
-            image: "/icons/outfits.webp",
-            bg: "/homepage/outfits.webp",
-            link: "/outfits",
-            description: "Find Information about the outfits from Genshin Impact."
-        },
-        {
-            title: `Elements`,
-            image: "/icons/elements.webp",
-            bg: "/homepage/elements.webp",
-            link: "/elements",
-            description: "Find Information about the elements from Genshin Impact."
-        },
-        {
-            title: `Achievements`,
-            image: "/icons/achievements.webp",
-            bg: "/homepage/achievements.webp",
-            link: "/achievements",
-            description: "Find Information about the achievements from Genshin Impact."
-        },
-        {
-            title: `Credits/Changelog`,
-            image: "/icons/credits.webp",
-            bg: "/homepage/credits.webp",
-            link: "/credits",
-            description: "Find Information about the changelog and credits of Tenryou."
-        },
+  return (
+    <div className="flex flex-col gap-6 md:gap-7 w-full pb-8">
+      {/* Hero Welcome Header */}
+      <section className="flex flex-col gap-1.5 pt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight">
+          Welcome, Traveler! 🌸
+        </h1>
+        <p className="text-sm sm:text-base text-text/75 max-w-3xl leading-relaxed">
+          Tenryou is a companion site for Genshin Impact, with characters,
+          weapons, artifacts, and more laid out so the details are easy to find.
+        </p>
+      </section>
 
-    ]
+      {/* Top 5 Quick Navigation Cards */}
+      <QuickNavCards />
 
-    return (
-        <>
-            <BentoGrid data={data} type="home" />
-        </>
-    );
+      {/* Main Two-Column Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Left Column: Dailies Today */}
+        <div className="lg:col-span-7 xl:col-span-7 w-full">
+          <DailiesCard />
+        </div>
+
+        {/* Right Column: Current Events + Birthdays This Month */}
+        <div className="lg:col-span-5 xl:col-span-5 flex flex-col gap-6 w-full">
+          <EventsCard eventsData={eventsData} />
+          <BirthdaysCard />
+        </div>
+      </div>
+    </div>
+  );
 }

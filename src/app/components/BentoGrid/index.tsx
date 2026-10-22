@@ -10,7 +10,7 @@ export default function BentoGrid({
 }) {
     return (
         <>
-            <section className="w-full max-w-screen-2xl " >
+            <section className="w-full" >
                 <div className='grid md:grid-cols-2 lg:grid-cols-4 auto-rows-[300px] w-full gap-4'>
                     {data.map((item: any, i: number) => (
                         <BentoItem item={item} index={i} key={i} type={type} />

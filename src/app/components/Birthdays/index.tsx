@@ -1,10 +1,9 @@
 "use client"
-import axios from "axios";
 import { useState, useLayoutEffect } from "react"
 import { addFileName } from "@/app/utils/helper";
 import Image from "next/image";
 import Link from "next/link";
-import Loader from "../Loader";
+import Skeleton from "../Skeleton";
 import { Character } from "@/app/types/character";
 export default function Birthdays({ }: {}) {
     const [characters, setCharacters] = useState<Character[]>([]);
@@ -30,9 +29,13 @@ export default function Birthdays({ }: {}) {
             setLoading(false);
         } else {
             if(selectedMonth.length == 0) return
-            axios.get<Character[]>(`https://genshin-db-api.vercel.app/api/v5/characters?query=${month}&matchCategories=true&dumpResults=true&verboseCategories=true`)
+            fetch(`https://genshin-db-api.vercel.app/api/v5/characters?query=${month}&matchCategories=true&dumpResults=true&verboseCategories=true`)
                 .then((res) => {
-                    let charactersData = res.data;
+                    if (!res.ok) throw new Error(`Failed to fetch characters: ${res.status}`);
+                    return res.json();
+                })
+                .then((res) => {
+                    let charactersData: Character[] = res;
                     charactersData.forEach((character: any) => {
                         addFileName([character]);
                     });
@@ -76,28 +79,35 @@ export default function Birthdays({ }: {}) {
                 <option value="December" id="December">December</option>
             </select>
         </label>
-        <div className="p-2 justify-center grid-auto-fit-100">
-            {loading ?
-                <Loader />
-                :
-                <>
-                    {characters.map((character, index) => {
-                        return <Link id={`${character.name}_month`}  key={index} href={`/characters/${character.name}`} className="bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light">
-                            <div className={`flex flex-col self-start `}>
-                                <Image
-                                    src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
-                                    width={150}
-                                    height={150}
-                                    alt={`${character.name} icon`}
-                                    title={`${character.name}`}
-                                    className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? " from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-SSR-start  to-gradient-SSR-end"}`}
-                                />
-                                <p className="text-center w-full h-full text-xs text-nowrap p-1 text-black relative font-bold rounded-b-xl after:absolute after:p-2 absolute:top-0 absolute:bg-red ">{character.birthdaymmdd}</p>
-                            </div>
-                        </Link>
-                    })}
-                </>
-            }
+        <div className="p-2 grid grid-auto-fit-100 gap-2">
+            {loading ? (
+                Array.from({ length: 8 }).map((_, i) => (
+                    <Skeleton key={i} className="h-[150px] w-full rounded-xl" />
+                ))
+            ) : (
+                characters.map((character, index) => (
+                    <Link
+                        id={`${character.name}_month`}
+                        key={index}
+                        href={`/characters/${character.name}`}
+                        className="bg-[#e9e9e9] transition-all relative rounded-xl cursor-pointer hover:scale-105 hover:shadow-light"
+                    >
+                        <div className="flex flex-col self-start">
+                            <Image
+                                src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
+                                width={150}
+                                height={150}
+                                alt={`${character.name} icon`}
+                                title={`${character.name}`}
+                                className={`rounded-t-xl rounded-br-4xl object-cover bg-gradient-to-br ${character.rarity == 4 ? "from-gradient-SR-start to-gradient-SR-end" : "from-gradient-SSR-start to-gradient-SSR-end"}`}
+                            />
+                            <p className="text-center w-full text-xs text-nowrap p-1 text-black font-bold rounded-b-xl">
+                                {character.birthdaymmdd}
+                            </p>
+                        </div>
+                    </Link>
+                ))
+            )}
         </div>
     </div>
 }

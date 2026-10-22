@@ -1,20 +1,28 @@
 "use client";
-import axios from "axios";
 import { useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import { addFileName } from "@/app/utils/helper";
 import Link from "next/link";
-import Loader from "../Loader";
+import Skeleton from "../Skeleton";
 import { Character } from "@/app/types/character";
 import { Artifact } from "@/app/types/artifacts";
 import { Weapon } from "@/app/types/weapon";
+
+type DomainData = {
+  id: number;
+  name: string;
+  domainType: string;
+  unlockRank: number;
+  rewardPreview?: { id: number; name: string }[];
+};
+
 export default function DailyDomains({ }: {}) {
-    const [activeWeapons, setActiveWeapons] = useState<Weapon[]>([]);
-    const [activeArtifacts, setActiveArtifacts] = useState<Artifact[]>([]);
-    const [activeCharacters, setActiveCharacters] = useState<Character[]>([]);
+    const [activeWeapons, setActiveWeapons] = useState<DomainData[]>([]);
+    const [activeArtifacts, setActiveArtifacts] = useState<DomainData[]>([]);
+    const [activeCharacters, setActiveCharacters] = useState<Character[][]>([]);
     const [selectedDay, setSelectedDay] = useState<string>("Monday");
     const [loading, setLoading] = useState<boolean>(true);
-    const fetchData = async (domain: any) => {
+    const fetchData = async (domain: DomainData) => {
         try {
             setActiveArtifacts((prevState) => {
                 //  dev mode rerendering
@@ -25,19 +33,23 @@ export default function DailyDomains({ }: {}) {
                 return prevState;
             });
 
-            const res = await axios.get(
-                `https://genshin-db-api.vercel.app/api/v5/talents?query=${domain.rewardPreview[domain.rewardPreview.length - 1].name
-                }&matchCategories=true&dumpResults=true&verboseCategories=true`
+            const rewardItem = domain.rewardPreview?.[domain.rewardPreview.length - 1];
+            if (!rewardItem) return null;
+
+            const res = await fetch(
+                `https://genshin-db-api.vercel.app/api/v5/talents?query=${encodeURIComponent(rewardItem.name)}&matchCategories=true&dumpResults=true&verboseCategories=true`
             );
-            const filteredData = res.data.filter(
-                (item: Weapon) => item.name && !item.name.startsWith("Traveler")
+            if (!res.ok) throw new Error(`Failed to fetch talents: ${res.status}`);
+            const filteredData = (await res.json()).filter(
+                (item: Character) => item.name && !item.name.startsWith("Traveler")
             );
 
             const innerRequests = filteredData.map(async (character: Character) => {
-                const response = await axios.get(
-                    `https://genshin-db-api.vercel.app/api/v5/characters?query=${character.name}&matchCategories=true&dumpResults=true&verboseCategories=true`
+                const response = await fetch(
+                    `https://genshin-db-api.vercel.app/api/v5/characters?query=${encodeURIComponent(character.name)}&matchCategories=true&dumpResults=true&verboseCategories=true`
                 );
-                return response.data;
+                if (!response.ok) throw new Error(`Failed to fetch character: ${response.status}`);
+                return response.json();
             });
 
             const charactersData = await Promise.all(innerRequests);
@@ -51,17 +63,17 @@ export default function DailyDomains({ }: {}) {
             return null;
         }
     };
-    const fetchAndSetData = async (data: any) => {
+    const fetchAndSetData = async (data: DomainData[]) => {
         const talentsPromises = data
             .filter(
-                (domain: any) =>
+                (domain) =>
                     domain.domainType === "UI_ABYSSUS_AVATAR_PROUD" &&
                     domain.unlockRank > 40
             )
-            .map((domain: any) => fetchData(domain));
+            .map((domain) => fetchData(domain));
 
         const talentsData = await Promise.all(talentsPromises);
-        setActiveCharacters(talentsData.filter(Boolean));
+        setActiveCharacters(talentsData.filter(Boolean) as Character[][]);
 
         setLoading(false);
     };
@@ -96,12 +108,15 @@ export default function DailyDomains({ }: {}) {
             setLoading(false);
         } else {
             if (day !== "Sunday") {
-                axios
-                    .get<any[]>(
-                        `https://genshin-db-api.vercel.app/api/v5/domains?query=${day}&matchCategories=true&dumpResults=true&verboseCategories=true`
-                    )
+                fetch(
+                    `https://genshin-db-api.vercel.app/api/v5/domains?query=${day}&matchCategories=true&dumpResults=true&verboseCategories=true`
+                )
                     .then((res) => {
-                        const weapons = res.data.filter((domain) => {
+                        if (!res.ok) throw new Error(`Failed to fetch domain data: ${res.status}`);
+                        return res.json();
+                    })
+                    .then((data: DomainData[]) => {
+                        const weapons = data.filter((domain) => {
                             if (
                                 domain.domainType !== "UI_ABYSSUS_WEAPON_PROMOTE" ||
                                 domain.unlockRank < 40
@@ -112,10 +127,10 @@ export default function DailyDomains({ }: {}) {
                         });
                         setActiveWeapons(weapons);
                         setActiveArtifacts([]);
-                        fetchAndSetData(res.data);
+                        fetchAndSetData(data);
                         sessionStorage.setItem(
                             `domainData_${selectedDay}`,
-                            JSON.stringify({ weapons, allData: res.data })
+                            JSON.stringify({ weapons, allData: data })
                         );
                         setLoading(false);
                     })
@@ -176,32 +191,33 @@ export default function DailyDomains({ }: {}) {
                         <>
                             <div className="flex flex-col gap-4">
                                 {activeArtifacts.map((domain, index) => {
+                                    const item = domain.rewardPreview?.[domain.rewardPreview.length - 1];
+                                    if (!item) return null;
                                     return (
                                         <div key={index} className="flex gap-4">
                                             <div className="flex flex-col items-center col-span-2 justify-start rounded-xl min-w-8 min-h-8">
                                                 <Image
-                                                    src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[
-                                                            domain.rewardPreview.length - 1
-                                                        ].id
-                                                        }.png`}
+                                                    src={`https://enka.network/ui/UI_ItemIcon_${item.id}.png`}
                                                     width={75}
                                                     height={75}
-                                                    alt={` material icon`}
+                                                    alt={`${item.name} icon`}
                                                     className={`bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end rounded-xl hover:scale-105 hover:shadow-light transition-all`}
-                                                    title={`${domain.rewardPreview[
-                                                            domain.rewardPreview.length - 1
-                                                        ].name
-                                                        }`}
+                                                    title={`${item.name}`}
                                                     onError={(e) => {
-                                                        // @ts-ignore
-                                                        e.target.src = "/None.png";
+                                                        const image = e.currentTarget;
+                                                        if (!image.dataset.fallback) {
+                                                            image.dataset.fallback = "yatta";
+                                                            image.src = `https://gi.yatta.moe/assets/UI/UI_ItemIcon_${item.id}.png`;
+                                                        } else {
+                                                            image.src = "/None.png";
+                                                        }
                                                     }}
                                                 />
                                             </div>
                                             <div className="grid-auto-fit-10">
                                                 {activeCharacters.length > 1 ? (
                                                     <>
-                                                        {activeCharacters[index].map(
+                                                        {activeCharacters[index]?.map(
                                                             (character: Character, i: number) => {
                                                                 return (
                                                                     <Link
@@ -221,8 +237,7 @@ export default function DailyDomains({ }: {}) {
                                                                                     : "from-gradient-SSR-start  to-gradient-SSR-end"
                                                                                 }`}
                                                                             onError={(e) => {
-                                                                                // @ts-ignore
-                                                                                e.target.src = "/None.png";
+                                                                                e.currentTarget.src = "/None.png";
                                                                             }}
                                                                         />
                                                                     </Link>
@@ -231,8 +246,10 @@ export default function DailyDomains({ }: {}) {
                                                         )}
                                                     </>
                                                 ) : index === 0 ? (
-                                                    <div className="col-span-full row-span-full">
-                                                        <Loader />
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {Array.from({ length: 4 }).map((_, j) => (
+                                                            <Skeleton key={j} className="h-12 w-12 rounded-xl" />
+                                                        ))}
                                                     </div>
                                                 ) : null}
                                             </div>
@@ -242,27 +259,27 @@ export default function DailyDomains({ }: {}) {
                             </div>
                             <div className="flex gap-2 mt-2">
                                 {activeWeapons.map((domain, index) => {
+                                    const item = domain.rewardPreview?.[domain.rewardPreview.length - 1];
+                                    if (!item) return null;
                                     return (
                                         <div key={index} className="flex justify-between gap-4 ">
                                             <div className="flex flex-col items-center hover:scale-105 hover:shadow-light transition-all rounded-xl bg-gradient-to-br from-gradient-SSR-start to-gradient-SSR-end">
                                                 <Image
-                                                    src={`https://enka.network/ui/UI_ItemIcon_${domain.rewardPreview[
-                                                            domain.rewardPreview.length - 1
-                                                        ].id
-                                                        }.png`}
+                                                    src={`https://enka.network/ui/UI_ItemIcon_${item.id}.png`}
                                                     width={75}
                                                     height={75}
-                                                    alt={` material icon`}
+                                                    alt={`${item.name} icon`}
                                                     className={``}
-                                                    title={`${domain.rewardPreview[
-                                                            domain.rewardPreview.length - 1
-                                                        ].name
-                                                        }`}
+                                                    title={`${item.name}`}
                                                     onError={(e) => {
-                                                        // @ts-ignore
-                                                        e.target.src = "/None.png";
+                                                        const image = e.currentTarget;
+                                                        if (!image.dataset.fallback) {
+                                                            image.dataset.fallback = "yatta";
+                                                            image.src = `https://gi.yatta.moe/assets/UI/UI_ItemIcon_${item.id}.png`;
+                                                        } else {
+                                                            image.src = "/None.png";
+                                                        }
                                                     }}
-
                                                 />
                                             </div>
                                         </div>
@@ -273,7 +290,26 @@ export default function DailyDomains({ }: {}) {
                     )}
                 </>
             ) : (
-                <Loader />
+                <div className="flex flex-col gap-4 p-2">
+                    {/* Two domain rows */}
+                    {Array.from({ length: 2 }).map((_, i) => (
+                        <div key={i} className="flex gap-4">
+                            {/* Artifact / material icon */}
+                            <Skeleton className="h-[75px] w-[75px] flex-shrink-0 rounded-xl" />
+                            {/* Character icons */}
+                            <div className="flex flex-wrap gap-2">
+                                {Array.from({ length: 4 }).map((_, j) => (
+                                    <Skeleton key={j} className="h-12 w-12 rounded-xl" />
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                    {/* Weapon icons row */}
+                    <div className="flex gap-2 mt-2">
+                        <Skeleton className="h-[75px] w-[75px] rounded-xl" />
+                        <Skeleton className="h-[75px] w-[75px] rounded-xl" />
+                    </div>
+                </div>
             )}
         </div>
     );
