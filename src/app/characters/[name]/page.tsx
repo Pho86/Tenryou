@@ -105,6 +105,7 @@ async function CharacterPageContent({ charName }: { charName: string }) {
     outfits: outfitData,
     quotes: quotesData,
   };
+  delete CharacterData.stats;
 
   const buildData = await fetchBuildData(
     CharacterData.name,
