@@ -4,6 +4,7 @@ import { CharacterBuildData } from "@/app/types/builds";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Loading from "./loading";
+import genshin from "genshin-db";
 
 const BUILD_API = "https://genshin-builds.com/api/genshin";
 
@@ -67,112 +68,43 @@ async function fetchBuildData(name: string, elementText?: string) {
 // ─── All heavy fetching lives here so Suspense can show the skeleton ──────────
 
 async function CharacterPageContent({ charName }: { charName: string }) {
-  const mergeWithPreference = (firstData: any, secondData: any) => {
-    if (!firstData) return secondData;
-    for (const key in secondData) {
-      if (
-        Object.prototype.hasOwnProperty.call(firstData, key) &&
-        typeof firstData[key] === "object" &&
-        secondData[key] !== null
-      ) {
-        firstData[key] = mergeWithPreference(firstData[key], secondData[key]);
-      } else {
-        firstData[key] = secondData[key];
-      }
-    }
-    return firstData;
-  };
+  const decodedName = decodeURIComponent(charName);
+  const character = genshin.characters(decodedName);
+  if (!character) notFound();
 
-  let CharacterData: any;
+  let CharacterData: any = { ...character };
+  const names = addFileName([CharacterData]);
+  const characterName = names[0].fileName;
 
+  const constellationsData = genshin.constellations(decodedName) ?? null;
+  const talentsData = genshin.talents(decodedName) ?? null;
+  const nameCardData = genshin.namecards(CharacterData.nameCardName || characterName) ?? null;
+  const voiceData = genshin.voiceovers(decodedName) ?? null;
+  const outfitData = genshin.outfits(decodedName, { matchCategories: true, verboseCategories: true }) ?? [];
+
+  let quotesData: any = null;
   try {
-    const response = await fetch(
-      `https://genshin-db-api.vercel.app/api/v5/stats?folder=characters&query=${charName}&dumpResult=true`,
-      { cache: "no-store" }
-    );
-    if (!response.ok) notFound();
-    const res = await response.json();
-    if (!res?.result) notFound();
-    CharacterData = res.result;
-
-    const names = addFileName([CharacterData]);
-    const characterName = names[0].fileName;
-
-    const [
-      constellationsResponse,
-      talentsResponse,
-      nameCardResponse,
-      voiceResponse,
-      outfitResponse,
-      quotesResponse,
-    ] = await Promise.all([
-      fetch(
-        `https://genshin-db-api.vercel.app/api/v5/constellations?query=${charName}&matchCategories=true&dumpResults=true&verboseCategories=true`
-      ),
-      fetch(
-        `https://genshin-db-api.vercel.app/api/v5/talents?query=${charName}&matchCategories=true&dumpResults=true&verboseCategories=true`
-      ),
-      fetch(
-        `https://genshin-db-api.vercel.app/api/v5/namecards?query=${
-          CharacterData.nameCardName ? CharacterData.nameCardName : characterName
-        }&matchCategories=true`
-      ),
-      fetch(
-        `https://genshin-db-api.vercel.app/api/v5/voiceovers?query=${charName}&matchCategories=true`
-      ),
-      fetch(
-        `https://genshin-db-api.vercel.app/api/v5/outfits?query=${charName}&matchCategories=true&dumpResults=true&verboseCategories=true`
-      ),
-      fetch(`https://gi.yatta.moe/api/v2/EN/avatarFetter/${CharacterData.id}`),
-    ]);
-
-    if (
-      !constellationsResponse.ok ||
-      !talentsResponse.ok ||
-      !nameCardResponse.ok ||
-      !outfitResponse.ok
-    ) {
-      notFound();
-    }
-
-    const [constellationsData, talentsData, nameCardData, outfitData] =
-      await Promise.all([
-        constellationsResponse.json(),
-        talentsResponse.json(),
-        nameCardResponse.json(),
-        outfitResponse.json(),
-      ]);
-
-    let voiceData: any = null;
-    try {
-      const voiceText = await voiceResponse.text();
-      if (voiceText) voiceData = JSON.parse(voiceText);
-    } catch {
-      voiceData = null;
-    }
-
-    let quotesData: any = null;
-    try {
+    const quotesResponse = await fetch(`https://gi.yatta.moe/api/v2/EN/avatarFetter/${CharacterData.id}`, {
+      signal: AbortSignal.timeout(3000),
+      next: { revalidate: 86400 },
+    });
+    if (quotesResponse.ok) {
       const quotesJson = await quotesResponse.json();
       quotesData = quotesJson?.data?.quotes ?? null;
-    } catch {
-      quotesData = null;
     }
-
-    const mergedData = {
-      constellations: constellationsData,
-      talents: talentsData,
-      nameCard: nameCardData,
-      voices: voiceData,
-      outfits: outfitData,
-      quotes: quotesData,
-      ...CharacterData,
-    };
-
-    CharacterData = mergeWithPreference(CharacterData, mergedData);
   } catch {
-    notFound();
+    quotesData = null;
   }
+
+  CharacterData = {
+    ...CharacterData,
+    constellations: constellationsData,
+    talents: talentsData,
+    nameCard: nameCardData,
+    voices: voiceData,
+    outfits: outfitData,
+    quotes: quotesData,
+  };
 
   const buildData = await fetchBuildData(
     CharacterData.name,
@@ -191,14 +123,9 @@ async function CharacterPageContent({ charName }: { charName: string }) {
 // ─── Static params ────────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
-  const response = await fetch(
-    "https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&verboseCategories=true",
-    { cache: "no-store" }
-  );
-  if (!response.ok) return [];
-  const characters = await response.json();
-  return Array.isArray(characters)
-    ? characters.map((char: any) => ({ name: char.name }))
+  const characterNames = genshin.characters("names", { matchCategories: true, verboseCategories: true });
+  return Array.isArray(characterNames)
+    ? characterNames.map((name: string) => ({ name }))
     : [];
 }
 
