@@ -8,55 +8,65 @@ const generationConfig = {
   temperature: 0.7,
   topP: 0.8,
   topK: 40,
-  maxOutputTokens: 4096, 
+  maxOutputTokens: 12000,
 };
 
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite", generationConfig });
 
 export const runtime = "edge";
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        let currentInfo = "";
-
-        if (body.part > 1 && Array.isArray(body.currentInfo)) {
-            currentInfo = body.currentInfo.join(' ');
-        }
 
         let availableCharacters = "";
         if (Array.isArray(body.ownedCharacters)) {
-            body.ownedCharacters.forEach((character: any) => {
+            body.ownedCharacters.forEach((character: { name: string; weaponText?: string; elementText?: string; fileName?: string }) => {
                 if (character && character.name) {
                     const characterInfo = `${character.name}, (${character.weaponText || 'Unknown'}), (${character.elementText || 'Unknown'}) (${character.fileName || 'Unknown'}) | `;
                     availableCharacters += characterInfo;
                 }
             });
         }
-        
-        if (!availableCharacters && body.part === 1) {
-            return NextResponse.json({
-                error: "No character data provided"
-            }, { status: 400 });
+
+        if (!availableCharacters) {
+            return NextResponse.json("No character data provided", { status: 400 });
         }
-        
-        const promptText = body.part === 1 ? availableCharacters : currentInfo;
-        const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part || 1}] ${
-            body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""
-        } PRINT ONLY [PART ${body.part || 1}], ${promptText}`;
 
-        console.log(`Sending request to Gemini for part ${body.part || 1}`);
-        
-        const result = await model.generateContent(systemPrompt);
-        const responseText = result.response.text();
-        
-        return NextResponse.json(responseText, { status: 200 });
+        const systemPrompt = `${prompt}\n\nAvailable characters: ${availableCharacters}`;
+        const result = await model.generateContentStream(systemPrompt);
+        const encoder = new TextEncoder();
 
-    } catch (error: any) {
+        const stream = new ReadableStream({
+            async start(controller) {
+                try {
+                    for await (const chunk of result.stream) {
+                        const text = chunk.text();
+                        if (text) controller.enqueue(encoder.encode(text));
+                    }
+                } catch (error: unknown) {
+                    console.error('Error while streaming the prompt:', error);
+                    const message = error instanceof Error ? error.message : "Unknown error";
+                    controller.enqueue(encoder.encode(`\n\nUnable to finish the response: ${message}`));
+                } finally {
+                    controller.close();
+                }
+            },
+        });
+
+        return new Response(stream, {
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8",
+                "Cache-Control": "no-cache, no-transform",
+                "X-Accel-Buffering": "no",
+            },
+        });
+    } catch (error: unknown) {
         console.error('Error processing the prompt:', error);
-        return NextResponse.json({
-            error: error.message || "Unknown error occurred",
-            details: error.toString()
-        }, { status: 500 });
+        const message = error instanceof Error ? error.message : "Unknown error occurred";
+        return NextResponse.json(
+            `Unable to process the prompt: ${message}`,
+            { status: 500 }
+        );
     }
 }

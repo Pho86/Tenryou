@@ -8,10 +8,10 @@ const generationConfig = {
   temperature: 0.7,
   topP: 0.8,
   topK: 40,
-  maxOutputTokens: 4096, 
+  maxOutputTokens: 12000, 
 };
 
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite", generationConfig });
 
 export async function POST(req: NextRequest, ) {
 
@@ -19,35 +19,58 @@ export async function POST(req: NextRequest, ) {
     const body = await req.json();
     let team1 = "";
     let team2 = "";
-    let currentInfo = "";
 
-    if (body.part > 1) {
-      currentInfo = body.currentInfo.join("");
-    }
-    
-    body.activeCharacters.forEach((character: any, index: number) => {
-      if (character.name) {
-        const characterInfo = `${character.name}, (${character.weaponText}), (${character.elementText}) | `;
-        if (index <= 3) {
-          team1 += characterInfo;
-        } else {
-          team2 += characterInfo;
+    if (Array.isArray(body.activeCharacters)) {
+      body.activeCharacters.forEach((character: any, index: number) => {
+        if (character?.name) {
+          const characterInfo = `${character.name}, (${character.weaponText}), (${character.elementText}) | `;
+          if (index <= 3) {
+            team1 += characterInfo;
+          } else {
+            team2 += characterInfo;
+          }
         }
-      }
+      });
+    }
+
+    const teams = body.team === 2 ? team2 : team1;
+
+    if (!teams) {
+      return NextResponse.json("No character data provided", { status: 400 });
+    }
+
+    const systemPrompt = `${prompt}\n\nTeam: ${teams}`;
+    const result = await model.generateContentStream(systemPrompt);
+    const encoder = new TextEncoder();
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of result.stream) {
+            const text = chunk.text();
+            if (text) controller.enqueue(encoder.encode(text));
+          }
+        } catch (error: any) {
+          console.error("Error while streaming the prompt:", error);
+          controller.enqueue(encoder.encode(`\n\nUnable to finish the response: ${error?.message || "Unknown error"}`));
+        } finally {
+          controller.close();
+        }
+      },
     });
 
-    let teams = body.team === 1 ? team1 : team2;
-
-    const systemPrompt = `${prompt}, YOU ARE ON [PART ${body.part}], the team is ${teams} ${
-      body.part > 1 ? `Past Info Provided: ${currentInfo}` : ""
-    }`;
-
-    const result = await model.generateContent(systemPrompt);
-    return NextResponse.json(result.response.text(), { status: 200 });
-  } catch (error) {
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-cache, no-transform",
+        "X-Accel-Buffering": "no",
+      },
+    });
+  } catch (error: any) {
     console.error("Error processing the prompt:", error);
-    return NextResponse.json({
-      text: "Unable to process the prompt. Please try again.",
-    });
+    return NextResponse.json(
+      `Unable to process the prompt: ${error?.message || "Unknown error"}`,
+      { status: 500 }
+    );
   }
 }
