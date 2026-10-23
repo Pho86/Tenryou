@@ -1,6 +1,5 @@
 import { NextResponse, NextRequest } from "next/server"; 
 import prompt from "../prompt";
-export const runtime = "edge";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);

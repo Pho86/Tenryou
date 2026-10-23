@@ -13,8 +13,6 @@ const generationConfig = {
 
 const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite", generationConfig });
 
-export const runtime = "edge";
-
 export async function POST(req: Request) {
     try {
         const body = await req.json();
