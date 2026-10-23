@@ -123,9 +123,9 @@ async function CharacterPageContent({ charName }: { charName: string }) {
 // ─── Static params ────────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
-  const characterNames = genshin.characters("names", { matchCategories: true, verboseCategories: true });
-  return Array.isArray(characterNames)
-    ? characterNames.map((name: string) => ({ name }))
+  const characters = genshin.characters("names", { matchCategories: true, verboseCategories: true });
+  return Array.isArray(characters)
+    ? characters.map((item: any) => ({ name: typeof item === "string" ? item : item.name }))
     : [];
 }
 
