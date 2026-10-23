@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { FaStar, FaDownload, FaImage } from "react-icons/fa6";
+import { FaStar, FaDownload } from "react-icons/fa6";
 import { toPng } from 'html-to-image';
 import React from "react";
-import { User, Characters, Artifact, SubStat } from "@/app/types/user";
+import { User, Characters, Artifact, SubStat, RollQualityItem, WeaponStat } from "@/app/types/user";
 import { isDefenseStat, isAttackStat, isHPStat, isPropertyDamageBonus, isPropertyFlat } from "./index";
 export function ProfileCardWide({
     user,
@@ -13,21 +13,26 @@ export function ProfileCardWide({
 }: {
     user: User,
     activeCharacter: Characters,
-    artifactSet: any
+    artifactSet: { name: string; count: number }[]
     toggleShowStatsModal: () => void,
 }) {
-    const cardRef = useRef<any>(null);
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [downloading, setDownloading] = useState<boolean>(false);
+    const [downloadError, setDownloadError] = useState<string | null>(null);
     const prepareURL = async () => {
-        toPng(cardRef.current, { cacheBust: true, })
-            .then((dataUrl) => {
-                const link = document.createElement('a');
-                link.download = `${user.player.username}_${activeCharacter.name}.png`;
-                link.href = dataUrl;
-                link.click();
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        setDownloading(true);
+        setDownloadError(null);
+        try {
+            const dataUrl = await toPng(cardRef.current!, { cacheBust: true });
+            const link = document.createElement('a');
+            link.download = `${user.player.username}_${activeCharacter.name}.png`;
+            link.href = dataUrl;
+            link.click();
+        } catch {
+            setDownloadError("Couldn't generate the card. Please try again.");
+        } finally {
+            setDownloading(false);
+        }
     };
     const [activeHover, setActiveHover] = useState<string>("");
     const [username, setUsername] = useState<boolean>(true);
@@ -36,7 +41,55 @@ export function ProfileCardWide({
     const [subStatRolls, setSubStatRolls] = useState<boolean>(true);
     const [starsBackground, setStarsBackground] = useState<boolean>(false);
     return <>
-        <div className="overflow-x-scroll 2xl:overflow-x-hidden grid place-items-center" id="wide_player_card">
+        <section aria-labelledby="build-card-heading" className="flex flex-col gap-4">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                    <h2 id="build-card-heading" className="text-2xl font-bold">Build card</h2>
+                    <p className="text-sm text-text/55">Choose what to include, then download the card as a PNG.</p>
+                </div>
+                <button
+                    type="button"
+                    onClick={() => { prepareURL() }}
+                    disabled={downloading}
+                    className="inline-flex h-10 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-bg-darkest transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-wait disabled:opacity-60"
+                >
+                    <FaDownload aria-hidden="true" />
+                    {downloading ? "Preparing..." : "Download PNG"}
+                </button>
+            </div>
+            <fieldset className="flex flex-wrap gap-2">
+                <legend className="sr-only">Card options</legend>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-bg-lighter bg-bg-light/40 px-3 py-2 text-sm font-semibold transition-colors hover:border-primary/40">
+                    <input type="checkbox" checked={username} onChange={() => { setUsername(!username) }} className="h-4 w-4 accent-primary" />
+                    <span>Username</span>
+                </label>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-bg-lighter bg-bg-light/40 px-3 py-2 text-sm font-semibold transition-colors hover:border-primary/40">
+                    <input type="checkbox" checked={UID} onChange={() => { setUID(!UID) }} className="h-4 w-4 accent-primary" />
+                    <span>UID</span>
+                </label>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-bg-lighter bg-bg-light/40 px-3 py-2 text-sm font-semibold transition-colors hover:border-primary/40">
+                    <input type="checkbox" checked={critValue} onChange={() => { setCritValue(!critValue) }} className="h-4 w-4 accent-primary" />
+                    <span>Crit Value</span>
+                </label>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-bg-lighter bg-bg-light/40 px-3 py-2 text-sm font-semibold transition-colors hover:border-primary/40">
+                    <input type="checkbox" checked={subStatRolls} onChange={() => { setSubStatRolls(!subStatRolls) }} className="h-4 w-4 accent-primary" />
+                    <span>Substat Rolls</span>
+                </label>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-bg-lighter bg-bg-light/40 px-3 py-2 text-sm font-semibold transition-colors hover:border-primary/40">
+                    <input type="checkbox" checked={!starsBackground} onChange={() => { setStarsBackground(!starsBackground) }} className="h-4 w-4 accent-primary" />
+                    <span>Namecard BG</span>
+                </label>
+            </fieldset>
+            {downloadError && (
+                <p role="alert" className="text-sm font-semibold text-primary">{downloadError}</p>
+            )}
+        <div
+            tabIndex={0}
+            role="region"
+            aria-label="Character card preview. Scroll horizontally on smaller screens."
+            className="grid place-items-center overflow-x-auto overscroll-x-contain rounded-2xl py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 2xl:overflow-x-hidden"
+            id="wide_player_card"
+        >
 
             <div className={`grid grid-cols-2 auto-cols-[400px] w-[1280px] p-2 rounded-xl self-center bg-gradient-to-br from-gradient-${activeCharacter.element}-start to-gradient-${activeCharacter.element}-end relative`} ref={cardRef}>
                 {starsBackground ?
@@ -77,7 +130,7 @@ export function ProfileCardWide({
                             </div>
                         </div>
                         <div className="absolute right-3 bottom-20 flex flex-col justify-between">
-                            {activeCharacter.assets.constellations.map((constellation: any, index: number) => {
+                            {activeCharacter.assets.constellations.map((constellation: string, index: number) => {
                                 return <div key={index} className="relative w-12 h-12">
                                     <Image src={`/stats/Constellation.svg`} width={250} height={250} alt={`${constellation} background`} className={`w-full z-10`} />
                                     <Image src={`https://enka.network/ui/${constellation}.png`} width={250} height={250} alt={`${constellation}`} className={`absolute ${activeCharacter.constellationsList[index] == undefined && "brightness-50"} top-0 left-0 mt-[11px] ml-[10px] w-7 h-7 z-20`} />
@@ -115,7 +168,7 @@ export function ProfileCardWide({
                         </div>
                     </div>
                     <div className="p-2 w-full h-full max-h-[650px] flex items-center justify-center">
-                        <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} blurDataURL="data:..." placeholder="blur"  width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="bg-bg bg-opacity-45 rounded-xl object-cover h-full w-full" />
+                        <Image src={`https://enka.network/ui/${activeCharacter.assets.gachaIcon}.png`} blurDataURL="data:..." placeholder="blur"  width={2500} height={2500} alt={`${activeCharacter.name}`} title={`${activeCharacter.name} gacha splash art`} className="rounded-xl bg-bg/30 object-cover h-full w-full" />
                     </div>
                 </div>
                 <div className="p-2 flex flex-col gap-2 col-span-1 w-full drop-shadow-text">
@@ -123,7 +176,7 @@ export function ProfileCardWide({
                         <div className="flex w-full justify-between gap-2 ">
                             <div className="flex w-full gap-2 ">
                                 <div className="relative flex justify-center">
-                                    <Image src={`https://enka.network/ui/${activeCharacter.equipment.weapon.assets.awakenIcon}.png`} width={250} height={250} className=" w-28 h-full object-cover bg-bg bg-opacity-40 rounded-xl" alt={activeCharacter.equipment.weapon.name} />
+                                    <Image src={`https://enka.network/ui/${activeCharacter.equipment.weapon.assets.awakenIcon}.png`} width={250} height={250} className=" w-28 h-full object-cover bg-bg/30 rounded-xl" alt={activeCharacter.equipment.weapon.name} />
                                     <div className="flex absolute bottom-1 text-xl text-yellow-400">
                                         {[...Array(activeCharacter.equipment.weapon.stars)].map((_, index) => (
                                             <FaStar key={index} />
@@ -132,7 +185,7 @@ export function ProfileCardWide({
                                 </div>
                                 <div className="flex flex-col gap-1 ">
                                     <div className="font-bold text-2xl">{activeCharacter.equipment.weapon.name}</div>
-                                    <div className="flex gap-4">{activeCharacter.equipment.weapon.weaponStats.map((stat: any, index: number) => {
+                                    <div className="flex gap-4">{activeCharacter.equipment.weapon.weaponStats.map((stat: WeaponStat, index: number) => {
                                         const percentStat = isPropertyFlat(stat.stat)
                                         const isAttackBonus = isAttackStat(stat.stat);
                                         const isDefenseBonus = isDefenseStat(stat.stat);
@@ -181,7 +234,7 @@ export function ProfileCardWide({
                                 <span className="text-xs ">
                                     ({activeCharacter.stats.baseHp.value.toFixed()}&nbsp;
                                     <span className="text-green-500">
-                                        +{activeCharacter.stats.maxHp.value.toFixed() - activeCharacter.stats.baseHp.value.toFixed()}
+                                        +{activeCharacter.stats.maxHp.value - activeCharacter.stats.baseHp.value}
                                     </span>
                                     )
                                 </span>
@@ -199,7 +252,7 @@ export function ProfileCardWide({
                                 <span className="text-xs">
                                     ({activeCharacter.stats.baseAtk.value.toFixed()}&nbsp;
                                     <span className="text-green-500">
-                                        +{activeCharacter.stats.atk.value.toFixed() - activeCharacter.stats.baseAtk.value.toFixed()}
+                                        +{activeCharacter.stats.atk.value - activeCharacter.stats.baseAtk.value}
                                     </span>
                                     )
                                 </span>
@@ -217,7 +270,7 @@ export function ProfileCardWide({
                                 <span className="text-xs">
                                     ({activeCharacter.stats.baseDef.value.toFixed()}&nbsp;
                                     <span className="text-green-500">
-                                        +{activeCharacter.stats.def.value.toFixed() - activeCharacter.stats.baseDef.value.toFixed()}
+                                        +{activeCharacter.stats.def.value - activeCharacter.stats.baseDef.value}
                                     </span>
                                     )
                                 </span>
@@ -337,7 +390,7 @@ export function ProfileCardWide({
                                 <span>Artifact Sets</span>
                             </div>
                             <div className="flex flex-col ">
-                                {artifactSet.map((set: any, index: number) => {
+                                {artifactSet.map((set: { name: string; count: number }, index: number) => {
                                     if (set.count >= 2) return <div key={index} className="font-medium text-md text-green-500">
                                         <p className="text-nowrap">{set.name} x<span>{set.count <= 3 ? 2 : 4}</span></p>
                                     </div>
@@ -354,16 +407,23 @@ export function ProfileCardWide({
                         const isHpBonus = isHPStat(artifact.mainstat.stat);
                         const isDamageBonus = isPropertyDamageBonus(artifact.mainstat.stat);
                         const propertyType = isPropertyFlat(artifact.mainstat.stat);
-                        artifact.rollquality = Object.values(artifact.substatsRollQuality.reduce((acc: any, item: any) => {
-                            if (!acc[item.type]) {
-                                acc[item.type] = { ...item, rollQuality: [item.rollQuality] };
+                        const rollQualityMap: Record<string, RollQualityItem> = {};
+                        for (const item of artifact.substatsRollQuality ?? []) {
+                            if (!item?.type) continue;
+                            const rolls = Array.isArray(item.rollQuality)
+                                ? item.rollQuality
+                                : typeof item.rollQuality === "number"
+                                    ? [item.rollQuality]
+                                    : [];
+                            if (!rollQualityMap[item.type]) {
+                                rollQualityMap[item.type] = { id: item.id, type: item.type, rollQuality: [...rolls] };
                             } else {
-                                acc[item.type].rollQuality.push(item.rollQuality);
+                                rollQualityMap[item.type].rollQuality.push(...rolls);
                             }
-                            return acc;
-                        }, {}));
+                        }
+                        artifact.rollquality = Object.values(rollQualityMap);
                         artifact.critValue = 0;
-                        artifact.substats.forEach((substat: SubStat) => {
+                        (artifact.substats ?? []).forEach((substat: SubStat) => {
                             if (substat.stat === 'FIGHT_PROP_CRITICAL_HURT') {
                                 artifact.critValue += substat.statValue;
                             }
@@ -413,7 +473,7 @@ export function ProfileCardWide({
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4 col-span-2 place-items-start font-bold drop-shadow-text ">
-                                {artifact.substats.map((stat: any, index: number) => {
+                                {artifact.substats.map((stat: SubStat, index: number) => {
                                     const isAttackBonus = isAttackStat(stat.stat);
                                     const isDefenseBonus = isDefenseStat(stat.stat);
                                     const isHpBonus = isHPStat(stat.stat);
@@ -436,9 +496,9 @@ export function ProfileCardWide({
                                         }
                                         +{stat.statValue}{!propertyType && "%"}
                                         <div className="flex absolute items-center -bottom-2 gap-1 pointer-events-none ">
-                                            {artifact.rollquality.map((roll: any, rollIndex: number) => {
+                                            {(artifact.rollquality ?? []).map((roll: RollQualityItem, rollIndex: number) => {
                                                 if (roll.type === stat.stat && subStatRolls) {
-                                                    return roll.rollQuality.map((quality: number, qualityIndex: number) => (
+                                                    return (roll.rollQuality ?? []).map((quality: number, qualityIndex: number) => (
                                                         <React.Fragment key={`${rollIndex}-${qualityIndex}`}>
                                                             <span className={`${quality === 4 ? "font-bold text-xl text-green-500" : quality === 3 ? "font-semibold text-lg text-orange-500" : quality === 2 ? "font-medium text-normal text-yellow-500" : "text-sm text-red-500"}`}>—</span>
                                                         </React.Fragment>
@@ -454,37 +514,6 @@ export function ProfileCardWide({
                 </div>
             </div>
         </div>
-        <div className="w-full flex flex-row-reverse items-center justify-center">
-            <div className="flex-end flex justify-end w-[1280px] max-w-7xl gap-4">
-                <FaDownload className="hover:text-primary text-xl transition-all cursor-pointer" title="Download Card" onClick={() => { prepareURL() }} />
-            </div>
-        </div>
-        <div className="w-full flex flex-row-reverse items-center justify-center">
-            <div className="flex-end flex flex-col justify-start w-[1280px] max-w-7xl gap-2">
-                <h2 className="font-bold text-2xl">Card Options</h2>
-                <div className="flex gap-4">
-                    <label className="flex gap-2 items-center cursor-pointer">
-                        <span>Username:</span>
-                        <input type="checkbox" checked={username} onChange={() => { setUsername(!username) }} />
-                    </label>
-                    <label className="flex gap-2 items-center cursor-pointer">
-                        <span>UID:</span>
-                        <input type="checkbox" checked={UID} onChange={() => { setUID(!UID) }} />
-                    </label>
-                    <label className="flex gap-2 items-center cursor-pointer">
-                        <span>Crit Value:</span>
-                        <input type="checkbox" checked={critValue} onChange={() => { setCritValue(!critValue) }} />
-                    </label>
-                    <label className="flex gap-2 items-center cursor-pointer">
-                        <span>Substat Rolls:</span>
-                        <input type="checkbox" checked={subStatRolls} onChange={() => { setSubStatRolls(!subStatRolls) }} />
-                    </label>
-                    <label className="flex gap-2 items-center cursor-pointer">
-                        <span>Namecard BG:</span>
-                        <input type="checkbox" checked={!starsBackground} onChange={() => { setStarsBackground(!starsBackground) }} />
-                    </label>
-                </div>
-            </div>
-        </div>
+        </section>
     </>
 }
