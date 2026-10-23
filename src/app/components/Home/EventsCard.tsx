@@ -205,7 +205,7 @@ export default function EventsCard({ eventsData }: EventsCardProps) {
       <AnimatePresence>
         {selectedEvent && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
             onClick={() => setSelectedEventId(null)}
           >
             <motion.div
@@ -292,7 +292,6 @@ export default function EventsCard({ eventsData }: EventsCardProps) {
                   <div
                     key={event.id}
                     onClick={() => {
-                      setShowAllModal(false);
                       setSelectedEventId(event.id);
                     }}
                     className="p-3 rounded-xl bg-[#221c1c] border border-[#302828] hover:border-primary/50 transition-all cursor-pointer flex flex-col gap-2 group"
