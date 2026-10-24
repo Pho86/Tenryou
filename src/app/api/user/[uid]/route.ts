@@ -1,13 +1,13 @@
-import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
-import { Wrapper } from 'enkanetwork.js';
+import { getPlayer } from '@/app/utils/enka';
 
-export async function GET(req: any, { params }: { params: { uid: number } }) {
-    const { genshin } = new Wrapper()
-    const uid = params.uid;
+export const revalidate = 300;
+
+export async function GET(_req: Request, { params }: { params: Promise<{ uid: string }> }) {
+    const { uid } = await params;
+
     try {
-        const playerData = await genshin.getPlayer(uid as number);
-        console.log(playerData)
+        const playerData = await getPlayer(uid);
         return NextResponse.json(playerData, { status: 200 });
     } catch (error) {
         console.error("Error fetching player data:", error);

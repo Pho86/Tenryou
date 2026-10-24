@@ -1,53 +1,61 @@
 import Profile from "@/app/components/Profile";
-import Loader from "@/app/components/Loader";
 import Link from "next/link";
 import { addFileName } from "@/app/utils/helper";
-import { Suspense } from "react";
+import { getPlayer } from "@/app/utils/enka";
+import UserSearchForm from "@/app/components/UserSearchForm";
+import { User } from "@/app/types/user";
 
-export default async function UIDPage({ params }: { params: { uid: string } }) {
+export const revalidate = 300;
+
+export default async function UIDPage({ params }: { params: Promise<{ uid: string }> }) {
+  const { uid } = await params;
+
+  let playerData: User | undefined;
+
   try {
-    const { uid } = await params;
-    const response = await fetch(`https://tenryou.live/api/user/${uid}`, {
-      cache: "reload",
-      next: { revalidate: 3600 },
-    });
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
+    const raw = await getPlayer(uid);
+    playerData = raw as unknown as User;
 
-    const playerData = await response.json();
-    playerData.characters.forEach((character: any) => {
-      addFileName([character]);
-    });
-
-    if (
-      !playerData ||
-      !playerData.characters ||
-      playerData.characters.length === 0
-    ) {
+    if (!playerData?.characters?.length) {
       throw new Error("No characters found");
     }
 
-    return (
-      <Suspense fallback={<Loader />}>
-        <Profile user={playerData} />
-      </Suspense>
-    );
+    playerData.characters.forEach((character) => {
+      addFileName([character]);
+    });
   } catch (error) {
     console.error(error);
+  }
+
+  if (!playerData?.characters?.length) {
     return (
-      <div className="h-[80dvh] flex flex-col gap-4 items-center justify-center">
-        <h1 className="text-9xl">404</h1>
-        <p className="text-2xl">
-          Oops... Something went wrong. Maybe the user uid was wrong, or the
-          servers/api is down.
-        </p>
-        <Link href="/" className="">
-          <button className="border-text border-2 hover:bg-bg-dark transition-all px-4 p-2 rounded-xl">
-            Back To Home
-          </button>
-        </Link>
+      <div className="flex min-h-[70dvh] flex-col items-center justify-center gap-6 py-12 text-center">
+        <h1 className="text-7xl font-bold text-primary">404</h1>
+        <div className="flex max-w-md flex-col gap-2">
+          <p className="text-2xl font-semibold">We couldn&apos;t load UID {uid}.</p>
+          <p className="text-text/60">
+            The UID may be incorrect, or the profile API may be unavailable.
+            Check the number and try again.
+          </p>
+        </div>
+        <UserSearchForm variant="compact" initialUid={uid} className="w-full max-w-sm" />
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/users"
+            className="inline-flex h-10 items-center rounded-xl border border-bg-lighter px-4 text-sm font-semibold transition-colors hover:border-primary/60 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+          >
+            Back to user search
+          </Link>
+          <Link
+            href="/"
+            className="text-sm font-semibold text-text/60 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+          >
+            Back to home
+          </Link>
+        </div>
       </div>
     );
   }
+
+  return <Profile user={playerData} />;
 }

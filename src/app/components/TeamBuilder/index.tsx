@@ -1,648 +1,890 @@
-"use client"
-import axios from "axios";
+"use client";
 import IconButtonSwitch from "../IconButtonSwitch";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Character } from "@/app/types/character";
-import Loader from "../Loader";
+import Skeleton from "../Skeleton";
 import { getRandomNumber } from "@/app/utils/helper";
 import Markdown from "../MarkdownComponent";
 import TeamCharacterCard from "../CharacterCard/team";
 import Image from "next/image";
-export default function TeamBuilder({
-    CharacterData
-}: {
-    CharacterData: Character[]
+import { motion, AnimatePresence } from "framer-motion";
+import { DragProvider, useDrag, type DragSource } from "./drag-context";
 
-}) {
-    const [activeElement, setActiveElement] = useState<number>(0);
-    const [activeWeapon, setActiveWeapon] = useState<number>(0);
-    const [mounted, setMounted] = useState<boolean>(false);
+// ─── helpers ─────────────────────────────────────────────────────────────────
 
-    const [activeCharacters, setActiveCharacters] = useState<any[]>(() => {
+async function readApiError(response: Response): Promise<string> {
+    const body = await response.text();
+    try {
+        const parsed = JSON.parse(body);
+        if (typeof parsed === "string") return parsed;
+        if (parsed && typeof parsed === "object") return parsed.error || parsed.text || body;
+    } catch { }
+    return body || `Request failed (${response.status})`;
+}
+
+function stripCharacterLine(text: string) {
+    return text.replace(/(?:^|\n)[ \t]*CHARACTERS:[^\n]*/i, "");
+}
+
+async function readTextStream(response: Response, onProgress: (t: string) => void) {
+    if (!response.body) throw new Error("No response body");
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let text = "";
+    let lastUpdate = 0;
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        text += decoder.decode(value, { stream: true });
+        const now = Date.now();
+        if (now - lastUpdate > 60) { lastUpdate = now; onProgress(text); }
+    }
+    const tail = decoder.decode();
+    if (tail) text += tail;
+    onProgress(text);
+    return text;
+}
+
+// ─── motion presets ──────────────────────────────────────────────────────────
+
+const cardVariants = {
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -16 },
+};
+
+// ─── TeamBuilder (inner — needs DragProvider above) ──────────────────────────
+
+function TeamBuilderInner({ CharacterData }: { CharacterData: Character[] }) {
+    const { drag, setOnDrop } = useDrag();
+
+    const [activeElement, setActiveElement] = useState(0);
+    const [activeWeapon, setActiveWeapon] = useState(0);
+    const [mounted, setMounted] = useState(false);
+
+    const [activeCharacters, setActiveCharacters] = useState<(Character | null)[]>(() => {
         if (typeof window !== "undefined") {
-            const storedActiveCharacters = localStorage.getItem('activeCharacters');
-            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [{}, {}, {}, {}, {}, {}, {}, {}, {}];
-        } else {
-            return [{}, {}, {}, {}, {}, {}, {}, {}, {}];
+            const stored = localStorage.getItem("activeCharacters");
+            return stored ? JSON.parse(stored) : Array(9).fill(null);
         }
+        return Array(9).fill(null);
     });
 
-    const [ownedCharacters, setOwnedCharacters] = useState<any[]>(() => {
+    const [ownedCharacters, setOwnedCharacters] = useState<Character[]>(() => {
         if (typeof window !== "undefined") {
-            const storedActiveCharacters = localStorage.getItem('ownedCharacters');
-            return storedActiveCharacters ? JSON.parse(storedActiveCharacters) : [];
-        } else {
-            return [];
+            const stored = localStorage.getItem("ownedCharacters");
+            return stored ? JSON.parse(stored) : [];
         }
+        return [];
     });
 
-    const [selectedOwned, setSelectedOwned] = useState<boolean>(false);
-    const [selectedSlot, setSelectedSlot] = useState<number>(0);
-    const [secondTeam, setSecondTeam] = useState<boolean>(false);
+    const [selectedOwned, setSelectedOwned] = useState(false);
+    const [selectedSlot, setSelectedSlot] = useState(0);
+    const [secondTeam, setSecondTeam] = useState(false);
     const [team1AILoading, setTeam1AILoading] = useState(false);
     const [team2AILoading, setTeam2AILoading] = useState(false);
     const [team1FinalizeLoading, setTeam1FinalizeLoading] = useState(false);
     const [team2FinalizeLoading, setTeam2FinalizeLoading] = useState(false);
-    const [team1Recommendations, setTeam1Recommendations] = useState<any[]>([]);
-    const [team2Recommendations, setTeam2Recommendations] = useState<any[]>([]);
-    const [team1ErrorMessage, setTeam1ErrorMessage] = useState<string>("Please put 2 or more characters in the team (Slot 1/2).")
-    const [team2ErrorMessage, setTeam2ErrorMessage] = useState<string>("Please put 2 or more characters in the team (Slot 5/6).")
+    const [team1Recommendations, setTeam1Recommendations] = useState<string[]>([]);
+    const [team2Recommendations, setTeam2Recommendations] = useState<string[]>([]);
+    const [team1ErrorMessage, setTeam1ErrorMessage] = useState("Please put 2 or more characters in the team (Slot 1/2).");
+    const [team2ErrorMessage, setTeam2ErrorMessage] = useState("Please put 2 or more characters in the team (Slot 5/6).");
     const [availableCharacters, setAvailableCharacters] = useState<Character[]>([]);
-    const [deletedChars, setDeletedChars] = useState<boolean>(false);
-    const [selectTeam, setSelectTeam] = useState<boolean>(true);
+    const [deletedChars, setDeletedChars] = useState(false);
+    const [selectTeam, setSelectTeam] = useState(true);
 
+    useEffect(() => { setMounted(true); }, []);
     useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('activeCharacters', JSON.stringify(activeCharacters));
+        localStorage.setItem("activeCharacters", JSON.stringify(activeCharacters));
     }, [activeCharacters]);
 
-    const selectCharacter = (character: Character, index?: number) => {
-        let slot = selectedSlot;
-        setActiveCharacters(prevActiveCharacters => {
-            const updatedCharacters = [...prevActiveCharacters];
-            if (index != undefined) {
-                updatedCharacters[index] = { ...character, active: true };
+    // ── drop handler wired into drag context ──
+    const handleDrop = useCallback((source: DragSource, targetSlot: number) => {
+        setActiveCharacters(prev => {
+            const next = [...prev];
+            const visibleSlots = secondTeam ? 8 : 4;
+            if (targetSlot >= visibleSlots) return prev;
+
+            if (source.kind === "roster") {
+                const incoming = source.character;
+                const isIncomingTraveller = incoming.name.startsWith("Traveller");
+
+                // If adding Traveller, clear any other Traveller already in the team
+                if (isIncomingTraveller) {
+                    for (let i = 0; i < next.length; i++) {
+                        if (i !== targetSlot && next[i]?.name.startsWith("Traveller")) {
+                            next[i] = null;
+                        }
+                    }
+                } else {
+                    // If regular character already in another slot, clear that slot
+                    for (let i = 0; i < next.length; i++) {
+                        if (i !== targetSlot && next[i]?.name === incoming.name) {
+                            next[i] = null;
+                        }
+                    }
+                }
+
+                next[targetSlot] = { ...incoming, active: true };
             } else {
-                updatedCharacters[slot] = { ...character, active: true };
+                // Dragged from another slot → swap
+                const fromSlot = source.slotIndex;
+                if (fromSlot === targetSlot) return prev;
+                const tmp = next[fromSlot];
+                next[fromSlot] = next[targetSlot];
+                next[targetSlot] = tmp;
             }
-            return updatedCharacters;
+            return next;
         });
-        console.log(character)
-        if (!secondTeam) setSelectedSlot(prevSlot => (prevSlot + 1) % 4);
-        else setSelectedSlot(prevSlot => (prevSlot + 1) % 8);
-        return character
-    };
+        // Advance selectedSlot only on roster drop
+        if (source.kind === "roster") {
+            setSelectedSlot(prev => {
+                const limit = secondTeam ? 8 : 4;
+                return (prev + 1) % limit;
+            });
+        }
+    }, [secondTeam]);
 
-    const removeCharacter = (character: Character) => {
-        const updatedCharacters = activeCharacters.map(item => {
-            if (typeof item.name === 'string' && item.name.startsWith("Traveller") || item.name === character.name) {
-                return {};
+    useEffect(() => { setOnDrop(handleDrop); }, [handleDrop, setOnDrop]);
+
+    const selectCharacter = useCallback((character: Character, index?: number) => {
+        setActiveCharacters(prev => {
+            const next = [...prev];
+            const slot = index !== undefined ? index : selectedSlot;
+            const isTraveller = character.name.startsWith("Traveller");
+
+            // If selecting Traveller, remove any existing Traveller from other slots
+            if (isTraveller) {
+                for (let i = 0; i < next.length; i++) {
+                    if (i !== slot && next[i]?.name.startsWith("Traveller")) {
+                        next[i] = null;
+                    }
+                }
+            } else {
+                // Remove duplicate if same character already in another slot
+                for (let i = 0; i < next.length; i++) {
+                    if (i !== slot && next[i]?.name === character.name) {
+                        next[i] = null;
+                    }
+                }
             }
-            return item;
+
+            next[slot] = { ...character, active: true };
+            return next;
         });
-        setActiveCharacters(updatedCharacters);
-    };
+        if (!secondTeam) setSelectedSlot(p => (p + 1) % 4);
+        else setSelectedSlot(p => (p + 1) % 8);
+    }, [selectedSlot, secondTeam]);
 
-    const randomizeTeam = () => {
-        let charactersAvailable;
+    const removeCharacter = useCallback((character: Character) => {
+        setActiveCharacters(prev => prev.map(item =>
+            item?.name === character.name || (item && typeof item.name === "string" && item.name.startsWith("Traveller") && character.name.startsWith("Traveller"))
+                ? null
+                : item
+        ));
+    }, []);
 
+    const isExcluded = (name?: string) =>
+        name === "Aether" || name === "Lumine" || name === "Manekin" || name === "Manekina";
+
+    const randomizeTeam = useCallback(() => {
+        let pool: Character[];
         if (!deletedChars) {
-            charactersAvailable = [...CharacterData];
-            charactersAvailable = charactersAvailable.filter(character => character.name !== "Aether" && character.name !== "Lumine");
+            pool = CharacterData.filter(c => !isExcluded(c.name));
             setDeletedChars(true);
-            setAvailableCharacters(charactersAvailable);
+            setAvailableCharacters(pool);
         } else {
-            charactersAvailable = selectedOwned ? [...ownedCharacters] : [...availableCharacters];
+            pool = selectedOwned ? [...ownedCharacters] : [...availableCharacters];
         }
-
-        let count = secondTeam ? 8 : 4;
-        count = Math.min(count, charactersAvailable.length);
-
-        let selectedCharacters = [];
+        const count = Math.min(secondTeam ? 8 : 4, pool.length);
+        const picked: Character[] = [];
         for (let i = 0; i < count; i++) {
-            let number = Math.floor(getRandomNumber(0, charactersAvailable.length));
-            let selectedCharacter = charactersAvailable[number];
-            selectedCharacters.push(selectedCharacter);
-            charactersAvailable.splice(number, 1);
+            const idx = Math.floor(getRandomNumber(0, pool.length));
+            picked.push(pool[idx]);
+            pool.splice(idx, 1);
         }
+        const next = Array(secondTeam ? 8 : 4).fill(null).map((_, i) =>
+            picked[i] ? { ...picked[i], active: true } : null
+        );
+        setActiveCharacters(next);
+    }, [deletedChars, selectedOwned, ownedCharacters, availableCharacters, secondTeam, CharacterData]);
 
-        let activeCharacters = new Array(secondTeam ? 8 : 4).fill(null);
-        for (let i = 0; i < selectedCharacters.length; i++) {
-            activeCharacters[i] = { ...selectedCharacters[i], active: true };
-        }
-
-        for (let i = selectedCharacters.length; i < activeCharacters.length; i++) {
-            activeCharacters[i] = {};
-        }
-
-        setActiveCharacters(activeCharacters);
-    };
-
-
-    const clearTeam = () => {
-        setActiveCharacters([{}, {}, {}, {}, {}, {}, {}, {}]);
+    const clearTeam = useCallback(() => {
+        setActiveCharacters(Array(8).fill(null));
         setSelectedSlot(0);
-        setTeam1Recommendations([])
-        setTeam2Recommendations([])
-    }
+        setTeam1Recommendations([]);
+        setTeam2Recommendations([]);
+    }, []);
 
-    const handleSort = () => {
-        const activeCharactersClone = [...activeCharacters]
-        const temp = activeCharactersClone[dragCharacter.current]
-        activeCharactersClone[dragCharacter.current] = activeCharactersClone[draggedOverCharacter.current]
-        activeCharactersClone[draggedOverCharacter.current] = temp
-        setActiveCharacters(activeCharactersClone)
-    }
+    const handleOwnedClick = useCallback((character: Character) => {
+        setOwnedCharacters(prev => {
+            const isOwned = prev.some(c => c.name === character.name);
+            const next = isOwned
+                ? prev.filter(c => c.name !== character.name)
+                : [...prev, character];
+            localStorage.setItem("ownedCharacters", JSON.stringify(next));
+            return next;
+        });
+    }, []);
 
-    const handleOwnedClick = (character: Character) => {
-        const isOwned = ownedCharacters.some(c => c.name === character.name);
-        let updatedOwnedCharacters;
-        if (isOwned) {
-            updatedOwnedCharacters = ownedCharacters.filter(c => c.name !== character.name);
-        } else {
-            updatedOwnedCharacters = [...ownedCharacters, character];
-        }
-        setOwnedCharacters(updatedOwnedCharacters);
-        localStorage.setItem('ownedCharacters', JSON.stringify(updatedOwnedCharacters));
-    };
-
-    const recommendTeam = async (team: number) => {
-        let isInvalid = false;
-        if (team == 1) {
-            setTeam1AILoading(true);
-        } else {
-            setTeam2AILoading(true);
-        }
-        if (secondTeam) {
-            if (ownedCharacters.length < 8) {
-                isInvalid = true;
-            }
-        }
-        else {
-            if (ownedCharacters.length < 4) {
-                isInvalid = true;
-            }
-        }
-        if (isInvalid) {
-            if (team === 1) {
-                setTeam1FinalizeLoading(false);
-                setTeam1AILoading(false);
-            } else {
-                setTeam2FinalizeLoading(false);
-                setTeam2AILoading(false);
-            }
-        }
-        if (isInvalid) {
-            setTeam1ErrorMessage("Please select more than 4 owned characters")
-            setTeam2ErrorMessage("Please select more than 8 owned characters")
+    const recommendTeam = useCallback(async (team: number) => {
+        const setAI = team === 1 ? setTeam1AILoading : setTeam2AILoading;
+        const setFinalize = team === 1 ? setTeam1FinalizeLoading : setTeam2FinalizeLoading;
+        const setRecs = team === 1 ? setTeam1Recommendations : setTeam2Recommendations;
+        const setErr = team === 1 ? setTeam1ErrorMessage : setTeam2ErrorMessage;
+        const minOwned = secondTeam ? 8 : 4;
+        if (ownedCharacters.length < minOwned) {
+            setErr(`Please select at least ${minOwned} owned characters`);
             return;
         }
+        setAI(true);
         try {
-            if (team === 1) {
-                setActiveCharacters([...Array(4).fill({}), ...activeCharacters.slice(4)]);
-            } else if (team === 2) {
-                setActiveCharacters([...activeCharacters.slice(0, -4), ...Array(4).fill({})]);
-            }
+            if (team === 1) setActiveCharacters(p => [...Array(4).fill(null), ...p.slice(4)]);
+            else setActiveCharacters(p => [...p.slice(0, -4), ...Array(4).fill(null)]);
 
-            let accumulatedData: any = [];
-            let response;
-
-            let copiedOwnedCharacters = [...ownedCharacters];
-            copiedOwnedCharacters = copiedOwnedCharacters.filter(character =>
-                !activeCharacters.some(activeCharacter =>
-                    activeCharacter.fileName === character.fileName
-                )
+            const filtered = ownedCharacters.filter(c =>
+                !activeCharacters.some(a => a?.fileName === c.fileName)
             );
+            setRecs([]);
+            setErr("");
 
-            for (let part = 1; part <= 4; part++) {
-                response = await axios.post("/api/teamrec/google", {
-                    ownedCharacters: copiedOwnedCharacters,
-                    part,
-                    currentInfo: accumulatedData,
-                    team,
-                });
+            const res = await fetch("/api/teamrec/google", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ownedCharacters: filtered, team }),
+            });
+            if (!res.ok) throw new Error(await readApiError(res));
 
-                const recommendedData = response.data;
-                console.log(recommendedData)
-                accumulatedData = [...accumulatedData, recommendedData];
+            let started = false;
+            const full = await readTextStream(res, (text) => {
+                if (!started) { started = true; setAI(false); setFinalize(true); }
+                setRecs([stripCharacterLine(text)]);
+            });
 
-                if (part == 1) {
-                    const namesArray = recommendedData.trim().split(", ");
-                    console.log(namesArray)
-                    let startIndex = 0;
-                    let endIndex = 0;
-                    if (team === 1) {
-                        startIndex = 0;
-                        endIndex = Math.min(4, namesArray.length);
-                    } else if (team === 2) {
-                        startIndex = 4;
-                        endIndex = Math.min(8);
-                    }
-
-                    for (let i = startIndex; i < endIndex; i++) {
-                        const nameToSearch = namesArray[i - startIndex];
-                        const character = CharacterData.find(character => {
-                            if(nameToSearch.toLowerCase().startsWith("traveller")) {
-                                return character.name.toLowerCase().includes(nameToSearch.toLowerCase())
-                            } else {
-                                return character.fileName.toLowerCase().includes(nameToSearch.toLowerCase())
-                            }
-                        }
-                        );
-                        if (character) {
-                            selectCharacter(character, i);
-                        } else {
-                            console.log(`Error for character: ${nameToSearch}`);
-                        }
-                    }
-                } else {
-                    if (team === 1) {
-                        setTeam1Recommendations([...accumulatedData.slice(1)]);
-                        setTeam1AILoading(false);
-                        setTeam1FinalizeLoading(true);
-                    } else {
-                        setTeam2Recommendations([...accumulatedData.slice(1)]);
-                        setTeam2AILoading(false);
-                        setTeam2FinalizeLoading(true);
-                    }
-                }
-            }
-        } 
-        catch (err) {
-            console.error(err);
+            const match = full.match(/(?:^|\n)[ \t]*CHARACTERS:[ \t]*(.+)/i);
+            const names = match ? match[1].split(",").map(n => n.trim()).filter(Boolean) : [];
+            const slotStart = team === 1 ? 0 : 4;
+            names.slice(0, 4).forEach((name, i) => {
+                const norm = name.toLowerCase().replace(/^traveler/, "traveller");
+                const char = CharacterData.find(c =>
+                    norm.startsWith("traveller")
+                        ? c.name.toLowerCase().includes(norm)
+                        : c.fileName.toLowerCase().includes(norm)
+                );
+                if (char) selectCharacter(char, slotStart + i);
+            });
+        } catch (err) {
+            const msg = err instanceof Error ? err.message : "Unable to process. Please try again.";
+            setRecs([]);
+            setErr(msg);
         } finally {
-            if (team === 1) {
-                setTeam1FinalizeLoading(false);
-            } else {
-                setTeam2FinalizeLoading(false);
-            }
+            setAI(false);
+            setFinalize(false);
         }
-    }
-    const createBuilds = async (team: number) => {
-        let isInvalid = false;
-        switch (team) {
-            case 1:
-                if (Object.keys(activeCharacters[0]).length === 0 || Object.keys(activeCharacters[1]).length === 0) {
-                    isInvalid = true;
-                } else {
-                    setTeam1AILoading(true);
-                }
-                break;
-            case 2:
-                if (Object.keys(activeCharacters[4]).length === 0 || Object.keys(activeCharacters[5]).length === 0) {
-                    isInvalid = true;
-                } else {
-                    setTeam2AILoading(true);
-                }
-                break;
-            default:
-                console.error("Invalid team number");
-                return;
-        }
-        if (isInvalid) {
-            console.log("Required character slots are empty, aborting API call.");
-            if (team === 1) {
-                setTeam1ErrorMessage("Please put 2 or more characters in the team (Slot 1/2).")
-                setTeam1FinalizeLoading(false);
-                setTeam1AILoading(false);
-            } else {
-                setTeam2ErrorMessage("Please put 2 or more characters in the team (Slot 5/6).")
-                setTeam2FinalizeLoading(false);
-                setTeam2AILoading(false);
-            }
+    }, [secondTeam, ownedCharacters, activeCharacters, CharacterData, selectCharacter]);
+
+    const createBuilds = useCallback(async (team: number) => {
+        const setAI = team === 1 ? setTeam1AILoading : setTeam2AILoading;
+        const setFinalize = team === 1 ? setTeam1FinalizeLoading : setTeam2FinalizeLoading;
+        const setRecs = team === 1 ? setTeam1Recommendations : setTeam2Recommendations;
+        const setErr = team === 1 ? setTeam1ErrorMessage : setTeam2ErrorMessage;
+
+        const slotA = team === 1 ? 0 : 4;
+        const slotB = team === 1 ? 1 : 5;
+        if (!activeCharacters[slotA] || !activeCharacters[slotB]) {
+            setErr(`Please put 2 or more characters in the team (Slot ${slotA + 1}/${slotB + 1}).`);
             return;
         }
-        if (isInvalid) return
+        setAI(true);
+        setRecs([]);
+        setErr("");
         try {
-            let accumulatedData: any = [];
-            let response;
-            for (let part = 1; part <= 3; part++) {
-                response = await axios.post("/api/teambuild/google", {
-                    activeCharacters,
-                    part,
-                    currentInfo: accumulatedData,
-                    team
-                });
-                const recommendedData = response.data;
-
-                accumulatedData = [...accumulatedData, recommendedData];
-
-                if (team === 1) {
-                    setTeam1Recommendations([...accumulatedData]);
-                    setTeam1AILoading(false);
-                    setTeam1FinalizeLoading(true);
-                } else {
-                    setTeam2Recommendations([...accumulatedData]);
-                    setTeam2AILoading(false);
-                    setTeam2FinalizeLoading(true);
-                }
-            }
+            const res = await fetch("/api/teambuild/google", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ activeCharacters, team }),
+            });
+            if (!res.ok) throw new Error(await readApiError(res));
+            let started = false;
+            await readTextStream(res, (text) => {
+                if (!started) { started = true; setAI(false); setFinalize(true); }
+                setRecs([text]);
+            });
         } catch (err) {
-            console.error(err);
+            setRecs([]);
+            setErr(err instanceof Error ? err.message : "Unable to process. Please try again.");
         } finally {
-            if (team === 1) {
-                setTeam1FinalizeLoading(false);
-            } else {
-                setTeam2FinalizeLoading(false);
-            }
+            setAI(false);
+            setFinalize(false);
         }
-    };
+    }, [activeCharacters]);
 
-    const dragCharacter = useRef<number>(0)
-    const draggedOverCharacter = useRef<number>(0)
+    const visibleSlots = secondTeam ? 8 : 4;
+    const activeTeam = activeCharacters.slice(0, visibleSlots);
 
     return (
         <>
-            <div className="flex gap-3 justify-around flex-col md:flex-row">
-                <div className="flex gap-3 justify-center flex-wrap">
-                    <IconButtonSwitch name="Pyro" onClick={() => { setActiveElement(activeElement === 1 ? 0 : 1) }} type="elements" index={1} active={activeElement} />
-                    <IconButtonSwitch name="Hydro" onClick={() => { setActiveElement(activeElement === 2 ? 0 : 2) }} type="elements" index={2} active={activeElement} />
-                    <IconButtonSwitch name="Anemo" onClick={() => { setActiveElement(activeElement === 3 ? 0 : 3) }} type="elements" index={3} active={activeElement} />
-                    <IconButtonSwitch name="Electro" onClick={() => { setActiveElement(activeElement === 4 ? 0 : 4) }} type="elements" index={4} active={activeElement} />
-                    <IconButtonSwitch name="Dendro" onClick={() => { setActiveElement(activeElement === 5 ? 0 : 5) }} type="elements" index={5} active={activeElement} />
-                    <IconButtonSwitch name="Cryo" onClick={() => { setActiveElement(activeElement === 6 ? 0 : 6) }} type="elements" index={6} active={activeElement} />
-                    <IconButtonSwitch name="Geo" onClick={() => { setActiveElement(activeElement === 7 ? 0 : 7) }} type="elements" index={7} active={activeElement} />
+            {/* ── filters ── */}
+            <div className="rounded-xl border border-bg-light/70 bg-bg-light/25 p-4 md:p-5 shadow-sm backdrop-blur-sm">
+                <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-text/45">Element</span>
+                    <div className="flex flex-wrap gap-1.5" role="group" aria-label="Element filters">
+                        {(["Pyro","Hydro","Anemo","Electro","Dendro","Cryo","Geo"] as const).map((el, i) => (
+                            <IconButtonSwitch key={el} name={el} type="elements" onClick={() => setActiveElement(e => e === i + 1 ? 0 : i + 1)} index={i + 1} active={activeElement} aria-pressed={activeElement === i + 1} />
+                        ))}
+                    </div>
                 </div>
-                <div className="flex gap-3 justify-center flex-wrap">
-                    <IconButtonSwitch name="Bow" onClick={() => { setActiveWeapon(activeWeapon === 1 ? 0 : 1) }} index={1} active={activeWeapon} />
-                    <IconButtonSwitch name="Sword" onClick={() => { setActiveWeapon(activeWeapon === 2 ? 0 : 2) }} index={2} active={activeWeapon} />
-                    <IconButtonSwitch name="Polearm" onClick={() => { setActiveWeapon(activeWeapon === 3 ? 0 : 3) }} index={3} active={activeWeapon} />
-                    <IconButtonSwitch name="Claymore" onClick={() => { setActiveWeapon(activeWeapon === 4 ? 0 : 4) }} index={4} active={activeWeapon} />
-                    <IconButtonSwitch name="Catalyst" onClick={() => { setActiveWeapon(activeWeapon === 5 ? 0 : 5) }} index={5} active={activeWeapon} />
+                <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-text/45">Weapon</span>
+                    <div className="flex flex-wrap gap-1.5" role="group" aria-label="Weapon filters">
+                        {(["Bow","Sword","Polearm","Claymore","Catalyst"] as const).map((w, i) => (
+                            <IconButtonSwitch key={w} name={w} onClick={() => setActiveWeapon(e => e === i + 1 ? 0 : i + 1)} index={i + 1} active={activeWeapon} aria-pressed={activeWeapon === i + 1} />
+                        ))}
+                    </div>
                 </div>
             </div>
-            <div className="grid lg:grid-cols-2 w-full max-w-screen-2xl ">
-                <section className="grid-auto-fit-100 w-full p-4 max-h-[100dvh] overflow-y-scroll py-2 order-1">
-                    {mounted ? CharacterData.map((character: Character, index: number) => {
-                        const elementConditions = [true, "Pyro", "Hydro", "Anemo", "Electro", "Dendro", "Cryo", "Geo"];
-                        const weaponConditions = [true, "Bow", "Sword", "Polearm", "Claymore", "Catalyst"];
-                        const validElement = activeElement === 0 || elementConditions[activeElement] === character.elementText;
-                        const validWeapon = activeWeapon === 0 || weaponConditions[activeWeapon] === character.weaponText;
-                        if (character.name == "Aether" || character.name == "Lumine") return null
-                        if (validWeapon && validElement) return <TeamCharacterCard
-                            key={index}
-                            index={index}
-                            character={character}
-                            selectCharacter={selectCharacter}
-                            removeCharacter={removeCharacter}
-                            selectOwned={handleOwnedClick}
-                            traveller={character.name.startsWith("Traveller")}
-                            activeProp={() => {
-                                let travellerActive = 0
-                                if (character.name.startsWith("Traveller")) {
-                                    travellerActive = activeCharacters.filter(item => typeof item.name === 'string' && item.name.startsWith("Traveller")).length;
-                                }
-                                const isCurrentActive = activeCharacters.some(item => item.name === character.name);
-                                return travellerActive > 0 || isCurrentActive;
-                            }}
-                            ownedOption={selectedOwned}
-                            ownedCharacters={ownedCharacters}
-                        />
-                    }) :
-                        <div className="col-span-full">
-                            <Loader />
-                        </div>
-                    }
+
+            {/* ── main grid ── */}
+            <div className="grid lg:grid-cols-2 w-full max-w-screen-2xl gap-6">
+
+                {/* roster */}
+                <section
+                    className="grid-auto-fit-100 w-full rounded-xl border border-bg-light/70 bg-bg-light/25 p-4 max-h-[85vh] overflow-y-auto order-1 lg:order-1 shadow-sm backdrop-blur-sm relative"
+                    aria-label="Character roster"
+                >
+                    {/* While dragging, cover the roster so the pointer can reach team slots freely */}
+                    {drag.source !== null && (
+                        <div className="absolute inset-0 z-10 cursor-grabbing" />
+                    )}
+                    <AnimatePresence mode="popLayout">
+                        {mounted
+                            ? CharacterData.map((character, index) => {
+                                const elementConditions = [true, "Pyro","Hydro","Anemo","Electro","Dendro","Cryo","Geo"];
+                                const weaponConditions = [true, "Bow","Sword","Polearm","Claymore","Catalyst"];
+                                if (isExcluded(character.name)) return null;
+                                const validEl = activeElement === 0 || elementConditions[activeElement] === character.elementText;
+                                const validWp = activeWeapon === 0 || weaponConditions[activeWeapon] === character.weaponText;
+                                if (!validEl || !validWp) return null;
+                                return (
+                                    <motion.div
+                                        key={character.fileName}
+                                        variants={cardVariants}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                    >
+                                        <TeamCharacterCard
+                                            index={index}
+                                            character={character}
+                                            selectCharacter={selectCharacter}
+                                            removeCharacter={removeCharacter}
+                                            selectOwned={handleOwnedClick}
+                                            traveller={character.name.startsWith("Traveller")}
+                                            activeProp={() => {
+                                                if (character.name.startsWith("Traveller"))
+                                                    return activeCharacters.some(a => a && a.name.startsWith("Traveller"));
+                                                return activeCharacters.some(a => a?.name === character.name);
+                                            }}
+                                            ownedOption={selectedOwned}
+                                            ownedCharacters={ownedCharacters}
+                                            isSkeleton={false}
+                                        />
+                                    </motion.div>
+                                );
+                            })
+                            : Array.from({ length: 12 }).map((_, i) => (
+                                <motion.div
+                                    key={i}
+                                    variants={cardVariants}
+                                    initial="initial"
+                                    animate="animate"
+                                    exit="exit"
+                                    transition={{ duration: 0.2, delay: i * 0.02, ease: [0.16, 1, 0.3, 1] }}
+                                >
+                                    <SkeletonCard />
+                                </motion.div>
+                            ))}
+                    </AnimatePresence>
                 </section>
 
-                <section className="w-full flex flex-col gap-4 p-4 order-0 lg:order-1">
-                    <div className="flex gap-4 items-center flex-wrap">
-                        <button onClick={() => {
-                            if (selectedOwned) {
-                                setTeam1ErrorMessage("Please put 2 or more characters in the team (Slot 1/2).")
-                                setTeam2ErrorMessage("Please put 2 or more characters in the team (Slot 5/6).")
-                            } else {
-                                setTeam1ErrorMessage("Please select more than 4 owned characters")
-                                setTeam2ErrorMessage("Please select more than 8 owned characters")
-                            }
-                            setSelectedOwned(!selectedOwned)
-                        }} className={`border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl ${selectedOwned ? "border-primary bg-bg-dark" : "border-2"}`}>{selectedOwned ? "Toggle Owned Characters" : "Select Characters Manually"}</button>
-                        <button onClick={() => { randomizeTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Randomize Team</button>
-                        <button onClick={() => { clearTeam() }} className="border-2 p-1 px-2 hover:bg-bg-dark transition-all rounded-xl">Clear Team</button>
-                        <label className="flex gap-2 font-bold">
-                            <input type="checkbox" checked={secondTeam} onChange={() => {
-                                if (secondTeam) {
-                                    setSecondTeam(!secondTeam)
-                                    setActiveCharacters(prevCharacters => [...prevCharacters.slice(0, 4), {}, {}, {}, {}]);
+                {/* team panel */}
+                <section className="w-full flex flex-col gap-4 rounded-xl border border-bg-light/70 bg-bg-light/25 p-4 md:p-5 order-0 lg:order-2 shadow-sm backdrop-blur-sm">
+                    {/* controls */}
+                    <div className="flex flex-wrap items-center gap-2">
+                        <button
+                            onClick={() => {
+                                if (!selectedOwned) {
+                                    setTeam1ErrorMessage("Please put 2 or more characters in the team (Slot 1/2).");
+                                    setTeam2ErrorMessage("Please put 2 or more characters in the team (Slot 5/6).");
                                 } else {
-                                    setSecondTeam(!secondTeam)
-
+                                    setTeam1ErrorMessage("Please select more than 4 owned characters");
+                                    setTeam2ErrorMessage("Please select more than 8 owned characters");
                                 }
-                            }} />
-                            Second Team
+                                setSelectedOwned(p => !p);
+                            }}
+                            className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all ${selectedOwned ? "bg-primary text-bg-darkest shadow-md hover:brightness-110" : "border border-bg-light/70 hover:bg-bg-dark/70"}`}
+                            aria-pressed={selectedOwned}
+                        >
+                            {selectedOwned ? "Owned Characters" : "All Characters"}
+                        </button>
+                        <button onClick={randomizeTeam} className="rounded-lg border border-bg-light/70 px-3 py-1.5 text-sm font-medium transition-all hover:bg-bg-dark/70">Randomize</button>
+                        <button onClick={clearTeam} className="rounded-lg border border-bg-light/70 px-3 py-1.5 text-sm font-medium transition-all hover:bg-bg-dark/70">Clear</button>
+                        <label className="flex gap-2 items-center text-sm font-medium cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={secondTeam}
+                                onChange={() => {
+                                    if (secondTeam) {
+                                        setSecondTeam(false);
+                                        setActiveCharacters(p => [...p.slice(0, 4), null, null, null, null]);
+                                    } else {
+                                        setSecondTeam(true);
+                                    }
+                                }}
+                                className="accent-primary"
+                                aria-label="Enable second team"
+                            />
+                            <span>Second Team</span>
                         </label>
-
                     </div>
-                    <div className="h-auto">
-                        <div className="grid grid-cols-4 gap-2 md:gap-4 h-full w-full">
-                            {mounted ? activeCharacters.map((character: any, index: number) => {
-                                if (!secondTeam) {
-                                    if (index > 3) return null
-                                }
 
-                                return (
-                                  <div
-                                    key={index}
-                                    className={`h-full rounded-xl cursor-move overflow-hidden transition-shadow ${
-                                      !character.active && "border-2"
-                                    } ${
-                                      selectedSlot == index &&
-                                      "scale-[103%] shadow-light"
-                                    }`}
-                                    onClick={() => setSelectedSlot(index)}
-                                    draggable
-                                    onDragStart={() =>
-                                      (dragCharacter.current = index)
-                                    }
-                                    onDragEnter={() =>
-                                      (draggedOverCharacter.current = index)
-                                    }
-                                    onDragEnd={handleSort}
-                                    onDragOver={(e) => e.preventDefault()}
-                                  >
-                                    {character.active ? (
-                                      <div
-                                        className={`h-full hover:scale-100 relative`}
-                                      >
-                                        {character.name.startsWith(
-                                          "Traveller"
-                                        ) ? (
-                                          <Image
-                                            src={`/characters/travellers.webp`}
-                                            width={1000}
-                                            height={1000}
-                                            alt=""
-                                            draggable="false"
-                                            className={`w-full object-cover bg-gradient-to-br ${
-                                              character.rarity == 4
-                                                ? " from-gradient-SR-start  to-gradient-SR-end"
-                                                : "from-gradient-SSR-start  to-gradient-SSR-end"
-                                            } relative`}
-                                          />
-                                        ) : (
-                                          <Image
-                                            src={`https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`}
-                                            width={1000}
-                                            height={1000}
-                                            alt=""
-                                            draggable="false"
-                                            className={`w-full object-cover bg-gradient-to-br ${
-                                              character.rarity == 4
-                                                ? " from-gradient-SR-start  to-gradient-SR-end"
-                                                : "from-gradient-SSR-start  to-gradient-SSR-end"
-                                            } relative`}
-                                          />
-                                        )}
-                                        <div className="absolute top-1 left-1 text-black">
-                                          <Image
-                                            src={`/elements/${character.elementText}.webp`}
-                                            width={25}
-                                            height={25}
-                                            alt={`${character.element} icon`}
-                                          />
-                                        </div>
-                                      </div>
-                                    ) : (
-                                      <div
-                                        className={`w-full h-full flex items-center justify-center font-bold text-7xl relative`}
-                                      >
-                                        <Image
-                                          src={"/elements/None.png"}
-                                          alt="placeholder empty image"
-                                          height={256}
-                                          width={256}
-                                          className=""
+                    {/* slot grid */}
+                    <div
+                        className="grid grid-cols-4 gap-2 md:gap-3"
+                        role="list"
+                        aria-label={secondTeam ? "Team slots (8 characters)" : "Team slots (4 characters)"}
+                    >
+                        <AnimatePresence mode="popLayout">
+                            {mounted
+                                ? activeTeam.map((character, index) => (
+                                    <motion.div
+                                        key={index}
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.88 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.88 }}
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                        className="h-full"
+                                    >
+                                        <TeamSlot
+                                            index={index}
+                                            character={character}
+                                            isSelected={selectedSlot === index}
+                                            onSelect={() => setSelectedSlot(index)}
+                                            dragState={drag}
                                         />
-                                        <p className="absolute">+</p>
-                                      </div>
-                                    )}
-                                  </div>
-                                );
-                            }) :
-                                <>
-                                    {Array.from({ length: 4 }).map((_: any, index: number) => {
-                                        return (
-                                            <div
-                                                key={index}
-                                                className={`rounded-xl cursor-move overflow-hidden transition-shadow border-2 ${selectedSlot == index && "scale-105 shadow-light"}`}
-                                            >
-                                                <div className="w-full h-full flex items-center justify-center font-bold text-7xl relative">
-                                                    <Image
-                                                        src="/elements/None.png"
-                                                        alt="placeholder empty image"
-                                                        height={256}
-                                                        width={256}
-                                                        className=""
-                                                    />
-                                                    <p className="absolute">+</p>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </>
-
-                            }
-                        </div>
+                                    </motion.div>
+                                ))
+                                : Array.from({ length: visibleSlots }).map((_, i) => (
+                                    <motion.div
+                                        key={i}
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.88 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.88 }}
+                                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1], delay: i * 0.04 }}
+                                        className="h-full"
+                                    >
+                                        <TeamSlot
+                                            index={i}
+                                            character={null}
+                                            isSelected={false}
+                                            onSelect={() => {}}
+                                            dragState={drag}
+                                        />
+                                    </motion.div>
+                                ))}
+                        </AnimatePresence>
                     </div>
-                    {!secondTeam ?
-                        <>
-                            <div className="flex gap-2">
-                                <>
-                                    {selectedOwned ? (
-                                        <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { recommendTeam(1); }} disabled={team1AILoading}>
-                                            {team1AILoading ? "Loading..." : "Build AI Team"}
-                                        </button>
-                                    ) : (
-                                        <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(1) }} disabled={team1AILoading}>
-                                            {team1AILoading ? "Loading..." : "Create Builds"}
-                                        </button>
-                                    )}
-                                </>
-                            </div>
-                            <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl text-pretty" >
-                                {team1AILoading ? <Loader />
-                                    :
-                                    <>
-                                        {team1Recommendations.length > 0 ?
-                                            <>
-                                                {team1Recommendations.map((rec, index) => (
-                                                    <Markdown content={rec} key={index} />
-                                                ))}
-                                            </>
-                                            :
-                                            <>
-                                                {team1ErrorMessage}
-                                            </>
-                                        }
-                                    </>
-                                }
-                                {team1FinalizeLoading && <Loader />}
-                            </div>
-                        </> :
-                        <>
-                            <div className="flex gap-2">
-                                {selectTeam ?
-                                    <>
-                                        {selectedOwned ? (
-                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { recommendTeam(1); }} disabled={team1AILoading}>
-                                                {team1AILoading ? "Loading..." : "Build AI Team 1"}
-                                            </button>
-                                        ) : (
-                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(1) }} disabled={team1AILoading}>
-                                                {team1AILoading ? "Loading..." : "Create Builds For Team 1"}
-                                            </button>
-                                        )}
-                                    </>
-                                    :
-                                    <>
-                                        {selectedOwned ? (
-                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { recommendTeam(2); }} disabled={team2AILoading}>
-                                                {team2AILoading ? "Loading..." : "Build AI Team 2"}
-                                            </button>
-                                        ) : (
-                                            <button className="border-2 p-2 rounded-xl hover:bg-bg-dark transition-all" onClick={() => { createBuilds(2); }} disabled={team2AILoading}>
-                                                {team2AILoading ? "Loading..." : "Create Builds For Team 2"}
-                                            </button>
-                                        )}
-                                    </>
-                                }
-                                <label className="flex gap-2 font-bold items-center">
-                                    <input type="checkbox" checked={selectTeam} onChange={() => { setSelectTeam(!selectTeam) }} />
-                                    Swap Team
-                                </label>
-                            </div>
-                            <div className="flex flex-col gap-2 max-h-[70dvh] overflow-y-scroll bg-bg-light p-4 rounded-xl text-pretty" >
-                                {selectTeam ?
-                                    <>
-                                        {team1AILoading ? <Loader />
-                                            :
-                                            <>
-                                                {team1Recommendations.length > 0 ?
-                                                    <>
-                                                        {team1Recommendations.map((rec, index) => (
-                                                            <Markdown content={rec} key={index} />
-                                                        ))}
-                                                    </>
-                                                    :
-                                                    <>
-                                                        {team1ErrorMessage}
-                                                    </>
-                                                }
-                                            </>
-                                        }
-                                        {team1FinalizeLoading && <Loader />}
-                                    </>
-                                    :
-                                    <>
-                                        {team2AILoading ? <Loader />
-                                            :
-                                            <>
-                                                {team2Recommendations.length > 0 ?
-                                                    <>
-                                                        {team2Recommendations.map((rec, index) => (
-                                                            <Markdown content={rec} key={index} />
-                                                        ))}
-                                                    </>
-                                                    :
-                                                    <>
-                                                        {team2ErrorMessage}
-                                                    </>
-                                                }
-                                            </>
-                                        }
-                                        {team2FinalizeLoading && <Loader />}
-                                    </>
-                                }
-                            </div>
-                        </>
-                    }
-                </section >
-            </div >
+
+                    {/* AI panel */}
+                    <AnimatePresence mode="wait">
+                        {!secondTeam ? (
+                            <TeamActionPanel
+                                key="single"
+                                selectedOwned={selectedOwned}
+                                teamNumber={1}
+                                aiLoading={team1AILoading}
+                                finalizeLoading={team1FinalizeLoading}
+                                recommendations={team1Recommendations}
+                                errorMessage={team1ErrorMessage}
+                                onRecommend={recommendTeam}
+                                onCreateBuilds={createBuilds}
+                            />
+                        ) : (
+                            <TeamActionPanel
+                                key="double"
+                                selectedOwned={selectedOwned}
+                                teamNumber={selectTeam ? 1 : 2}
+                                aiLoading={selectTeam ? team1AILoading : team2AILoading}
+                                finalizeLoading={selectTeam ? team1FinalizeLoading : team2FinalizeLoading}
+                                recommendations={selectTeam ? team1Recommendations : team2Recommendations}
+                                errorMessage={selectTeam ? team1ErrorMessage : team2ErrorMessage}
+                                onRecommend={recommendTeam}
+                                onCreateBuilds={createBuilds}
+                                showTeamSwap
+                                selectTeam={selectTeam}
+                                setSelectTeam={setSelectTeam}
+                            />
+                        )}
+                    </AnimatePresence>
+                </section>
+            </div>
         </>
-    )
+    );
 }
 
+// ─── TeamSlot ────────────────────────────────────────────────────────────────
 
+function TeamSlot({
+    index,
+    character,
+    isSelected,
+    onSelect,
+    dragState,
+}: {
+    index: number;
+    character: Character | null;
+    isSelected: boolean;
+    onSelect: () => void;
+    dragState: { source: DragSource | null; overSlot: number | null };
+}) {
+    const { enterSlot, leaveSlot, endDrag, startDrag } = useDrag();
+    const slotPointerStart = useRef<{ x: number; y: number } | null>(null);
+    const slotDragging = useRef(false);
+
+    const isActive = !!character?.active;
+    const isDragOver = dragState.overSlot === index;
+    const isDragging = dragState.source !== null;
+
+    const previewChar =
+        isDragOver && dragState.source ? dragState.source.character : null;
+    const isBeingDragged =
+        dragState.source?.kind === "slot" &&
+        dragState.source.slotIndex === index;
+
+    const isTraveller = character?.name?.startsWith("Traveller");
+    const gradient =
+        character?.rarity === 4
+            ? "from-gradient-SR-start to-gradient-SR-end"
+            : "from-gradient-SSR-start to-gradient-SSR-end";
+
+    return (
+        <motion.div
+            role="listitem"
+            aria-label={isActive ? `${character?.name}, slot ${index + 1}` : `Empty slot ${index + 1}`}
+            onClick={() => { if (!slotDragging.current) onSelect(); }}
+            onPointerDown={(e) => {
+                if (!isActive || !character) return;
+                slotPointerStart.current = { x: e.clientX, y: e.clientY };
+                slotDragging.current = false;
+                // No setPointerCapture — keep pointerenter routing intact
+            }}
+            onPointerMove={(e) => {
+                if (!isActive || !character || !slotPointerStart.current) return;
+                const dx = e.clientX - slotPointerStart.current.x;
+                const dy = e.clientY - slotPointerStart.current.y;
+                if (!slotDragging.current && Math.hypot(dx, dy) > 6) {
+                    slotDragging.current = true;
+                    startDrag({ kind: "slot", character, slotIndex: index }, e.clientX, e.clientY);
+                }
+            }}
+            // Drop target
+            onPointerEnter={() => {
+                if (isDragging) enterSlot(index);
+            }}
+            onPointerLeave={() => {
+                if (isDragging) leaveSlot();
+            }}
+            onPointerUp={(e) => {
+                slotPointerStart.current = null;
+                slotDragging.current = false;
+                if (isDragging) { e.stopPropagation(); endDrag(); }
+            }}
+            animate={{
+                scale: isDragOver && isDragging ? 1.05 : isSelected && !isDragging ? 1.02 : isBeingDragged ? 0.95 : 1,
+                boxShadow: isDragOver && isDragging
+                    ? "0 0 0 2px rgba(255,115,115,0.8), 0 0 16px rgba(255,115,115,0.3)"
+                    : isSelected && !isDragging
+                    ? "0 0 0 2px rgba(255,115,115,0.8), 0 0 12px rgba(255,115,115,0.25)"
+                    : "none",
+                opacity: isBeingDragged ? 0.45 : 1,
+            }}
+            transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className={`relative overflow-hidden rounded-xl cursor-pointer select-none touch-none transition-all h-full flex flex-col ${
+                !isActive
+                    ? isSelected && !isDragging
+                        ? "border-2 border-primary/80 bg-primary/5"
+                        : "border border-bg-light/70 hover:border-primary/50 bg-bg-light/20"
+                    : "border border-bg-light/80 shadow-md"
+            }`}
+        >
+            {isActive && character ? (
+                <>
+                    {/* Character image */}
+                    <div
+                        className={`w-full bg-gradient-to-br ${gradient} relative overflow-hidden`}
+                        style={{ aspectRatio: "1/1" }}
+                    >
+                        <Image
+                            src={
+                                isTraveller
+                                    ? "/characters/travellers.webp"
+                                    : `https://enka.network/ui/UI_AvatarIcon_${character.fileName}.png`
+                            }
+                            width={400}
+                            height={400}
+                            alt={character.name}
+                            draggable={false}
+                            className="w-full h-full object-cover pointer-events-none"
+                        />
+                        {/* Drop-swap overlay */}
+                        <AnimatePresence>
+                            {isDragOver && isDragging && dragState.source?.kind !== "slot" || (isDragOver && isDragging) ? (
+                                <motion.div
+                                    className="absolute inset-0 bg-primary/20 flex items-center justify-center"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.12 }}
+                                >
+                                    <span className="text-2xl font-bold text-white drop-shadow-text">↔</span>
+                                </motion.div>
+                            ) : null}
+                        </AnimatePresence>
+                        {/* Element badge */}
+                        <div className="absolute top-1 left-1 pointer-events-none drop-shadow-icon">
+                            <Image
+                                src={`/elements/${character.elementText}.webp`}
+                                width={20}
+                                height={20}
+                                alt={character.element ?? ""}
+                                draggable={false}
+                            />
+                        </div>
+                    </div>
+                    {/* Name */}
+                    <div className="flex flex-col items-center justify-center px-1 py-1 bg-bg-dark/85 text-center">
+                        <p className="text-[0.65rem] font-bold truncate text-text/90 w-full">
+                            {isTraveller ? "Traveller" : character.name}
+                        </p>
+                        {isTraveller && character.elementText && (
+                            <span className="text-[9px] font-semibold text-primary uppercase tracking-wide leading-none">
+                                {character.elementText}
+                            </span>
+                        )}
+                    </div>
+                </>
+            ) : (
+                /* Empty slot */
+                <div
+                    className={`w-full h-full flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl transition-colors duration-150 ${
+                        isDragOver && isDragging
+                            ? "bg-primary/20"
+                            : isSelected && !isDragging
+                            ? "bg-primary/10"
+                            : "hover:bg-bg-light/35"
+                    }`}
+                >
+                    <AnimatePresence mode="wait">
+                        {isDragOver && isDragging && previewChar ? (
+                            <motion.div
+                                key="preview"
+                                initial={{ opacity: 0, scale: 0.7 }}
+                                animate={{ opacity: 0.7, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.7 }}
+                                transition={{ duration: 0.15 }}
+                                className="w-full"
+                            >
+                                <Image
+                                    src={
+                                        previewChar.name.startsWith("Traveller")
+                                            ? "/characters/travellers.webp"
+                                            : `https://enka.network/ui/UI_AvatarIcon_${previewChar.fileName}.png`
+                                    }
+                                    width={200}
+                                    height={200}
+                                    alt=""
+                                    draggable={false}
+                                    className="w-full aspect-square object-cover rounded-t-xl rounded-br-4xl pointer-events-none"
+                                />
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="empty"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="flex flex-col items-center justify-center gap-1 w-full h-full text-center"
+                            >
+                                <div className="w-7 h-7 rounded-full border border-dashed border-text/25 flex items-center justify-center text-text/40 text-xs font-mono font-semibold">
+                                    +
+                                </div>
+                                <span className="text-[11px] font-medium text-text/40">
+                                    Slot {index + 1}
+                                </span>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            )}
+        </motion.div>
+    );
+}
+
+// ─── SkeletonCard ────────────────────────────────────────────────────────────
+
+function SkeletonCard() {
+    return (
+        <motion.div
+            className="w-full rounded-xl bg-bg-dark/50 border border-bg-light/30 overflow-hidden"
+            animate={{ opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+            <div
+                className="w-full bg-gradient-to-br from-bg-lighter to-bg-light rounded-t-xl"
+                style={{ aspectRatio: "1/1" }}
+            />
+            <div className="h-4 w-3/4 mx-auto my-2 rounded bg-bg-lighter" />
+        </motion.div>
+    );
+}
+
+// ─── TeamActionPanel ──────────────────────────────────────────────────────────
+
+function TeamActionPanel({
+    selectedOwned,
+    teamNumber,
+    aiLoading,
+    finalizeLoading,
+    recommendations,
+    errorMessage,
+    onRecommend,
+    onCreateBuilds,
+    showTeamSwap = false,
+    selectTeam = true,
+    setSelectTeam = () => {},
+}: {
+    selectedOwned: boolean;
+    teamNumber: number;
+    aiLoading: boolean;
+    finalizeLoading: boolean;
+    recommendations: string[];
+    errorMessage: string;
+    onRecommend: (team: number) => void;
+    onCreateBuilds: (team: number) => void;
+    showTeamSwap?: boolean;
+    selectTeam?: boolean;
+    setSelectTeam?: (v: boolean) => void;
+}) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-3"
+        >
+            <div className="flex flex-wrap items-center gap-2.5">
+                {selectedOwned ? (
+                    <button
+                        className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-primary text-bg-darkest font-bold text-sm hover:brightness-110 active:scale-[0.98] transition-all shadow-md shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bg-dark"
+                        onClick={() => onRecommend(teamNumber)}
+                        disabled={aiLoading || finalizeLoading}
+                        aria-busy={aiLoading || finalizeLoading}
+                    >
+                        {aiLoading ? (
+                            <span className="flex items-center gap-2">
+                                <span className="h-3 w-3 rounded-full bg-bg-darkest animate-pulse shrink-0" aria-hidden="true" />
+                                Building Team {teamNumber}...
+                            </span>
+                        ) : `Build AI Team${showTeamSwap ? ` ${teamNumber}` : ""}`}
+                    </button>
+                ) : (
+                    <button
+                        className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-primary text-bg-darkest font-bold text-sm hover:brightness-110 active:scale-[0.98] transition-all shadow-md shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bg-dark"
+                        onClick={() => onCreateBuilds(teamNumber)}
+                        disabled={aiLoading || finalizeLoading}
+                        aria-busy={aiLoading || finalizeLoading}
+                    >
+                        {aiLoading ? (
+                            <span className="flex items-center gap-2">
+                                <span className="h-3 w-3 rounded-full bg-bg-darkest animate-pulse shrink-0" aria-hidden="true" />
+                                Creating Builds...
+                            </span>
+                        ) : `Create Builds${showTeamSwap ? ` For Team ${teamNumber}` : ""}`}
+                    </button>
+                )}
+                {showTeamSwap && (
+                    <label className="flex gap-2 font-medium items-center cursor-pointer text-sm bg-bg-light/40 border border-bg-light/70 px-3 py-2 rounded-xl">
+                        <input
+                            type="checkbox"
+                            checked={selectTeam}
+                            onChange={() => setSelectTeam(!selectTeam)}
+                            className="accent-primary"
+                            aria-label={`Switch to Team ${selectTeam ? 2 : 1}`}
+                        />
+                        <span>Team {selectTeam ? 1 : 2}</span>
+                    </label>
+                )}
+            </div>
+
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={recommendations.length > 0 ? "content" : "empty"}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex flex-col gap-2 max-h-[70vh] overflow-y-auto rounded-xl border border-bg-light/70 bg-bg-light/25 p-5 text-pretty shadow-sm"
+                >
+                    {aiLoading ? (
+                        <div className="flex flex-col gap-3 py-4">
+                            <Skeleton className="h-4 w-full rounded" />
+                            <Skeleton className="h-4 w-5/6 rounded" />
+                            <Skeleton className="h-4 w-4/5 rounded" />
+                            <Skeleton className="h-4 w-full rounded" />
+                            <Skeleton className="h-4 w-3/4 rounded" />
+                        </div>
+                    ) : recommendations.length > 0 ? (
+                        recommendations.map((rec, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.08 }}
+                            >
+                                <Markdown content={rec} />
+                            </motion.div>
+                        ))
+                    ) : (
+                        <div className="flex flex-col items-center justify-center gap-2 py-8 text-center">
+                            <p className="text-text/70 text-sm font-medium">{errorMessage}</p>
+                            <span className="text-text/40 text-xs">
+                                Click or drag characters from the list below into the team slots above to generate team builds.
+                            </span>
+                        </div>
+                    )}
+                    {finalizeLoading && (
+                        <div className="flex flex-col gap-2 pt-4 border-t border-bg-light/30">
+                            <Skeleton className="h-4 w-full rounded" />
+                            <Skeleton className="h-4 w-4/5 rounded" />
+                            <Skeleton className="h-4 w-2/3 rounded" />
+                        </div>
+                    )}
+                </motion.div>
+            </AnimatePresence>
+        </motion.div>
+    );
+}
+
+// ─── public export (wraps with DragProvider) ─────────────────────────────────
+
+export default function TeamBuilder({ CharacterData }: { CharacterData: Character[] }) {
+    return (
+        <DragProvider>
+            <TeamBuilderInner CharacterData={CharacterData} />
+        </DragProvider>
+    );
+}

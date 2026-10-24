@@ -124,7 +124,33 @@ export function addFileName(names: any[]) {
         }, 
         {
             name: "Lan Yan",
-            fileName: "LanYan"
+            fileName: "Lanyan"
+        },
+        {
+            name: "Skirk",
+            fileName: "SkirkNew"
+        },
+        {
+            name: "Yumemizuki Mizuki",
+            fileName: "Mizuki"
+        },
+        {
+            name: "Manekin",
+            fileName: "MannequinBoy",
+            nameCardName: "Manekin"
+        },
+        {
+            name: "Manekina",
+            fileName: "MannequinGirl",
+            nameCardName: "Manekina"
+        },
+        {
+            name: "Sandrone",
+            fileName: "MarionetteNew"
+        },
+        {
+            name: "Aino",
+            fileName: "Aino"
         },
     ];
 
@@ -157,7 +183,37 @@ export function parseColorTags(text: string) {
     });
 }
 
+export function parseGameText(text: string) {
+    if (!text) return "";
+    let withPlainText = text
+        .replace(/\r\n?/g, "\n")
+        .replace(/(^|\n)#(?=[A-Za-z])/g, "$1")
+        .replace(/(?:\{LAYOUT_(?:MOBILE|PC|PS)#[^}]*\})+/g, (run) => {
+            const tags = Array.from(
+                run.matchAll(/\{LAYOUT_(MOBILE|PC|PS)#([^}]*)\}/g)
+            );
+            const preferred =
+                tags.find(([, platform]) => platform === "PC") ??
+                tags.find(([, platform]) => platform === "MOBILE") ??
+                tags[0];
+
+            return preferred?.[2] ?? "";
+        });
+
+    // Handle {LINK#...}text{/LINK}
+    withPlainText = withPlainText.replace(/\{LINK#[^}]*\}([^{]+)\{\/LINK\}/g, "$1");
+    // Handle other link formats
+    withPlainText = withPlainText.replace(/\{LINK[^}]*\}/g, "");
+    withPlainText = withPlainText.replace(/\{\/LINK\}/g, "");
+
+    return parseColorTags(withPlainText).replace(/\n/g, "<br />");
+}
+
 export function getRandomNumber(min: number, max: number): number {
 
     return Math.random() * (max - min) + min;
+}
+
+export function cn(...classes: Array<string | false | null | undefined>) {
+    return classes.filter(Boolean).join(" ");
 }

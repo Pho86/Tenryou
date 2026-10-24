@@ -32,7 +32,7 @@ export default function EventsModal({
                             {show === event.id && (
                                 <div
                                     className="fixed w-[100vw] h-[100dvh] top-0 left-0 z-50 flex items-center bg-bg bg-opacity-[30%] justify-center"
-                                    onClick={() => {setShow(0);}}
+                                    onClick={() => { setShow(0); }}
                                 >
                                     <motion.div
                                         className="max-h-[70dvh] md:max-h-[80dvh] md:max-w-[60dvw] p-8 overflow-y-scroll bg-bg rounded-xl"

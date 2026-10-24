@@ -1,90 +1,133 @@
 "use client"
 import Image from "next/image";
-import { Fragment, useState } from "react"
+import { useState } from "react"
 import { Artifact as ArtifactTypes } from "../../../types/artifacts";
+
+const pieceKeys = ["flower", "plume", "sands", "goblet", "circlet"] as const;
+type PieceKey = typeof pieceKeys[number];
 
 export default function ArtifactsList({
     artifactData
 }: {
     artifactData: ArtifactTypes[]
 }) {
-    const [activeArtifact, setActiveArtifact] = useState(() => ({
-        ...artifactData[0],
-        hover: "flower"
-      }));
-    return <>
-        <section className="grid md:grid-cols-2 gap-8">
-            <div className="max-h-[100dvh] overflow-y-scroll py-4 grid-auto-fit-100 px-2 order-last md:order-first">
-                {artifactData.map((artifact, index) => (
-                    <Fragment key={index}>
-                        {artifact.flower && (
-                            <ArtifactItem type="flower" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_flower}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "flower" }); }} name={artifact.flower.name} />
-                        )}
-                        {artifact.plume && (
-                            <ArtifactItem type="plume" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_plume}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "plume" }); }} name={artifact.plume.name} />
-                        )}
-                        {artifact.sands && (
-                            <ArtifactItem type="sands" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_sands}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "sands" }); }} name={artifact.sands.name} />
-                        )}
-                        {artifact.goblet && (
-                            <ArtifactItem type="goblet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_goblet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "goblet" }); }} name={artifact.goblet.name} />
-                        )}
-                        {artifact.circlet && (
-                            <ArtifactItem type="circlet" rarity={artifact.rarityList[1]} image={`https://enka.network/ui/${artifact.images.filename_circlet}.png`} onClick={() => { setActiveArtifact({ ...artifact, hover: "circlet" }); }} name={artifact.circlet.name} />
-                        )}
-                    </Fragment>
+    const [active, setActive] = useState<{ artifact: ArtifactTypes, piece: PieceKey } | null>(() => {
+        const first = artifactData[0];
+        return first ? { artifact: first, piece: firstPiece(first) } : null;
+    });
+    const activePiece = active ? active.artifact[active.piece] : undefined;
+    const activeRarity = active ? rarityOf(active.artifact) : 1;
+
+    return (
+        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <div className="grid max-h-[85dvh] grid-cols-2 gap-3 overflow-y-auto rounded-xl border border-bg-light/60 p-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
+                {artifactData.map((artifact: ArtifactTypes, index: number) => (
+                    availablePieces(artifact).map((pieceKey: PieceKey) => {
+                        const piece = artifact[pieceKey];
+                        if (!piece) return null;
+                        const selected = active?.artifact.id === artifact.id && active.piece === pieceKey;
+                        return (
+                            <button
+                                key={`${artifact.id}-${pieceKey}-${index}`}
+                                type="button"
+                                onClick={() => { setActive({ artifact, piece: pieceKey }) }}
+                                aria-pressed={selected}
+                                aria-label={`${artifact.name}: ${piece.name}`}
+                                className={`group flex min-h-[10rem] w-full cursor-pointer flex-col overflow-hidden rounded-xl border bg-bg-light/15 text-left transition-all hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${selected ? "border-primary/60 shadow-[0_0_0_1px_rgba(255,115,115,0.4)]" : "border-bg-light/60"}`}
+                            >
+                                <div className={`relative flex w-full min-h-[6rem] flex-1 items-center justify-center overflow-hidden rounded-t-xl p-3 ${rarityGradient(rarityOf(artifact))}`}>
+                                    <Image
+                                        src={imageFor(artifact, pieceKey)}
+                                        width={160}
+                                        height={160}
+                                        alt={`${piece.name} icon`}
+                                        className="h-20 w-20 object-contain sm:h-24 sm:w-24"
+                                        title={piece.name}
+                                        onError={(event: React.SyntheticEvent<HTMLImageElement, Event>) => { event.currentTarget.src = '/icon.svg' }}
+                                    />
+                                </div>
+                                <div className="px-2 py-2 text-center">
+                                    <p className="truncate text-xs font-semibold text-text/80">{piece.relicText}</p>
+                                    <p className="mt-0.5 truncate text-[10px] text-text/60" title={artifact.name}>{artifact.name}</p>
+                                </div>
+                            </button>
+                        )
+                    })
                 ))}
             </div>
-            <div className=" order-3">
-                {activeArtifact &&
-                    <div className="flex flex-col gap-2">
-                        <div className="flex flex-col relative bg-[#e9e9e9] rounded-xl ">
-                            <div className={`max-h-56 rounded-t-xl bg-gradient-to-br ${activeArtifact.rarityList[1] === 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : activeArtifact.rarityList[1] === 4 ? "from-gradient-SR-start to-gradient-SR-end" : activeArtifact.rarityList[1] === 3 ? "from-gradient-R-start to-gradient-R-end" : activeArtifact.rarityList[1] === 2 ? "from-gradient-UC-start to-gradient-UC-end" : "from-gradient-C-start to-gradient-C-end"} flex justify-between `}>
-                                {activeArtifact.hover == "flower" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_flower}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
-                                {activeArtifact.hover == "plume" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_plume}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
-                                {activeArtifact.hover == "sands" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_sands}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
-                                {activeArtifact.hover == "goblet" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_goblet}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
-                                {activeArtifact.hover == "circlet" && <Image src={`https://enka.network/ui/${activeArtifact.images.filename_circlet}.png`} width={500} height={500} alt={`${activeArtifact.name} artifact icon`} className={`object-contain w-full`} />}
-
+            <div className="order-first lg:order-last">
+                {active && activePiece ? (
+                    <article className="rounded-xl border border-bg-light/70 bg-bg-light/25 flex flex-col overflow-hidden">
+                        <div className={`flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between ${rarityGradient(activeRarity)}`}>
+                            <div className="min-w-0">
+                                <p className="text-sm font-semibold uppercase tracking-wider text-text/80">{activePiece.relicText}</p>
+                                <h2 className="mt-2 text-2xl font-bold text-text sm:text-3xl">{activePiece.name}</h2>
+                                <p className="mt-1 text-sm text-text/80">{active.artifact.name}</p>
                             </div>
-                            <div className="text-bg p-4 flex flex-col gap-2">
-                                {activeArtifact.hover == "flower" && <Description piece={activeArtifact.flower} />}
-                                {activeArtifact.hover == "plume" && <Description piece={activeArtifact.plume} />}
-                                {activeArtifact.hover == "sands" && <Description piece={activeArtifact.sands} />}
-                                {activeArtifact.hover == "goblet" && <Description piece={activeArtifact.goblet} />}
-                                {activeArtifact.hover == "circlet" && <Description piece={activeArtifact.circlet} />}
-                                <div className="flex flex-col w-full text-pretty">
-                                    <h2 className="font-bold text-xl">{activeArtifact.name}</h2>
-                                    {activeArtifact.effect1Pc && <p><span className="font-semibold">1 Piece:</span> {activeArtifact.effect1Pc}</p>}
-                                    {activeArtifact.effect2Pc && <p><span className="font-semibold">2 Piece:</span> {activeArtifact.effect2Pc}</p>}
-                                    {activeArtifact.effect4Pc && <p><span className="font-semibold">4 Piece:</span> {activeArtifact.effect4Pc}</p>}
+                            <Image
+                                src={imageFor(active.artifact, active.piece)}
+                                width={240}
+                                height={240}
+                                alt={`${activePiece.name} icon`}
+                                className="h-32 w-32 self-center object-contain sm:h-40 sm:w-40"
+                                onError={(event: React.SyntheticEvent<HTMLImageElement, Event>) => { event.currentTarget.src = '/icon.svg' }}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-5 p-6">
+                            <p className="text-sm leading-relaxed text-text/75">{activePiece.description}</p>
+                            {activePiece.story && (
+                                <blockquote className="border-l border-bg-light/60 pl-4 text-sm italic leading-relaxed text-text/60">
+                                    {activePiece.story}
+                                </blockquote>
+                            )}
+                            <div className="border-t border-bg-light/60 pt-5">
+                                <h3 className="text-lg font-bold text-text">{active.artifact.name}</h3>
+                                <div className="mt-2 flex flex-col gap-1 text-sm leading-relaxed text-text/75">
+                                    {active.artifact.effect1Pc && <p><span className="font-semibold">1 Piece:</span> {active.artifact.effect1Pc}</p>}
+                                    {active.artifact.effect2Pc && <p><span className="font-semibold">2 Piece:</span> {active.artifact.effect2Pc}</p>}
+                                    {active.artifact.effect4Pc && <p><span className="font-semibold">4 Piece:</span> {active.artifact.effect4Pc}</p>}
                                 </div>
                             </div>
                         </div>
+                    </article>
+                ) : (
+                    <div className="rounded-xl border border-bg-light/70 bg-bg-light/25 text-sm text-text/60">
+                        No artifacts available.
                     </div>
-                }
+                )}
             </div>
         </section>
-    </>
+    )
 }
 
-function ArtifactItem({ type, rarity, image, onMouseEnter, name, onClick }: { type: string, rarity: number, image: string, onMouseEnter?: () => void, name: string, onClick: () => void }) {
-    return <Image
-        src={image}
-        width={150}
-        height={150}
-        alt={`${type} image`}
-        className={`rounded-xl w-full h-full min-h-16 object-cover bg-gradient-to-br ${rarity == 5 ? "from-gradient-SSR-start to-gradient-SSR-end" : rarity == 4 ? "from-gradient-SR-start  to-gradient-SR-end" : "from-gradient-R-start to-gradient-R-end"} hover:scale-110 transition-all hover:shadow-light`}
-        onMouseEnter={onMouseEnter}
-        onClick={onClick}
-        title={name ? name : ""}
-    />
+function availablePieces(artifact: ArtifactTypes) {
+    return pieceKeys.filter((key: PieceKey) => Boolean(artifact[key]));
 }
 
-function Description({ piece }: { piece: any }) {
-    return <div className="flex gap-2 flex-col">
-        <p className="font-bold text-2xl">{piece.name}</p>
-        <blockquote className="">{piece.description}</blockquote>
-        <blockquote className="italic text-sm">{piece.story}</blockquote>
-    </div>
+function firstPiece(artifact: ArtifactTypes): PieceKey {
+    return availablePieces(artifact)[0] ?? "flower";
+}
+
+function rarityOf(artifact: ArtifactTypes) {
+    return Math.max(...(artifact.rarityList.length > 0 ? artifact.rarityList : [1]));
+}
+
+function imageFor(artifact: ArtifactTypes, piece: PieceKey) {
+    const filename = artifact.images[`filename_${piece}` as keyof ArtifactTypes["images"]];
+    return filename ? `https://enka.network/ui/${filename}.png` : "/icon.svg";
+}
+
+function rarityGradient(rarity: number) {
+    switch (rarity) {
+        case 5:
+            return "bg-gradient-to-br from-[#b98a56]/40 to-[#f5d16e]/30";
+        case 4:
+            return "bg-gradient-to-br from-[#7c4d9f]/40 to-[#b99aff]/30";
+        case 3:
+            return "bg-gradient-to-br from-[#3a6da8]/40 to-[#7fb6ff]/30";
+        case 2:
+            return "bg-gradient-to-br from-[#3a7f5d]/40 to-[#7dffb1]/30";
+        default:
+            return "bg-gradient-to-br from-[#6b6b6b]/40 to-[#9f9f9f]/30";
+    }
 }

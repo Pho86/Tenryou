@@ -1,0 +1,5052 @@
+{
+  "talentDomains": {
+    "Monday": [
+      {
+        "id": 4213,
+        "bookName": "Teachings of Freedom",
+        "region": "Mondstadt",
+        "iconId": 104301,
+        "characters": [
+          {
+            "name": "Aloy",
+            "title": "Savior From Another World",
+            "description": "Formerly an outcast, now a hunter of unparalleled skill. Ready to do the right thing at any time.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Aloy"
+          },
+          {
+            "name": "Klee",
+            "title": "Fleeing Sunlight",
+            "description": "An explosives expert and a regular at the Knights of Favonius's confinement room. Also known as Fleeing Sunlight.",
+            "elementText": "Pyro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Klee"
+          },
+          {
+            "name": "Tartaglia",
+            "title": "Childe",
+            "description": "No. 11 of The Harbingers, also known as \"Childe.\" His name is highly feared on the battlefield.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Tartaglia"
+          },
+          {
+            "name": "Varka",
+            "title": "Knight of Boreas",
+            "description": "Grand Master of the Knights of Favonius. Knight of Boreas, protector of Mondstadt.",
+            "elementText": "Anemo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Varka"
+          },
+          {
+            "name": "Amber",
+            "title": "Gliding Champion",
+            "description": "Always energetic and full of life, Amber's the best — albeit only — Outrider of the Knights of Favonius.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ambor"
+          },
+          {
+            "name": "Barbara",
+            "title": "Shining Idol",
+            "description": "Every citizen of Mondstadt adores Barbara. She learned the word \"idol\" from a magazine.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Barbara"
+          },
+          {
+            "name": "Diona",
+            "title": "Kätzlein Cocktail",
+            "description": "A young lady who has inherited trace amounts of non-human blood. She is the incredibly popular bartender of the Cat's Tail tavern.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Diona"
+          },
+          {
+            "name": "Sucrose",
+            "title": "Harmless Sweetie",
+            "description": "An alchemist filled with curiosity about all things. She researches bio-alchemy.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sucrose"
+          }
+        ]
+      },
+      {
+        "id": 5257,
+        "bookName": "Teachings of Prosperity",
+        "region": "Liyue",
+        "iconId": 104310,
+        "characters": [
+          {
+            "name": "Keqing",
+            "title": "Driving Thunder",
+            "description": "The Yuheng of the Liyue Qixing. Keqing has much to say about Rex Lapis's unilateral approach to policymaking in Liyue — but in truth, gods admire skeptics such as her quite a lot.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Keqing"
+          },
+          {
+            "name": "Qiqi",
+            "title": "Icy Resurrection",
+            "description": "An apprentice and herb gatherer at Bubu Pharmacy. An undead with a bone-white complexion, she seldom has much in the way of words or emotion.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Qiqi"
+          },
+          {
+            "name": "Shenhe",
+            "title": "Lonesome Transcendence",
+            "description": "An adepti disciple with a most unusual air about her. Having spent much time cultivating in isolation in Liyue's mountains, she has become every bit as cool and distant as the adepti themselves.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Shenhe"
+          },
+          {
+            "name": "Xiao",
+            "title": "Vigilant Yaksha",
+            "description": "A yaksha adeptus who defends Liyue. Also heralded as the \"Conqueror of Demons\" and \"Vigilant Yaksha.\"",
+            "elementText": "Anemo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Xiao"
+          },
+          {
+            "name": "Yelan",
+            "title": "Valley Orchid",
+            "description": "A mysterious person who claims to work for the Ministry of Civil Affairs, but is a \"non-entity\" on the Ministry of Civil Affairs' list.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yelan"
+          },
+          {
+            "name": "Gaming",
+            "title": "Leonine Vanguard",
+            "description": "Guard of the Sword and Strongbox Secure Transport Agency, and the head of the \"Mighty Mythical Beasts\" Wushou troupe.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Gaming"
+          },
+          {
+            "name": "Ningguang",
+            "title": "Eclipsing Star",
+            "description": "The Tianquan of the Liyue Qixing. Her wealth is unsurpassed in all of Teyvat.",
+            "elementText": "Geo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ningguang"
+          }
+        ]
+      },
+      {
+        "id": 4403,
+        "bookName": "Teachings of Transience",
+        "region": "Inazuma",
+        "iconId": 104320,
+        "characters": [
+          {
+            "name": "Sangonomiya Kokomi",
+            "title": "Pearl of Wisdom",
+            "description": "The Divine Priestess of Watatsumi Island. All of the island's affairs are at this young lady's fingertips.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kokomi"
+          },
+          {
+            "name": "Yoimiya",
+            "title": "Frolicking Flames",
+            "description": "Owner of Naganohara Fireworks. Known as the \"Queen of the Summer Festival,\" she excels in her craft of creating fireworks that symbolize people's hopes and dreams.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yoimiya"
+          },
+          {
+            "name": "Yumemizuki Mizuki",
+            "title": "Embrace of Enchanting Dreams",
+            "description": "A shareholder of Aisa Bathhouse, a baku, and a clinical psychologist. Dedicated to the dispersal of nightmares, and to bringing people peace of mind.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mizuki"
+          },
+          {
+            "name": "Kirara",
+            "title": "Cat Upon the Eaves",
+            "description": "A courier for Komaniya Express, a delivery company in Inazuma. A nekomata who loves her job and human society.",
+            "elementText": "Dendro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Momoka"
+          },
+          {
+            "name": "Shikanoin Heizou",
+            "title": "Analytical Harmony",
+            "description": "A young prodigy detective from the Tenryou Commission. His senses are sharp and his thoughts are clear.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Heizo"
+          },
+          {
+            "name": "Thoma",
+            "title": "Protector From Afar",
+            "description": "The Kamisato Clan's housekeeper. A well-known \"fixer\" in Inazuma.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Tohma"
+          }
+        ]
+      },
+      {
+        "id": 4433,
+        "bookName": "Teachings of Admonition",
+        "region": "Sumeru",
+        "iconId": 104329,
+        "characters": [
+          {
+            "name": "Cyno",
+            "title": "Judicator of Secrets",
+            "description": "The General Mahamatra in charge of supervising the researchers of the Akademiya. It is said that when he gets down to work, the General Mahamatra is even more efficient than the \"Great Vayuvyastra\" made by the Kshahrewar.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Cyno"
+          },
+          {
+            "name": "Tighnari",
+            "title": "Verdant Strider",
+            "description": "A young researcher well-versed in botany who currently serves as a Forest Watcher in Avidya Forest. He is a straight shooter with a warm heart — and a dab hand at guiding even the dullest of pupils.",
+            "elementText": "Dendro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Tighnari"
+          },
+          {
+            "name": "Candace",
+            "title": "Golden Vow",
+            "description": "A descendant of King Deshret with an amber left eye. The defender of Aaru Village.",
+            "elementText": "Hydro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Candace"
+          },
+          {
+            "name": "Faruzan",
+            "title": "Enigmatic Machinist",
+            "description": "A researcher from \"one hundred years ago.\" She enjoys self-identifying as everyone's senior, and has significant knowledge of ancient scripts and machines of all kinds.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Faruzan"
+          }
+        ]
+      },
+      {
+        "id": 4463,
+        "bookName": "Teachings of Equity",
+        "region": "Fontaine",
+        "iconId": 104338,
+        "characters": [
+          {
+            "name": "Lyney",
+            "title": "Spectacle of Phantasmagoria",
+            "description": "A famed Fontainian magician who possesses great stage presence as well as gift of the gab. Audiences are enthralled by his exquisite skills, and they hang on to his every clever word.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Liney"
+          },
+          {
+            "name": "Navia",
+            "title": "Helm of the Radiant Rose",
+            "description": "The current President of Spina di Rosula, who is lovely, dutiful, and a great boss.",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Navia"
+          },
+          {
+            "name": "Neuvillette",
+            "title": "Ordainer of Inexorable Judgment",
+            "description": "The Chief Justice of Fontaine, known as the Iudex, is renowned for his unassailable impartiality.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Neuvillette"
+          },
+          {
+            "name": "Sigewinne",
+            "title": "Wondrous Dragonheir",
+            "description": "A Melusine and the Fortress of Meropide's head nurse. She cares equally for every convict locked in the undersea prison.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Sigewinne"
+          }
+        ]
+      },
+      {
+        "id": 4437,
+        "bookName": "Teachings of Contention",
+        "region": "Natlan",
+        "iconId": 104347,
+        "characters": [
+          {
+            "name": "Mavuika",
+            "title": "Night-Igniting Flame",
+            "description": "The leader of Natlan who inherited the Ancient Name of \"Kiongozi.\" She made a vow to illuminate the future of the nation of war with the Sacred Flame.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mavuika"
+          },
+          {
+            "name": "Mualani",
+            "title": "Splish-Splash Wavechaser",
+            "description": "A well-known guide in Natlan who owns a watersports shop, and expert in all forms of wave-chasing.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mualani"
+          },
+          {
+            "name": "Skirk",
+            "title": "Void Star",
+            "description": "A visitor who once appeared in an Abyssal rift and the Primordial Sea, this solitary warrior mentored Tartaglia in the martial arts.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_SkirkNew"
+          },
+          {
+            "name": "Iansan",
+            "title": "Tempered in Molten Stone",
+            "description": "Head coach of the fitness club at the Collective of Plenty, and a renowned Natlanese nutritionist.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Iansan"
+          }
+        ]
+      }
+    ],
+    "Tuesday": [
+      {
+        "id": 4223,
+        "bookName": "Teachings of Resistance",
+        "region": "Mondstadt",
+        "iconId": 104304,
+        "characters": [
+          {
+            "name": "Diluc",
+            "title": "Dark Side of Dawn",
+            "description": "The tycoon of a winery empire in Mondstadt, unmatched in every possible way.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Diluc"
+          },
+          {
+            "name": "Eula",
+            "title": "Dance of the Shimmering Wave",
+            "description": "The Spindrift Knight, a scion of the old aristocracy, and the Captain of the Knights of Favonius Reconnaissance Company. The reason for which a descendant of the ancient nobles might join the Knights remains a great mystery in Mondstadt to this very day.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Eula"
+          },
+          {
+            "name": "Jean",
+            "title": "Dandelion Knight",
+            "description": "The righteous and rigorous Dandelion Knight, and Acting Grand Master of Mondstadt's Knights of Favonius.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Qin"
+          },
+          {
+            "name": "Lohen",
+            "title": "Sharpened Arrowhead",
+            "description": "Vice Captain of the Knights of Favonius Ranged Company, a knight known for his unorthodox approach and fondness for unconventional tactics.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Lohen"
+          },
+          {
+            "name": "Mona",
+            "title": "Astral Reflection",
+            "description": "A mysterious young astrologer who proclaims herself to be \"Astrologist Mona Megistus,\" and who possesses abilities to match the title. Erudite, but prideful.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mona"
+          },
+          {
+            "name": "Bennett",
+            "title": "Trial by Fire",
+            "description": "A good-natured adventurer from Mondstadt who's unfortunately extremely unlucky.",
+            "elementText": "Pyro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Bennett"
+          },
+          {
+            "name": "Noelle",
+            "title": "Chivalric Blossom",
+            "description": "A maid who faithfully serves the Knights of Favonius. She dreams of joining their ranks someday.",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Noel"
+          },
+          {
+            "name": "Prune",
+            "title": "Childlike Dreams Cherished",
+            "description": "A diminutive Witch Hunter who has journeyed all the way from Nod-Krai with the singular purpose of rooting out a witch who, to hear her tell it, has committed every sin imaginable — including bullying little kids!",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Prune"
+          },
+          {
+            "name": "Razor",
+            "title": "Wolf Boy",
+            "description": "A boy who lives among the wolves in Wolvendom of Mondstadt, away from human civilization. As agile as lightning.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Razor"
+          }
+        ]
+      },
+      {
+        "id": 5261,
+        "bookName": "Teachings of Diligence",
+        "region": "Liyue",
+        "iconId": 104313,
+        "characters": [
+          {
+            "name": "Ganyu",
+            "title": "Plenilune Gaze",
+            "description": "The secretary at Yuehai Pavilion. The blood of the qilin, an illuminated beast, flows within her veins.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ganyu"
+          },
+          {
+            "name": "Hu Tao",
+            "title": "Fragrance in Thaw",
+            "description": "The 77th Director of the Wangsheng Funeral Parlor. She took over the business at a rather young age.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Hutao"
+          },
+          {
+            "name": "Kaedehara Kazuha",
+            "title": "Scarlet Leaves Pursue Wild Waves",
+            "description": "A wandering samurai from Inazuma who is currently with Liyue's Crux Fleet. A gentle and carefree soul whose heart hides a great many burdens from the past.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kazuha"
+          },
+          {
+            "name": "Chongyun",
+            "title": "Frozen Ardor",
+            "description": "A young exorcist from a family of exorcists. He does everything he can to suppress his abundance of yang energy.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Chongyun"
+          },
+          {
+            "name": "Lan Yan",
+            "title": "Spring Woven From Jade",
+            "description": "A rattan weaver from Chenyu Vale. Clear-minded and well-tempered, she is as lively as a mountain spring.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Lanyan"
+          },
+          {
+            "name": "Xiangling",
+            "title": "Exquisite Delicacy",
+            "description": "A renowned chef from Liyue. She's extremely passionate about cooking and excels at making her signature hot and spicy dishes.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xiangling"
+          },
+          {
+            "name": "Yaoyao",
+            "title": "Burgeoning Grace",
+            "description": "Streetward Rambler's youngest disciple. A gentle and caring \"little adult.\"",
+            "elementText": "Dendro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Yaoyao"
+          },
+          {
+            "name": "Yun Jin",
+            "title": "Stage Lucida",
+            "description": "A renowned Liyue opera singer who is skilled in both playwriting and singing. Her style is one-of-a-kind, exquisite and delicate, much like the person herself.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Yunjin"
+          }
+        ]
+      },
+      {
+        "id": 4413,
+        "bookName": "Teachings of Elegance",
+        "region": "Inazuma",
+        "iconId": 104323,
+        "characters": [
+          {
+            "name": "Arataki Itto",
+            "title": "Hanamizaka Heroics",
+            "description": "The first and greatest head of the Arataki Gang, famed throughout Inazuma City's Hanamizaka... Wait, what? You've never heard of them? Are you trying to be funny here?",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Itto"
+          },
+          {
+            "name": "Kamisato Ayaka",
+            "title": "Frostflake Heron",
+            "description": "Daughter of the Yashiro Commission's Kamisato Clan. Dignified and elegant, as well as wise and strong.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ayaka"
+          },
+          {
+            "name": "Kamisato Ayato",
+            "title": "Pillar of Fortitude",
+            "description": "The young but highly accomplished head of the Yashiro Commission's Kamisato Clan. Cultured and polite, he is a man of many ways and means.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ayato"
+          },
+          {
+            "name": "Kujou Sara",
+            "title": "Crowfeather Kaburaya",
+            "description": "A general of the Tenryou Commission. Bold, decisive, and skilled in battle.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sara"
+          },
+          {
+            "name": "Kuki Shinobu",
+            "title": "Mender of Tribulations",
+            "description": "The capable and reliable Arataki Gang deputy leader. Please note: capable and reliable are not appellations for the \"Arataki Gang,\" but for their deputy leader in specific.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Shinobu"
+          }
+        ]
+      },
+      {
+        "id": 4443,
+        "bookName": "Teachings of Ingenuity",
+        "region": "Sumeru",
+        "iconId": 104332,
+        "characters": [
+          {
+            "name": "Alhaitham",
+            "title": "Admonishing Instruction",
+            "description": "The current scribe of the Sumeru Akademiya, a man endowed with extraordinary intelligence and talent. He lives free — free from the searching eyes of ordinary people, anyway.",
+            "elementText": "Dendro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Alhatham"
+          },
+          {
+            "name": "Nahida",
+            "title": "Physic of Purity",
+            "description": "A caged bird secluded within the confines of the Sanctuary of Surasthana who can only see the world in her dreams.",
+            "elementText": "Dendro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Nahida"
+          },
+          {
+            "name": "Dori",
+            "title": "Treasure of Dream Garden",
+            "description": "An elusive merchant who has a fondness for glittering Mora.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Dori"
+          },
+          {
+            "name": "Kaveh",
+            "title": "Empyrean Reflection",
+            "description": "A renowned architect from Sumeru who perhaps cares a bit too much about too many things. He is an aesthete troubled by reality.",
+            "elementText": "Dendro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kaveh"
+          },
+          {
+            "name": "Layla",
+            "title": "Fantastical Evening Star",
+            "description": "A Rtawahist student who specializes in Theoretical Astrology. Heavily prone to somnambulism and locked in a grinding war with sleep deprivation, the problem of restful slumber is a most troubling one to her.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Layla"
+          }
+        ]
+      },
+      {
+        "id": 4493,
+        "bookName": "Teachings of Justice",
+        "region": "Fontaine",
+        "iconId": 104341,
+        "characters": [
+          {
+            "name": "Clorinde",
+            "title": "Candlebearer, Shadowhunter",
+            "description": "An undefeated Champion Duelist. Sword in hand, she defends justice in the Court of Fontaine.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Clorinde"
+          },
+          {
+            "name": "Escoffier",
+            "title": "Tasteful Excellence",
+            "description": "The ex-head chef of Hotel Debord, renowned throughout Fontaine as the Patissiere Supreme and vanguard of precision gastronomy. Has incomparably strict standards when it comes to cooking.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Escoffier"
+          },
+          {
+            "name": "Furina",
+            "title": "Endless Solo of Solitude",
+            "description": "The absolute focus of the stage of judgment, until the final applause sounds.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Furina"
+          },
+          {
+            "name": "Charlotte",
+            "title": "Lens of Verity",
+            "description": "Indefatigable reporter of The Steambird, constantly on the hunt for the \"truth.\"",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Charlotte"
+          },
+          {
+            "name": "Freminet",
+            "title": "Yearning for Unseen Depths",
+            "description": "A reserved young man who is well-versed in diving. Beneath his distant, icy demeanor lies a pure heart bereft of all flaws.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Freminet"
+          }
+        ]
+      },
+      {
+        "id": 4447,
+        "bookName": "Teachings of Kindling",
+        "region": "Natlan",
+        "iconId": 104350,
+        "characters": [
+          {
+            "name": "Citlali",
+            "title": "Obsidian Opalstar",
+            "description": "The great shaman from the Masters of the Night-Wind, the universally-revered Granny Itztli.",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Citlali"
+          },
+          {
+            "name": "Kinich",
+            "title": "Turnfire Hunt",
+            "description": "A Huitztlan Saurian Hunter skilled at counting costs.",
+            "elementText": "Dendro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kinich"
+          },
+          {
+            "name": "Xilonen",
+            "title": "Ardent Flames Forge the Soul",
+            "description": "A Name Engraver of the Nanatzcayan, she is especially skilled at finding a good balance between the heavy responsibilities of her job and living well.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Xilonen"
+          },
+          {
+            "name": "Ororon",
+            "title": "Shadow of the Night-Wind",
+            "description": "A young man from the Masters of the Night-Wind who instead lives in the wild alongside all manner of life.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Olorun"
+          }
+        ]
+      }
+    ],
+    "Wednesday": [
+      {
+        "id": 4233,
+        "bookName": "Teachings of Ballad",
+        "region": "Mondstadt",
+        "iconId": 104307,
+        "characters": [
+          {
+            "name": "Albedo",
+            "title": "Kreideprinz",
+            "description": "A genius known as the Kreideprinz, he is the Chief Alchemist and Captain of the Investigation Team of the Knights of Favonius.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Albedo"
+          },
+          {
+            "name": "Durin",
+            "title": "\"The Undying Fire\"",
+            "description": "A dragon born from M's pen, who came to alight in the human world. His \"story\" continues to unfold.",
+            "elementText": "Pyro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Durin"
+          },
+          {
+            "name": "Venti",
+            "title": "Windborne Bard",
+            "description": "One of the many bards of Mondstadt, who freely wanders the city's streets and alleys.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Venti"
+          },
+          {
+            "name": "Dahlia",
+            "title": "Ode and Oblation",
+            "description": "Deacon of the Church of Favonius and the Anemo Archon's representative in the church.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Dahlia"
+          },
+          {
+            "name": "Fischl",
+            "title": "Prinzessin der Verurteilung!",
+            "description": "A mysterious girl who calls herself \"Prinzessin der Verurteilung\" and travels with a night raven named Oz.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Fischl"
+          },
+          {
+            "name": "Kaeya",
+            "title": "Frostwind Swordsman",
+            "description": "An accomplished swordsman and a strategic thinker in the Knights of Favonius, rumored to hail from beyond Mondstadt.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kaeya"
+          },
+          {
+            "name": "Lisa",
+            "title": "Witch of Purple Rose",
+            "description": "The languid but knowledgeable Librarian of the Knights of Favonius, deemed by Sumeru Akademiya to be their most distinguished graduate in the past two centuries.",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Lisa"
+          },
+          {
+            "name": "Mika",
+            "title": "Coordinates of Clear Frost",
+            "description": "A young knight born to an ordinary family. He serves as a Front-Line Surveyor in his Company. He is a low-key and cautious character.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Mika"
+          },
+          {
+            "name": "Rosaria",
+            "title": "Thorny Benevolence",
+            "description": "A sister of the church, though you wouldn't know it if it weren't for her attire. Known for her sharp, cold words and manner, she often works alone.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Rosaria"
+          }
+        ]
+      },
+      {
+        "id": 5265,
+        "bookName": "Teachings of Gold",
+        "region": "Liyue",
+        "iconId": 104316,
+        "characters": [
+          {
+            "name": "Baizhu",
+            "title": "Beyond Mortality",
+            "description": "The owner of Bubu Pharmacy, who is rarely seen without the white snake named Changsheng. His medicinal knowledge is encyclopedic, and his personal intrigues subtle.",
+            "elementText": "Dendro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Baizhuer"
+          },
+          {
+            "name": "Xianyun",
+            "title": "Passerine Herald",
+            "description": "One of the Mighty and Illuminated Adepti of Jueyun, known as \"Cloud Retainer.\" Expert in all kinds of mechanical contraptions, her heart now turns towards the affairs of the mortal world, through which she walks under the name \"Xianyun.\"",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Liuyun"
+          },
+          {
+            "name": "Zhongli",
+            "title": "Vago Mundo",
+            "description": "A mysterious expert contracted by the Wangsheng Funeral Parlor. Extremely knowledgeable in all things.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Zhongli"
+          },
+          {
+            "name": "Zibai",
+            "title": "White Horse's Fleeting Spring",
+            "description": "The White Horse Adeptus from Liyue's legends, known as Zibai. The most mysterious figure in Liyue's myths.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Zibai"
+          },
+          {
+            "name": "Beidou",
+            "title": "Uncrowned Lord of the Ocean",
+            "description": "Captain of her crew, The Crux. She's quite an unbound and forthright woman.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Beidou"
+          },
+          {
+            "name": "Xingqiu",
+            "title": "Juvenile Galant",
+            "description": "A young man carrying a longsword who is frequently seen at book booths. He has a chivalrous heart and yearns for justice and fairness for all.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xingqiu"
+          },
+          {
+            "name": "Xinyan",
+            "title": "Blazing Riff",
+            "description": "Liyue's sole rock 'n' roll musician. She rebels against ossified prejudices using her music and passionate singing.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xinyan"
+          },
+          {
+            "name": "Yanfei",
+            "title": "Wise Innocence",
+            "description": "A well-known legal adviser active in Liyue Harbor. A brilliant young lady in whose veins runs the blood of an illuminated beast.",
+            "elementText": "Pyro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Feiyan"
+          }
+        ]
+      },
+      {
+        "id": 4423,
+        "bookName": "Teachings of Light",
+        "region": "Inazuma",
+        "iconId": 104326,
+        "characters": [
+          {
+            "name": "Chiori",
+            "title": "The Thundering Seamstress",
+            "description": "The owner of Chioriya Boutique. A tailor renowned throughout Fontaine.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Chiori"
+          },
+          {
+            "name": "Raiden Shogun",
+            "title": "Plane of Euthymia",
+            "description": "Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Shougun"
+          },
+          {
+            "name": "Yae Miko",
+            "title": "Astute Amusement",
+            "description": "Lady Guuji of the Grand Narukami Shrine. Also serves as the editor-in-chief of Yae Publishing House. Unimaginable intelligence and cunning are hidden under her beautiful appearance.",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yae"
+          },
+          {
+            "name": "Gorou",
+            "title": "Canine Warrior",
+            "description": "The great general of Watatsumi Island's forces. He is deeply trusted by his subordinates.",
+            "elementText": "Geo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Gorou"
+          },
+          {
+            "name": "Sayu",
+            "title": "Mujina Ninja",
+            "description": "A pint-sized ninja attached to the Shuumatsuban, who always seems sleep-deprived.",
+            "elementText": "Anemo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sayu"
+          }
+        ]
+      },
+      {
+        "id": 4453,
+        "bookName": "Teachings of Praxis",
+        "region": "Sumeru",
+        "iconId": 104335,
+        "characters": [
+          {
+            "name": "Dehya",
+            "title": "Flame-Mane",
+            "description": "A member of the Eremites, a mercenary organization that roams the sands of Sumeru. Valiant and powerful, she enjoys great fame amongst her fellow Eremites.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Dehya"
+          },
+          {
+            "name": "Nilou",
+            "title": "Dance of Lotuslight",
+            "description": "The star of the Zubayr Theater. She is full of warmth and innocence, and her dances are lively and elegant.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Nilou"
+          },
+          {
+            "name": "Wanderer",
+            "title": "Eons Adrift",
+            "description": "A wayfaring figure whose identity is a mystery. He dresses like a mountain ascetic, but he certainly does not act the part.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Wanderer"
+          },
+          {
+            "name": "Collei",
+            "title": "Sprout of Rebirth",
+            "description": "A trainee ranger active in Avidya Forest. Behind her enthusiastic words and actions hides a slightly introverted personality.",
+            "elementText": "Dendro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Collei"
+          },
+          {
+            "name": "Sethos",
+            "title": "Wisdom's Measure",
+            "description": "The Temple of Silence's heir. Burdened with secrets, he comes from the sands.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sethos"
+          }
+        ]
+      },
+      {
+        "id": 4497,
+        "bookName": "Teachings of Order",
+        "region": "Fontaine",
+        "iconId": 104344,
+        "characters": [
+          {
+            "name": "Arlecchino",
+            "title": "Dire Balemoon",
+            "description": "\"The Knave,\" Fourth of the Fatui Harbingers. A poised, ruthless diplomat. To the children in the House of the Hearth, she is their feared yet dependable \"Father.\"",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Arlecchino"
+          },
+          {
+            "name": "Emilie",
+            "title": "A Thousand Scents Traced",
+            "description": "A Fontainian perfumer, one who bottles secrets.",
+            "elementText": "Dendro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Emilie"
+          },
+          {
+            "name": "Wriothesley",
+            "title": "Emissary of Solitary Iniquity",
+            "description": "Duke of the Fortress of Meropide, Lord Incognito of the murky depths.",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Wriothesley"
+          },
+          {
+            "name": "Chevreuse",
+            "title": "Executor of Justice",
+            "description": "The captain of the Special Security and Surveillance Patrol, who wears justice as an ever-present seal upon her heart. Her musket shall only ever point at the guilty.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Chevreuse"
+          },
+          {
+            "name": "Lynette",
+            "title": "Elegance in the Shadows",
+            "description": "A magic assistant of few words, her emotions are as inscrutable as any cat's.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Linette"
+          }
+        ]
+      },
+      {
+        "id": 4457,
+        "bookName": "Teachings of Conflict",
+        "region": "Natlan",
+        "iconId": 104353,
+        "characters": [
+          {
+            "name": "Chasca",
+            "title": "Skyborne Arbiter",
+            "description": "The Peacemaker of the Tlalocan, the ender of all disputes.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Chasca"
+          },
+          {
+            "name": "Ineffa",
+            "title": "Boom Boom Thunderwave",
+            "description": "A multifunctional robot containing integrated mechanical components from various nations. The Source Core in her chest has endured the passage of countless years.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ineffa"
+          },
+          {
+            "name": "Varesa",
+            "title": "Strength in Serenity",
+            "description": "A laid-back orchard manager and warrior of the Collective of Plenty. An aspiring hero who hungers for justice... and lots and lots of food!",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Varesa"
+          },
+          {
+            "name": "Ifa",
+            "title": "In the Wake of Wandering Winds",
+            "description": "A vet from the Flower-Feather Clan who cherishes the life he leads alongside all manner of living things — people, animals, you name it.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ifa"
+          },
+          {
+            "name": "Kachina",
+            "title": "Mottled Gold Yet Unsmelted",
+            "description": "A young warrior of the Nanatzcayan, given the Ancient Name of \"Uthabiti.\" Kind-hearted and insatiably persistent, she grows stronger and more capable with each setback she faces.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kachina"
+          }
+        ]
+      }
+    ],
+    "Thursday": [
+      {
+        "id": 4213,
+        "bookName": "Teachings of Freedom",
+        "region": "Mondstadt",
+        "iconId": 104301,
+        "characters": [
+          {
+            "name": "Aloy",
+            "title": "Savior From Another World",
+            "description": "Formerly an outcast, now a hunter of unparalleled skill. Ready to do the right thing at any time.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Aloy"
+          },
+          {
+            "name": "Klee",
+            "title": "Fleeing Sunlight",
+            "description": "An explosives expert and a regular at the Knights of Favonius's confinement room. Also known as Fleeing Sunlight.",
+            "elementText": "Pyro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Klee"
+          },
+          {
+            "name": "Tartaglia",
+            "title": "Childe",
+            "description": "No. 11 of The Harbingers, also known as \"Childe.\" His name is highly feared on the battlefield.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Tartaglia"
+          },
+          {
+            "name": "Varka",
+            "title": "Knight of Boreas",
+            "description": "Grand Master of the Knights of Favonius. Knight of Boreas, protector of Mondstadt.",
+            "elementText": "Anemo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Varka"
+          },
+          {
+            "name": "Amber",
+            "title": "Gliding Champion",
+            "description": "Always energetic and full of life, Amber's the best — albeit only — Outrider of the Knights of Favonius.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ambor"
+          },
+          {
+            "name": "Barbara",
+            "title": "Shining Idol",
+            "description": "Every citizen of Mondstadt adores Barbara. She learned the word \"idol\" from a magazine.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Barbara"
+          },
+          {
+            "name": "Diona",
+            "title": "Kätzlein Cocktail",
+            "description": "A young lady who has inherited trace amounts of non-human blood. She is the incredibly popular bartender of the Cat's Tail tavern.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Diona"
+          },
+          {
+            "name": "Sucrose",
+            "title": "Harmless Sweetie",
+            "description": "An alchemist filled with curiosity about all things. She researches bio-alchemy.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sucrose"
+          }
+        ]
+      },
+      {
+        "id": 5257,
+        "bookName": "Teachings of Prosperity",
+        "region": "Liyue",
+        "iconId": 104310,
+        "characters": [
+          {
+            "name": "Keqing",
+            "title": "Driving Thunder",
+            "description": "The Yuheng of the Liyue Qixing. Keqing has much to say about Rex Lapis's unilateral approach to policymaking in Liyue — but in truth, gods admire skeptics such as her quite a lot.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Keqing"
+          },
+          {
+            "name": "Qiqi",
+            "title": "Icy Resurrection",
+            "description": "An apprentice and herb gatherer at Bubu Pharmacy. An undead with a bone-white complexion, she seldom has much in the way of words or emotion.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Qiqi"
+          },
+          {
+            "name": "Shenhe",
+            "title": "Lonesome Transcendence",
+            "description": "An adepti disciple with a most unusual air about her. Having spent much time cultivating in isolation in Liyue's mountains, she has become every bit as cool and distant as the adepti themselves.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Shenhe"
+          },
+          {
+            "name": "Xiao",
+            "title": "Vigilant Yaksha",
+            "description": "A yaksha adeptus who defends Liyue. Also heralded as the \"Conqueror of Demons\" and \"Vigilant Yaksha.\"",
+            "elementText": "Anemo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Xiao"
+          },
+          {
+            "name": "Yelan",
+            "title": "Valley Orchid",
+            "description": "A mysterious person who claims to work for the Ministry of Civil Affairs, but is a \"non-entity\" on the Ministry of Civil Affairs' list.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yelan"
+          },
+          {
+            "name": "Gaming",
+            "title": "Leonine Vanguard",
+            "description": "Guard of the Sword and Strongbox Secure Transport Agency, and the head of the \"Mighty Mythical Beasts\" Wushou troupe.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Gaming"
+          },
+          {
+            "name": "Ningguang",
+            "title": "Eclipsing Star",
+            "description": "The Tianquan of the Liyue Qixing. Her wealth is unsurpassed in all of Teyvat.",
+            "elementText": "Geo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ningguang"
+          }
+        ]
+      },
+      {
+        "id": 4403,
+        "bookName": "Teachings of Transience",
+        "region": "Inazuma",
+        "iconId": 104320,
+        "characters": [
+          {
+            "name": "Sangonomiya Kokomi",
+            "title": "Pearl of Wisdom",
+            "description": "The Divine Priestess of Watatsumi Island. All of the island's affairs are at this young lady's fingertips.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kokomi"
+          },
+          {
+            "name": "Yoimiya",
+            "title": "Frolicking Flames",
+            "description": "Owner of Naganohara Fireworks. Known as the \"Queen of the Summer Festival,\" she excels in her craft of creating fireworks that symbolize people's hopes and dreams.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yoimiya"
+          },
+          {
+            "name": "Yumemizuki Mizuki",
+            "title": "Embrace of Enchanting Dreams",
+            "description": "A shareholder of Aisa Bathhouse, a baku, and a clinical psychologist. Dedicated to the dispersal of nightmares, and to bringing people peace of mind.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mizuki"
+          },
+          {
+            "name": "Kirara",
+            "title": "Cat Upon the Eaves",
+            "description": "A courier for Komaniya Express, a delivery company in Inazuma. A nekomata who loves her job and human society.",
+            "elementText": "Dendro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Momoka"
+          },
+          {
+            "name": "Shikanoin Heizou",
+            "title": "Analytical Harmony",
+            "description": "A young prodigy detective from the Tenryou Commission. His senses are sharp and his thoughts are clear.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Heizo"
+          },
+          {
+            "name": "Thoma",
+            "title": "Protector From Afar",
+            "description": "The Kamisato Clan's housekeeper. A well-known \"fixer\" in Inazuma.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Tohma"
+          }
+        ]
+      },
+      {
+        "id": 4433,
+        "bookName": "Teachings of Admonition",
+        "region": "Sumeru",
+        "iconId": 104329,
+        "characters": [
+          {
+            "name": "Cyno",
+            "title": "Judicator of Secrets",
+            "description": "The General Mahamatra in charge of supervising the researchers of the Akademiya. It is said that when he gets down to work, the General Mahamatra is even more efficient than the \"Great Vayuvyastra\" made by the Kshahrewar.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Cyno"
+          },
+          {
+            "name": "Tighnari",
+            "title": "Verdant Strider",
+            "description": "A young researcher well-versed in botany who currently serves as a Forest Watcher in Avidya Forest. He is a straight shooter with a warm heart — and a dab hand at guiding even the dullest of pupils.",
+            "elementText": "Dendro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Tighnari"
+          },
+          {
+            "name": "Candace",
+            "title": "Golden Vow",
+            "description": "A descendant of King Deshret with an amber left eye. The defender of Aaru Village.",
+            "elementText": "Hydro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Candace"
+          },
+          {
+            "name": "Faruzan",
+            "title": "Enigmatic Machinist",
+            "description": "A researcher from \"one hundred years ago.\" She enjoys self-identifying as everyone's senior, and has significant knowledge of ancient scripts and machines of all kinds.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Faruzan"
+          }
+        ]
+      },
+      {
+        "id": 4463,
+        "bookName": "Teachings of Equity",
+        "region": "Fontaine",
+        "iconId": 104338,
+        "characters": [
+          {
+            "name": "Lyney",
+            "title": "Spectacle of Phantasmagoria",
+            "description": "A famed Fontainian magician who possesses great stage presence as well as gift of the gab. Audiences are enthralled by his exquisite skills, and they hang on to his every clever word.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Liney"
+          },
+          {
+            "name": "Navia",
+            "title": "Helm of the Radiant Rose",
+            "description": "The current President of Spina di Rosula, who is lovely, dutiful, and a great boss.",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Navia"
+          },
+          {
+            "name": "Neuvillette",
+            "title": "Ordainer of Inexorable Judgment",
+            "description": "The Chief Justice of Fontaine, known as the Iudex, is renowned for his unassailable impartiality.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Neuvillette"
+          },
+          {
+            "name": "Sigewinne",
+            "title": "Wondrous Dragonheir",
+            "description": "A Melusine and the Fortress of Meropide's head nurse. She cares equally for every convict locked in the undersea prison.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Sigewinne"
+          }
+        ]
+      },
+      {
+        "id": 4437,
+        "bookName": "Teachings of Contention",
+        "region": "Natlan",
+        "iconId": 104347,
+        "characters": [
+          {
+            "name": "Mavuika",
+            "title": "Night-Igniting Flame",
+            "description": "The leader of Natlan who inherited the Ancient Name of \"Kiongozi.\" She made a vow to illuminate the future of the nation of war with the Sacred Flame.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mavuika"
+          },
+          {
+            "name": "Mualani",
+            "title": "Splish-Splash Wavechaser",
+            "description": "A well-known guide in Natlan who owns a watersports shop, and expert in all forms of wave-chasing.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mualani"
+          },
+          {
+            "name": "Skirk",
+            "title": "Void Star",
+            "description": "A visitor who once appeared in an Abyssal rift and the Primordial Sea, this solitary warrior mentored Tartaglia in the martial arts.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_SkirkNew"
+          },
+          {
+            "name": "Iansan",
+            "title": "Tempered in Molten Stone",
+            "description": "Head coach of the fitness club at the Collective of Plenty, and a renowned Natlanese nutritionist.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Iansan"
+          }
+        ]
+      }
+    ],
+    "Friday": [
+      {
+        "id": 4223,
+        "bookName": "Teachings of Resistance",
+        "region": "Mondstadt",
+        "iconId": 104304,
+        "characters": [
+          {
+            "name": "Diluc",
+            "title": "Dark Side of Dawn",
+            "description": "The tycoon of a winery empire in Mondstadt, unmatched in every possible way.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Diluc"
+          },
+          {
+            "name": "Eula",
+            "title": "Dance of the Shimmering Wave",
+            "description": "The Spindrift Knight, a scion of the old aristocracy, and the Captain of the Knights of Favonius Reconnaissance Company. The reason for which a descendant of the ancient nobles might join the Knights remains a great mystery in Mondstadt to this very day.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Eula"
+          },
+          {
+            "name": "Jean",
+            "title": "Dandelion Knight",
+            "description": "The righteous and rigorous Dandelion Knight, and Acting Grand Master of Mondstadt's Knights of Favonius.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Qin"
+          },
+          {
+            "name": "Lohen",
+            "title": "Sharpened Arrowhead",
+            "description": "Vice Captain of the Knights of Favonius Ranged Company, a knight known for his unorthodox approach and fondness for unconventional tactics.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Lohen"
+          },
+          {
+            "name": "Mona",
+            "title": "Astral Reflection",
+            "description": "A mysterious young astrologer who proclaims herself to be \"Astrologist Mona Megistus,\" and who possesses abilities to match the title. Erudite, but prideful.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mona"
+          },
+          {
+            "name": "Bennett",
+            "title": "Trial by Fire",
+            "description": "A good-natured adventurer from Mondstadt who's unfortunately extremely unlucky.",
+            "elementText": "Pyro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Bennett"
+          },
+          {
+            "name": "Noelle",
+            "title": "Chivalric Blossom",
+            "description": "A maid who faithfully serves the Knights of Favonius. She dreams of joining their ranks someday.",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Noel"
+          },
+          {
+            "name": "Prune",
+            "title": "Childlike Dreams Cherished",
+            "description": "A diminutive Witch Hunter who has journeyed all the way from Nod-Krai with the singular purpose of rooting out a witch who, to hear her tell it, has committed every sin imaginable — including bullying little kids!",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Prune"
+          },
+          {
+            "name": "Razor",
+            "title": "Wolf Boy",
+            "description": "A boy who lives among the wolves in Wolvendom of Mondstadt, away from human civilization. As agile as lightning.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Razor"
+          }
+        ]
+      },
+      {
+        "id": 5261,
+        "bookName": "Teachings of Diligence",
+        "region": "Liyue",
+        "iconId": 104313,
+        "characters": [
+          {
+            "name": "Ganyu",
+            "title": "Plenilune Gaze",
+            "description": "The secretary at Yuehai Pavilion. The blood of the qilin, an illuminated beast, flows within her veins.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ganyu"
+          },
+          {
+            "name": "Hu Tao",
+            "title": "Fragrance in Thaw",
+            "description": "The 77th Director of the Wangsheng Funeral Parlor. She took over the business at a rather young age.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Hutao"
+          },
+          {
+            "name": "Kaedehara Kazuha",
+            "title": "Scarlet Leaves Pursue Wild Waves",
+            "description": "A wandering samurai from Inazuma who is currently with Liyue's Crux Fleet. A gentle and carefree soul whose heart hides a great many burdens from the past.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kazuha"
+          },
+          {
+            "name": "Chongyun",
+            "title": "Frozen Ardor",
+            "description": "A young exorcist from a family of exorcists. He does everything he can to suppress his abundance of yang energy.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Chongyun"
+          },
+          {
+            "name": "Lan Yan",
+            "title": "Spring Woven From Jade",
+            "description": "A rattan weaver from Chenyu Vale. Clear-minded and well-tempered, she is as lively as a mountain spring.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Lanyan"
+          },
+          {
+            "name": "Xiangling",
+            "title": "Exquisite Delicacy",
+            "description": "A renowned chef from Liyue. She's extremely passionate about cooking and excels at making her signature hot and spicy dishes.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xiangling"
+          },
+          {
+            "name": "Yaoyao",
+            "title": "Burgeoning Grace",
+            "description": "Streetward Rambler's youngest disciple. A gentle and caring \"little adult.\"",
+            "elementText": "Dendro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Yaoyao"
+          },
+          {
+            "name": "Yun Jin",
+            "title": "Stage Lucida",
+            "description": "A renowned Liyue opera singer who is skilled in both playwriting and singing. Her style is one-of-a-kind, exquisite and delicate, much like the person herself.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Yunjin"
+          }
+        ]
+      },
+      {
+        "id": 4413,
+        "bookName": "Teachings of Elegance",
+        "region": "Inazuma",
+        "iconId": 104323,
+        "characters": [
+          {
+            "name": "Arataki Itto",
+            "title": "Hanamizaka Heroics",
+            "description": "The first and greatest head of the Arataki Gang, famed throughout Inazuma City's Hanamizaka... Wait, what? You've never heard of them? Are you trying to be funny here?",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Itto"
+          },
+          {
+            "name": "Kamisato Ayaka",
+            "title": "Frostflake Heron",
+            "description": "Daughter of the Yashiro Commission's Kamisato Clan. Dignified and elegant, as well as wise and strong.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ayaka"
+          },
+          {
+            "name": "Kamisato Ayato",
+            "title": "Pillar of Fortitude",
+            "description": "The young but highly accomplished head of the Yashiro Commission's Kamisato Clan. Cultured and polite, he is a man of many ways and means.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ayato"
+          },
+          {
+            "name": "Kujou Sara",
+            "title": "Crowfeather Kaburaya",
+            "description": "A general of the Tenryou Commission. Bold, decisive, and skilled in battle.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sara"
+          },
+          {
+            "name": "Kuki Shinobu",
+            "title": "Mender of Tribulations",
+            "description": "The capable and reliable Arataki Gang deputy leader. Please note: capable and reliable are not appellations for the \"Arataki Gang,\" but for their deputy leader in specific.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Shinobu"
+          }
+        ]
+      },
+      {
+        "id": 4443,
+        "bookName": "Teachings of Ingenuity",
+        "region": "Sumeru",
+        "iconId": 104332,
+        "characters": [
+          {
+            "name": "Alhaitham",
+            "title": "Admonishing Instruction",
+            "description": "The current scribe of the Sumeru Akademiya, a man endowed with extraordinary intelligence and talent. He lives free — free from the searching eyes of ordinary people, anyway.",
+            "elementText": "Dendro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Alhatham"
+          },
+          {
+            "name": "Nahida",
+            "title": "Physic of Purity",
+            "description": "A caged bird secluded within the confines of the Sanctuary of Surasthana who can only see the world in her dreams.",
+            "elementText": "Dendro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Nahida"
+          },
+          {
+            "name": "Dori",
+            "title": "Treasure of Dream Garden",
+            "description": "An elusive merchant who has a fondness for glittering Mora.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Dori"
+          },
+          {
+            "name": "Kaveh",
+            "title": "Empyrean Reflection",
+            "description": "A renowned architect from Sumeru who perhaps cares a bit too much about too many things. He is an aesthete troubled by reality.",
+            "elementText": "Dendro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kaveh"
+          },
+          {
+            "name": "Layla",
+            "title": "Fantastical Evening Star",
+            "description": "A Rtawahist student who specializes in Theoretical Astrology. Heavily prone to somnambulism and locked in a grinding war with sleep deprivation, the problem of restful slumber is a most troubling one to her.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Layla"
+          }
+        ]
+      },
+      {
+        "id": 4493,
+        "bookName": "Teachings of Justice",
+        "region": "Fontaine",
+        "iconId": 104341,
+        "characters": [
+          {
+            "name": "Clorinde",
+            "title": "Candlebearer, Shadowhunter",
+            "description": "An undefeated Champion Duelist. Sword in hand, she defends justice in the Court of Fontaine.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Clorinde"
+          },
+          {
+            "name": "Escoffier",
+            "title": "Tasteful Excellence",
+            "description": "The ex-head chef of Hotel Debord, renowned throughout Fontaine as the Patissiere Supreme and vanguard of precision gastronomy. Has incomparably strict standards when it comes to cooking.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Escoffier"
+          },
+          {
+            "name": "Furina",
+            "title": "Endless Solo of Solitude",
+            "description": "The absolute focus of the stage of judgment, until the final applause sounds.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Furina"
+          },
+          {
+            "name": "Charlotte",
+            "title": "Lens of Verity",
+            "description": "Indefatigable reporter of The Steambird, constantly on the hunt for the \"truth.\"",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Charlotte"
+          },
+          {
+            "name": "Freminet",
+            "title": "Yearning for Unseen Depths",
+            "description": "A reserved young man who is well-versed in diving. Beneath his distant, icy demeanor lies a pure heart bereft of all flaws.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Freminet"
+          }
+        ]
+      },
+      {
+        "id": 4447,
+        "bookName": "Teachings of Kindling",
+        "region": "Natlan",
+        "iconId": 104350,
+        "characters": [
+          {
+            "name": "Citlali",
+            "title": "Obsidian Opalstar",
+            "description": "The great shaman from the Masters of the Night-Wind, the universally-revered Granny Itztli.",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Citlali"
+          },
+          {
+            "name": "Kinich",
+            "title": "Turnfire Hunt",
+            "description": "A Huitztlan Saurian Hunter skilled at counting costs.",
+            "elementText": "Dendro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kinich"
+          },
+          {
+            "name": "Xilonen",
+            "title": "Ardent Flames Forge the Soul",
+            "description": "A Name Engraver of the Nanatzcayan, she is especially skilled at finding a good balance between the heavy responsibilities of her job and living well.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Xilonen"
+          },
+          {
+            "name": "Ororon",
+            "title": "Shadow of the Night-Wind",
+            "description": "A young man from the Masters of the Night-Wind who instead lives in the wild alongside all manner of life.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Olorun"
+          }
+        ]
+      }
+    ],
+    "Saturday": [
+      {
+        "id": 4233,
+        "bookName": "Teachings of Ballad",
+        "region": "Mondstadt",
+        "iconId": 104307,
+        "characters": [
+          {
+            "name": "Albedo",
+            "title": "Kreideprinz",
+            "description": "A genius known as the Kreideprinz, he is the Chief Alchemist and Captain of the Investigation Team of the Knights of Favonius.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Albedo"
+          },
+          {
+            "name": "Durin",
+            "title": "\"The Undying Fire\"",
+            "description": "A dragon born from M's pen, who came to alight in the human world. His \"story\" continues to unfold.",
+            "elementText": "Pyro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Durin"
+          },
+          {
+            "name": "Venti",
+            "title": "Windborne Bard",
+            "description": "One of the many bards of Mondstadt, who freely wanders the city's streets and alleys.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Venti"
+          },
+          {
+            "name": "Dahlia",
+            "title": "Ode and Oblation",
+            "description": "Deacon of the Church of Favonius and the Anemo Archon's representative in the church.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Dahlia"
+          },
+          {
+            "name": "Fischl",
+            "title": "Prinzessin der Verurteilung!",
+            "description": "A mysterious girl who calls herself \"Prinzessin der Verurteilung\" and travels with a night raven named Oz.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Fischl"
+          },
+          {
+            "name": "Kaeya",
+            "title": "Frostwind Swordsman",
+            "description": "An accomplished swordsman and a strategic thinker in the Knights of Favonius, rumored to hail from beyond Mondstadt.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kaeya"
+          },
+          {
+            "name": "Lisa",
+            "title": "Witch of Purple Rose",
+            "description": "The languid but knowledgeable Librarian of the Knights of Favonius, deemed by Sumeru Akademiya to be their most distinguished graduate in the past two centuries.",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Lisa"
+          },
+          {
+            "name": "Mika",
+            "title": "Coordinates of Clear Frost",
+            "description": "A young knight born to an ordinary family. He serves as a Front-Line Surveyor in his Company. He is a low-key and cautious character.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Mika"
+          },
+          {
+            "name": "Rosaria",
+            "title": "Thorny Benevolence",
+            "description": "A sister of the church, though you wouldn't know it if it weren't for her attire. Known for her sharp, cold words and manner, she often works alone.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Rosaria"
+          }
+        ]
+      },
+      {
+        "id": 5265,
+        "bookName": "Teachings of Gold",
+        "region": "Liyue",
+        "iconId": 104316,
+        "characters": [
+          {
+            "name": "Baizhu",
+            "title": "Beyond Mortality",
+            "description": "The owner of Bubu Pharmacy, who is rarely seen without the white snake named Changsheng. His medicinal knowledge is encyclopedic, and his personal intrigues subtle.",
+            "elementText": "Dendro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Baizhuer"
+          },
+          {
+            "name": "Xianyun",
+            "title": "Passerine Herald",
+            "description": "One of the Mighty and Illuminated Adepti of Jueyun, known as \"Cloud Retainer.\" Expert in all kinds of mechanical contraptions, her heart now turns towards the affairs of the mortal world, through which she walks under the name \"Xianyun.\"",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Liuyun"
+          },
+          {
+            "name": "Zhongli",
+            "title": "Vago Mundo",
+            "description": "A mysterious expert contracted by the Wangsheng Funeral Parlor. Extremely knowledgeable in all things.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Zhongli"
+          },
+          {
+            "name": "Zibai",
+            "title": "White Horse's Fleeting Spring",
+            "description": "The White Horse Adeptus from Liyue's legends, known as Zibai. The most mysterious figure in Liyue's myths.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Zibai"
+          },
+          {
+            "name": "Beidou",
+            "title": "Uncrowned Lord of the Ocean",
+            "description": "Captain of her crew, The Crux. She's quite an unbound and forthright woman.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Beidou"
+          },
+          {
+            "name": "Xingqiu",
+            "title": "Juvenile Galant",
+            "description": "A young man carrying a longsword who is frequently seen at book booths. He has a chivalrous heart and yearns for justice and fairness for all.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xingqiu"
+          },
+          {
+            "name": "Xinyan",
+            "title": "Blazing Riff",
+            "description": "Liyue's sole rock 'n' roll musician. She rebels against ossified prejudices using her music and passionate singing.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xinyan"
+          },
+          {
+            "name": "Yanfei",
+            "title": "Wise Innocence",
+            "description": "A well-known legal adviser active in Liyue Harbor. A brilliant young lady in whose veins runs the blood of an illuminated beast.",
+            "elementText": "Pyro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Feiyan"
+          }
+        ]
+      },
+      {
+        "id": 4423,
+        "bookName": "Teachings of Light",
+        "region": "Inazuma",
+        "iconId": 104326,
+        "characters": [
+          {
+            "name": "Chiori",
+            "title": "The Thundering Seamstress",
+            "description": "The owner of Chioriya Boutique. A tailor renowned throughout Fontaine.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Chiori"
+          },
+          {
+            "name": "Raiden Shogun",
+            "title": "Plane of Euthymia",
+            "description": "Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Shougun"
+          },
+          {
+            "name": "Yae Miko",
+            "title": "Astute Amusement",
+            "description": "Lady Guuji of the Grand Narukami Shrine. Also serves as the editor-in-chief of Yae Publishing House. Unimaginable intelligence and cunning are hidden under her beautiful appearance.",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yae"
+          },
+          {
+            "name": "Gorou",
+            "title": "Canine Warrior",
+            "description": "The great general of Watatsumi Island's forces. He is deeply trusted by his subordinates.",
+            "elementText": "Geo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Gorou"
+          },
+          {
+            "name": "Sayu",
+            "title": "Mujina Ninja",
+            "description": "A pint-sized ninja attached to the Shuumatsuban, who always seems sleep-deprived.",
+            "elementText": "Anemo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sayu"
+          }
+        ]
+      },
+      {
+        "id": 4453,
+        "bookName": "Teachings of Praxis",
+        "region": "Sumeru",
+        "iconId": 104335,
+        "characters": [
+          {
+            "name": "Dehya",
+            "title": "Flame-Mane",
+            "description": "A member of the Eremites, a mercenary organization that roams the sands of Sumeru. Valiant and powerful, she enjoys great fame amongst her fellow Eremites.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Dehya"
+          },
+          {
+            "name": "Nilou",
+            "title": "Dance of Lotuslight",
+            "description": "The star of the Zubayr Theater. She is full of warmth and innocence, and her dances are lively and elegant.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Nilou"
+          },
+          {
+            "name": "Wanderer",
+            "title": "Eons Adrift",
+            "description": "A wayfaring figure whose identity is a mystery. He dresses like a mountain ascetic, but he certainly does not act the part.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Wanderer"
+          },
+          {
+            "name": "Collei",
+            "title": "Sprout of Rebirth",
+            "description": "A trainee ranger active in Avidya Forest. Behind her enthusiastic words and actions hides a slightly introverted personality.",
+            "elementText": "Dendro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Collei"
+          },
+          {
+            "name": "Sethos",
+            "title": "Wisdom's Measure",
+            "description": "The Temple of Silence's heir. Burdened with secrets, he comes from the sands.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sethos"
+          }
+        ]
+      },
+      {
+        "id": 4497,
+        "bookName": "Teachings of Order",
+        "region": "Fontaine",
+        "iconId": 104344,
+        "characters": [
+          {
+            "name": "Arlecchino",
+            "title": "Dire Balemoon",
+            "description": "\"The Knave,\" Fourth of the Fatui Harbingers. A poised, ruthless diplomat. To the children in the House of the Hearth, she is their feared yet dependable \"Father.\"",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Arlecchino"
+          },
+          {
+            "name": "Emilie",
+            "title": "A Thousand Scents Traced",
+            "description": "A Fontainian perfumer, one who bottles secrets.",
+            "elementText": "Dendro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Emilie"
+          },
+          {
+            "name": "Wriothesley",
+            "title": "Emissary of Solitary Iniquity",
+            "description": "Duke of the Fortress of Meropide, Lord Incognito of the murky depths.",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Wriothesley"
+          },
+          {
+            "name": "Chevreuse",
+            "title": "Executor of Justice",
+            "description": "The captain of the Special Security and Surveillance Patrol, who wears justice as an ever-present seal upon her heart. Her musket shall only ever point at the guilty.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Chevreuse"
+          },
+          {
+            "name": "Lynette",
+            "title": "Elegance in the Shadows",
+            "description": "A magic assistant of few words, her emotions are as inscrutable as any cat's.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Linette"
+          }
+        ]
+      },
+      {
+        "id": 4457,
+        "bookName": "Teachings of Conflict",
+        "region": "Natlan",
+        "iconId": 104353,
+        "characters": [
+          {
+            "name": "Chasca",
+            "title": "Skyborne Arbiter",
+            "description": "The Peacemaker of the Tlalocan, the ender of all disputes.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Chasca"
+          },
+          {
+            "name": "Ineffa",
+            "title": "Boom Boom Thunderwave",
+            "description": "A multifunctional robot containing integrated mechanical components from various nations. The Source Core in her chest has endured the passage of countless years.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ineffa"
+          },
+          {
+            "name": "Varesa",
+            "title": "Strength in Serenity",
+            "description": "A laid-back orchard manager and warrior of the Collective of Plenty. An aspiring hero who hungers for justice... and lots and lots of food!",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Varesa"
+          },
+          {
+            "name": "Ifa",
+            "title": "In the Wake of Wandering Winds",
+            "description": "A vet from the Flower-Feather Clan who cherishes the life he leads alongside all manner of living things — people, animals, you name it.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ifa"
+          },
+          {
+            "name": "Kachina",
+            "title": "Mottled Gold Yet Unsmelted",
+            "description": "A young warrior of the Nanatzcayan, given the Ancient Name of \"Uthabiti.\" Kind-hearted and insatiably persistent, she grows stronger and more capable with each setback she faces.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kachina"
+          }
+        ]
+      }
+    ],
+    "Sunday": [
+      {
+        "id": 4213,
+        "bookName": "Teachings of Freedom",
+        "region": "Mondstadt",
+        "iconId": 104301,
+        "characters": [
+          {
+            "name": "Aloy",
+            "title": "Savior From Another World",
+            "description": "Formerly an outcast, now a hunter of unparalleled skill. Ready to do the right thing at any time.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Aloy"
+          },
+          {
+            "name": "Klee",
+            "title": "Fleeing Sunlight",
+            "description": "An explosives expert and a regular at the Knights of Favonius's confinement room. Also known as Fleeing Sunlight.",
+            "elementText": "Pyro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Klee"
+          },
+          {
+            "name": "Tartaglia",
+            "title": "Childe",
+            "description": "No. 11 of The Harbingers, also known as \"Childe.\" His name is highly feared on the battlefield.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Tartaglia"
+          },
+          {
+            "name": "Varka",
+            "title": "Knight of Boreas",
+            "description": "Grand Master of the Knights of Favonius. Knight of Boreas, protector of Mondstadt.",
+            "elementText": "Anemo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Varka"
+          },
+          {
+            "name": "Amber",
+            "title": "Gliding Champion",
+            "description": "Always energetic and full of life, Amber's the best — albeit only — Outrider of the Knights of Favonius.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ambor"
+          },
+          {
+            "name": "Barbara",
+            "title": "Shining Idol",
+            "description": "Every citizen of Mondstadt adores Barbara. She learned the word \"idol\" from a magazine.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Barbara"
+          },
+          {
+            "name": "Diona",
+            "title": "Kätzlein Cocktail",
+            "description": "A young lady who has inherited trace amounts of non-human blood. She is the incredibly popular bartender of the Cat's Tail tavern.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Diona"
+          },
+          {
+            "name": "Sucrose",
+            "title": "Harmless Sweetie",
+            "description": "An alchemist filled with curiosity about all things. She researches bio-alchemy.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sucrose"
+          }
+        ]
+      },
+      {
+        "id": 4223,
+        "bookName": "Teachings of Resistance",
+        "region": "Mondstadt",
+        "iconId": 104304,
+        "characters": [
+          {
+            "name": "Diluc",
+            "title": "Dark Side of Dawn",
+            "description": "The tycoon of a winery empire in Mondstadt, unmatched in every possible way.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Diluc"
+          },
+          {
+            "name": "Eula",
+            "title": "Dance of the Shimmering Wave",
+            "description": "The Spindrift Knight, a scion of the old aristocracy, and the Captain of the Knights of Favonius Reconnaissance Company. The reason for which a descendant of the ancient nobles might join the Knights remains a great mystery in Mondstadt to this very day.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Eula"
+          },
+          {
+            "name": "Jean",
+            "title": "Dandelion Knight",
+            "description": "The righteous and rigorous Dandelion Knight, and Acting Grand Master of Mondstadt's Knights of Favonius.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Qin"
+          },
+          {
+            "name": "Lohen",
+            "title": "Sharpened Arrowhead",
+            "description": "Vice Captain of the Knights of Favonius Ranged Company, a knight known for his unorthodox approach and fondness for unconventional tactics.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Lohen"
+          },
+          {
+            "name": "Mona",
+            "title": "Astral Reflection",
+            "description": "A mysterious young astrologer who proclaims herself to be \"Astrologist Mona Megistus,\" and who possesses abilities to match the title. Erudite, but prideful.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mona"
+          },
+          {
+            "name": "Bennett",
+            "title": "Trial by Fire",
+            "description": "A good-natured adventurer from Mondstadt who's unfortunately extremely unlucky.",
+            "elementText": "Pyro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Bennett"
+          },
+          {
+            "name": "Noelle",
+            "title": "Chivalric Blossom",
+            "description": "A maid who faithfully serves the Knights of Favonius. She dreams of joining their ranks someday.",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Noel"
+          },
+          {
+            "name": "Prune",
+            "title": "Childlike Dreams Cherished",
+            "description": "A diminutive Witch Hunter who has journeyed all the way from Nod-Krai with the singular purpose of rooting out a witch who, to hear her tell it, has committed every sin imaginable — including bullying little kids!",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Prune"
+          },
+          {
+            "name": "Razor",
+            "title": "Wolf Boy",
+            "description": "A boy who lives among the wolves in Wolvendom of Mondstadt, away from human civilization. As agile as lightning.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Razor"
+          }
+        ]
+      },
+      {
+        "id": 4233,
+        "bookName": "Teachings of Ballad",
+        "region": "Mondstadt",
+        "iconId": 104307,
+        "characters": [
+          {
+            "name": "Albedo",
+            "title": "Kreideprinz",
+            "description": "A genius known as the Kreideprinz, he is the Chief Alchemist and Captain of the Investigation Team of the Knights of Favonius.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Albedo"
+          },
+          {
+            "name": "Durin",
+            "title": "\"The Undying Fire\"",
+            "description": "A dragon born from M's pen, who came to alight in the human world. His \"story\" continues to unfold.",
+            "elementText": "Pyro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Durin"
+          },
+          {
+            "name": "Venti",
+            "title": "Windborne Bard",
+            "description": "One of the many bards of Mondstadt, who freely wanders the city's streets and alleys.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Venti"
+          },
+          {
+            "name": "Dahlia",
+            "title": "Ode and Oblation",
+            "description": "Deacon of the Church of Favonius and the Anemo Archon's representative in the church.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Dahlia"
+          },
+          {
+            "name": "Fischl",
+            "title": "Prinzessin der Verurteilung!",
+            "description": "A mysterious girl who calls herself \"Prinzessin der Verurteilung\" and travels with a night raven named Oz.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Fischl"
+          },
+          {
+            "name": "Kaeya",
+            "title": "Frostwind Swordsman",
+            "description": "An accomplished swordsman and a strategic thinker in the Knights of Favonius, rumored to hail from beyond Mondstadt.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kaeya"
+          },
+          {
+            "name": "Lisa",
+            "title": "Witch of Purple Rose",
+            "description": "The languid but knowledgeable Librarian of the Knights of Favonius, deemed by Sumeru Akademiya to be their most distinguished graduate in the past two centuries.",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Lisa"
+          },
+          {
+            "name": "Mika",
+            "title": "Coordinates of Clear Frost",
+            "description": "A young knight born to an ordinary family. He serves as a Front-Line Surveyor in his Company. He is a low-key and cautious character.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Mika"
+          },
+          {
+            "name": "Rosaria",
+            "title": "Thorny Benevolence",
+            "description": "A sister of the church, though you wouldn't know it if it weren't for her attire. Known for her sharp, cold words and manner, she often works alone.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Rosaria"
+          }
+        ]
+      },
+      {
+        "id": 5257,
+        "bookName": "Teachings of Prosperity",
+        "region": "Liyue",
+        "iconId": 104310,
+        "characters": [
+          {
+            "name": "Keqing",
+            "title": "Driving Thunder",
+            "description": "The Yuheng of the Liyue Qixing. Keqing has much to say about Rex Lapis's unilateral approach to policymaking in Liyue — but in truth, gods admire skeptics such as her quite a lot.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Keqing"
+          },
+          {
+            "name": "Qiqi",
+            "title": "Icy Resurrection",
+            "description": "An apprentice and herb gatherer at Bubu Pharmacy. An undead with a bone-white complexion, she seldom has much in the way of words or emotion.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Qiqi"
+          },
+          {
+            "name": "Shenhe",
+            "title": "Lonesome Transcendence",
+            "description": "An adepti disciple with a most unusual air about her. Having spent much time cultivating in isolation in Liyue's mountains, she has become every bit as cool and distant as the adepti themselves.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Shenhe"
+          },
+          {
+            "name": "Xiao",
+            "title": "Vigilant Yaksha",
+            "description": "A yaksha adeptus who defends Liyue. Also heralded as the \"Conqueror of Demons\" and \"Vigilant Yaksha.\"",
+            "elementText": "Anemo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Xiao"
+          },
+          {
+            "name": "Yelan",
+            "title": "Valley Orchid",
+            "description": "A mysterious person who claims to work for the Ministry of Civil Affairs, but is a \"non-entity\" on the Ministry of Civil Affairs' list.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yelan"
+          },
+          {
+            "name": "Gaming",
+            "title": "Leonine Vanguard",
+            "description": "Guard of the Sword and Strongbox Secure Transport Agency, and the head of the \"Mighty Mythical Beasts\" Wushou troupe.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Gaming"
+          },
+          {
+            "name": "Ningguang",
+            "title": "Eclipsing Star",
+            "description": "The Tianquan of the Liyue Qixing. Her wealth is unsurpassed in all of Teyvat.",
+            "elementText": "Geo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ningguang"
+          }
+        ]
+      },
+      {
+        "id": 5265,
+        "bookName": "Teachings of Gold",
+        "region": "Liyue",
+        "iconId": 104316,
+        "characters": [
+          {
+            "name": "Baizhu",
+            "title": "Beyond Mortality",
+            "description": "The owner of Bubu Pharmacy, who is rarely seen without the white snake named Changsheng. His medicinal knowledge is encyclopedic, and his personal intrigues subtle.",
+            "elementText": "Dendro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Baizhuer"
+          },
+          {
+            "name": "Xianyun",
+            "title": "Passerine Herald",
+            "description": "One of the Mighty and Illuminated Adepti of Jueyun, known as \"Cloud Retainer.\" Expert in all kinds of mechanical contraptions, her heart now turns towards the affairs of the mortal world, through which she walks under the name \"Xianyun.\"",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Liuyun"
+          },
+          {
+            "name": "Zhongli",
+            "title": "Vago Mundo",
+            "description": "A mysterious expert contracted by the Wangsheng Funeral Parlor. Extremely knowledgeable in all things.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Zhongli"
+          },
+          {
+            "name": "Zibai",
+            "title": "White Horse's Fleeting Spring",
+            "description": "The White Horse Adeptus from Liyue's legends, known as Zibai. The most mysterious figure in Liyue's myths.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Zibai"
+          },
+          {
+            "name": "Beidou",
+            "title": "Uncrowned Lord of the Ocean",
+            "description": "Captain of her crew, The Crux. She's quite an unbound and forthright woman.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Beidou"
+          },
+          {
+            "name": "Xingqiu",
+            "title": "Juvenile Galant",
+            "description": "A young man carrying a longsword who is frequently seen at book booths. He has a chivalrous heart and yearns for justice and fairness for all.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xingqiu"
+          },
+          {
+            "name": "Xinyan",
+            "title": "Blazing Riff",
+            "description": "Liyue's sole rock 'n' roll musician. She rebels against ossified prejudices using her music and passionate singing.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xinyan"
+          },
+          {
+            "name": "Yanfei",
+            "title": "Wise Innocence",
+            "description": "A well-known legal adviser active in Liyue Harbor. A brilliant young lady in whose veins runs the blood of an illuminated beast.",
+            "elementText": "Pyro",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Feiyan"
+          }
+        ]
+      },
+      {
+        "id": 5261,
+        "bookName": "Teachings of Diligence",
+        "region": "Liyue",
+        "iconId": 104313,
+        "characters": [
+          {
+            "name": "Ganyu",
+            "title": "Plenilune Gaze",
+            "description": "The secretary at Yuehai Pavilion. The blood of the qilin, an illuminated beast, flows within her veins.",
+            "elementText": "Cryo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ganyu"
+          },
+          {
+            "name": "Hu Tao",
+            "title": "Fragrance in Thaw",
+            "description": "The 77th Director of the Wangsheng Funeral Parlor. She took over the business at a rather young age.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Hutao"
+          },
+          {
+            "name": "Kaedehara Kazuha",
+            "title": "Scarlet Leaves Pursue Wild Waves",
+            "description": "A wandering samurai from Inazuma who is currently with Liyue's Crux Fleet. A gentle and carefree soul whose heart hides a great many burdens from the past.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kazuha"
+          },
+          {
+            "name": "Chongyun",
+            "title": "Frozen Ardor",
+            "description": "A young exorcist from a family of exorcists. He does everything he can to suppress his abundance of yang energy.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Chongyun"
+          },
+          {
+            "name": "Lan Yan",
+            "title": "Spring Woven From Jade",
+            "description": "A rattan weaver from Chenyu Vale. Clear-minded and well-tempered, she is as lively as a mountain spring.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Lanyan"
+          },
+          {
+            "name": "Xiangling",
+            "title": "Exquisite Delicacy",
+            "description": "A renowned chef from Liyue. She's extremely passionate about cooking and excels at making her signature hot and spicy dishes.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Xiangling"
+          },
+          {
+            "name": "Yaoyao",
+            "title": "Burgeoning Grace",
+            "description": "Streetward Rambler's youngest disciple. A gentle and caring \"little adult.\"",
+            "elementText": "Dendro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Yaoyao"
+          },
+          {
+            "name": "Yun Jin",
+            "title": "Stage Lucida",
+            "description": "A renowned Liyue opera singer who is skilled in both playwriting and singing. Her style is one-of-a-kind, exquisite and delicate, much like the person herself.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Yunjin"
+          }
+        ]
+      },
+      {
+        "id": 4403,
+        "bookName": "Teachings of Transience",
+        "region": "Inazuma",
+        "iconId": 104320,
+        "characters": [
+          {
+            "name": "Sangonomiya Kokomi",
+            "title": "Pearl of Wisdom",
+            "description": "The Divine Priestess of Watatsumi Island. All of the island's affairs are at this young lady's fingertips.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kokomi"
+          },
+          {
+            "name": "Yoimiya",
+            "title": "Frolicking Flames",
+            "description": "Owner of Naganohara Fireworks. Known as the \"Queen of the Summer Festival,\" she excels in her craft of creating fireworks that symbolize people's hopes and dreams.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yoimiya"
+          },
+          {
+            "name": "Yumemizuki Mizuki",
+            "title": "Embrace of Enchanting Dreams",
+            "description": "A shareholder of Aisa Bathhouse, a baku, and a clinical psychologist. Dedicated to the dispersal of nightmares, and to bringing people peace of mind.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mizuki"
+          },
+          {
+            "name": "Kirara",
+            "title": "Cat Upon the Eaves",
+            "description": "A courier for Komaniya Express, a delivery company in Inazuma. A nekomata who loves her job and human society.",
+            "elementText": "Dendro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Momoka"
+          },
+          {
+            "name": "Shikanoin Heizou",
+            "title": "Analytical Harmony",
+            "description": "A young prodigy detective from the Tenryou Commission. His senses are sharp and his thoughts are clear.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Heizo"
+          },
+          {
+            "name": "Thoma",
+            "title": "Protector From Afar",
+            "description": "The Kamisato Clan's housekeeper. A well-known \"fixer\" in Inazuma.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Tohma"
+          }
+        ]
+      },
+      {
+        "id": 4413,
+        "bookName": "Teachings of Elegance",
+        "region": "Inazuma",
+        "iconId": 104323,
+        "characters": [
+          {
+            "name": "Arataki Itto",
+            "title": "Hanamizaka Heroics",
+            "description": "The first and greatest head of the Arataki Gang, famed throughout Inazuma City's Hanamizaka... Wait, what? You've never heard of them? Are you trying to be funny here?",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Itto"
+          },
+          {
+            "name": "Kamisato Ayaka",
+            "title": "Frostflake Heron",
+            "description": "Daughter of the Yashiro Commission's Kamisato Clan. Dignified and elegant, as well as wise and strong.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ayaka"
+          },
+          {
+            "name": "Kamisato Ayato",
+            "title": "Pillar of Fortitude",
+            "description": "The young but highly accomplished head of the Yashiro Commission's Kamisato Clan. Cultured and polite, he is a man of many ways and means.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ayato"
+          },
+          {
+            "name": "Kujou Sara",
+            "title": "Crowfeather Kaburaya",
+            "description": "A general of the Tenryou Commission. Bold, decisive, and skilled in battle.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sara"
+          },
+          {
+            "name": "Kuki Shinobu",
+            "title": "Mender of Tribulations",
+            "description": "The capable and reliable Arataki Gang deputy leader. Please note: capable and reliable are not appellations for the \"Arataki Gang,\" but for their deputy leader in specific.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Shinobu"
+          }
+        ]
+      },
+      {
+        "id": 4423,
+        "bookName": "Teachings of Light",
+        "region": "Inazuma",
+        "iconId": 104326,
+        "characters": [
+          {
+            "name": "Chiori",
+            "title": "The Thundering Seamstress",
+            "description": "The owner of Chioriya Boutique. A tailor renowned throughout Fontaine.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Chiori"
+          },
+          {
+            "name": "Raiden Shogun",
+            "title": "Plane of Euthymia",
+            "description": "Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Shougun"
+          },
+          {
+            "name": "Yae Miko",
+            "title": "Astute Amusement",
+            "description": "Lady Guuji of the Grand Narukami Shrine. Also serves as the editor-in-chief of Yae Publishing House. Unimaginable intelligence and cunning are hidden under her beautiful appearance.",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Yae"
+          },
+          {
+            "name": "Gorou",
+            "title": "Canine Warrior",
+            "description": "The great general of Watatsumi Island's forces. He is deeply trusted by his subordinates.",
+            "elementText": "Geo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Gorou"
+          },
+          {
+            "name": "Sayu",
+            "title": "Mujina Ninja",
+            "description": "A pint-sized ninja attached to the Shuumatsuban, who always seems sleep-deprived.",
+            "elementText": "Anemo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sayu"
+          }
+        ]
+      },
+      {
+        "id": 4453,
+        "bookName": "Teachings of Praxis",
+        "region": "Sumeru",
+        "iconId": 104335,
+        "characters": [
+          {
+            "name": "Dehya",
+            "title": "Flame-Mane",
+            "description": "A member of the Eremites, a mercenary organization that roams the sands of Sumeru. Valiant and powerful, she enjoys great fame amongst her fellow Eremites.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Dehya"
+          },
+          {
+            "name": "Nilou",
+            "title": "Dance of Lotuslight",
+            "description": "The star of the Zubayr Theater. She is full of warmth and innocence, and her dances are lively and elegant.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Nilou"
+          },
+          {
+            "name": "Wanderer",
+            "title": "Eons Adrift",
+            "description": "A wayfaring figure whose identity is a mystery. He dresses like a mountain ascetic, but he certainly does not act the part.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Wanderer"
+          },
+          {
+            "name": "Collei",
+            "title": "Sprout of Rebirth",
+            "description": "A trainee ranger active in Avidya Forest. Behind her enthusiastic words and actions hides a slightly introverted personality.",
+            "elementText": "Dendro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Collei"
+          },
+          {
+            "name": "Sethos",
+            "title": "Wisdom's Measure",
+            "description": "The Temple of Silence's heir. Burdened with secrets, he comes from the sands.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Sethos"
+          }
+        ]
+      },
+      {
+        "id": 4433,
+        "bookName": "Teachings of Admonition",
+        "region": "Sumeru",
+        "iconId": 104329,
+        "characters": [
+          {
+            "name": "Cyno",
+            "title": "Judicator of Secrets",
+            "description": "The General Mahamatra in charge of supervising the researchers of the Akademiya. It is said that when he gets down to work, the General Mahamatra is even more efficient than the \"Great Vayuvyastra\" made by the Kshahrewar.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Cyno"
+          },
+          {
+            "name": "Tighnari",
+            "title": "Verdant Strider",
+            "description": "A young researcher well-versed in botany who currently serves as a Forest Watcher in Avidya Forest. He is a straight shooter with a warm heart — and a dab hand at guiding even the dullest of pupils.",
+            "elementText": "Dendro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Tighnari"
+          },
+          {
+            "name": "Candace",
+            "title": "Golden Vow",
+            "description": "A descendant of King Deshret with an amber left eye. The defender of Aaru Village.",
+            "elementText": "Hydro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Candace"
+          },
+          {
+            "name": "Faruzan",
+            "title": "Enigmatic Machinist",
+            "description": "A researcher from \"one hundred years ago.\" She enjoys self-identifying as everyone's senior, and has significant knowledge of ancient scripts and machines of all kinds.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Faruzan"
+          }
+        ]
+      },
+      {
+        "id": 4443,
+        "bookName": "Teachings of Ingenuity",
+        "region": "Sumeru",
+        "iconId": 104332,
+        "characters": [
+          {
+            "name": "Alhaitham",
+            "title": "Admonishing Instruction",
+            "description": "The current scribe of the Sumeru Akademiya, a man endowed with extraordinary intelligence and talent. He lives free — free from the searching eyes of ordinary people, anyway.",
+            "elementText": "Dendro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Alhatham"
+          },
+          {
+            "name": "Nahida",
+            "title": "Physic of Purity",
+            "description": "A caged bird secluded within the confines of the Sanctuary of Surasthana who can only see the world in her dreams.",
+            "elementText": "Dendro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Nahida"
+          },
+          {
+            "name": "Dori",
+            "title": "Treasure of Dream Garden",
+            "description": "An elusive merchant who has a fondness for glittering Mora.",
+            "elementText": "Electro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Dori"
+          },
+          {
+            "name": "Kaveh",
+            "title": "Empyrean Reflection",
+            "description": "A renowned architect from Sumeru who perhaps cares a bit too much about too many things. He is an aesthete troubled by reality.",
+            "elementText": "Dendro",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kaveh"
+          },
+          {
+            "name": "Layla",
+            "title": "Fantastical Evening Star",
+            "description": "A Rtawahist student who specializes in Theoretical Astrology. Heavily prone to somnambulism and locked in a grinding war with sleep deprivation, the problem of restful slumber is a most troubling one to her.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Layla"
+          }
+        ]
+      },
+      {
+        "id": 4493,
+        "bookName": "Teachings of Justice",
+        "region": "Fontaine",
+        "iconId": 104341,
+        "characters": [
+          {
+            "name": "Clorinde",
+            "title": "Candlebearer, Shadowhunter",
+            "description": "An undefeated Champion Duelist. Sword in hand, she defends justice in the Court of Fontaine.",
+            "elementText": "Electro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Clorinde"
+          },
+          {
+            "name": "Escoffier",
+            "title": "Tasteful Excellence",
+            "description": "The ex-head chef of Hotel Debord, renowned throughout Fontaine as the Patissiere Supreme and vanguard of precision gastronomy. Has incomparably strict standards when it comes to cooking.",
+            "elementText": "Cryo",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Escoffier"
+          },
+          {
+            "name": "Furina",
+            "title": "Endless Solo of Solitude",
+            "description": "The absolute focus of the stage of judgment, until the final applause sounds.",
+            "elementText": "Hydro",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Furina"
+          },
+          {
+            "name": "Charlotte",
+            "title": "Lens of Verity",
+            "description": "Indefatigable reporter of The Steambird, constantly on the hunt for the \"truth.\"",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Charlotte"
+          },
+          {
+            "name": "Freminet",
+            "title": "Yearning for Unseen Depths",
+            "description": "A reserved young man who is well-versed in diving. Beneath his distant, icy demeanor lies a pure heart bereft of all flaws.",
+            "elementText": "Cryo",
+            "weaponText": "Claymore",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Freminet"
+          }
+        ]
+      },
+      {
+        "id": 4497,
+        "bookName": "Teachings of Order",
+        "region": "Fontaine",
+        "iconId": 104344,
+        "characters": [
+          {
+            "name": "Arlecchino",
+            "title": "Dire Balemoon",
+            "description": "\"The Knave,\" Fourth of the Fatui Harbingers. A poised, ruthless diplomat. To the children in the House of the Hearth, she is their feared yet dependable \"Father.\"",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Arlecchino"
+          },
+          {
+            "name": "Emilie",
+            "title": "A Thousand Scents Traced",
+            "description": "A Fontainian perfumer, one who bottles secrets.",
+            "elementText": "Dendro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Emilie"
+          },
+          {
+            "name": "Wriothesley",
+            "title": "Emissary of Solitary Iniquity",
+            "description": "Duke of the Fortress of Meropide, Lord Incognito of the murky depths.",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Wriothesley"
+          },
+          {
+            "name": "Chevreuse",
+            "title": "Executor of Justice",
+            "description": "The captain of the Special Security and Surveillance Patrol, who wears justice as an ever-present seal upon her heart. Her musket shall only ever point at the guilty.",
+            "elementText": "Pyro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Chevreuse"
+          },
+          {
+            "name": "Lynette",
+            "title": "Elegance in the Shadows",
+            "description": "A magic assistant of few words, her emotions are as inscrutable as any cat's.",
+            "elementText": "Anemo",
+            "weaponText": "Sword",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Linette"
+          }
+        ]
+      },
+      {
+        "id": 4463,
+        "bookName": "Teachings of Equity",
+        "region": "Fontaine",
+        "iconId": 104338,
+        "characters": [
+          {
+            "name": "Lyney",
+            "title": "Spectacle of Phantasmagoria",
+            "description": "A famed Fontainian magician who possesses great stage presence as well as gift of the gab. Audiences are enthralled by his exquisite skills, and they hang on to his every clever word.",
+            "elementText": "Pyro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Liney"
+          },
+          {
+            "name": "Navia",
+            "title": "Helm of the Radiant Rose",
+            "description": "The current President of Spina di Rosula, who is lovely, dutiful, and a great boss.",
+            "elementText": "Geo",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Navia"
+          },
+          {
+            "name": "Neuvillette",
+            "title": "Ordainer of Inexorable Judgment",
+            "description": "The Chief Justice of Fontaine, known as the Iudex, is renowned for his unassailable impartiality.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Neuvillette"
+          },
+          {
+            "name": "Sigewinne",
+            "title": "Wondrous Dragonheir",
+            "description": "A Melusine and the Fortress of Meropide's head nurse. She cares equally for every convict locked in the undersea prison.",
+            "elementText": "Hydro",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Sigewinne"
+          }
+        ]
+      },
+      {
+        "id": 4447,
+        "bookName": "Teachings of Kindling",
+        "region": "Natlan",
+        "iconId": 104350,
+        "characters": [
+          {
+            "name": "Citlali",
+            "title": "Obsidian Opalstar",
+            "description": "The great shaman from the Masters of the Night-Wind, the universally-revered Granny Itztli.",
+            "elementText": "Cryo",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Citlali"
+          },
+          {
+            "name": "Kinich",
+            "title": "Turnfire Hunt",
+            "description": "A Huitztlan Saurian Hunter skilled at counting costs.",
+            "elementText": "Dendro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Kinich"
+          },
+          {
+            "name": "Xilonen",
+            "title": "Ardent Flames Forge the Soul",
+            "description": "A Name Engraver of the Nanatzcayan, she is especially skilled at finding a good balance between the heavy responsibilities of her job and living well.",
+            "elementText": "Geo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Xilonen"
+          },
+          {
+            "name": "Ororon",
+            "title": "Shadow of the Night-Wind",
+            "description": "A young man from the Masters of the Night-Wind who instead lives in the wild alongside all manner of life.",
+            "elementText": "Electro",
+            "weaponText": "Bow",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Olorun"
+          }
+        ]
+      },
+      {
+        "id": 4457,
+        "bookName": "Teachings of Conflict",
+        "region": "Natlan",
+        "iconId": 104353,
+        "characters": [
+          {
+            "name": "Chasca",
+            "title": "Skyborne Arbiter",
+            "description": "The Peacemaker of the Tlalocan, the ender of all disputes.",
+            "elementText": "Anemo",
+            "weaponText": "Bow",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Chasca"
+          },
+          {
+            "name": "Ineffa",
+            "title": "Boom Boom Thunderwave",
+            "description": "A multifunctional robot containing integrated mechanical components from various nations. The Source Core in her chest has endured the passage of countless years.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Ineffa"
+          },
+          {
+            "name": "Varesa",
+            "title": "Strength in Serenity",
+            "description": "A laid-back orchard manager and warrior of the Collective of Plenty. An aspiring hero who hungers for justice... and lots and lots of food!",
+            "elementText": "Electro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Varesa"
+          },
+          {
+            "name": "Ifa",
+            "title": "In the Wake of Wandering Winds",
+            "description": "A vet from the Flower-Feather Clan who cherishes the life he leads alongside all manner of living things — people, animals, you name it.",
+            "elementText": "Anemo",
+            "weaponText": "Catalyst",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Ifa"
+          },
+          {
+            "name": "Kachina",
+            "title": "Mottled Gold Yet Unsmelted",
+            "description": "A young warrior of the Nanatzcayan, given the Ancient Name of \"Uthabiti.\" Kind-hearted and insatiably persistent, she grows stronger and more capable with each setback she faces.",
+            "elementText": "Geo",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Kachina"
+          }
+        ]
+      },
+      {
+        "id": 4437,
+        "bookName": "Teachings of Contention",
+        "region": "Natlan",
+        "iconId": 104347,
+        "characters": [
+          {
+            "name": "Mavuika",
+            "title": "Night-Igniting Flame",
+            "description": "The leader of Natlan who inherited the Ancient Name of \"Kiongozi.\" She made a vow to illuminate the future of the nation of war with the Sacred Flame.",
+            "elementText": "Pyro",
+            "weaponText": "Claymore",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mavuika"
+          },
+          {
+            "name": "Mualani",
+            "title": "Splish-Splash Wavechaser",
+            "description": "A well-known guide in Natlan who owns a watersports shop, and expert in all forms of wave-chasing.",
+            "elementText": "Hydro",
+            "weaponText": "Catalyst",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_Mualani"
+          },
+          {
+            "name": "Skirk",
+            "title": "Void Star",
+            "description": "A visitor who once appeared in an Abyssal rift and the Primordial Sea, this solitary warrior mentored Tartaglia in the martial arts.",
+            "elementText": "Cryo",
+            "weaponText": "Sword",
+            "rarity": 5,
+            "icon": "UI_AvatarIcon_SkirkNew"
+          },
+          {
+            "name": "Iansan",
+            "title": "Tempered in Molten Stone",
+            "description": "Head coach of the fitness club at the Collective of Plenty, and a renowned Natlanese nutritionist.",
+            "elementText": "Electro",
+            "weaponText": "Polearm",
+            "rarity": 4,
+            "icon": "UI_AvatarIcon_Iansan"
+          }
+        ]
+      }
+    ]
+  },
+  "weaponDomains": {
+    "Monday": [
+      {
+        "id": 4313,
+        "name": "Scattered Piece of Decarabian's Dream",
+        "itemId": 114004,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 5217,
+        "name": "Divine Body from Guyun",
+        "itemId": 114016,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 4343,
+        "name": "Golden Branch of a Distant Sea",
+        "itemId": 114028,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4373,
+        "name": "Golden Talisman of the Forest Dew",
+        "itemId": 114040,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4473,
+        "name": "Echo of an Ancient Chord",
+        "itemId": 114052,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4385,
+        "name": "Blazing Sacrificial Heart's Splendor",
+        "itemId": 114064,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      }
+    ],
+    "Tuesday": [
+      {
+        "id": 4323,
+        "name": "Boreal Wolf's Nostalgia",
+        "itemId": 114008,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 5221,
+        "name": "Mist Veiled Primo Elixir",
+        "itemId": 114020,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 4353,
+        "name": "Narukami's Valor",
+        "itemId": 114032,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4377,
+        "name": "Oasis Garden's Truth",
+        "itemId": 114044,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4503,
+        "name": "Essence of Pure Sacred Dewdrop",
+        "itemId": 114056,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4389,
+        "name": "Delirious Divinity of the Sacred Lord",
+        "itemId": 114068,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      }
+    ],
+    "Wednesday": [
+      {
+        "id": 4333,
+        "name": "Dream of the Dandelion Gladiator",
+        "itemId": 114012,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 5225,
+        "name": "Chunk of Aerosiderite",
+        "itemId": 114024,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 4363,
+        "name": "Mask of the Kijin",
+        "itemId": 114036,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4381,
+        "name": "Olden Days of Scorching Might",
+        "itemId": 114048,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4507,
+        "name": "Golden Goblet of the Pristine Sea",
+        "itemId": 114060,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4393,
+        "name": "Night-Wind's Mystic Revelation",
+        "itemId": 114072,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      }
+    ],
+    "Thursday": [
+      {
+        "id": 4313,
+        "name": "Scattered Piece of Decarabian's Dream",
+        "itemId": 114004,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 5217,
+        "name": "Divine Body from Guyun",
+        "itemId": 114016,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 4343,
+        "name": "Golden Branch of a Distant Sea",
+        "itemId": 114028,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4373,
+        "name": "Golden Talisman of the Forest Dew",
+        "itemId": 114040,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4473,
+        "name": "Echo of an Ancient Chord",
+        "itemId": 114052,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4385,
+        "name": "Blazing Sacrificial Heart's Splendor",
+        "itemId": 114064,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      }
+    ],
+    "Friday": [
+      {
+        "id": 4323,
+        "name": "Boreal Wolf's Nostalgia",
+        "itemId": 114008,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 5221,
+        "name": "Mist Veiled Primo Elixir",
+        "itemId": 114020,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 4353,
+        "name": "Narukami's Valor",
+        "itemId": 114032,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4377,
+        "name": "Oasis Garden's Truth",
+        "itemId": 114044,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4503,
+        "name": "Essence of Pure Sacred Dewdrop",
+        "itemId": 114056,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4389,
+        "name": "Delirious Divinity of the Sacred Lord",
+        "itemId": 114068,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      }
+    ],
+    "Saturday": [
+      {
+        "id": 4333,
+        "name": "Dream of the Dandelion Gladiator",
+        "itemId": 114012,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 5225,
+        "name": "Chunk of Aerosiderite",
+        "itemId": 114024,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 4363,
+        "name": "Mask of the Kijin",
+        "itemId": 114036,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4381,
+        "name": "Olden Days of Scorching Might",
+        "itemId": 114048,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4507,
+        "name": "Golden Goblet of the Pristine Sea",
+        "itemId": 114060,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4393,
+        "name": "Night-Wind's Mystic Revelation",
+        "itemId": 114072,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      }
+    ],
+    "Sunday": [
+      {
+        "id": 4313,
+        "name": "Scattered Piece of Decarabian's Dream",
+        "itemId": 114004,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 4333,
+        "name": "Dream of the Dandelion Gladiator",
+        "itemId": 114012,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 4323,
+        "name": "Boreal Wolf's Nostalgia",
+        "itemId": 114008,
+        "region": "Mondstadt",
+        "entrance": "Cecilia Garden"
+      },
+      {
+        "id": 5217,
+        "name": "Divine Body from Guyun",
+        "itemId": 114016,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 5221,
+        "name": "Mist Veiled Primo Elixir",
+        "itemId": 114020,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 5225,
+        "name": "Chunk of Aerosiderite",
+        "itemId": 114024,
+        "region": "Liyue",
+        "entrance": "Hidden Palace of Lianshan Formula"
+      },
+      {
+        "id": 4353,
+        "name": "Narukami's Valor",
+        "itemId": 114032,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4363,
+        "name": "Mask of the Kijin",
+        "itemId": 114036,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4343,
+        "name": "Golden Branch of a Distant Sea",
+        "itemId": 114028,
+        "region": "Inazuma",
+        "entrance": "Court of Flowing Sand"
+      },
+      {
+        "id": 4381,
+        "name": "Olden Days of Scorching Might",
+        "itemId": 114048,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4377,
+        "name": "Oasis Garden's Truth",
+        "itemId": 114044,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4373,
+        "name": "Golden Talisman of the Forest Dew",
+        "itemId": 114040,
+        "region": "Sumeru",
+        "entrance": "Tower of Abject Pride"
+      },
+      {
+        "id": 4503,
+        "name": "Essence of Pure Sacred Dewdrop",
+        "itemId": 114056,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4507,
+        "name": "Golden Goblet of the Pristine Sea",
+        "itemId": 114060,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4473,
+        "name": "Echo of an Ancient Chord",
+        "itemId": 114052,
+        "region": "Fontaine",
+        "entrance": "Echoes of the Deep Tides"
+      },
+      {
+        "id": 4389,
+        "name": "Delirious Divinity of the Sacred Lord",
+        "itemId": 114068,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      },
+      {
+        "id": 4393,
+        "name": "Night-Wind's Mystic Revelation",
+        "itemId": 114072,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      },
+      {
+        "id": 4385,
+        "name": "Blazing Sacrificial Heart's Splendor",
+        "itemId": 114064,
+        "region": "Natlan",
+        "entrance": "Ancient Watchtower"
+      }
+    ]
+  },
+  "birthdays": {
+    "1": [
+      {
+        "name": "Wanderer",
+        "title": "Eons Adrift",
+        "description": "A wayfaring figure whose identity is a mystery. He dresses like a mountain ascetic, but he certainly does not act the part.",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Wanderer",
+        "birthday": "1/3",
+        "day": 3
+      },
+      {
+        "name": "Jahoda",
+        "title": "Windthreading Shadow",
+        "description": "The Curatorium of Secrets' extremely reliable, do-it-all super employee (or so she claims).",
+        "elementText": "Anemo",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Jahoda",
+        "birthday": "1/5",
+        "day": 5
+      },
+      {
+        "name": "Lan Yan",
+        "title": "Spring Woven From Jade",
+        "description": "A rattan weaver from Chenyu Vale. Clear-minded and well-tempered, she is as lively as a mountain spring.",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Lanyan",
+        "birthday": "1/6",
+        "day": 6
+      },
+      {
+        "name": "Thoma",
+        "title": "Protector From Afar",
+        "description": "The Kamisato Clan's housekeeper. A well-known \"fixer\" in Inazuma.",
+        "elementText": "Pyro",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Tohma",
+        "birthday": "1/9",
+        "day": 9
+      },
+      {
+        "name": "Chevreuse",
+        "title": "Executor of Justice",
+        "description": "The captain of the Special Security and Surveillance Patrol, who wears justice as an ever-present seal upon her heart. Her musket shall only ever point at the guilty.",
+        "elementText": "Pyro",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Chevreuse",
+        "birthday": "1/10",
+        "day": 10
+      },
+      {
+        "name": "Sandrone",
+        "title": "Mirrored Analysis",
+        "description": "The Seventh of the Fatui Harbingers, \"Marionette.\" Interprets all phenomena through the prism of mathematics, and is an elegant lady who is never absent from a tea party.",
+        "elementText": "Cryo",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_MarionetteNew",
+        "birthday": "1/13",
+        "day": 13
+      },
+      {
+        "name": "Columbina",
+        "title": "Welkin Moon's Homecoming",
+        "description": "The Moon Maiden born in Nod-Krai, and also the welkin moon returning home.",
+        "elementText": "Hydro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Columbina",
+        "birthday": "1/14",
+        "day": 14
+      },
+      {
+        "name": "Diona",
+        "title": "Kätzlein Cocktail",
+        "description": "A young lady who has inherited trace amounts of non-human blood. She is the incredibly popular bartender of the Cat's Tail tavern.",
+        "elementText": "Cryo",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Diona",
+        "birthday": "1/18",
+        "day": 18
+      },
+      {
+        "name": "Citlali",
+        "title": "Obsidian Opalstar",
+        "description": "The great shaman from the Masters of the Night-Wind, the universally-revered Granny Itztli.",
+        "elementText": "Cryo",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Citlali",
+        "birthday": "1/20",
+        "day": 20
+      },
+      {
+        "name": "Kirara",
+        "title": "Cat Upon the Eaves",
+        "description": "A courier for Komaniya Express, a delivery company in Inazuma. A nekomata who loves her job and human society.",
+        "elementText": "Dendro",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Momoka",
+        "birthday": "1/22",
+        "day": 22
+      },
+      {
+        "name": "Rosaria",
+        "title": "Thorny Benevolence",
+        "description": "A sister of the church, though you wouldn't know it if it weren't for her attire. Known for her sharp, cold words and manner, she often works alone.",
+        "elementText": "Cryo",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Rosaria",
+        "birthday": "1/24",
+        "day": 24
+      }
+    ],
+    "2": [
+      {
+        "name": "Lynette",
+        "title": "Elegance in the Shadows",
+        "description": "A magic assistant of few words, her emotions are as inscrutable as any cat's.",
+        "elementText": "Anemo",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Linette",
+        "birthday": "2/2",
+        "day": 2
+      },
+      {
+        "name": "Lyney",
+        "title": "Spectacle of Phantasmagoria",
+        "description": "A famed Fontainian magician who possesses great stage presence as well as gift of the gab. Audiences are enthralled by his exquisite skills, and they hang on to his every clever word.",
+        "elementText": "Pyro",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Liney",
+        "birthday": "2/2",
+        "day": 2
+      },
+      {
+        "name": "Vesna",
+        "title": "Snowy Banquet's Sharp Blade",
+        "description": "Commander of the Druzhna and the Tsaritsa's keen blade.",
+        "elementText": "Anemo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Vesna",
+        "birthday": "2/4",
+        "day": 4
+      },
+      {
+        "name": "Alyosha",
+        "title": "Swift-Striding Hound",
+        "description": "A \"professional hunter\" and master of the Snezhnayan snowfields. A fierce, distinct \"idealism\" burns beneath his calm demeanor.",
+        "elementText": "Electro",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Alyosha",
+        "birthday": "2/9",
+        "day": 9
+      },
+      {
+        "name": "Alhaitham",
+        "title": "Admonishing Instruction",
+        "description": "The current scribe of the Sumeru Akademiya, a man endowed with extraordinary intelligence and talent. He lives free — free from the searching eyes of ordinary people, anyway.",
+        "elementText": "Dendro",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Alhatham",
+        "birthday": "2/11",
+        "day": 11
+      },
+      {
+        "name": "Beidou",
+        "title": "Uncrowned Lord of the Ocean",
+        "description": "Captain of her crew, The Crux. She's quite an unbound and forthright woman.",
+        "elementText": "Electro",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Beidou",
+        "birthday": "2/14",
+        "day": 14
+      },
+      {
+        "name": "Varka",
+        "title": "Knight of Boreas",
+        "description": "Grand Master of the Knights of Favonius. Knight of Boreas, protector of Mondstadt.",
+        "elementText": "Anemo",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Varka",
+        "birthday": "2/17",
+        "day": 17
+      },
+      {
+        "name": "Odette",
+        "title": "Swirling Snow",
+        "description": "A famed Snezhnayan ballerina who blossoms against the frozen landscape with a beauty as sharp as frost.",
+        "elementText": "Cryo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Odette",
+        "birthday": "2/20",
+        "day": 20
+      },
+      {
+        "name": "Sangonomiya Kokomi",
+        "title": "Pearl of Wisdom",
+        "description": "The Divine Priestess of Watatsumi Island. All of the island's affairs are at this young lady's fingertips.",
+        "elementText": "Hydro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Kokomi",
+        "birthday": "2/22",
+        "day": 22
+      },
+      {
+        "name": "Bennett",
+        "title": "Trial by Fire",
+        "description": "A good-natured adventurer from Mondstadt who's unfortunately extremely unlucky.",
+        "elementText": "Pyro",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Bennett",
+        "birthday": "2/29",
+        "day": 29
+      }
+    ],
+    "3": [
+      {
+        "name": "Lauma",
+        "title": "Evermoon's Sacrament Song",
+        "description": "A Maiden blessed by moonlight and the grove alike, hope born to the Frostmoon Scions.",
+        "elementText": "Dendro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Lauma",
+        "birthday": "3/1",
+        "day": 1
+      },
+      {
+        "name": "Qiqi",
+        "title": "Icy Resurrection",
+        "description": "An apprentice and herb gatherer at Bubu Pharmacy. An undead with a bone-white complexion, she seldom has much in the way of words or emotion.",
+        "elementText": "Cryo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Qiqi",
+        "birthday": "3/3",
+        "day": 3
+      },
+      {
+        "name": "Yaoyao",
+        "title": "Burgeoning Grace",
+        "description": "Streetward Rambler's youngest disciple. A gentle and caring \"little adult.\"",
+        "elementText": "Dendro",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Yaoyao",
+        "birthday": "3/6",
+        "day": 6
+      },
+      {
+        "name": "Shenhe",
+        "title": "Lonesome Transcendence",
+        "description": "An adepti disciple with a most unusual air about her. Having spent much time cultivating in isolation in Liyue's mountains, she has become every bit as cool and distant as the adepti themselves.",
+        "elementText": "Cryo",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Shenhe",
+        "birthday": "3/10",
+        "day": 10
+      },
+      {
+        "name": "Xilonen",
+        "title": "Ardent Flames Forge the Soul",
+        "description": "A Name Engraver of the Nanatzcayan, she is especially skilled at finding a good balance between the heavy responsibilities of her job and living well.",
+        "elementText": "Geo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Xilonen",
+        "birthday": "3/13",
+        "day": 13
+      },
+      {
+        "name": "Durin",
+        "title": "\"The Undying Fire\"",
+        "description": "A dragon born from M's pen, who came to alight in the human world. His \"story\" continues to unfold.",
+        "elementText": "Pyro",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Durin",
+        "birthday": "3/14",
+        "day": 14
+      },
+      {
+        "name": "Jean",
+        "title": "Dandelion Knight",
+        "description": "The righteous and rigorous Dandelion Knight, and Acting Grand Master of Mondstadt's Knights of Favonius.",
+        "elementText": "Anemo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Qin",
+        "birthday": "3/14",
+        "day": 14
+      },
+      {
+        "name": "Yumemizuki Mizuki",
+        "title": "Embrace of Enchanting Dreams",
+        "description": "A shareholder of Aisa Bathhouse, a baku, and a clinical psychologist. Dedicated to the dispersal of nightmares, and to bringing people peace of mind.",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Mizuki",
+        "birthday": "3/16",
+        "day": 16
+      },
+      {
+        "name": "Noelle",
+        "title": "Chivalric Blossom",
+        "description": "A maid who faithfully serves the Knights of Favonius. She dreams of joining their ranks someday.",
+        "elementText": "Geo",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Noel",
+        "birthday": "3/21",
+        "day": 21
+      },
+      {
+        "name": "Ifa",
+        "title": "In the Wake of Wandering Winds",
+        "description": "A vet from the Flower-Feather Clan who cherishes the life he leads alongside all manner of living things — people, animals, you name it.",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Ifa",
+        "birthday": "3/23",
+        "day": 23
+      },
+      {
+        "name": "Kamisato Ayato",
+        "title": "Pillar of Fortitude",
+        "description": "The young but highly accomplished head of the Yashiro Commission's Kamisato Clan. Cultured and polite, he is a man of many ways and means.",
+        "elementText": "Hydro",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Ayato",
+        "birthday": "3/26",
+        "day": 26
+      },
+      {
+        "name": "Vodyanitsa",
+        "title": "Lingering Siren-Song",
+        "description": "Prima Donna of the Korolevskiy Troupe and a Water Imp who has parted from her kin.",
+        "elementText": "Hydro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Vodyanitsa",
+        "birthday": "3/29",
+        "day": 29
+      },
+      {
+        "name": "Sigewinne",
+        "title": "Wondrous Dragonheir",
+        "description": "A Melusine and the Fortress of Meropide's head nurse. She cares equally for every convict locked in the undersea prison.",
+        "elementText": "Hydro",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Sigewinne",
+        "birthday": "3/30",
+        "day": 30
+      }
+    ],
+    "4": [
+      {
+        "name": "Ineffa",
+        "title": "Boom Boom Thunderwave",
+        "description": "A multifunctional robot containing integrated mechanical components from various nations. The Source Core in her chest has endured the passage of countless years.",
+        "elementText": "Electro",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Ineffa",
+        "birthday": "4/2",
+        "day": 2
+      },
+      {
+        "name": "Lohen",
+        "title": "Sharpened Arrowhead",
+        "description": "Vice Captain of the Knights of Favonius Ranged Company, a knight known for his unorthodox approach and fondness for unconventional tactics.",
+        "elementText": "Cryo",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Lohen",
+        "birthday": "4/3",
+        "day": 3
+      },
+      {
+        "name": "Aloy",
+        "title": "Savior From Another World",
+        "description": "Formerly an outcast, now a hunter of unparalleled skill. Ready to do the right thing at any time.",
+        "elementText": "Cryo",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Aloy",
+        "birthday": "4/4",
+        "day": 4
+      },
+      {
+        "name": "Dehya",
+        "title": "Flame-Mane",
+        "description": "A member of the Eremites, a mercenary organization that roams the sands of Sumeru. Valiant and powerful, she enjoys great fame amongst her fellow Eremites.",
+        "elementText": "Pyro",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Dehya",
+        "birthday": "4/7",
+        "day": 7
+      },
+      {
+        "name": "Charlotte",
+        "title": "Lens of Verity",
+        "description": "Indefatigable reporter of The Steambird, constantly on the hunt for the \"truth.\"",
+        "elementText": "Cryo",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Charlotte",
+        "birthday": "4/10",
+        "day": 10
+      },
+      {
+        "name": "Xianyun",
+        "title": "Passerine Herald",
+        "description": "One of the Mighty and Illuminated Adepti of Jueyun, known as \"Cloud Retainer.\" Expert in all kinds of mechanical contraptions, her heart now turns towards the affairs of the mortal world, through which she walks under the name \"Xianyun.\"",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Liuyun",
+        "birthday": "4/11",
+        "day": 11
+      },
+      {
+        "name": "Xiao",
+        "title": "Vigilant Yaksha",
+        "description": "A yaksha adeptus who defends Liyue. Also heralded as the \"Conqueror of Demons\" and \"Vigilant Yaksha.\"",
+        "elementText": "Anemo",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Xiao",
+        "birthday": "4/17",
+        "day": 17
+      },
+      {
+        "name": "Yelan",
+        "title": "Valley Orchid",
+        "description": "A mysterious person who claims to work for the Ministry of Civil Affairs, but is a \"non-entity\" on the Ministry of Civil Affairs' list.",
+        "elementText": "Hydro",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Yelan",
+        "birthday": "4/20",
+        "day": 20
+      },
+      {
+        "name": "Kachina",
+        "title": "Mottled Gold Yet Unsmelted",
+        "description": "A young warrior of the Nanatzcayan, given the Ancient Name of \"Uthabiti.\" Kind-hearted and insatiably persistent, she grows stronger and more capable with each setback she faces.",
+        "elementText": "Geo",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Kachina",
+        "birthday": "4/22",
+        "day": 22
+      },
+      {
+        "name": "Baizhu",
+        "title": "Beyond Mortality",
+        "description": "The owner of Bubu Pharmacy, who is rarely seen without the white snake named Changsheng. His medicinal knowledge is encyclopedic, and his personal intrigues subtle.",
+        "elementText": "Dendro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Baizhuer",
+        "birthday": "4/25",
+        "day": 25
+      },
+      {
+        "name": "Diluc",
+        "title": "Dark Side of Dawn",
+        "description": "The tycoon of a winery empire in Mondstadt, unmatched in every possible way.",
+        "elementText": "Pyro",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Diluc",
+        "birthday": "4/30",
+        "day": 30
+      }
+    ],
+    "5": [
+      {
+        "name": "Candace",
+        "title": "Golden Vow",
+        "description": "A descendant of King Deshret with an amber left eye. The defender of Aaru Village.",
+        "elementText": "Hydro",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Candace",
+        "birthday": "5/3",
+        "day": 3
+      },
+      {
+        "name": "Collei",
+        "title": "Sprout of Rebirth",
+        "description": "A trainee ranger active in Avidya Forest. Behind her enthusiastic words and actions hides a slightly introverted personality.",
+        "elementText": "Dendro",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Collei",
+        "birthday": "5/8",
+        "day": 8
+      },
+      {
+        "name": "Nefer",
+        "title": "Secret Beneath the Sands",
+        "description": "The remarkably resourceful owner of the Curatorium of Secrets.",
+        "elementText": "Dendro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Nefer",
+        "birthday": "5/9",
+        "day": 9
+      },
+      {
+        "name": "Zibai",
+        "title": "White Horse's Fleeting Spring",
+        "description": "The White Horse Adeptus from Liyue's legends, known as Zibai. The most mysterious figure in Liyue's myths.",
+        "elementText": "Geo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Zibai",
+        "birthday": "5/15",
+        "day": 15
+      },
+      {
+        "name": "Gorou",
+        "title": "Canine Warrior",
+        "description": "The great general of Watatsumi Island's forces. He is deeply trusted by his subordinates.",
+        "elementText": "Geo",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Gorou",
+        "birthday": "5/18",
+        "day": 18
+      },
+      {
+        "name": "Yun Jin",
+        "title": "Stage Lucida",
+        "description": "A renowned Liyue opera singer who is skilled in both playwriting and singing. Her style is one-of-a-kind, exquisite and delicate, much like the person herself.",
+        "elementText": "Geo",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Yunjin",
+        "birthday": "5/21",
+        "day": 21
+      },
+      {
+        "name": "Linnea",
+        "title": "Augur of Wonders",
+        "description": "Naturalist and Advisor to the Nod-Krai Branch of the Adventurers' Guild.",
+        "elementText": "Geo",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Linnea",
+        "birthday": "5/23",
+        "day": 23
+      },
+      {
+        "name": "Dahlia",
+        "title": "Ode and Oblation",
+        "description": "Deacon of the Church of Favonius and the Anemo Archon's representative in the church.",
+        "elementText": "Hydro",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Dahlia",
+        "birthday": "5/25",
+        "day": 25
+      },
+      {
+        "name": "Fischl",
+        "title": "Prinzessin der Verurteilung!",
+        "description": "A mysterious girl who calls herself \"Prinzessin der Verurteilung\" and travels with a night raven named Oz.",
+        "elementText": "Electro",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Fischl",
+        "birthday": "5/27",
+        "day": 27
+      },
+      {
+        "name": "Sethos",
+        "title": "Wisdom's Measure",
+        "description": "The Temple of Silence's heir. Burdened with secrets, he comes from the sands.",
+        "elementText": "Electro",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Sethos",
+        "birthday": "5/31",
+        "day": 31
+      }
+    ],
+    "6": [
+      {
+        "name": "Arataki Itto",
+        "title": "Hanamizaka Heroics",
+        "description": "The first and greatest head of the Arataki Gang, famed throughout Inazuma City's Hanamizaka... Wait, what? You've never heard of them? Are you trying to be funny here?",
+        "elementText": "Geo",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Itto",
+        "birthday": "6/1",
+        "day": 1
+      },
+      {
+        "name": "Escoffier",
+        "title": "Tasteful Excellence",
+        "description": "The ex-head chef of Hotel Debord, renowned throughout Fontaine as the Patissiere Supreme and vanguard of precision gastronomy. Has incomparably strict standards when it comes to cooking.",
+        "elementText": "Cryo",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Escoffier",
+        "birthday": "6/8",
+        "day": 8
+      },
+      {
+        "name": "Lisa",
+        "title": "Witch of Purple Rose",
+        "description": "The languid but knowledgeable Librarian of the Knights of Favonius, deemed by Sumeru Akademiya to be their most distinguished graduate in the past two centuries.",
+        "elementText": "Electro",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Lisa",
+        "birthday": "6/9",
+        "day": 9
+      },
+      {
+        "name": "Venti",
+        "title": "Windborne Bard",
+        "description": "One of the many bards of Mondstadt, who freely wanders the city's streets and alleys.",
+        "elementText": "Anemo",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Venti",
+        "birthday": "6/16",
+        "day": 16
+      },
+      {
+        "name": "Yoimiya",
+        "title": "Frolicking Flames",
+        "description": "Owner of Naganohara Fireworks. Known as the \"Queen of the Summer Festival,\" she excels in her craft of creating fireworks that symbolize people's hopes and dreams.",
+        "elementText": "Pyro",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Yoimiya",
+        "birthday": "6/21",
+        "day": 21
+      },
+      {
+        "name": "Cyno",
+        "title": "Judicator of Secrets",
+        "description": "The General Mahamatra in charge of supervising the researchers of the Akademiya. It is said that when he gets down to work, the General Mahamatra is even more efficient than the \"Great Vayuvyastra\" made by the Kshahrewar.",
+        "elementText": "Electro",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Cyno",
+        "birthday": "6/23",
+        "day": 23
+      },
+      {
+        "name": "Raiden Shogun",
+        "title": "Plane of Euthymia",
+        "description": "Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.",
+        "elementText": "Electro",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Shougun",
+        "birthday": "6/26",
+        "day": 26
+      },
+      {
+        "name": "Yae Miko",
+        "title": "Astute Amusement",
+        "description": "Lady Guuji of the Grand Narukami Shrine. Also serves as the editor-in-chief of Yae Publishing House. Unimaginable intelligence and cunning are hidden under her beautiful appearance.",
+        "elementText": "Electro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Yae",
+        "birthday": "6/27",
+        "day": 27
+      }
+    ],
+    "7": [
+      {
+        "name": "Barbara",
+        "title": "Shining Idol",
+        "description": "Every citizen of Mondstadt adores Barbara. She learned the word \"idol\" from a magazine.",
+        "elementText": "Hydro",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Barbara",
+        "birthday": "7/5",
+        "day": 5
+      },
+      {
+        "name": "Kaveh",
+        "title": "Empyrean Reflection",
+        "description": "A renowned architect from Sumeru who perhaps cares a bit too much about too many things. He is an aesthete troubled by reality.",
+        "elementText": "Dendro",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Kaveh",
+        "birthday": "7/9",
+        "day": 9
+      },
+      {
+        "name": "Kujou Sara",
+        "title": "Crowfeather Kaburaya",
+        "description": "A general of the Tenryou Commission. Bold, decisive, and skilled in battle.",
+        "elementText": "Electro",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Sara",
+        "birthday": "7/14",
+        "day": 14
+      },
+      {
+        "name": "Hu Tao",
+        "title": "Fragrance in Thaw",
+        "description": "The 77th Director of the Wangsheng Funeral Parlor. She took over the business at a rather young age.",
+        "elementText": "Pyro",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Hutao",
+        "birthday": "7/15",
+        "day": 15
+      },
+      {
+        "name": "Tartaglia",
+        "title": "Childe",
+        "description": "No. 11 of The Harbingers, also known as \"Childe.\" His name is highly feared on the battlefield.",
+        "elementText": "Hydro",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Tartaglia",
+        "birthday": "7/20",
+        "day": 20
+      },
+      {
+        "name": "Shikanoin Heizou",
+        "title": "Analytical Harmony",
+        "description": "A young prodigy detective from the Tenryou Commission. His senses are sharp and his thoughts are clear.",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Heizo",
+        "birthday": "7/24",
+        "day": 24
+      },
+      {
+        "name": "Klee",
+        "title": "Fleeing Sunlight",
+        "description": "An explosives expert and a regular at the Knights of Favonius's confinement room. Also known as Fleeing Sunlight.",
+        "elementText": "Pyro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Klee",
+        "birthday": "7/27",
+        "day": 27
+      },
+      {
+        "name": "Kuki Shinobu",
+        "title": "Mender of Tribulations",
+        "description": "The capable and reliable Arataki Gang deputy leader. Please note: capable and reliable are not appellations for the \"Arataki Gang,\" but for their deputy leader in specific.",
+        "elementText": "Electro",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Shinobu",
+        "birthday": "7/27",
+        "day": 27
+      },
+      {
+        "name": "Yanfei",
+        "title": "Wise Innocence",
+        "description": "A well-known legal adviser active in Liyue Harbor. A brilliant young lady in whose veins runs the blood of an illuminated beast.",
+        "elementText": "Pyro",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Feiyan",
+        "birthday": "7/28",
+        "day": 28
+      }
+    ],
+    "8": [
+      {
+        "name": "Mualani",
+        "title": "Splish-Splash Wavechaser",
+        "description": "A well-known guide in Natlan who owns a watersports shop, and expert in all forms of wave-chasing.",
+        "elementText": "Hydro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Mualani",
+        "birthday": "8/3",
+        "day": 3
+      },
+      {
+        "name": "Iansan",
+        "title": "Tempered in Molten Stone",
+        "description": "Head coach of the fitness club at the Collective of Plenty, and a renowned Natlanese nutritionist.",
+        "elementText": "Electro",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Iansan",
+        "birthday": "8/8",
+        "day": 8
+      },
+      {
+        "name": "Amber",
+        "title": "Gliding Champion",
+        "description": "Always energetic and full of life, Amber's the best — albeit only — Outrider of the Knights of Favonius.",
+        "elementText": "Pyro",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Ambor",
+        "birthday": "8/10",
+        "day": 10
+      },
+      {
+        "name": "Mika",
+        "title": "Coordinates of Clear Frost",
+        "description": "A young knight born to an ordinary family. He serves as a Front-Line Surveyor in his Company. He is a low-key and cautious character.",
+        "elementText": "Cryo",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Mika",
+        "birthday": "8/11",
+        "day": 11
+      },
+      {
+        "name": "Navia",
+        "title": "Helm of the Radiant Rose",
+        "description": "The current President of Spina di Rosula, who is lovely, dutiful, and a great boss.",
+        "elementText": "Geo",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Navia",
+        "birthday": "8/16",
+        "day": 16
+      },
+      {
+        "name": "Chiori",
+        "title": "The Thundering Seamstress",
+        "description": "The owner of Chioriya Boutique. A tailor renowned throughout Fontaine.",
+        "elementText": "Geo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Chiori",
+        "birthday": "8/17",
+        "day": 17
+      },
+      {
+        "name": "Faruzan",
+        "title": "Enigmatic Machinist",
+        "description": "A researcher from \"one hundred years ago.\" She enjoys self-identifying as everyone's senior, and has significant knowledge of ancient scripts and machines of all kinds.",
+        "elementText": "Anemo",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Faruzan",
+        "birthday": "8/20",
+        "day": 20
+      },
+      {
+        "name": "Arlecchino",
+        "title": "Dire Balemoon",
+        "description": "\"The Knave,\" Fourth of the Fatui Harbingers. A poised, ruthless diplomat. To the children in the House of the Hearth, she is their feared yet dependable \"Father.\"",
+        "elementText": "Pyro",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Arlecchino",
+        "birthday": "8/22",
+        "day": 22
+      },
+      {
+        "name": "Ningguang",
+        "title": "Eclipsing Star",
+        "description": "The Tianquan of the Liyue Qixing. Her wealth is unsurpassed in all of Teyvat.",
+        "elementText": "Geo",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Ningguang",
+        "birthday": "8/26",
+        "day": 26
+      },
+      {
+        "name": "Mavuika",
+        "title": "Night-Igniting Flame",
+        "description": "The leader of Natlan who inherited the Ancient Name of \"Kiongozi.\" She made a vow to illuminate the future of the nation of war with the Sacred Flame.",
+        "elementText": "Pyro",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Mavuika",
+        "birthday": "8/28",
+        "day": 28
+      },
+      {
+        "name": "Mona",
+        "title": "Astral Reflection",
+        "description": "A mysterious young astrologer who proclaims herself to be \"Astrologist Mona Megistus,\" and who possesses abilities to match the title. Erudite, but prideful.",
+        "elementText": "Hydro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Mona",
+        "birthday": "8/31",
+        "day": 31
+      }
+    ],
+    "9": [
+      {
+        "name": "Chongyun",
+        "title": "Frozen Ardor",
+        "description": "A young exorcist from a family of exorcists. He does everything he can to suppress his abundance of yang energy.",
+        "elementText": "Cryo",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Chongyun",
+        "birthday": "9/7",
+        "day": 7
+      },
+      {
+        "name": "Razor",
+        "title": "Wolf Boy",
+        "description": "A boy who lives among the wolves in Wolvendom of Mondstadt, away from human civilization. As agile as lightning.",
+        "elementText": "Electro",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Razor",
+        "birthday": "9/9",
+        "day": 9
+      },
+      {
+        "name": "Albedo",
+        "title": "Kreideprinz",
+        "description": "A genius known as the Kreideprinz, he is the Chief Alchemist and Captain of the Investigation Team of the Knights of Favonius.",
+        "elementText": "Geo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Albedo",
+        "birthday": "9/13",
+        "day": 13
+      },
+      {
+        "name": "Clorinde",
+        "title": "Candlebearer, Shadowhunter",
+        "description": "An undefeated Champion Duelist. Sword in hand, she defends justice in the Court of Fontaine.",
+        "elementText": "Electro",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Clorinde",
+        "birthday": "9/20",
+        "day": 20
+      },
+      {
+        "name": "Aino",
+        "title": "Clinky-Clank Gadgets-A-Gogo",
+        "description": "A genius mechanic and inventor from Nod-Krai who loves interesting machines and sweet treats.",
+        "elementText": "Hydro",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Aino",
+        "birthday": "9/21",
+        "day": 21
+      },
+      {
+        "name": "Emilie",
+        "title": "A Thousand Scents Traced",
+        "description": "A Fontainian perfumer, one who bottles secrets.",
+        "elementText": "Dendro",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Emilie",
+        "birthday": "9/22",
+        "day": 22
+      },
+      {
+        "name": "Freminet",
+        "title": "Yearning for Unseen Depths",
+        "description": "A reserved young man who is well-versed in diving. Beneath his distant, icy demeanor lies a pure heart bereft of all flaws.",
+        "elementText": "Cryo",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Freminet",
+        "birthday": "9/24",
+        "day": 24
+      },
+      {
+        "name": "Kamisato Ayaka",
+        "title": "Frostflake Heron",
+        "description": "Daughter of the Yashiro Commission's Kamisato Clan. Dignified and elegant, as well as wise and strong.",
+        "elementText": "Cryo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Ayaka",
+        "birthday": "9/28",
+        "day": 28
+      },
+      {
+        "name": "Nicole",
+        "title": "Clamor Within",
+        "description": "The Silent \"Mage,\" the Voiceless \"Angel.\"",
+        "elementText": "Pyro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Nicole",
+        "birthday": "9/29",
+        "day": 29
+      }
+    ],
+    "10": [
+      {
+        "name": "Xingqiu",
+        "title": "Juvenile Galant",
+        "description": "A young man carrying a longsword who is frequently seen at book booths. He has a chivalrous heart and yearns for justice and fairness for all.",
+        "elementText": "Hydro",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Xingqiu",
+        "birthday": "10/9",
+        "day": 9
+      },
+      {
+        "name": "Furina",
+        "title": "Endless Solo of Solitude",
+        "description": "The absolute focus of the stage of judgment, until the final applause sounds.",
+        "elementText": "Hydro",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Furina",
+        "birthday": "10/13",
+        "day": 13
+      },
+      {
+        "name": "Ororon",
+        "title": "Shadow of the Night-Wind",
+        "description": "A young man from the Masters of the Night-Wind who instead lives in the wild alongside all manner of life.",
+        "elementText": "Electro",
+        "weaponText": "Bow",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Olorun",
+        "birthday": "10/14",
+        "day": 14
+      },
+      {
+        "name": "Xinyan",
+        "title": "Blazing Riff",
+        "description": "Liyue's sole rock 'n' roll musician. She rebels against ossified prejudices using her music and passionate singing.",
+        "elementText": "Pyro",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Xinyan",
+        "birthday": "10/16",
+        "day": 16
+      },
+      {
+        "name": "Sayu",
+        "title": "Mujina Ninja",
+        "description": "A pint-sized ninja attached to the Shuumatsuban, who always seems sleep-deprived.",
+        "elementText": "Anemo",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Sayu",
+        "birthday": "10/19",
+        "day": 19
+      },
+      {
+        "name": "Eula",
+        "title": "Dance of the Shimmering Wave",
+        "description": "The Spindrift Knight, a scion of the old aristocracy, and the Captain of the Knights of Favonius Reconnaissance Company. The reason for which a descendant of the ancient nobles might join the Knights remains a great mystery in Mondstadt to this very day.",
+        "elementText": "Cryo",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Eula",
+        "birthday": "10/25",
+        "day": 25
+      },
+      {
+        "name": "Nahida",
+        "title": "Physic of Purity",
+        "description": "A caged bird secluded within the confines of the Sanctuary of Surasthana who can only see the world in her dreams.",
+        "elementText": "Dendro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Nahida",
+        "birthday": "10/27",
+        "day": 27
+      },
+      {
+        "name": "Kaedehara Kazuha",
+        "title": "Scarlet Leaves Pursue Wild Waves",
+        "description": "A wandering samurai from Inazuma who is currently with Liyue's Crux Fleet. A gentle and carefree soul whose heart hides a great many burdens from the past.",
+        "elementText": "Anemo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Kazuha",
+        "birthday": "10/29",
+        "day": 29
+      },
+      {
+        "name": "Flins",
+        "title": "Shadowy Lights, Stranger Wights",
+        "description": "A Lightkeeper of Nod-Krai, guardian of a lighthouse and graveyard on a northern isle. An enigmatic gentleman, cultured and courtly.",
+        "elementText": "Electro",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Flins",
+        "birthday": "10/31",
+        "day": 31
+      }
+    ],
+    "11": [
+      {
+        "name": "Xiangling",
+        "title": "Exquisite Delicacy",
+        "description": "A renowned chef from Liyue. She's extremely passionate about cooking and excels at making her signature hot and spicy dishes.",
+        "elementText": "Pyro",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Xiangling",
+        "birthday": "11/2",
+        "day": 2
+      },
+      {
+        "name": "Skirk",
+        "title": "Void Star",
+        "description": "A visitor who once appeared in an Abyssal rift and the Primordial Sea, this solitary warrior mentored Tartaglia in the martial arts.",
+        "elementText": "Cryo",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_SkirkNew",
+        "birthday": "11/5",
+        "day": 5
+      },
+      {
+        "name": "Kinich",
+        "title": "Turnfire Hunt",
+        "description": "A Huitztlan Saurian Hunter skilled at counting costs.",
+        "elementText": "Dendro",
+        "weaponText": "Claymore",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Kinich",
+        "birthday": "11/11",
+        "day": 11
+      },
+      {
+        "name": "Varesa",
+        "title": "Strength in Serenity",
+        "description": "A laid-back orchard manager and warrior of the Collective of Plenty. An aspiring hero who hungers for justice... and lots and lots of food!",
+        "elementText": "Electro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Varesa",
+        "birthday": "11/15",
+        "day": 15
+      },
+      {
+        "name": "Keqing",
+        "title": "Driving Thunder",
+        "description": "The Yuheng of the Liyue Qixing. Keqing has much to say about Rex Lapis's unilateral approach to policymaking in Liyue — but in truth, gods admire skeptics such as her quite a lot.",
+        "elementText": "Electro",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Keqing",
+        "birthday": "11/20",
+        "day": 20
+      },
+      {
+        "name": "Prune",
+        "title": "Childlike Dreams Cherished",
+        "description": "A diminutive Witch Hunter who has journeyed all the way from Nod-Krai with the singular purpose of rooting out a witch who, to hear her tell it, has committed every sin imaginable — including bullying little kids!",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Prune",
+        "birthday": "11/20",
+        "day": 20
+      },
+      {
+        "name": "Wriothesley",
+        "title": "Emissary of Solitary Iniquity",
+        "description": "Duke of the Fortress of Meropide, Lord Incognito of the murky depths.",
+        "elementText": "Cryo",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Wriothesley",
+        "birthday": "11/23",
+        "day": 23
+      },
+      {
+        "name": "Sucrose",
+        "title": "Harmless Sweetie",
+        "description": "An alchemist filled with curiosity about all things. She researches bio-alchemy.",
+        "elementText": "Anemo",
+        "weaponText": "Catalyst",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Sucrose",
+        "birthday": "11/26",
+        "day": 26
+      },
+      {
+        "name": "Kaeya",
+        "title": "Frostwind Swordsman",
+        "description": "An accomplished swordsman and a strategic thinker in the Knights of Favonius, rumored to hail from beyond Mondstadt.",
+        "elementText": "Cryo",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Kaeya",
+        "birthday": "11/30",
+        "day": 30
+      }
+    ],
+    "12": [
+      {
+        "name": "Ganyu",
+        "title": "Plenilune Gaze",
+        "description": "The secretary at Yuehai Pavilion. The blood of the qilin, an illuminated beast, flows within her veins.",
+        "elementText": "Cryo",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Ganyu",
+        "birthday": "12/2",
+        "day": 2
+      },
+      {
+        "name": "Nilou",
+        "title": "Dance of Lotuslight",
+        "description": "The star of the Zubayr Theater. She is full of warmth and innocence, and her dances are lively and elegant.",
+        "elementText": "Hydro",
+        "weaponText": "Sword",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Nilou",
+        "birthday": "12/3",
+        "day": 3
+      },
+      {
+        "name": "Chasca",
+        "title": "Skyborne Arbiter",
+        "description": "The Peacemaker of the Tlalocan, the ender of all disputes.",
+        "elementText": "Anemo",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Chasca",
+        "birthday": "12/10",
+        "day": 10
+      },
+      {
+        "name": "Neuvillette",
+        "title": "Ordainer of Inexorable Judgment",
+        "description": "The Chief Justice of Fontaine, known as the Iudex, is renowned for his unassailable impartiality.",
+        "elementText": "Hydro",
+        "weaponText": "Catalyst",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Neuvillette",
+        "birthday": "12/18",
+        "day": 18
+      },
+      {
+        "name": "Layla",
+        "title": "Fantastical Evening Star",
+        "description": "A Rtawahist student who specializes in Theoretical Astrology. Heavily prone to somnambulism and locked in a grinding war with sleep deprivation, the problem of restful slumber is a most troubling one to her.",
+        "elementText": "Cryo",
+        "weaponText": "Sword",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Layla",
+        "birthday": "12/19",
+        "day": 19
+      },
+      {
+        "name": "Dori",
+        "title": "Treasure of Dream Garden",
+        "description": "An elusive merchant who has a fondness for glittering Mora.",
+        "elementText": "Electro",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Dori",
+        "birthday": "12/21",
+        "day": 21
+      },
+      {
+        "name": "Gaming",
+        "title": "Leonine Vanguard",
+        "description": "Guard of the Sword and Strongbox Secure Transport Agency, and the head of the \"Mighty Mythical Beasts\" Wushou troupe.",
+        "elementText": "Pyro",
+        "weaponText": "Claymore",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Gaming",
+        "birthday": "12/22",
+        "day": 22
+      },
+      {
+        "name": "Illuga",
+        "title": "Nightmare's Burning Heart",
+        "description": "Member of the investigation squad, the Nightmare Orioles. The youngest squad leader among the Lightkeepers.",
+        "elementText": "Geo",
+        "weaponText": "Polearm",
+        "rarity": 4,
+        "icon": "UI_AvatarIcon_Illuga",
+        "birthday": "12/23",
+        "day": 23
+      },
+      {
+        "name": "Tighnari",
+        "title": "Verdant Strider",
+        "description": "A young researcher well-versed in botany who currently serves as a Forest Watcher in Avidya Forest. He is a straight shooter with a warm heart — and a dab hand at guiding even the dullest of pupils.",
+        "elementText": "Dendro",
+        "weaponText": "Bow",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Tighnari",
+        "birthday": "12/29",
+        "day": 29
+      },
+      {
+        "name": "Zhongli",
+        "title": "Vago Mundo",
+        "description": "A mysterious expert contracted by the Wangsheng Funeral Parlor. Extremely knowledgeable in all things.",
+        "elementText": "Geo",
+        "weaponText": "Polearm",
+        "rarity": 5,
+        "icon": "UI_AvatarIcon_Zhongli",
+        "birthday": "12/31",
+        "day": 31
+      }
+    ]
+  }
+}

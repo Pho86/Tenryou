@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 type Props = {
-    params: { uid: string }
+    params: Promise<{ uid: string }>
 }
 
 export async function generateMetadata(
@@ -11,8 +11,8 @@ export async function generateMetadata(
     const {uid} = await params;
 
     return {
-        title: `${uid}'s Profile - Tenryou 💮`,
-        description:`${uid}'s, page to see all of their characters and create character or team cards.`
+        title: `${uid}'s Profile`,
+        description: `View UID ${uid}'s characters and create character or team cards.`
     }
 }
 
@@ -20,6 +20,7 @@ export default function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
+    params: Promise<{ uid: string }>;
 }>) {
     return (
         <>

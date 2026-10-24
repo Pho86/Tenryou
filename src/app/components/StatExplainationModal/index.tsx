@@ -1,5 +1,4 @@
 "use client"
-import { AnimatePresence, motion } from "framer-motion";
 import Modal from "../Modal";
 export default function StatsModal({
     exit,
@@ -9,9 +8,9 @@ export default function StatsModal({
     exit: () => void,
     visible:boolean
 }) {
-    return <Modal visible={visible} exit={exit}>
+    return <Modal visible={visible} exit={exit} label="Stats explanation">
         <div className="flex flex-col gap-2">
-            <h2 className="font-bold text-3xl text-primary">Stats Explaination</h2>
+            <h2 className="font-bold text-3xl text-primary">Stats explanation</h2>
             <p><span className="font-bold">Crit Value</span> = Crit Rate * 2 + Crit Damage</p>
             <div className="grid grid-cols-4 gap-2 place-items-center">
                 <div className="p-2 bg-red-500 w-full"></div>

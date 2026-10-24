@@ -1,4 +1,3 @@
-import axios from "axios";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -83,11 +82,12 @@ const generateCharacterData = async () => {
     let characterNames: string[] = [];
     let sitemap: sitemap[] = [];
     try {
-        const res = await axios.get<any[]>("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&dumpResults=true");
-        characterNames = res.data;
-        for (let i = 0; i < characterNames.length - 1; i++) {
+        const res = await fetch("https://genshin-db-api.vercel.app/api/v5/characters?query=names&matchCategories=true&dumpResults=true");
+        if (!res.ok) throw new Error(`Failed to fetch character names: ${res.status}`);
+        characterNames = await res.json();
+        for (let i = 0; i < characterNames.length; i++) {
             sitemap.push({
-                slug: characterNames[i],
+                slug: encodeURIComponent(characterNames[i]),
                 updatedAt: new Date()
             });
         }

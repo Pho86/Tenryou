@@ -8,8 +8,8 @@ export type Outfit = {
     source: string[];
 
     images: {
-        namesplash: any;
-        namecard: any;
+        namesplash: string | null;
+        namecard: string | null;
         nameicon: string;
         filename_card: string;
         filename_icon?: string;
@@ -21,5 +21,5 @@ export type Outfit = {
         modelviewer: string;
     };
     version: string;
-    result:any;
+    result: Outfit | null;
 }
